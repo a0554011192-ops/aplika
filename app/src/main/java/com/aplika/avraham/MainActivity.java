@@ -404,6 +404,7 @@ public class MainActivity extends Activity {
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
   if(actionRequest(q)){runAction(q);return;}
+  if(engine.commandsLoaded && engine.bestAction(q)!=null){runAction(q);return;}
 
   // Natural Android commands: a user should be able to say just "מחשבון",
   // "שעון", "דרייב", "גוגל פליי", etc. without adding the word "פתח".
@@ -638,7 +639,7 @@ public class MainActivity extends Activity {
  boolean quickToggle(String... labels){try{return ShortcutService.toggleQuickSetting(labels);}catch(Exception e){return false;}}
  boolean openSetting(String action,String ok){try{Intent i=new Intent(action);if(i.resolveActivity(getPackageManager())==null)return false;startActivity(i);addMessage(ok,"assistant");return true;}catch(Exception e){return false;}}
  boolean systemToggle(String q){
-  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","שים","עבור למצב","תעביר אותי למצב","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
+  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","שים","עבור למצב","תעביר אותי למצב","תעביר אותי למצב טיסה","שים במצב טיסה","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
   if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){if(quickToggle("bluetooth","בלוטוס","בלוטות")){addMessage(on?"הבלוטוס הופעל.":"הבלוטוס כובה.","assistant");return true;}if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}if(openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס."))return true;}
   if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){if(quickToggle("wifi","wi-fi","wi fi","ויפי","וויפיי","וייפיי")){addMessage(on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_WIFI_SETTINGS,"פתחתי את הגדרות ה־Wi‑Fi."))return true;}
   if(hasAny(x,"מצב טיסה","airplane")){if(quickToggle("airplane","airplane mode","מצב טיסה")){addMessage(on?"מצב טיסה הופעל.":"מצב טיסה כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה."))return true;}
