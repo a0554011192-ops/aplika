@@ -22,3 +22,5 @@ The resolver is device-first: it discovers installed apps on the current Android
 The main screen includes a Settings button with an installed-app manager. You can search every installed app, set one or more personal nicknames, delete them, refresh the inventory, and run an Android-role diagnostic. Personal nicknames take priority over all other matching.
 
 The 4,000-name catalog combines public Google Play category snapshots from privacy-tech-lab/gpc-android with a cleaned public Google Play snapshot. The runtime still uses PackageManager as the authoritative source for what can actually be opened on the device.
+
+Build verification branch.
