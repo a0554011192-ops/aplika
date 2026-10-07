@@ -267,6 +267,10 @@ public class MainActivity extends Activity {
  }
 
  void renderMessage(String text,String who,boolean actions){
+  renderMessage(text,who,actions,true);
+ }
+
+ void renderMessage(String text,String who,boolean actions,boolean scrollToBottom){
   boolean user="user".equals(who);
   LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.VERTICAL);row.setGravity(user?Gravity.RIGHT:Gravity.LEFT);row.setPadding(dp(8),dp(4),dp(8),dp(4));
   TextView b=bubble(text,user);
@@ -281,7 +285,8 @@ public class MainActivity extends Activity {
    tools.addView(copy);tools.addView(again);
    LinearLayout.LayoutParams tp=new LinearLayout.LayoutParams(-2,dp(32));tp.setMargins(user?dp(52):dp(8),0,user?dp(8):dp(52),0);row.addView(tools,tp);
   }
-  chatList.addView(row,new LinearLayout.LayoutParams(-1,-2));chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
+  chatList.addView(row,new LinearLayout.LayoutParams(-1,-2));
+  if(scrollToBottom)chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
  }
 
  Button miniAction(String s){Button b=softButton(s);b.setTextSize(11);b.setMinHeight(dp(28));b.setPadding(dp(12),0,dp(12),0);b.setBackground(shape(Color.TRANSPARENT,12,0));return b;}
@@ -405,7 +410,9 @@ public class MainActivity extends Activity {
    if(cs==null||cs.messages.isEmpty()){setChatActive(false);return;}
    messages.addAll(cs.messages);
   }
-  setChatActive(true);for(ChatMessage m:messages)renderMessage(m.text,m.who,true);
+  setChatActive(true);
+  for(ChatMessage m:messages)renderMessage(m.text,m.who,true,false);
+  if(!messages.isEmpty())chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
  }
 
  void openSession(String id){if(!chatSessions.containsKey(id))return;currentChatId=id;renderCurrentSession();refreshSidebar();}
