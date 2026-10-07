@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
   t.setPriority(Thread.NORM_PRIORITY);
   return t;
  });
+ volatile int responseRequestId=0;
 
  final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
  final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
@@ -462,6 +463,7 @@ public class MainActivity extends Activity {
  }
 
  void process(String q){
+  try{
   // Resolve deterministic Android commands before the large offline catalogs.
   // This prevents a known system command from being mistaken for ordinary chat.
   if(mathRequest(q))return;
@@ -479,6 +481,10 @@ public class MainActivity extends Activity {
   if(appNameOnlyRequest(q)){openThing(q);return;}
 
   chat(q);
+  }catch(Exception ex){
+   android.util.Log.e("Avraham","process failed",ex);
+   addMessage(english?"I hit a local processing error and recovered.":"אירעה שגיאת עיבוד מקומית והאפליקציה התאוששה.","assistant");
+  }
  }
 
  boolean appNameOnlyRequest(String q){
@@ -549,20 +555,32 @@ public class MainActivity extends Activity {
   OfflineEngine.Resp fast=engine.quickResponse(q);
   if(fast!=null){addMessage(english?fast.en:fast.he,"assistant");return;}
   final boolean responseEnglish=english;
+  final int requestId=++responseRequestId;
   responseExecutor.execute(()->{
-   if(!engine.chatLoaded){
-    runOnUiThread(()->status.setText("טוען מאגר..."));
-    engine.loadChat(this);
-    runOnUiThread(()->status.setText("אופליין • מוכן"));
-   }
-   OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
-   runOnUiThread(()->{
-    if(r==null){
-     addMessage(responseEnglish?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");
-    }else{
-     addMessage(responseEnglish?r.en:r.he,"assistant");
+   try{
+    if(!engine.chatLoaded){
+     runOnUiThread(()->status.setText("טוען מאגר..."));
+     engine.loadChat(this);
+     runOnUiThread(()->status.setText("אופליין • מוכן"));
     }
-   });
+    // If a newer question arrived while loading, do not spend CPU matching
+    // an obsolete question. The latest request will be processed instead.
+    if(requestId!=responseRequestId)return;
+    OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
+    runOnUiThread(()->{
+     if(requestId!=responseRequestId)return;
+     if(r==null){
+      addMessage(responseEnglish?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");
+     }else{
+      addMessage(responseEnglish?r.en:r.he,"assistant");
+     }
+    });
+   }catch(Exception ex){
+    android.util.Log.e("Avraham","response worker failed",ex);
+    runOnUiThread(()->{
+     if(requestId==responseRequestId)addMessage(english?"Sorry, I had a local processing error.":"אירעה שגיאת עיבוד מקומית, אבל האפליקציה ממשיכה לפעול.","assistant");
+    });
+   }
   });
  }
 
