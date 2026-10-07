@@ -216,7 +216,7 @@ public class MainActivity extends Activity {
   PopupWindow pw=new PopupWindow(box,dp(250),-2,true);pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));pw.setElevation(dp(8));
   addModeItem(box,pw,"חיפוש קובץ","חפש קובץ בתיקייה שנבחרה ופתח אותו",Mode.FILE);
   addModeItem(box,pw,"פתיחת אפליקציה","חפש אפליקציה מותקנת ופתח אותה",Mode.APP);
-  addModeItem(box,pw,"צ׳אט","נסה תשובה; אם אין התאמה, נסה אפליקציה ואז קבצים",Mode.CHAT);
+  addModeItem(box,pw,"צ׳אט","שיחה טבעית ומהירה; אפליקציות נפתחות רק בפקודת פתיחה",Mode.CHAT);
   pw.showAsDropDown(anchor,-dp(190),-dp(220));
  }
 
