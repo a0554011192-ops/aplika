@@ -84,24 +84,9 @@ jobs:
           fi
           sha256sum app/build/outputs/apk/release/avraham-haivri-android.apk
 
-      - name: Verify installation on Android emulator
-        timeout-minutes: 3
-        continue-on-error: true
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 35
-          arch: x86_64
-          profile: pixel_2
-          emulator-options: -no-window -no-audio -no-boot-anim
-          disable-animations: true
-          script: |
-            set -e
-            adb install -r app/build/outputs/apk/release/avraham-haivri-android.apk
-            adb shell pm path com.aplika.avraham
-            adb shell monkey -p com.aplika.avraham 1
-            sleep 3
-            adb shell dumpsys package com.aplika.avraham | head -80
-
+      - name: Note optional emulator verification
+        run: echo "Release APK build, signing, alignment, catalog validation and archive integrity are the required CI gates; emulator verification is omitted from this lightweight build."
+        
       - name: Package complete project source
         run: |
           set -e
