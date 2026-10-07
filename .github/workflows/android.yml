@@ -21,6 +21,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Package complete project source
+        run: |
+          set -e
+          mkdir -p build/source
+          rm -f build/source/aplika-full-project.zip
+          zip -r build/source/aplika-full-project.zip . -x './.git/*' './app/build/*' './build/*' './.gradle/*'
+          test -s build/source/aplika-full-project.zip
+
+      - name: Upload complete project source
+        uses: actions/upload-artifact@v4
+        with:
+          name: aplika-full-project-${{ github.run_number }}
+          path: build/source/aplika-full-project.zip
+          if-no-files-found: error
 
       - name: Build app icon from repository 1.ico
         run: |
