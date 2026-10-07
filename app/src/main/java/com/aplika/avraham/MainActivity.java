@@ -382,10 +382,29 @@ public class MainActivity extends Activity {
    return true;
   }
 
-  // Load the compact alias table on demand as well, so the very first command
-  // after installation can use all 3,000 catalog aliases immediately.
   engine.loadApps(this);
-  return engine.isKnownAppAlias(x);
+  if(engine.isKnownAppAlias(x))return true;
+
+  // Any short phrase that exactly/closely matches a currently installed app
+  // is also considered an app command, even when it isn't in the offline catalog.
+  if(installedAppsLoaded && tokenCount(x)<=6){
+   return bestInstalledScore(x)>=45;
+  }
+  return false;
+ }
+
+ int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
+
+ int bestInstalledScore(String target){
+  String q=OfflineEngine.normalize(target);
+  int best=0;
+  for(AppRow row:installedApps){
+   String aliases=row.label+" "+row.packageName;
+   int s=engine.score(q,aliases);
+   if(engine.canonical(q).equals(engine.canonical(row.label)))s=Math.max(s,120);
+   best=Math.max(best,s);
+  }
+  return best;
  }
 
  void chat(String q){
@@ -532,39 +551,45 @@ public class MainActivity extends Activity {
 
  boolean openThing(String q){
   String target=targetOf(q);
+  if(!installedAppsLoaded){
+   addMessage(english?"Loading the installed apps list...":"טוען את רשימת האפליקציות המותקנות...","assistant");
+   ensureInstalledApps(()->openThing(q));
+   return true;
+  }
   engine.loadApps(this);
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
-  Intent launcher=new Intent(Intent.ACTION_MAIN);
-  launcher.addCategory(Intent.CATEGORY_LAUNCHER);
-  List<ResolveInfo> launchers=pm.queryIntentActivities(launcher,PackageManager.MATCH_ALL);
-  ResolveInfo best=null;String bn="";String bp="";int bs=0;
+  // Personal nickname always wins.
+  String userPkg=findUserAliasPackage(target);
+  if(userPkg!=null && launchPackage(userPkg,target))return true;
 
-  for(ResolveInfo ri:launchers){
-   if(ri.activityInfo==null)continue;
-   CharSequence label=ri.loadLabel(pm);
-   String name=label==null?"":label.toString();
-   String pkg=ri.activityInfo.packageName==null?"":ri.activityInfo.packageName;
-   int s=appSpecialScore(wanted,pkg);
-   if(s==0 && wanted.equals(engine.canonical(name)))s=120;
-   if(s==0)s=engine.score(target,name+" "+pkg.replace('.',' '));
-   if(s>bs){bs=s;best=ri;bn=name;bp=pkg;}
+  // Deterministic mappings for common apps/Android components.
+  if(launchKnownApp(target))return true;
+
+  AppRow best=null;int bestScore=0;
+  for(AppRow row:installedApps){
+   int s=appSpecialScore(wanted,row.packageName);
+   if(s==0 && wanted.equals(engine.canonical(row.label)))s=120;
+   if(s==0){
+    String hay=row.label+" "+row.packageName.replace('.',' ');
+    s=engine.score(target,hay);
+   }
+   if(s>bestScore){bestScore=s;best=row;}
+  }
+
+  if(best!=null && bestScore>=18){
+   if(launchPackage(best.packageName,target))return true;
   }
 
   ResolveInfo semantic=semanticApp(pm,target);
-  if(semantic!=null && (best==null||bs<25)){
-   best=semantic;bp=semantic.activityInfo.packageName;
-   CharSequence label=semantic.loadLabel(pm);bn=label==null?"":label.toString();bs=90;
-  }
-
-  if(best!=null && bs>=10){
+  if(semantic!=null){
    try{
     Intent i=new Intent();
-    i.setComponent(new ComponentName(bp,best.activityInfo.name));
+    i.setComponent(new ComponentName(semantic.activityInfo.packageName,semantic.activityInfo.name));
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(i);
-    addMessage((english?"Opening ":"פותח ")+(bn.isEmpty()?target:bn),"assistant");return true;
+    addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;
    }catch(Exception ignored){}
   }
 
@@ -582,9 +607,24 @@ public class MainActivity extends Activity {
   return true;
  }
 
+ boolean launchPackage(String pkg,String spoken){
+  if(pkg==null||pkg.trim().isEmpty())return false;
+  try{
+   Intent i=getPackageManager().getLaunchIntentForPackage(pkg);
+   if(i==null)return false;
+   i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+   startActivity(i);
+   addMessage((english?"Opening ":"פותח ")+spoken,"assistant");
+   return true;
+  }catch(Exception e){return false;}
+ }
+
  boolean launchKnownApp(String target){
   String w=OfflineEngine.normalize(engine.canonical(target));
   PackageManager pm=getPackageManager();
+
+  String userPkg=findUserAliasPackage(target);
+  if(userPkg!=null && launchPackage(userPkg,target))return true;
 
   String[] packages=null;
   if(w.equals("play store"))packages=new String[]{"com.android.vending"};
@@ -606,31 +646,34 @@ public class MainActivity extends Activity {
   else if(w.equals("instagram"))packages=new String[]{"com.instagram.android"};
 
   if(packages!=null){
-   for(String pkg:packages){
-    try{
-     Intent i=pm.getLaunchIntentForPackage(pkg);
-     if(i!=null){i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);startActivity(i);
-      addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;}
-    }catch(Exception ignored){}
-   }
+   for(String pkg:packages)if(launchPackage(pkg,target))return true;
   }
 
-  // Generic Android semantic apps. Useful for OEM calculators, clocks, galleries, etc.
   String category=null;
   if(w.equals("calculator"))category=Intent.CATEGORY_APP_CALCULATOR;
-  else if(w.equals("clock"))category=Intent.CATEGORY_APP_CLOCK;
   else if(w.equals("gallery"))category=Intent.CATEGORY_APP_GALLERY;
   else if(w.equals("music")||w.equals("media player"))category=Intent.CATEGORY_APP_MUSIC;
   else if(w.equals("browser"))category=Intent.CATEGORY_APP_BROWSER;
   else if(w.equals("calendar"))category=Intent.CATEGORY_APP_CALENDAR;
+  else if(w.equals("contacts"))category=Intent.CATEGORY_APP_CONTACTS;
+  else if(w.equals("email"))category=Intent.CATEGORY_APP_EMAIL;
+  else if(w.equals("files"))category=Intent.CATEGORY_APP_FILES;
+  else if(w.equals("maps"))category=Intent.CATEGORY_APP_MAPS;
+  else if(w.equals("play store"))category=Intent.CATEGORY_APP_MARKET;
+  else if(w.equals("messages"))category=Intent.CATEGORY_APP_MESSAGING;
+  else if(w.equals("weather"))category=Intent.CATEGORY_APP_WEATHER;
+
   if(category!=null){
    try{
+    if(category.equals(Intent.CATEGORY_APP_FILES) && Build.VERSION.SDK_INT<29)return false;
     Intent i=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,category);
     List<ResolveInfo> list=pm.queryIntentActivities(i,PackageManager.MATCH_ALL);
     if(!list.isEmpty()){
-     ResolveInfo ri=list.get(0);Intent launch=new Intent(i);
+     ResolveInfo ri=list.get(0);
+     Intent launch=new Intent();
      launch.setComponent(new ComponentName(ri.activityInfo.packageName,ri.activityInfo.name));
-     launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);startActivity(launch);
+     launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+     startActivity(launch);
      addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;
     }
    }catch(Exception ignored){}
