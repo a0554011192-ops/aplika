@@ -58,6 +58,10 @@ final class OfflineEngine {
   load(c,"actions.tsv",1);
   commandsLoaded=true;
  }
+ // Kept as a compatibility no-op: installed apps are matched dynamically by PackageManager,
+ // so the 3000-row catalog never needs to be loaded into RAM.
+ synchronized void loadApps(Context c){}
+
 
  void load(Context c,String fn,int type){
   try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open(fn),"UTF-8"))){
@@ -151,6 +155,8 @@ final class OfflineEngine {
   return d[a.length()][b.length()];
  }
 
+ int score(String q,String text){return keywordScore(q,text);}
+ 
  int keywordScore(String query,String trigger){
   String qn=normalize(query),tn=normalize(trigger);
   if(qn.isEmpty()||tn.isEmpty())return 0;
