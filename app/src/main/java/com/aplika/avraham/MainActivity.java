@@ -12,6 +12,7 @@ import android.widget.*;
 import java.util.*;
 
 public class MainActivity extends Activity {
+    // CI rebuild trigger v4
     LinearLayout root; EditText input; TextView answer;
     boolean actionMode=false; long plusAt=0;
     final String[] ACTION_TRIGGERS={"פתח","תפתח","open","launch","start","פתח לי","תפתח לי","סגור","close","הפעל","תפעיל","turn on","enable","כבה","תכבה","turn off","disable","תגדיר","הגדר","configure","set","שנה","תשנה","change","תעשה לי","עשה לי","do"};
