@@ -340,7 +340,7 @@ public class MainActivity extends Activity {
   ArrayList<ChatSession> list=new ArrayList<>(chatSessions.values());Collections.reverse(list);
   for(ChatSession cs:list){
    LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(10),dp(3),dp(5),dp(3));
-   row.setBackground(shape(cs.id.equals(currentChatId)?Color.rgb(231,227,218):Color.TRANSPARENT,14,0);
+   row.setBackground(shape(cs.id.equals(currentChatId)?Color.rgb(231,227,218):Color.TRANSPARENT,14,0));
    TextView name=label(cs.title==null||cs.title.isEmpty()?"שיחה חדשה":cs.title,14,TEXT);name.setSingleLine(true);name.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);row.addView(name,new LinearLayout.LayoutParams(0,dp(44),1));
    Button del=softButton("⌫");del.setTextSize(13);del.setPadding(0,0,0,0);del.setBackground(shape(Color.TRANSPARENT,12,0));del.setOnClickListener(v->deleteSession(cs.id));row.addView(del,new LinearLayout.LayoutParams(dp(40),dp(42)));
    row.setOnClickListener(v->openSession(cs.id));sidebarList.addView(row,new LinearLayout.LayoutParams(-1,dp(48)));
