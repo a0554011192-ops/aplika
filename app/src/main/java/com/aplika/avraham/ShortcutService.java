@@ -1,10 +1,13 @@
 package com.aplika.avraham;
-import android.accessibilityservice.AccessibilityService;import android.view.KeyEvent;import android.view.accessibility.AccessibilityEvent;import android.content.Intent;import android.os.SystemClock;
+import android.accessibilityservice.AccessibilityService;import android.view.KeyEvent;import android.view.accessibility.AccessibilityEvent;import android.content.Intent;import android.os.SystemClock;import android.os.Handler;import android.os.Looper;import android.view.accessibility.AccessibilityNodeInfo;import java.util.Locale;
 public class ShortcutService extends AccessibilityService{
  private static ShortcutService instance;private long plus=0;
  public void onServiceConnected(){super.onServiceConnected();instance=this;}
  public void onDestroy(){if(instance==this)instance=null;super.onDestroy();}
  public static boolean doGlobal(int action){return instance!=null&&instance.performGlobalAction(action);}
+ public static boolean toggleQuickSetting(String... labels){if(instance==null)return false;instance.performGlobalAction(GLOBAL_ACTION_QUICK_SETTINGS);new Handler(Looper.getMainLooper()).postDelayed(()->instance.clickQuickSetting(labels),450);return true;}
+ private void clickQuickSetting(String... labels){AccessibilityNodeInfo root=getRootInActiveWindow();if(root==null)return;AccessibilityNodeInfo n=findNode(root,labels);if(n!=null&&n.isClickable())n.performAction(AccessibilityNodeInfo.ACTION_CLICK);}
+ private AccessibilityNodeInfo findNode(AccessibilityNodeInfo node,String... labels){if(node==null)return null;String text=node.getText()==null?"":node.getText().toString().toLowerCase(Locale.ROOT);String desc=node.getContentDescription()==null?"":node.getContentDescription().toString().toLowerCase(Locale.ROOT);for(String label:labels){String q=label.toLowerCase(Locale.ROOT);if(text.contains(q)||desc.contains(q))return node;}for(int i=0;i<node.getChildCount();i++){AccessibilityNodeInfo r=findNode(node.getChild(i),labels);if(r!=null)return r;}return null;}
  public boolean onKeyEvent(KeyEvent e){if(e.getAction()!=KeyEvent.ACTION_DOWN||e.getRepeatCount()!=0)return false;int k=e.getKeyCode();if(k==KeyEvent.KEYCODE_PLUS||k==KeyEvent.KEYCODE_EQUALS){plus=SystemClock.uptimeMillis();return true;}if(k==KeyEvent.KEYCODE_MINUS&&plus>0&&SystemClock.uptimeMillis()-plus<=1000){plus=0;Intent i=new Intent(this,MainActivity.class);i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);startActivity(i);return true;}return false;}
  public void onAccessibilityEvent(AccessibilityEvent e){}public void onInterrupt(){}
 }
