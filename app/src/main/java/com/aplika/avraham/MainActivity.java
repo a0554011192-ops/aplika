@@ -1,61 +1,238 @@
 package com.aplika.avraham;
 
-import android.app.*;import android.os.*;import android.content.*;import android.content.pm.*;import android.graphics.Color;import android.graphics.Typeface;import android.graphics.drawable.GradientDrawable;import android.net.Uri;import android.provider.DocumentsContract;import android.view.*;import android.view.inputmethod.InputMethodManager;import android.widget.*;import android.media.AudioManager;import android.view.KeyEvent;import android.accessibilityservice.AccessibilityService;import java.io.*;import java.util.*;
+import android.app.*;
+import android.os.*;
+import android.content.*;
+import android.content.pm.*;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
+import android.provider.DocumentsContract;
+import android.view.*;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.*;
+import android.media.AudioManager;
+import android.view.KeyEvent;
+import android.accessibilityservice.AccessibilityService;
+import java.util.*;
 
-public class MainActivity extends Activity{
- LinearLayout root;EditText input;TextView result;Button modeBtn,langBtn;boolean english=false;String mode="open";OfflineEngine engine;AudioManager audio;
- final String[] openWords={"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run"};
- final String[] actWords={"הפעל","תפעיל","הדלק","תדליק","כבה","תכבה","סגור","תסגור","הגדר","תגדיר","שנה","תשנה","אפשר","תאפשר","בטל","תבטל","אפס","תאפס","open","enable","disable","configure","set","change","turn on","turn off"};
- public void onCreate(Bundle b){super.onCreate(b);getWindow().setStatusBarColor(Color.rgb(247,245,252));audio=(AudioManager)getSystemService(AUDIO_SERVICE);engine=new OfflineEngine(this);build();}
- TextView text(String s,int z){TextView t=new TextView(this);t.setText(s);t.setTextSize(z);t.setTextColor(Color.rgb(38,38,48));t.setPadding(16,10,16,10);return t;}
- GradientDrawable bg(int c,float r){GradientDrawable g=new GradientDrawable();g.setColor(c);g.setCornerRadius(r);g.setStroke(1,Color.rgb(226,222,238));return g;}
- Button button(String s){Button b=new Button(this);b.setText(s);b.setAllCaps(false);return b;}
- void build(){root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setPadding(20,20,20,14);root.setBackgroundColor(Color.rgb(247,245,252));
-  LinearLayout head=new LinearLayout(this);head.setGravity(Gravity.CENTER_VERTICAL);ImageView icon=new ImageView(this);icon.setImageResource(R.drawable.ic_avraham);head.addView(icon,new LinearLayout.LayoutParams(64,64));
-  LinearLayout names=new LinearLayout(this);names.setOrientation(LinearLayout.VERTICAL);TextView title=text("אברהם העברי",27);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);names.addView(title);names.addView(text("Android • Offline / אופליין",13));head.addView(names,new LinearLayout.LayoutParams(0,-2,1));langBtn=button("עברית / English");langBtn.setOnClickListener(v->{english=!english;applyLang();});head.addView(langBtn,new LinearLayout.LayoutParams(150,60));root.addView(head);
-  modeBtn=button("מצב: פתיחה");modeBtn.setOnClickListener(v->chooseMode());root.addView(modeBtn,new LinearLayout.LayoutParams(-1,62));
-  result=text("כתוב בקשה. המנוע בודק מילות מפתח, כינויים ושגיאות כתיב.",16);result.setBackground(bg(Color.WHITE,24));root.addView(result,new LinearLayout.LayoutParams(-1,110));
-  input=new EditText(this);input.setTextSize(17);input.setSingleLine(false);input.setMinLines(2);input.setHint("לדוגמה: פתח לי כרום / תגביה שמע / תעביר לשיר הבא");input.setPadding(18,12,18,12);input.setBackground(bg(Color.WHITE,24));root.addView(input,new LinearLayout.LayoutParams(-1,0,1));
-  LinearLayout bar=new LinearLayout(this);Button plus=button("＋"),minus=button("−"),go=button("בצע  /  Go"),files=button("תיקייה");plus.setTextSize(28);minus.setTextSize(28);
-  plus.setOnClickListener(v->chooseMode());minus.setOnClickListener(v->{input.requestFocus();((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).showSoftInput(input,InputMethodManager.SHOW_IMPLICIT);});go.setOnClickListener(v->process(input.getText().toString()));files.setOnClickListener(v->pickFolder());
-  bar.addView(plus,new LinearLayout.LayoutParams(0,68,1));bar.addView(minus,new LinearLayout.LayoutParams(0,68,1));bar.addView(go,new LinearLayout.LayoutParams(0,68,2));bar.addView(files,new LinearLayout.LayoutParams(0,68,1));root.addView(bar);
-  Button access=button("⚙ הגדרת קיצור + ואז −  /  Set shortcut");access.setOnClickListener(v->startActivity(new Intent("android.settings.ACCESSIBILITY_SETTINGS")));root.addView(access,new LinearLayout.LayoutParams(-1,58));setContentView(root);applyLang();}
- void chooseMode(){PopupMenu p=new PopupMenu(this,modeBtn);p.getMenu().add("פתיחת אפליקציה / Open app");p.getMenu().add("פעולה בהגדרות / Settings action");p.getMenu().add("שיחה / Chat");p.setOnMenuItemClickListener(m->{String s=m.getTitle().toString();mode=s.startsWith("פתיחת")?"open":s.startsWith("פעולה")?"action":"chat";applyLang();return true;});p.show();}
- void applyLang(){getWindow().getDecorView().setLayoutDirection(english?View.LAYOUT_DIRECTION_LTR:View.LAYOUT_DIRECTION_RTL);modeBtn.setText((english?"Mode: ":"מצב: ")+(mode.equals("open")?(english?"Open app":"פתיחה"):mode.equals("action")?(english?"Settings action":"פעולה בהגדרות"):(english?"Chat":"שיחה")));langBtn.setText(english?"English / עברית":"עברית / English");}
- boolean explicit(String q,String[] words){String x=q.toLowerCase(Locale.ROOT);for(String w:words)if(x.contains(w.toLowerCase(Locale.ROOT)))return true;return false;}
- String targetOf(String q){String x=q;for(String w:openWords)x=x.replaceAll("(?iu)\\b"+java.util.regex.Pattern.quote(w)+"\\b"," ");return x.trim();}
- String nq(String q){return q.toLowerCase(Locale.ROOT).replace("׳","'");}
- boolean has(String q,String...ws){String x=nq(q);for(String w:ws)if(x.contains(w.toLowerCase(Locale.ROOT)))return true;return false;}
- boolean media(int k){try{audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,k));audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,k));return true;}catch(Exception e){return false;}}
+public class MainActivity extends Activity {
+ LinearLayout root,chatList;
+ ScrollView chatScroll;
+ EditText input;
+ TextView status;
+ OfflineEngine engine;
+ AudioManager audio;
+ boolean english=false;
+
+ final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
+ final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
+
+ @Override public void onCreate(Bundle b){
+  super.onCreate(b);
+  getWindow().setStatusBarColor(BG);
+  getWindow().setNavigationBarColor(BG);
+  audio=(AudioManager)getSystemService(AUDIO_SERVICE);
+  engine=new OfflineEngine(this);
+  buildChatUi();
+  addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
+  new Thread(()->engine.loadAll(this),"catalog-loader").start();
+ }
+
+ TextView label(String s,float size,int color){
+  TextView t=new TextView(this);
+  t.setText(s);t.setTextSize(size);t.setTextColor(color);t.setFontFeatureSettings("kern");
+  return t;
+ }
+
+ GradientDrawable shape(int color,float radius,int stroke){
+  GradientDrawable g=new GradientDrawable();g.setColor(color);g.setCornerRadius(radius);
+  if(stroke>0)g.setStroke(1,stroke==1?BORDER:Color.TRANSPARENT);
+  return g;
+ }
+
+ Button softButton(String s){
+  Button b=new Button(this);b.setText(s);b.setTextSize(14);b.setAllCaps(false);
+  b.setTextColor(TEXT);b.setPadding(18,4,18,4);b.setMinHeight(42);b.setBackground(shape(Color.WHITE,26,1));
+  return b;
+ }
+
+ void buildChatUi(){
+  root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);
+  root.setPadding(14,10,14,10);
+
+  LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(6,4,4,8);
+  ImageView avatar=new ImageView(this);avatar.setImageResource(R.drawable.ic_avraham);
+  top.addView(avatar,new LinearLayout.LayoutParams(48,48));
+  LinearLayout titleBox=new LinearLayout(this);titleBox.setOrientation(LinearLayout.VERTICAL);titleBox.setPadding(10,0,0,0);
+  TextView title=label("אברהם העברי",20,TEXT);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
+  titleBox.addView(title);
+  status=label("אופליין • מוכן",12,MUTED);titleBox.addView(status);
+  top.addView(titleBox,new LinearLayout.LayoutParams(0,-2,1));
+  Button tools=softButton("כלים");tools.setOnClickListener(v->showTools());
+  top.addView(tools,new LinearLayout.LayoutParams(82,44));
+  root.addView(top);
+
+  View line=new View(this);line.setBackgroundColor(BORDER);root.addView(line,new LinearLayout.LayoutParams(-1,1));
+
+  chatScroll=new ScrollView(this);chatScroll.setFillViewport(true);chatScroll.setVerticalScrollBarEnabled(false);
+  chatList=new LinearLayout(this);chatList.setOrientation(LinearLayout.VERTICAL);chatList.setPadding(3,12,3,12);
+  chatScroll.addView(chatList,new ScrollView.LayoutParams(-1,-2));
+  root.addView(chatScroll,new LinearLayout.LayoutParams(-1,0,1));
+
+  LinearLayout suggestions=new LinearLayout(this);suggestions.setOrientation(LinearLayout.HORIZONTAL);suggestions.setGravity(Gravity.CENTER_VERTICAL);
+  suggestions.setPadding(0,3,0,7);
+  addSuggestion(suggestions,"פתח לי כרום");addSuggestion(suggestions,"תגביה שמע");addSuggestion(suggestions,"תעביר לשיר הבא");
+  root.addView(suggestions,new LinearLayout.LayoutParams(-1,50));
+
+  LinearLayout composer=new LinearLayout(this);composer.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);composer.setPadding(0,4,0,0);
+  input=new EditText(this);input.setTextSize(16);input.setTextColor(TEXT);input.setHintTextColor(Color.rgb(150,147,160));
+  input.setHint("כתוב הודעה...");input.setSingleLine(false);input.setMaxLines(4);input.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
+  input.setPadding(18,10,18,10);input.setBackground(shape(Color.WHITE,28,1));
+  composer.addView(input,new LinearLayout.LayoutParams(0,58,1));
+  Button send=softButton("שלח");send.setTextColor(Color.WHITE);send.setBackground(shape(Color.rgb(109,94,245),28,0));
+  send.setOnClickListener(v->sendCurrent());composer.addView(send,new LinearLayout.LayoutParams(78,58));
+  root.addView(composer,new LinearLayout.LayoutParams(-1,64));
+
+  setContentView(root);
+  getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+ }
+
+ void addSuggestion(LinearLayout box,String text){
+  Button b=softButton(text);b.setTextSize(12);b.setOnClickListener(v->{input.setText(text);sendCurrent();});
+  LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(0,44,1);lp.setMargins(3,0,3,0);box.addView(b,lp);
+ }
+
+ TextView bubble(String text,boolean user){
+  TextView t=label(text,16,TEXT);t.setLineSpacing(0,1.12f);t.setPadding(16,12,16,12);t.setBackground(shape(user?USER_BUBBLE:BUBBLE,22,1));
+  if(user)t.setTextColor(Color.rgb(48,43,72));
+  return t;
+ }
+
+ void addMessage(String text,String who){
+  boolean user="user".equals(who);
+  LinearLayout row=new LinearLayout(this);row.setGravity(user?Gravity.RIGHT:Gravity.LEFT);
+  row.setPadding(8,4,8,4);
+  TextView b=bubble(text,user);
+  LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-2,-2);bp.setMargins(user?56:8,2,user?8:56,2);row.addView(b,bp);
+  chatList.addView(row,new LinearLayout.LayoutParams(-1,-2));
+  chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
+ }
+
+ void sendCurrent(){
+  String q=input.getText().toString().trim();if(q.isEmpty())return;
+  input.setText("");
+  addMessage(q,"user");
+  process(q);
+ }
+
+ void showTools(){
+  PopupMenu p=new PopupMenu(this,findViewById(android.R.id.content));
+  p.getMenu().add("צ׳אט");
+  p.getMenu().add("פתיחת אפליקציה");
+  p.getMenu().add("פעולת מערכת");
+  p.getMenu().add("בחר תיקיית קבצים");
+  p.setOnMenuItemClickListener(m->{String s=m.getTitle().toString();
+   if(s.startsWith("בחר"))pickFolder();
+   else if(s.startsWith("פתיחת")){addMessage("כתוב את שם האפליקציה שתרצה לפתוח.","assistant");}
+   else if(s.startsWith("פעולת")){addMessage("כתוב את פעולת המערכת שתרצה לבצע.","assistant");}
+   return true;
+  });p.show();
+ }
+
+ String norm(String s){return OfflineEngine.normalize(s);}
+ boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
+ boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
+ boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","נעל מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings");}
+
+ void process(String q){
+  String n=norm(q);
+  if(openRequest(q)&&!hasAny(n,"הגדרות","מסך הגדרות")){openThing(q);return;}
+  if(actionRequest(q)){if(direct(q))return;runAction(q);return;}
+  chat(q);
+ }
+
+ void chat(String q){
+  OfflineEngine.Resp r=engine.bestResponse(q,english);
+  if(r==null){addMessage(english?"I did not find a matching offline answer. Try another wording.":"לא מצאתי תשובה תואמת במאגר האופליין. נסה ניסוח אחר.","assistant");return;}
+  addMessage(english?r.en:r.he,"assistant");
+ }
+
+ boolean media(int k){
+  try{audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,k));audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,k));return true;}catch(Exception e){return false;}
+ }
  boolean global(int action){return ShortcutService.doGlobal(action);}
+
  boolean direct(String q){
-  String x=nq(q);
-  if(has(x,"בטל השתקה","unmute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);result.setText(english?"Media unmuted.":"ההשתקה בוטלה.");return true;}
-  if(has(x,"השתק","השתקה","שקט","mute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_MUTE,0);result.setText(english?"Media muted.":"השמע הושתק.");return true;}
-  if(has(x,"תגביה","תגביהה","הגבהה","תגביר","תעלה","תרים","הגבר","volume up","increase volume","louder")&&(has(x,"שמע","קול","מוזיקה","שיר","volume","sound")||has(x,"תגביה","תגביהה","הגבהה","תגביר","louder"))){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,0);result.setText(english?"Volume increased.":"עוצמת השמע הוגברה.");return true;}
-  if(has(x,"תנמיך","הנמכה","תוריד","תקטין","הנמך","volume down","decrease volume","quieter","lower volume")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_LOWER,0);result.setText(english?"Volume decreased.":"עוצמת השמע הונמכה.");return true;}
-  java.util.regex.Matcher m=java.util.regex.Pattern.compile("(?<!\\d)(\\d{1,3})(?:\\s*%)?").matcher(x);if(has(x,"ווליום","עוצמה","volume","שמע","קול")&&m.find()){int p=Math.max(0,Math.min(100,Integer.parseInt(m.group(1))));int max=audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);audio.setStreamVolume(AudioManager.STREAM_MUSIC,(max*p)/100,0);result.setText((english?"Volume set to ":"עוצמת השמע הוגדרה ל-")+p+"%");return true;}
-  if(has(x,"תעביר לשיר הבא","שיר הבא","next track","next song")|| (has(x,"הבא","next")&&has(x,"שיר","מוזיקה","track","song"))){if(media(KeyEvent.KEYCODE_MEDIA_NEXT)){result.setText(english?"Next track.":"השיר הבא.");return true;}}
-  if(has(x,"שיר קודם","שיר הקודם","previous track","previous song")|| (has(x,"קודם","previous")&&has(x,"שיר","מוזיקה","track","song"))){if(media(KeyEvent.KEYCODE_MEDIA_PREVIOUS)){result.setText(english?"Previous track.":"השיר הקודם.");return true;}}
-  if(has(x,"נגן","נגינה","play music","play")){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){result.setText(english?"Play.":"ניגון.");return true;}}
-  if(has(x,"השהה","השהייה","pause")){if(media(KeyEvent.KEYCODE_MEDIA_PAUSE)){result.setText(english?"Paused.":"הושהה.");return true;}}
-  if(has(x,"עצור מוזיקה","stop music")){if(media(KeyEvent.KEYCODE_MEDIA_STOP)){result.setText(english?"Stopped.":"המוזיקה נעצרה.");return true;}}
+  String x=norm(q);
+  if(hasAny(x,"בטל השתקה","unmute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);addMessage(english?"Media unmuted.":"ההשתקה בוטלה.","assistant");return true;}
+  if(hasAny(x,"השתק","השתקה","שקט","mute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_MUTE,0);addMessage(english?"Media muted.":"השמע הושתק.","assistant");return true;}
+  if(hasAny(x,"תגביה","תגביהה","הגבהה","תגביר","תעלה","תרים","הגבר","volume up","increase volume","louder")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,0);addMessage(english?"Volume increased.":"עוצמת השמע הוגברה.","assistant");return true;}
+  if(hasAny(x,"תנמיך","הנמכה","תוריד","תקטין","הנמך","volume down","decrease volume","quieter","lower volume")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_LOWER,0);addMessage(english?"Volume decreased.":"עוצמת השמע הונמכה.","assistant");return true;}
+  java.util.regex.Matcher m=java.util.regex.Pattern.compile("(?<!\\d)(\\d{1,3})(?:\\s*%)?").matcher(x);
+  if(hasAny(x,"ווליום","עוצמה","volume","שמע","קול")&&m.find()){int p=Math.max(0,Math.min(100,Integer.parseInt(m.group(1))));int max=audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);audio.setStreamVolume(AudioManager.STREAM_MUSIC,(max*p)/100,0);addMessage((english?"Volume set to ":"עוצמת השמע הוגדרה ל-")+p+"%","assistant");return true;}
+  if(hasAny(x,"תעביר לשיר הבא","שיר הבא","הבא","next track","next song")&&hasAny(x,"שיר","מוזיקה","track","song")){if(media(KeyEvent.KEYCODE_MEDIA_NEXT)){addMessage(english?"Next track.":"השיר הבא.","assistant");return true;}}
+  if(hasAny(x,"שיר קודם","שיר הקודם","previous track","previous song")&&hasAny(x,"שיר","מוזיקה","track","song")){if(media(KeyEvent.KEYCODE_MEDIA_PREVIOUS)){addMessage(english?"Previous track.":"השיר הקודם.","assistant");return true;}}
+  if(hasAny(x,"נגן","נגינה","play music","play")){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){addMessage(english?"Play.":"ניגון.","assistant");return true;}}
+  if(hasAny(x,"השהה","השהייה","pause")){if(media(KeyEvent.KEYCODE_MEDIA_PAUSE)){addMessage(english?"Paused.":"הושהה.","assistant");return true;}}
+  if(hasAny(x,"עצור מוזיקה","stop music")){if(media(KeyEvent.KEYCODE_MEDIA_STOP)){addMessage(english?"Stopped.":"המוזיקה נעצרה.","assistant");return true;}}
   int g=-1;String msg=null;
-  if(has(x,"חזור הביתה","מסך הבית","דף הבית","home")){g=AccessibilityService.GLOBAL_ACTION_HOME;msg=english?"Home.":"מסך הבית.";}
-  else if(has(x,"חזור אחורה","אחורה","back")){g=AccessibilityService.GLOBAL_ACTION_BACK;msg=english?"Back.":"חזרה.";}
-  else if(has(x,"אחרונות","אפליקציות אחרונות","recents","recent apps")){g=AccessibilityService.GLOBAL_ACTION_RECENTS;msg=english?"Recent apps.":"האפליקציות האחרונות.";}
-  else if(has(x,"פתח התראות","התראות","notifications")){g=AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS;msg=english?"Notifications.":"התראות.";}
-  else if(has(x,"הגדרות מהירות","quick settings")){g=AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS;msg=english?"Quick settings.":"הגדרות מהירות.";}
-  if(g>=0){if(global(g)){result.setText(msg);return true;}result.setText(english?"Enable the accessibility service once for this system command.":"כדי לבצע את פקודת המערכת הזו ללא מגע, יש להפעיל פעם אחת את שירות הנגישות.");return true;}
+  if(hasAny(x,"חזור הביתה","מסך הבית","דף הבית","home")){g=AccessibilityService.GLOBAL_ACTION_HOME;msg=english?"Home.":"מסך הבית.";}
+  else if(hasAny(x,"חזור אחורה","אחורה","back")){g=AccessibilityService.GLOBAL_ACTION_BACK;msg=english?"Back.":"חזרה.";}
+  else if(hasAny(x,"אחרונות","אפליקציות אחרונות","recents","recent apps")){g=AccessibilityService.GLOBAL_ACTION_RECENTS;msg=english?"Recent apps.":"האפליקציות האחרונות.";}
+  else if(hasAny(x,"פתח התראות","התראות","notifications")){g=AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS;msg=english?"Notifications.":"התראות.";}
+  else if(hasAny(x,"הגדרות מהירות","quick settings")){g=AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS;msg=english?"Quick settings.":"הגדרות מהירות.";}
+  if(g>=0){if(global(g)){addMessage(msg,"assistant");return true;}addMessage(english?"Enable the accessibility service once for this system command.":"כדי לבצע את פקודת המערכת הזו ללא מגע, יש להפעיל פעם אחת את שירות הנגישות.","assistant");return true;}
   return false;
  }
- void process(String q){q=q.trim();if(q.isEmpty()){result.setText(english?"Please type a request.":"כתוב בקשה.");return;}if(mode.equals("chat")){chat(q);return;}if(direct(q))return;if(mode.equals("action")||(explicit(q,actWords)&&!explicit(q,openWords))){runAction(q);return;}openThing(q);}
- void chat(String q){OfflineEngine.Resp r=engine.bestResponse(q,english);if(r==null){result.setText(english?"No matching offline response.":"אין תגובה מתאימה במאגר המקומי.");return;}result.setText(english?r.en:r.he);}
- void runAction(String q){OfflineEngine.ActionEntry a=engine.bestAction(q);if(a==null){result.setText(english?"No action matched.":"לא נמצאה פעולה מתאימה.");return;}try{startActivity(engine.settingIntent(a.setting));result.setText((english?"Opening settings: ":"פותח הגדרות: ")+(english?a.en:a.he));}catch(Exception e){result.setText(english?"This Android version does not expose that settings screen.":"גרסת Android הזו אינה חושפת את מסך ההגדרה הזה.");}}
- void openThing(String q){String target=targetOf(q);PackageManager pm=getPackageManager();ApplicationInfo best=null;String bn="";int bs=0;for(ApplicationInfo a:pm.getInstalledApplications(PackageManager.GET_META_DATA)){String n=pm.getApplicationLabel(a).toString();int s=Math.max(engine.score(target,n),engine.score(q,n));if(s>bs){bs=s;best=a;bn=n;}}if(best!=null&&bs>=2){Intent i=pm.getLaunchIntentForPackage(best.packageName);if(i!=null){startActivity(i);result.setText((english?"Opening ":"פותח ")+bn);return;}}searchSelectedFolder(target);}
- void pickFolder(){Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);startActivityForResult(i,11);}
- protected void onActivityResult(int r,int c,Intent d){super.onActivityResult(r,c,d);if(r==11&&c==RESULT_OK&&d!=null){getPreferences(MODE_PRIVATE).edit().putString("tree",d.getData().toString()).apply();try{getContentResolver().takePersistableUriPermission(d.getData(),Intent.FLAG_GRANT_READ_URI_PERMISSION);}catch(Exception ignored){}result.setText(english?"Folder saved for offline search.":"התיקייה נשמרה לחיפוש אופליין.");}}
- void searchSelectedFolder(String target){String u=getPreferences(MODE_PRIVATE).getString("tree","");if(u.isEmpty()){Intent p=new Intent(Intent.ACTION_OPEN_DOCUMENT);p.addCategory(Intent.CATEGORY_OPENABLE);p.setType("*/*");startActivityForResult(p,12);result.setText(english?"No indexed folder. Choose a file.":"לא נבחרה תיקיית חיפוש. בחר מסמך.");return;}FileHit h=find(Uri.parse(u),target,0,new int[]{0});if(h!=null){Intent i=new Intent(Intent.ACTION_VIEW);i.setDataAndType(Uri.parse(h.uri),h.mime);i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);try{startActivity(i);result.setText((english?"Opening ":"פותח ")+h.name);}catch(Exception e){startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse(h.uri)));}}else result.setText(english?"No file matched.":"לא נמצא קובץ תואם.");}
- static class FileHit{String name,uri,mime;FileHit(String n,String u,String m){name=n;uri=u;mime=m;}}
- FileHit find(Uri tree,String target,int depth,int[] count){if(depth>12||count[0]>8000)return null;try{String docId=DocumentsContract.getTreeDocumentId(tree);Uri children=DocumentsContract.buildChildDocumentsUriUsingTree(tree,docId);android.database.Cursor c=getContentResolver().query(children,new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID,DocumentsContract.Document.COLUMN_DISPLAY_NAME,DocumentsContract.Document.COLUMN_MIME_TYPE},null,null,null);if(c==null)return null;FileHit near=null;int ns=0;while(c.moveToNext()&&count[0]++<8000){String id=c.getString(0),name=c.getString(1),mime=c.getString(2);Uri u=DocumentsContract.buildDocumentUriUsingTree(tree,id);if(!"vnd.android.document/directory".equals(mime)){int s=Math.max(engine.score(target,name),engine.score(target,name.replaceFirst("(?s)\\.[^.]+$","")));if(s>ns){ns=s;near=new FileHit(name,u.toString(),mime);}}else if(depth<12){FileHit x=find(u,target,depth+1,count);if(x!=null)return x;}}c.close();return ns>=2?near:null;}catch(Exception e){return null;}}
+
+ void runAction(String q){
+  OfflineEngine.ActionEntry a=engine.bestAction(q);
+  if(a==null){addMessage(english?"I could not match that system action.":"לא הצלחתי לזהות את פעולת המערכת הזאת.","assistant");return;}
+  try{
+   startActivity(engine.settingIntent(a.setting));
+   addMessage((english?"Opening settings: ":"פותח הגדרות: ")+(english?a.en:a.he),"assistant");
+  }catch(Exception e){addMessage(english?"This Android version does not expose that settings screen.":"גרסת Android זו אינה חושפת את מסך ההגדרה הזה.","assistant");}
+ }
+
+ String targetOf(String q){
+  String x=norm(q);
+  String[] filler={"פתח","תפתח","לפתוח","פתיחה","לי","את","בבקשה","open","launch","start","run","please","app"};
+  for(String w:filler)x=x.replaceAll("(?iu)(^| )"+java.util.regex.Pattern.quote(norm(w))+"(?= |$)"," ");
+  return x.trim();
+ }
+
+ void openThing(String q){
+  String target=targetOf(q);
+  String wanted=engine.canonical(target);
+  PackageManager pm=getPackageManager();
+  ApplicationInfo best=null;String bn="";int bs=0;
+  for(ApplicationInfo a:pm.getInstalledApplications(PackageManager.GET_META_DATA)){
+   String n=pm.getApplicationLabel(a).toString();
+   String cn=engine.canonical(n);
+   int s=wanted.equals(cn)?100:engine.score(target,n);
+   if(s>bs){bs=s;best=a;bn=n;}
+  }
+  if(best!=null&&bs>=1){
+   Intent i=pm.getLaunchIntentForPackage(best.packageName);
+   if(i!=null){startActivity(i);addMessage((english?"Opening ":"פותח ")+bn,"assistant");return;}
+  }
+  addMessage(english?"I could not find that installed app.":"לא מצאתי את האפליקציה הזו בין האפליקציות המותקנות.","assistant");
+ }
+
+ void pickFolder(){
+  Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+  i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+  startActivityForResult(i,11);
+ }
+
+ @Override protected void onActivityResult(int r,int c,Intent d){
+  super.onActivityResult(r,c,d);
+  if(r==11&&c==RESULT_OK&&d!=null){
+   getPreferences(MODE_PRIVATE).edit().putString("tree",d.getData().toString()).apply();
+   try{getContentResolver().takePersistableUriPermission(d.getData(),Intent.FLAG_GRANT_READ_URI_PERMISSION);}catch(Exception ignored){}
+   addMessage(english?"Folder saved for offline file search.":"התיקייה נשמרה לחיפוש קבצים באופליין.","assistant");
+  }
+ }
 }
