@@ -100,7 +100,8 @@ final class OfflineEngine {
  }
 
  synchronized void loadApps(Context c){
-  try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open("apps.tsv"),"UTF-8"))){
+  if(appsLoaded)return;
+  try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open("apps.tsv"),"UTF-8"),65536)){
    String l;
    while((l=br.readLine())!=null){
     String[] p=l.split("\\t",-1);
