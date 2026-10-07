@@ -378,7 +378,22 @@ public class MainActivity extends Activity {
  String norm(String s){return OfflineEngine.normalize(s);}
  boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
- boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings","screenshot","lock screen");}
+ boolean actionRequest(String q){
+  String x=norm(q);
+  if(hasAny(x,"תגביה","תגביהה","תנמיך","השתק","השתקה","נגן","השהה","עצור","חזור אחורה","חזור הביתה","אחורה","אפליקציות אחרונות","אחרונות","פתח התראות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","home","back","notifications","quick settings","screenshot","lock screen"))return true;
+  return hasAny(x,"הבא","קודם","next","previous")&&hasAny(x,"שיר","מוזיקה","track","song");
+ }
+ boolean likelyActionCommand(String q){
+  String x=norm(q);
+  return hasAny(x,
+   "פתח","תפתח","לפתוח","הצג","בדוק","נהל","כוון","בחר","עבור","היכנס","גישה",
+   "הפעל","תפעיל","השבת","תכבה","אפשר","בטל","אפס","שנה","הגדר","שלוט","התאם",
+   "נווט","עיין","עדכן","שמור","צלם","נעל","השתק","נגן","השהה","עצור","תגביה","תנמיך",
+   "open","show","check","manage","adjust","choose","go","enter","access","enable","disable",
+   "allow","reset","change","set","control","navigate","inspect","update","save","screenshot",
+   "lock","mute","play","pause","stop","volume","quick settings"
+  );
+ }
  boolean settingsRequest(String q){
   String x=norm(q);
   if(!hasAny(x,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast","sound","שמע"))return false;
@@ -404,7 +419,7 @@ public class MainActivity extends Activity {
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
   if(actionRequest(q)){runAction(q);return;}
-  if(engine.commandsLoaded && engine.bestAction(q)!=null){runAction(q);return;}
+  if(engine.commandsLoaded && likelyActionCommand(q) && engine.bestAction(q)!=null){runAction(q);return;}
 
   // Natural Android commands: a user should be able to say just "מחשבון",
   // "שעון", "דרייב", "גוגל פליי", etc. without adding the word "פתח".
