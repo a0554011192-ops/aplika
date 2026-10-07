@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 final class OfflineEngine {
- static final int APP_COUNT=4000,ACTION_COUNT=4000,RESPONSE_COUNT=5000,SYN_COUNT=6000;
+ static final int APP_COUNT=4000,ACTION_COUNT=712,RESPONSE_COUNT=9000,SYN_COUNT=516;
 
  static class Resp{
   String he,en;String[] triggers;String[] triggerNorms;
@@ -24,7 +24,7 @@ final class OfflineEngine {
  final Map<String,String> commonAliases=new ConcurrentHashMap<>();
 
  final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
- final HashMap<String,Resp> responseExact=new HashMap<>();
+ final HashMap<String,ArrayList<Resp>> responseExact=new HashMap<>();
  final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
 
@@ -83,6 +83,7 @@ final class OfflineEngine {
    responseIndex.clear();
    responseExact.clear();
    load(c,"responses.tsv",2);
+   if(responses.size()!=RESPONSE_COUNT) throw new IOException("responses.tsv expected "+RESPONSE_COUNT+" rows, got "+responses.size());
    chatLoaded=true;
   }catch(Exception ignored){chatLoaded=false;}
  }
@@ -172,12 +173,14 @@ final class OfflineEngine {
  void indexResponse(String raw,Resp r){indexResponseNormalized(normalize(raw),r);}
  void indexResponseNormalized(String n,Resp r){
   if(n.isEmpty())return;
-  responseExact.putIfAbsent(n,r);
+  ArrayList<Resp> exact=responseExact.get(n);
+  if(exact==null){exact=new ArrayList<>();responseExact.put(n,exact);}
+  exact.add(r);
   for(String tok:n.split("\\s+")){
    if(tok.length()<2)continue;
    ArrayList<Resp> list=responseIndex.get(tok);
    if(list==null){list=new ArrayList<>();responseIndex.put(tok,list);}
-   if(list.size()<48&&!list.contains(r))list.add(r);
+   if(list.size()<64&&!list.contains(r))list.add(r);
   }
  }
 
@@ -191,7 +194,7 @@ final class OfflineEngine {
  }
 
  static String normalize(String s){
-  return s.toLowerCase(Locale.ROOT).replace("׳","'").replaceAll("[^\\p{L}\\p{N}]+"," ").trim();
+  return s.toLowerCase(Locale.ROOT).replace("׳","'").replaceAll("[^\\p{L}\\p{N}]+"," ").trim().replaceAll("ח{2,}","חחח").replaceAll("(?:lol)+","lol");
  }
 
  String canonicalWord(String w){
@@ -269,8 +272,6 @@ final class OfflineEngine {
  Resp quickResponse(String q){
   String n=normalize(q);
   if(n.isEmpty())return null;
-  if(hasAny(n,"שלום","היי","הי","hello","hi"))
-   return new Resp("שלום! אני אברהם העברי. מה תרצה לעשות?","Hello! I am Avraham HaIvri. What would you like to do?",new String[]{"שלום"});
   if(hasAny(n,"מה השם שלך","השם שלך","איך קוראים לך","who are you","what is your name"))
    return new Resp("השם שלי הוא אברהם העברי.","My name is Avraham HaIvri.",new String[]{"השם שלך"});
   if(hasAny(n,"מה אתה יכול לעשות","מה אתה יודע","יכולות","capabilities","what can you do"))
@@ -279,10 +280,6 @@ final class OfflineEngine {
    return new Resp("הנה חידה: מה יש לו מקשים אבל לא דלתות? מקלדת. אם פתרת, נוודא יחד את התשובה.","Here is a riddle: What has keys but no doors? A keyboard. Check the answer after you think.",new String[]{"חידה"});
   if(hasAny(n,"בדיחה","תספר בדיחה","תן לי בדיחה","joke","tell me a joke"))
    return new Resp("בדיחה: למה המחשב הלך לרופא? כי היו לו יותר מדי חלונות פתוחים.","Joke: Why did the computer go to the doctor? It had too many open windows.",new String[]{"בדיחה"});
-  if(hasAny(n,"מה נשמע","מה קורה","מה שלומך","how are you"))
-   return new Resp("אני מוכן. כתוב לי מה תרצה לעשות.","I am ready. Tell me what you would like to do.",new String[]{"מה נשמע"});
-  if(hasAny(n,"תודה","תודה רבה","thanks","thank you"))
-   return new Resp("בשמחה!","You are welcome!",new String[]{"תודה"});
   if(hasAny(n,"עזרה","תעזור לי","איך משתמשים","help"))
    return new Resp("כתוב כמו שאתה מדבר. למשל: „תתן לי חידה מצחיקה”, „מה השם שלך?”, „פתח לי כרום” או „תגביה שמע”.","Write naturally. For example: “give me a funny riddle”, “what is your name?”, “open Chrome”, or “turn up the volume.”",new String[]{"עזרה"});
   return null;
@@ -304,11 +301,9 @@ final class OfflineEngine {
   String n=normalize(q);
   if(n.isEmpty())return null;
 
-  // Stage 1: exact normalized phrase lookup.
-  Resp exact=responseExact.get(n);
-  if(exact!=null)return exact;
+  ArrayList<Resp> exact=responseExact.get(n);
+  if(exact!=null&&!exact.isEmpty())return randomResponse(exact);
 
-  // Stage 2: canonicalized words, still O(number of query words).
   String[] words=n.split("\\s+");
   StringBuilder cb=new StringBuilder();
   for(String w:words){
@@ -318,21 +313,20 @@ final class OfflineEngine {
   }
   String canonicalQuery=cb.toString().trim();
   if(!canonicalQuery.equals(n)){
-   exact=responseExact.get(canonicalQuery);
-   if(exact!=null)return exact;
+   ArrayList<Resp> canonicalExact=responseExact.get(canonicalQuery);
+   if(canonicalExact!=null&&!canonicalExact.isEmpty())return randomResponse(canonicalExact);
   }
 
-  // Stage 3: tiny inverted-index search. Never scan the whole response catalog.
   LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
   for(String raw:words){
    ArrayList<Resp> list=responseIndex.get(raw);
    if(list!=null){
     for(Resp r:list){
      candidates.add(r);
-     if(candidates.size()>=32)break;
+     if(candidates.size()>=256)break;
     }
    }
-   if(candidates.size()>=32)break;
+   if(candidates.size()>=256)break;
   }
   if(candidates.isEmpty() && !canonicalQuery.equals(n)){
    for(String raw:canonicalQuery.split("\\s+")){
@@ -340,21 +334,27 @@ final class OfflineEngine {
     if(list!=null){
      for(Resp r:list){
       candidates.add(r);
-      if(candidates.size()>=32)break;
+      if(candidates.size()>=256)break;
      }
     }
-    if(candidates.size()>=32)break;
+    if(candidates.size()>=256)break;
    }
   }
 
-  Resp best=null;int bestScore=0;
+  Resp best=null;int bestScore=0;ArrayList<Resp> ties=new ArrayList<>();
   for(Resp r:candidates){
-   for(String tr:r.triggerNorms){
-    int s=fastScoreNormalized(n,tr);
-    if(s>bestScore){bestScore=s;best=r;}
-   }
+   int localBest=0;
+   for(String tr:r.triggerNorms) localBest=Math.max(localBest,fastScoreNormalized(n,tr));
+   if(localBest>bestScore){bestScore=localBest;best=r;ties.clear();ties.add(r);}
+   else if(localBest==bestScore&&localBest>=20)ties.add(r);
   }
-  return bestScore>=20?best:null;
+  if(bestScore<20)return null;
+  return ties.isEmpty()?best:randomResponse(ties);
+ }
+
+ Resp randomResponse(ArrayList<Resp> list){
+  if(list==null||list.isEmpty())return null;
+  return list.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(list.size()));
  }
 
  ActionEntry bestAction(String q){
