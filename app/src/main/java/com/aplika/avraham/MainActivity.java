@@ -596,6 +596,11 @@ public class MainActivity extends Activity {
   }
   if(findInstalledMatch(x)!=null)return true;
 
+  // A name known only to the offline catalog is NOT evidence that the app is
+  // installed. Let openThing() report a clear "not found / may not be installed"
+  // message instead of silently waiting or looping.
+  if(engine.isKnownAppAlias(x))return true;
+
   if(!engine.appsLoaded){
    new Thread(()->{
     engine.loadApps(this);
@@ -603,7 +608,7 @@ public class MainActivity extends Activity {
    },"lazy-app-catalog-loader").start();
    return true;
   }
-  return engine.isKnownAppAlias(x);
+  return false;
  }
 
  int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
@@ -1026,8 +1031,17 @@ public class MainActivity extends Activity {
   AppRow best=findInstalledMatch(wanted);
   if(best!=null && launchPackage(best.packageName,target))return true;
 
-  // Only after the tiny search fails, allow the 4,000-name catalog as a
-  // one-time fallback. This path is off the UI thread and runs at most once.
+  // If this is a catalog-known app but it is not installed, stop here. Do not
+  // fall through to a generic Android category that could open a different app.
+  if(engine.isKnownAppAlias(wanted) || engine.isKnownAppAlias(target)){
+   addMessage(english?
+     "I couldn't find that installed app. It may not be installed on this device.":
+     "לא מצאתי את האפליקציה בין האפליקציות המותקנות. ייתכן שהיא לא מותקנת במכשיר.","assistant");
+   return true;
+  }
+
+  // Only after the tiny installed-app search fails do we consult the 4,000-name
+  // vocabulary catalog, and only once, in the background.
   if(!engine.appsLoaded){
    new Thread(()->{
     engine.loadApps(this);
