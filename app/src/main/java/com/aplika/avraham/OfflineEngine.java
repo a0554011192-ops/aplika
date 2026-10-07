@@ -9,8 +9,8 @@ final class OfflineEngine {
  static final int APP_COUNT=4000,ACTION_COUNT=4000,RESPONSE_COUNT=5000,SYN_COUNT=6000;
 
  static class Resp{
-  String he,en;String[] triggers;
-  Resp(String h,String e,String[] t){he=h;en=e;triggers=t;}
+  String he,en;String[] triggers;String[] triggerNorms;
+  Resp(String h,String e,String[] t){he=h;en=e;triggers=t;triggerNorms=new String[t.length];for(int i=0;i<t.length;i++)triggerNorms[i]=normalize(t[i]);}
  }
  static class ActionEntry{
   String he,en;int setting;String code;String[] triggers;
@@ -24,6 +24,7 @@ final class OfflineEngine {
  final Map<String,String> commonAliases=new ConcurrentHashMap<>();
 
  final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
+ final HashMap<String,Resp> responseExact=new HashMap<>();
  final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
 
@@ -80,6 +81,7 @@ final class OfflineEngine {
    responses.clear();
    loadedResponseKeys.clear();
    responseIndex.clear();
+   responseExact.clear();
    load(c,"responses.tsv",2);
    chatLoaded=true;
   }catch(Exception ignored){chatLoaded=false;}
@@ -239,20 +241,24 @@ final class OfflineEngine {
  int score(String q,String text){return keywordScore(q,text);}
  
  int keywordScore(String query,String trigger){
-  String qn=normalize(query),tn=normalize(trigger);
+  return fastScoreNormalized(normalize(query),normalize(trigger));
+ }
+
+ int fastScoreNormalized(String qn,String tn){
   if(qn.isEmpty()||tn.isEmpty())return 0;
-  if(qn.equals(tn))return 40;
-  int score=qn.contains(tn)?28:0;
-  HashSet<String> uq=new HashSet<>(Arrays.asList(qn.split("\\s+")));
-  String[] t=tn.split("\\s+");
-  for(String a:uq){
+  if(qn.equals(tn))return 100;
+  if(tn.startsWith(qn) || tn.contains(" "+qn+" ") || tn.endsWith(" "+qn))return 82;
+  String[] q=qn.split("\\s+"), t=tn.split("\\s+");
+  int hits=0;
+  for(String a:q){
    if(a.length()<2)continue;
    for(String b:t){
-    if(a.equals(b)){score+=8;break;}
-    if(a.length()>=3&&b.length()>=3&&(a.contains(b)||b.contains(a))){score+=5;break;}
+    if(a.equals(b)){hits++;break;}
+    if(a.length()>=3&&b.length()>=3&&(a.startsWith(b)||b.startsWith(a))){hits++;break;}
    }
   }
-  return score;
+  if(hits==q.length && hits>0)return 60+Math.min(30,hits*5);
+  return hits*10;
  }
 
  Resp quickResponse(String q){
@@ -292,33 +298,58 @@ final class OfflineEngine {
  Resp bestResponseIndexed(String q){
   String n=normalize(q);
   if(n.isEmpty())return null;
+
+  // Stage 1: exact normalized phrase lookup.
+  Resp exact=responseExact.get(n);
+  if(exact!=null)return exact;
+
+  // Stage 2: canonicalized words, still O(number of query words).
+  String[] words=n.split("\\s+");
+  StringBuilder cb=new StringBuilder();
+  for(String w:words){
+   String canon=canonicalWord(w);
+   if(cb.length()>0)cb.append(' ');
+   cb.append(canon);
+  }
+  String canonicalQuery=cb.toString().trim();
+  if(!canonicalQuery.equals(n)){
+   exact=responseExact.get(canonicalQuery);
+   if(exact!=null)return exact;
+  }
+
+  // Stage 3: tiny inverted-index search. Never scan the whole response catalog.
   LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
-  // Response matching is intentionally independent of the large synonym map.
-  // This keeps the hot path lock-free while synonyms are loaded for app/actions.
-  for(String raw:n.split("\\s+")){
-   LinkedHashSet<String> variants=new LinkedHashSet<>();
-   variants.add(raw);
-   String alias=commonAliases.get(raw);
-   if(alias!=null&&!alias.isEmpty())variants.addAll(Arrays.asList(normalize(alias).split("\\s+")));
-   String syn=synonyms.get(raw);
-   if(syn!=null&&!syn.isEmpty())variants.addAll(Arrays.asList(normalize(syn).split("\\s+")));
-   for(String part:variants){
-    if(part.isEmpty())continue;
-    ArrayList<Resp> list=responseIndex.get(part);
-    if(list!=null){
-     candidates.addAll(list);
-     if(candidates.size()>=120)break;
+  for(String raw:words){
+   ArrayList<Resp> list=responseIndex.get(raw);
+   if(list!=null){
+    for(Resp r:list){
+     candidates.add(r);
+     if(candidates.size()>=32)break;
     }
    }
-   if(candidates.size()>=120)break;
+   if(candidates.size()>=32)break;
   }
+  if(candidates.isEmpty() && !canonicalQuery.equals(n)){
+   for(String raw:canonicalQuery.split("\\s+")){
+    ArrayList<Resp> list=responseIndex.get(raw);
+    if(list!=null){
+     for(Resp r:list){
+      candidates.add(r);
+      if(candidates.size()>=32)break;
+     }
+    }
+    if(candidates.size()>=32)break;
+   }
+  }
+
   Resp best=null;int bestScore=0;
   for(Resp r:candidates){
-   int s=0;
-   for(String tr:r.triggers)s=Math.max(s,keywordScore(q,tr));
-   if(s>bestScore){bestScore=s;best=r;}
+   for(String tr:r.triggerNorms){
+    int s=fastScoreNormalized(n,tr);
+    if(s>bestScore){bestScore=s;best=r;}
+   }
   }
-  return bestScore>=8?best:null;
+  return bestScore>=20?best:null;
  }
 
  ActionEntry bestAction(String q){
