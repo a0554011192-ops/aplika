@@ -34,3 +34,5 @@ Final UI build trigger: cream-history-modes-icon.
 Final polished UI build trigger: verified.
 
 Sidebar closed default fix build: 2026-10-07.
+
+Final icon verification build: 1.ico authoritative.
