@@ -51,9 +51,16 @@ public class MainActivity extends Activity {
   aliasPrefs=getSharedPreferences("app_aliases",MODE_PRIVATE);
   buildChatUi();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
-  // Startup is intentionally zero-catalog. The UI becomes ready immediately;
-  // catalogs are loaded only on the rare path that actually needs them.
+  // The UI becomes ready immediately. The response catalog warms up silently
+  // in the background so normal chat is ready without a visible loading screen.
   status.setText("אופליין • מוכן");
+  Thread warmup=new Thread(()->{
+   try{
+    Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    engine.loadChat(this);
+   }catch(Exception ignored){}
+  },"response-warmup");
+  warmup.start();
  }
 
  TextView label(String s,float size,int color){
