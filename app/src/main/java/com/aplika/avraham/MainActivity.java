@@ -891,10 +891,10 @@ public class MainActivity extends Activity {
  }
 
  void fallbackFromChat(String q,boolean responseEnglish){
-  if(!installedAppsLoaded){ensureInstalledApps(()->fallbackFromChat(q,responseEnglish));return;}
-  String target=targetOf(q);AppRow app=findInstalledMatch(target);
-  if(app!=null&&launchPackage(app.packageName,target))return;
-  searchFiles(q,true);
+  String[] he={"קלטתי אותך.","הבנתי את הכיוון.","אני איתך.","זה נשמע טבעי לגמרי.","קיבלתי את מה שכתבת.","אני זורם עם השיחה.","הבנתי, ממשיכים מכאן.","זה עבר אליי ברור.","קלטתי את האווירה.","אני איתך בקצב הזה.","המשפט שלך נקלט טוב.","הכיוון ברור לי.","קיבלתי.","הבנתי אותך.","נשמע טוב.","אני כאן איתך."};
+  String[] en={"Got you.","I get the direction.","I am with you.","That sounds completely natural.","I got what you wrote.","I am going with the conversation.","Got it, we continue from here.","That came through clearly.","I caught the mood.","I am with you at this pace.","Your sentence came through clearly.","The direction is clear to me.","Got it.","I understand you.","Sounds good.","I am here with you."};
+  int i=java.util.concurrent.ThreadLocalRandom.current().nextInt(he.length);
+  addMessage(responseEnglish?en[i]:he[i],"assistant");
  }
 
  boolean mathRequest(String raw){
