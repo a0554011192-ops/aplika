@@ -67,6 +67,22 @@ jobs:
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose app/build/outputs/apk/release/avraham-haivri-android.apk
           "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -P 16 -v 4 app/build/outputs/apk/release/avraham-haivri-android.apk
 
+      - name: Verify installation on Android emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -no-audio -no-boot-anim
+          disable-animations: true
+          script: |
+            set -e
+            adb install -r app/build/outputs/apk/release/avraham-haivri-android.apk
+            adb shell pm path com.aplika.avraham
+            adb shell monkey -p com.aplika.avraham 1
+            sleep 3
+            adb shell dumpsys package com.aplika.avraham | head -80
+
       - uses: actions/upload-artifact@v4
         with:
           name: avraham-haivri-android-full-signed-${{ github.run_number }}
