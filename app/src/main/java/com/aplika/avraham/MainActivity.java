@@ -202,17 +202,78 @@ public class MainActivity extends Activity {
  }
 
  void runAction(String q){
-  if(!engine.commandsLoaded){
-   addMessage(english?"Loading the command catalog once...":"טוען את מאגר הפעולות פעם אחת...","assistant");
-   new Thread(()->{engine.loadCommands(this);runOnUiThread(()->runAction(q));},"command-loader").start();
-   return;
-  }
-  OfflineEngine.ActionEntry a=engine.bestAction(q);
-  if(a==null){addMessage(english?"I could not match that system action.":"לא הצלחתי לזהות את פעולת המערכת הזאת.","assistant");return;}
+  String x=norm(q);
   try{
-   startActivity(engine.settingIntent(a.setting));
-   addMessage((english?"Opening settings: ":"פותח הגדרות: ")+(english?a.en:a.he),"assistant");
-  }catch(Exception e){addMessage(english?"This Android version does not expose that settings screen.":"גרסת Android זו אינה חושפת את מסך ההגדרה הזה.","assistant");}
+   if(hasAny(x,"צילום מסך","צלם מסך","screenshot","take screenshot") && Build.VERSION.SDK_INT>=30 &&
+      global(AccessibilityService.GLOBAL_ACTION_TAKE_SCREENSHOT)){
+    addMessage(english?"Screenshot taken.":"צילום המסך בוצע.","assistant");return;
+   }
+   if(hasAny(x,"נעל מסך","נעילת מסך","lock screen","lock device") && Build.VERSION.SDK_INT>=28 &&
+      global(AccessibilityService.GLOBAL_ACTION_LOCK_SCREEN)){
+    addMessage(english?"Screen locked.":"המסך ננעל.","assistant");return;
+   }
+   if(hasAny(x,"מסך הבית","דף הבית","חזור הביתה","home") && global(AccessibilityService.GLOBAL_ACTION_HOME)){
+    addMessage(english?"Home.":"מסך הבית.","assistant");return;
+   }
+   if(hasAny(x,"חזור אחורה","אחורה","back") && global(AccessibilityService.GLOBAL_ACTION_BACK)){
+    addMessage(english?"Back.":"חזרה.","assistant");return;
+   }
+   if(hasAny(x,"אפליקציות אחרונות","אחרונות","recents","recent apps") && global(AccessibilityService.GLOBAL_ACTION_RECENTS)){
+    addMessage(english?"Recent apps.":"האפליקציות האחרונות.","assistant");return;
+   }
+   if(hasAny(x,"התראות","פתח התראות","notifications") && global(AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS)){
+    addMessage(english?"Notifications.":"התראות.","assistant");return;
+   }
+   if(hasAny(x,"הגדרות מהירות","quick settings") && global(AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS)){
+    addMessage(english?"Quick settings.":"הגדרות מהירות.","assistant");return;
+   }
+  }catch(Exception ignored){}
+
+  int setting=settingForRequest(x);
+  if(setting>=0){
+   try{
+    startActivity(engine.settingIntent(setting));
+    addMessage((english?"Opening settings: ":"פותח הגדרות: ")+settingName(setting),"assistant");return;
+   }catch(Exception ignored){}
+  }
+
+  addMessage(english?"I could not match that system action.":"לא הצלחתי לזהות את פעולת המערכת הזאת. נסה למשל Wi‑Fi, Bluetooth, צילום מסך, מסך הבית, אחורה או התראות.","assistant");
+ }
+
+ int settingForRequest(String x){
+  if(hasAny(x,"wifi","wi fi","רשת אלחוטית","וויפי","וייפיי","אלחוטי"))return 0;
+  if(hasAny(x,"bluetooth","בלוטוס","בלוטות","בלוטות'"))return 1;
+  if(hasAny(x,"מצב טיסה","airplane"))return 2;
+  if(hasAny(x,"רשת סלולרית","mobile network","cellular"))return 3;
+  if(hasAny(x,"שימוש בנתונים","data usage","mobile data"))return 4;
+  if(hasAny(x,"נקודה חמה","hotspot","mobile hotspot"))return 5;
+  if(hasAny(x,"vpn"))return 6;
+  if(hasAny(x,"dns פרטי","private dns"))return 7;
+  if(hasAny(x,"תצוגה","display","בהירות","brightness"))return 8;
+  if(hasAny(x,"צליל","שמע","sound"))return 9;
+  if(hasAny(x,"התראות","notification settings","notification"))return 10;
+  if(hasAny(x,"אפליקציות","apps settings","applications"))return 11;
+  if(hasAny(x,"אחסון","storage"))return 12;
+  if(hasAny(x,"אבטחה","security"))return 13;
+  if(hasAny(x,"מיקום","location"))return 14;
+  if(hasAny(x,"נגישות","accessibility"))return 15;
+  if(hasAny(x,"סוללה","battery"))return 16;
+  if(hasAny(x,"אופטימיזציית סוללה","battery optimization"))return 17;
+  if(hasAny(x,"תאריך","date"))return 18;
+  if(hasAny(x,"שעה","time"))return 19;
+  if(hasAny(x,"אזור זמן","timezone","time zone"))return 20;
+  if(hasAny(x,"שפה","language","locale"))return 21;
+  if(hasAny(x,"מקלדת","keyboard","קלט"))return 22;
+  if(hasAny(x,"שידור מסך","cast","casting"))return 23;
+  if(hasAny(x,"nfc"))return 24;
+  if(hasAny(x,"רשתות","wireless"))return 25;
+  if(hasAny(x,"סנכרון","sync"))return 26;
+  return -1;
+ }
+
+ String settingName(int i){
+  String[] h={"Wi‑Fi","Bluetooth","מצב טיסה","רשת סלולרית","שימוש בנתונים","נקודה חמה","VPN","DNS פרטי","תצוגה","שמע","התראות","אפליקציות","אחסון","אבטחה","מיקום","נגישות","סוללה","אופטימיזציית סוללה","תאריך","שעה","אזור זמן","שפה","מקלדת","שידור מסך","NFC","רשתות","סנכרון"};
+  return i>=0&&i<h.length?h[i]:"מערכת";
  }
 
  String targetOf(String q){
