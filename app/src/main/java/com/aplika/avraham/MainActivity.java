@@ -997,34 +997,44 @@ int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").leng
   },"chat-loader").start();
  }
 
- void submitChatResponse(String q,boolean responseEnglish){
+ void appendAssistantMessageToChat(String chatId,String text){
+  if(chatId==null||text==null)return;
+  boolean render=chatId.equals(currentChatId);
+  if(render)renderMessage(text,"assistant",true);
+
+  synchronized(chatSessions){
+   ChatSession cs=chatSessions.get(chatId);
+   if(cs!=null)cs.messages.add(new ChatMessage(text,"assistant"));
+  }
+  scheduleHistorySave();
+ }
+
+ void submitChatResponse(String q,boolean responseEnglish,String chatId){
   responseExecutor.execute(()->{
    try{
     OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
-    runOnUiThread(()->{
-     if(r==null)fallbackFromChat(q,responseEnglish);else
-      addMessage(responseEnglish?r.en:r.he,"assistant");
-    });
+    String text=r==null?fallbackText(responseEnglish):(responseEnglish?r.en:r.he);
+    runOnUiThread(()->appendAssistantMessageToChat(chatId,text));
    }catch(Exception ex){
     android.util.Log.e("Avraham","response worker failed",ex);
-    runOnUiThread(()->addMessage(
-      english?"Sorry, I had a local processing error.":"אירעה שגיאת עיבוד מקומית, אבל האפליקציה ממשיכה לפעול.",
-      "assistant"));
+    String text=responseEnglish?"Sorry, I had a local processing error.":"אירעה שגיאת עיבוד מקומית, אבל האפליקציה ממשיכה לפעול.";
+    runOnUiThread(()->appendAssistantMessageToChat(chatId,text));
    }
   });
  }
 
  void chat(String q){
   final boolean responseEnglish=english;
-  if(engine.chatLoaded)submitChatResponse(q,responseEnglish);
-  else ensureChatLoaded(()->submitChatResponse(q,responseEnglish));
+  final String chatId=currentChatId;
+  if(engine.chatLoaded)submitChatResponse(q,responseEnglish,chatId);
+  else ensureChatLoaded(()->submitChatResponse(q,responseEnglish,chatId));
  }
 
- void fallbackFromChat(String q,boolean responseEnglish){
+ String fallbackText(boolean responseEnglish){
   String[] he={"קלטתי אותך.","הבנתי את הכיוון.","אני איתך.","זה נשמע טבעי לגמרי.","קיבלתי את מה שכתבת.","אני זורם עם השיחה.","הבנתי, ממשיכים מכאן.","זה עבר אליי ברור.","קלטתי את האווירה.","אני איתך בקצב הזה.","המשפט שלך נקלט טוב.","הכיוון ברור לי.","קיבלתי.","הבנתי אותך.","נשמע טוב.","אני כאן איתך."};
   String[] en={"Got you.","I get the direction.","I am with you.","That sounds completely natural.","I got what you wrote.","I am going with the conversation.","Got it, we continue from here.","That came through clearly.","I caught the mood.","I am with you at this pace.","Your sentence came through clearly.","The direction is clear to me.","Got it.","I understand you.","Sounds good.","I am here with you."};
   int i=java.util.concurrent.ThreadLocalRandom.current().nextInt(he.length);
-  addMessage(responseEnglish?en[i]:he[i],"assistant");
+  return responseEnglish?en[i]:he[i];
  }
 
  boolean mathRequest(String raw){
@@ -1579,6 +1589,7 @@ boolean coreAppTarget(String raw){
 
  @Override protected void onDestroy(){
   responseExecutor.shutdownNow();
+  try{saveHistoryNow();}catch(Exception ignored){}
   synchronized(historyExecutor){
    if(historySaveFuture!=null)historySaveFuture.cancel(false);
   }
