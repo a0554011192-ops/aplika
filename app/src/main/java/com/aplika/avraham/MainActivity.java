@@ -42,6 +42,8 @@ public class MainActivity extends Activity {
  volatile Map<String,ArrayList<AppRow>> installedTokenIndex=Collections.emptyMap();
  volatile boolean installedAppsLoading=false;
  final ArrayList<Runnable> appLoadWaiters=new ArrayList<>();
+ volatile boolean appSearchLoaded=false,appSearchLoading=false;
+ final ArrayList<Runnable> appSearchWaiters=new ArrayList<>();
 
  enum Mode{CHAT,APP,FILE}
  Mode mode=Mode.CHAT;
@@ -91,7 +93,9 @@ public class MainActivity extends Activity {
     engine.loadApps(this);
    }catch(Exception ignored){}
   },"app-catalog-warmup").start();
-  ensureInstalledApps(null);
+  // Build only the launchable-app search index at startup. The full installed
+  // app list is loaded lazily for the manager screen, not for every open command.
+  ensureAppSearchIndex(null);
  }
  
  TextView label(String s,float size,int color){
@@ -514,6 +518,64 @@ public class MainActivity extends Activity {
    if(s>bestScore){bestScore=s;best=row;}
   }
   return bestScore>=22?best:null;
+ }
+
+ void ensureAppSearchIndex(Runnable done){
+  synchronized(appSearchWaiters){
+   if(appSearchLoaded){
+    if(done!=null)runOnUiThread(done);
+    return;
+   }
+   if(done!=null)appSearchWaiters.add(done);
+   if(appSearchLoading)return;
+   appSearchLoading=true;
+  }
+  new Thread(()->{
+   boolean success=false;
+   try{
+    PackageManager pm=getPackageManager();
+    Intent launcher=new Intent(Intent.ACTION_MAIN);
+    launcher.addCategory(Intent.CATEGORY_LAUNCHER);
+    List<ResolveInfo> results=pm.queryIntentActivities(launcher,PackageManager.MATCH_ALL);
+
+    HashMap<String,AppRow> exact=new HashMap<>();
+    HashMap<String,ArrayList<AppRow>> tokens=new HashMap<>();
+    for(ResolveInfo ri:results){
+     if(ri==null||ri.activityInfo==null)continue;
+     String pkg=ri.activityInfo.packageName;
+     if(pkg==null||pkg.isEmpty())continue;
+     CharSequence cs=ri.loadLabel(pm);
+     String label=cs==null?pkg:cs.toString();
+     AppRow row=new AppRow(label,pkg,ri.activityInfo.name,false,true);
+     String nl=row.normalizedLabel;
+     String np=row.normalizedPackage;
+     addInstalledExact(exact,nl,row);
+     addInstalledExact(exact,np,row);
+     String canon=OfflineEngine.normalize(engine.canonical(nl));
+     addInstalledExact(exact,canon,row);
+     for(String tok:(nl+" "+np).split("\\s+")){
+      if(tok.length()<2)continue;
+      ArrayList<AppRow> list=tokens.get(tok);
+      if(list==null){list=new ArrayList<>();tokens.put(tok,list);}
+      if(list.size()<24&&!list.contains(row))list.add(row);
+     }
+    }
+    installedExactIndex=exact;
+    installedTokenIndex=tokens;
+    appSearchLoaded=true;
+    success=true;
+   }catch(Exception ignored){}
+   ArrayList<Runnable> waiters;
+   synchronized(appSearchWaiters){
+    appSearchLoading=false;
+    waiters=new ArrayList<>(appSearchWaiters);
+    appSearchWaiters.clear();
+   }
+   final boolean ok=success;
+   runOnUiThread(()->{
+    for(Runnable r:waiters)try{r.run();}catch(Exception ignored){}
+   });
+  },"app-search-index-loader").start();
  }
 
  void ensureInstalledApps(Runnable done){
@@ -1244,10 +1306,10 @@ boolean coreAppTarget(String raw){
   if(userPkg!=null&&launchPackage(userPkg,target))return true;
   if(launchKnownApp(target))return true;
 
-  if(!installedAppsLoaded){
-   // Startup indexing normally makes this path unnecessary. Keep it as a
-   // non-blocking fallback for a command typed immediately after launch.
-   ensureInstalledApps(()->openThing(q));
+  if(!appSearchLoaded){
+   // The fast launchable-app index is built independently from the full manager
+   // list. Never make an app search wait for all installed packages.
+   ensureAppSearchIndex(()->openThing(q));
    return true;
   }
 
