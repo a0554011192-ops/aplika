@@ -26,7 +26,7 @@ final class OfflineEngine {
  final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
 
- volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false;
+ volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false,synonymsLoaded=false;
 
  OfflineEngine(Context c){
   alias("כרום","chrome");alias("גוגל כרום","google chrome");
@@ -74,10 +74,23 @@ final class OfflineEngine {
  synchronized void loadChat(Context c){
   if(chatLoaded)return;
   try{
-   load(c,"synonyms.tsv",3);
+   // Chat responses do not need the 6,000-row synonym catalog during load.
+   // Keeping this path tiny makes the first answer available quickly.
+   responses.clear();
+   loadedResponseKeys.clear();
+   responseIndex.clear();
    load(c,"responses.tsv",2);
    chatLoaded=true;
   }catch(Exception ignored){chatLoaded=false;}
+ }
+
+ synchronized void loadSynonyms(Context c){
+  if(synonymsLoaded)return;
+  try{
+   synonyms.clear();
+   load(c,"synonyms.tsv",3);
+   synonymsLoaded=true;
+  }catch(Exception ignored){synonymsLoaded=false;}
  }
 
  synchronized void loadCommands(Context c){
@@ -85,6 +98,7 @@ final class OfflineEngine {
   actions.clear();
   actionIndex.clear();
   try{
+   loadSynonyms(c);
    load(c,"actions.tsv",1);
    commandsLoaded=true;
   }catch(Exception ignored){commandsLoaded=false;}
@@ -149,7 +163,9 @@ final class OfflineEngine {
  }
 
  void indexResponse(String raw,Resp r){
-  for(String tok:tokenizeCanonical(raw)){
+  String n=normalize(raw);
+  if(n.isEmpty())return;
+  for(String tok:n.split("\\s+")){
    if(tok.length()<2)continue;
    ArrayList<Resp> list=responseIndex.get(tok);
    if(list==null){list=new ArrayList<>();responseIndex.put(tok,list);}
@@ -226,9 +242,10 @@ final class OfflineEngine {
   if(qn.isEmpty()||tn.isEmpty())return 0;
   if(qn.equals(tn))return 40;
   int score=qn.contains(tn)?28:0;
-  String[] q=tokenizeCanonical(qn),t=tokenizeCanonical(tn);
-  HashSet<String> uq=new HashSet<>(Arrays.asList(q));
+  HashSet<String> uq=new HashSet<>(Arrays.asList(qn.split("\\s+")));
+  String[] t=tn.split("\\s+");
   for(String a:uq){
+   if(a.length()<2)continue;
    for(String b:t){
     if(a.equals(b)){score+=8;break;}
     if(a.length()>=3&&b.length()>=3&&(a.contains(b)||b.contains(a))){score+=5;break;}
@@ -272,15 +289,18 @@ final class OfflineEngine {
  }
 
  Resp bestResponseIndexed(String q){
-  String[] qt=tokenizeCanonical(q);
+  String n=normalize(q);
+  if(n.isEmpty())return null;
   LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
-  for(String tok:qt){
+  for(String raw:n.split("\\s+")){
+   String tok=canonicalWord(raw);
    ArrayList<Resp> list=responseIndex.get(tok);
-   if(list!=null)candidates.addAll(list);
+   if(list==null&&synonymsLoaded)list=responseIndex.get(synonyms.get(tok));
+   if(list!=null){
+    candidates.addAll(list);
+    if(candidates.size()>=120)break;
+   }
   }
-  // Deliberately do not scan every indexed token with edit-distance.
-  // That fallback made short/unknown questions proportional to the entire
-  // catalog size. Exact/canonical token candidates are enough for fast offline matching.
   Resp best=null;int bestScore=0;
   for(Resp r:candidates){
    int s=0;
