@@ -32,7 +32,8 @@ jobs:
           fi
           mkdir -p app/src/main/res/drawable-nodpi
           rm -f app/src/main/res/drawable/ic_avraham.xml
-          magick 1.ico -alpha on -background none -strip -resize 256x256 app/src/main/res/drawable-nodpi/ic_avraham.png
+          mogrify -format png -path app/src/main/res/drawable-nodpi -resize 256x256 1.ico
+          mv app/src/main/res/drawable-nodpi/1.png app/src/main/res/drawable-nodpi/ic_avraham.png
           test -s app/src/main/res/drawable-nodpi/ic_avraham.png
           file app/src/main/res/drawable-nodpi/ic_avraham.png
       - name: Verify 12,000 catalog records
