@@ -87,7 +87,10 @@ public class MainActivity extends Activity {
   refreshSidebar();
   // Only warm the chat engine at startup. App catalogs and package scans stay
   // completely out of the startup path and are loaded only when explicitly used.
-  ensureChatLoaded(null);
+  if(status!=null)status.setText("אופליין • מכין צ׳אט…");
+  ensureChatLoaded(()->runOnUiThread(()->{
+   if(status!=null)status.setText("אופליין • מוכן");
+  }));
  }
  
  TextView label(String s,float size,int color){
@@ -225,6 +228,7 @@ public class MainActivity extends Activity {
   String name=mode==Mode.CHAT?"צ׳אט":mode==Mode.APP?"אפליקציה":"קובץ";
   modeLabel.setText(name);
   input.setHint(mode==Mode.CHAT?"כתוב הודעה...":mode==Mode.APP?"שם האפליקציה לפתיחה...":"שם הקובץ לחיפוש...");
+  if(mode==Mode.APP && !appSearchLoaded)ensureAppSearchIndex(null);
  }
 
  void addSuggestion(LinearLayout box,String text){
