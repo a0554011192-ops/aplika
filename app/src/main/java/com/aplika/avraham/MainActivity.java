@@ -1443,27 +1443,17 @@ boolean coreAppTarget(String raw){
   return true;
  }
 
- boolean launchBestInstalled(String target){
-  String q=OfflineEngine.normalize(target);
-  if(q.isEmpty())return false;
-  if(!installedAppsLoaded)loadInstalledApps();
-  AppRow best=findInstalledMatch(q);
-  return best!=null&&launchPackage(best.packageName,target);
- }
-
  boolean launchPackage(String pkg,String spoken){
   if(pkg==null||pkg.trim().isEmpty())return false;
   try{
    PackageManager pm=getPackageManager();
    Intent i=pm.getLaunchIntentForPackage(pkg);
-   if(i==null&&installedAppsLoaded){
-    for(AppRow row:installedApps){
-     if(pkg.equals(row.packageName)&&row.activityName!=null&&!row.activityName.isEmpty()){
-      i=new Intent(Intent.ACTION_MAIN);
-      i.addCategory(Intent.CATEGORY_LAUNCHER);
-      i.setComponent(new ComponentName(pkg,row.activityName));
-      break;
-     }
+   if(i==null){
+    AppRow indexed=installedExactIndex.get(OfflineEngine.normalize(pkg));
+    if(indexed!=null&&indexed.activityName!=null&&!indexed.activityName.isEmpty()){
+     i=new Intent(Intent.ACTION_MAIN);
+     i.addCategory(Intent.CATEGORY_LAUNCHER);
+     i.setComponent(new ComponentName(indexed.packageName,indexed.activityName));
     }
    }
    if(i==null)return false;
@@ -1533,7 +1523,10 @@ boolean coreAppTarget(String raw){
     }
    }catch(Exception ignored){}
   }
-  if(launchBestInstalled(target))return true;
+  if(appSearchLoaded){
+   AppRow best=findInstalledMatch(target);
+   if(best!=null&&launchPackage(best.packageName,target))return true;
+  }
   return false;
  }
 
