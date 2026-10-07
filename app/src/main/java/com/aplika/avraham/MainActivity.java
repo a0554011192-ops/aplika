@@ -1,6 +1,6 @@
 package com.aplika.avraham;
 
-import android.app.*;import android.os.*;import android.content.*;import android.content.pm.*;import android.graphics.Color;import android.graphics.Typeface;import android.graphics.drawable.GradientDrawable;import android.net.Uri;import android.provider.DocumentsContract;import android.view.*;import android.view.inputmethod.InputMethodManager;import android.widget.*;import android.media.AudioManager;import android.view.KeyEvent;import java.io.*;import java.util.*;
+import android.app.*;import android.os.*;import android.content.*;import android.content.pm.*;import android.graphics.Color;import android.graphics.Typeface;import android.graphics.drawable.GradientDrawable;import android.net.Uri;import android.provider.DocumentsContract;import android.view.*;import android.view.inputmethod.InputMethodManager;import android.widget.*;import android.media.AudioManager;import android.view.KeyEvent;import android.accessibilityservice.AccessibilityService;import java.io.*;import java.util.*;
 
 public class MainActivity extends Activity{
  LinearLayout root;EditText input;TextView result;Button modeBtn,langBtn;boolean english=false;String mode="open";OfflineEngine engine;AudioManager audio;
@@ -27,6 +27,7 @@ public class MainActivity extends Activity{
  String nq(String q){return q.toLowerCase(Locale.ROOT).replace("׳","'");}
  boolean has(String q,String...ws){String x=nq(q);for(String w:ws)if(x.contains(w.toLowerCase(Locale.ROOT)))return true;return false;}
  boolean media(int k){try{audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,k));audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,k));return true;}catch(Exception e){return false;}}
+ boolean global(int action){return ShortcutService.doGlobal(action);}
  boolean direct(String q){
   String x=nq(q);
   if(has(x,"בטל השתקה","unmute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);result.setText(english?"Media unmuted.":"ההשתקה בוטלה.");return true;}
@@ -39,6 +40,13 @@ public class MainActivity extends Activity{
   if(has(x,"נגן","נגינה","play music","play")){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){result.setText(english?"Play.":"ניגון.");return true;}}
   if(has(x,"השהה","השהייה","pause")){if(media(KeyEvent.KEYCODE_MEDIA_PAUSE)){result.setText(english?"Paused.":"הושהה.");return true;}}
   if(has(x,"עצור מוזיקה","stop music")){if(media(KeyEvent.KEYCODE_MEDIA_STOP)){result.setText(english?"Stopped.":"המוזיקה נעצרה.");return true;}}
+  int g=-1;String msg=null;
+  if(has(x,"חזור הביתה","מסך הבית","דף הבית","home")){g=AccessibilityService.GLOBAL_ACTION_HOME;msg=english?"Home.":"מסך הבית.";}
+  else if(has(x,"חזור אחורה","אחורה","back")){g=AccessibilityService.GLOBAL_ACTION_BACK;msg=english?"Back.":"חזרה.";}
+  else if(has(x,"אחרונות","אפליקציות אחרונות","recents","recent apps")){g=AccessibilityService.GLOBAL_ACTION_RECENTS;msg=english?"Recent apps.":"האפליקציות האחרונות.";}
+  else if(has(x,"פתח התראות","התראות","notifications")){g=AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS;msg=english?"Notifications.":"התראות.";}
+  else if(has(x,"הגדרות מהירות","quick settings")){g=AccessibilityService.GLOBAL_ACTION_QUICK_SETTINGS;msg=english?"Quick settings.":"הגדרות מהירות.";}
+  if(g>=0){if(global(g)){result.setText(msg);return true;}result.setText(english?"Enable the accessibility service once for this system command.":"כדי לבצע את פקודת המערכת הזו ללא מגע, יש להפעיל פעם אחת את שירות הנגישות.");return true;}
   return false;
  }
  void process(String q){q=q.trim();if(q.isEmpty()){result.setText(english?"Please type a request.":"כתוב בקשה.");return;}if(mode.equals("chat")){chat(q);return;}if(direct(q))return;if(mode.equals("action")||(explicit(q,actWords)&&!explicit(q,openWords))){runAction(q);return;}openThing(q);}
