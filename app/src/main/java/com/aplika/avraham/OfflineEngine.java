@@ -23,6 +23,7 @@ final class OfflineEngine {
  final HashMap<String,String> commonAliases=new HashMap<>();
 
  final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
+ final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
 
  volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false;
@@ -118,6 +119,11 @@ final class OfflineEngine {
      indexAction(a.he,a);indexAction(a.en,a);
      for(String t:a.triggers)indexAction(t,a);
     }else if(type==2&&p.length>=4){
+     String responseKey=normalize(p[1])+"\\u0000"+normalize(p[2])+"\\u0000"+normalize(p[3]);
+     // The catalog intentionally keeps stable numeric IDs, but several blocks
+     // are byte-for-byte duplicates apart from that ID. Do not load the same
+     // response five times into the matcher.
+     if(!loadedResponseKeys.add(responseKey))continue;
      Resp rr=new Resp(p[1],p[2],p[3].split("\\|",-1));
      responses.add(rr);
      for(String t:rr.triggers)indexResponse(t,rr);
