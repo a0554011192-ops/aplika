@@ -27,6 +27,10 @@ final class OfflineEngine {
  final HashMap<String,ArrayList<Resp>> responseExact=new HashMap<>();
  final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
+ final Map<String,Resp> responseCache=Collections.synchronizedMap(
+  new LinkedHashMap<String,Resp>(256,0.75f,true){
+   @Override protected boolean removeEldestEntry(Map.Entry<String,Resp> e){return size()>256;}
+  });
 
  volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false,synonymsLoaded=false;
 
@@ -82,6 +86,7 @@ final class OfflineEngine {
    loadedResponseKeys.clear();
    responseIndex.clear();
    responseExact.clear();
+   responseCache.clear();
    load(c,"responses.tsv",2);
    if(responses.size()!=RESPONSE_COUNT) throw new IOException("responses.tsv expected "+RESPONSE_COUNT+" rows, got "+responses.size());
    chatLoaded=true;
@@ -293,7 +298,6 @@ final class OfflineEngine {
  }
 
  Resp bestResponse(String q,boolean en){
-  Resp fast=quickResponse(q);if(fast!=null)return fast;
   if(!chatLoaded)return null;
   return bestResponseIndexed(q);
  }
@@ -305,6 +309,9 @@ final class OfflineEngine {
   ArrayList<Resp> exact=responseExact.get(n);
   if(exact!=null&&!exact.isEmpty())return randomResponse(exact);
 
+  Resp cached=responseCache.get(n);
+  if(cached!=null)return cached;
+
   String[] words=n.split("\\s+");
   StringBuilder cb=new StringBuilder();
   for(String w:words){
@@ -315,30 +322,40 @@ final class OfflineEngine {
   String canonicalQuery=cb.toString().trim();
   if(!canonicalQuery.equals(n)){
    ArrayList<Resp> canonicalExact=responseExact.get(canonicalQuery);
-   if(canonicalExact!=null&&!canonicalExact.isEmpty())return randomResponse(canonicalExact);
+   if(canonicalExact!=null&&!canonicalExact.isEmpty()){
+    Resp hit=randomResponse(canonicalExact);
+    if(hit!=null)responseCache.put(n,hit);
+    return hit;
+   }
   }
 
+  // Search the smallest token buckets first. Generic words such as "מה" can
+  // have many entries; rarer words narrow the candidate set much faster.
+  ArrayList<String> searchTokens=new ArrayList<>();
+  for(String raw:words)if(raw.length()>=2&&responseIndex.containsKey(raw))searchTokens.add(raw);
+  Collections.sort(searchTokens,(a,b)->Integer.compare(responseIndex.get(a).size(),responseIndex.get(b).size()));
+
   LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
-  for(String raw:words){
+  for(String raw:searchTokens){
    ArrayList<Resp> list=responseIndex.get(raw);
-   if(list!=null){
-    for(Resp r:list){
-     candidates.add(r);
-     if(candidates.size()>=256)break;
-    }
+   if(list!=null)for(Resp r:list){
+    candidates.add(r);
+    if(candidates.size()>=128)break;
    }
-   if(candidates.size()>=256)break;
+   if(candidates.size()>=128)break;
   }
   if(candidates.isEmpty() && !canonicalQuery.equals(n)){
-   for(String raw:canonicalQuery.split("\\s+")){
+   ArrayList<String> canonicalTokens=new ArrayList<>();
+   for(String raw:canonicalQuery.split("\\s+"))
+    if(raw.length()>=2&&responseIndex.containsKey(raw))canonicalTokens.add(raw);
+   Collections.sort(canonicalTokens,(a,b)->Integer.compare(responseIndex.get(a).size(),responseIndex.get(b).size()));
+   for(String raw:canonicalTokens){
     ArrayList<Resp> list=responseIndex.get(raw);
-    if(list!=null){
-     for(Resp r:list){
-      candidates.add(r);
-      if(candidates.size()>=256)break;
-     }
+    if(list!=null)for(Resp r:list){
+     candidates.add(r);
+     if(candidates.size()>=128)break;
     }
-    if(candidates.size()>=256)break;
+    if(candidates.size()>=128)break;
    }
   }
 
@@ -350,7 +367,9 @@ final class OfflineEngine {
    else if(localBest==bestScore&&localBest>=20)ties.add(r);
   }
   if(bestScore<20)return null;
-  return ties.isEmpty()?best:randomResponse(ties);
+  Resp answer=ties.isEmpty()?best:randomResponse(ties);
+  if(answer!=null)responseCache.put(n,answer);
+  return answer;
  }
 
  Resp randomResponse(ArrayList<Resp> list){
