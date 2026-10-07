@@ -407,14 +407,19 @@ public class MainActivity extends Activity {
  }
  boolean hasAnyWordOrPhrase(String q,String...terms){for(String t:terms)if(hasWordOrPhrase(q,t))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
+ boolean startsCommand(String q,String term){
+  String n=norm(q),t=norm(term);if(n.equals(t)||n.startsWith(t+" "))return true;
+  return n.startsWith("בבקשה "+t)||n.startsWith("please "+t);
+ }
+ boolean anyStartsCommand(String q,String...terms){for(String t:terms)if(startsCommand(q,t))return true;return false;}
  boolean actionRequest(String q){
   String x=norm(q);
-  if(hasAny(x,"תגביה","תגביהה","תנמיך","השתק","השתקה","נגן","השהה","עצור","חזור אחורה","חזור הביתה","אחורה","אפליקציות אחרונות","אחרונות","פתח התראות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","home","back","notifications","quick settings","screenshot","lock screen"))return true;
-  return hasAny(x,"הבא","קודם","next","previous")&&hasAny(x,"שיר","מוזיקה","track","song");
+  if(anyStartsCommand(x,"תגביה","תגביהה","תנמיך","השתק","השתקה","נגן","השהה","עצור","חזור אחורה","חזור הביתה","אחורה","אפליקציות אחרונות","אחרונות","פתח התראות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","home","back","notifications","quick settings","screenshot","lock screen"))return true;
+  return (startsCommand(x,"הבא")||startsCommand(x,"קודם")||startsCommand(x,"next")||startsCommand(x,"previous"))&&hasAnyWordOrPhrase(x,"שיר","מוזיקה","track","song");
  }
  boolean likelyActionCommand(String q){
   String x=norm(q);
-  return hasAny(x,
+  return anyStartsCommand(x,
    "פתח","תפתח","לפתוח","הצג","בדוק","נהל","כוון","בחר","עבור","היכנס","גישה",
    "הפעל","תפעיל","השבת","תכבה","אפשר","בטל","אפס","שנה","הגדר","שלוט","התאם",
    "נווט","עיין","עדכן","שמור","צלם","נעל","השתק","נגן","השהה","עצור","תגביה","תנמיך",
@@ -580,10 +585,10 @@ public class MainActivity extends Activity {
  boolean appNameOnlyRequestCore(String q){
   String x=norm(q);
   if(x.isEmpty() || tokenCount(x)>5)return false;
-  return hasAny(x,"מחשבון","calculator","שעון","clock","סייר קבצים","מנהל קבצים",
+  return hasAnyWordOrPhrase(x,"מחשבון","calculator","שעון","clock","סייר קבצים","מנהל קבצים",
     "סייר הקבצים","קבצים","files","file manager","file explorer","גלריה","gallery",
     "מצלמה","camera","יומן","לוח שנה","calendar","טלפון","phone","חייגן","dialer",
-    "הודעות","messages","אנשי קשר","contacts","דפדפן","browser","אינטרנט","browser",
+    "הודעות","messages","אנשי קשר","contacts","דפדפן","browser","אינטרנט",
     "מפות","maps","חנות","חנות play","google play","play store");
  }
 
@@ -723,8 +728,8 @@ public class MainActivity extends Activity {
 
  boolean direct(String q){
   String x=norm(q);
-  if(hasAny(x,"פתח הגדרות","תפתח הגדרות","פתח את ההגדרות","תפתח את ההגדרות","היכנס להגדרות","open settings","settings") &&
-     !hasAny(x,"הגדרות התראות","התראות אפליקציה","notification settings","wifi","wi-fi","רשת אלחוטית","bluetooth","בלוטוס","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","מסך","תצוגה","display","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast")){
+  if((x.equals("הגדרות")||x.equals("settings")||startsCommand(x,"פתח הגדרות")||startsCommand(x,"תפתח הגדרות")||startsCommand(x,"פתח את ההגדרות")||startsCommand(x,"תפתח את ההגדרות")||startsCommand(x,"היכנס להגדרות")||startsCommand(x,"open settings")) &&
+     !hasAnyWordOrPhrase(x,"הגדרות התראות","התראות אפליקציה","notification settings","wifi","wi-fi","רשת אלחוטית","bluetooth","בלוטוס","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","מסך","תצוגה","display","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast")){
    try{startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));addMessage(english?"Opening Android settings.":"פותח את הגדרות Android.","assistant");}catch(Exception e){addMessage(english?"Could not open Android settings.":"לא הצלחתי לפתוח את הגדרות Android.","assistant");}
    return true;
   }
