@@ -40,6 +40,8 @@ public class MainActivity extends Activity {
  volatile int responseRequestId=0;
  volatile Map<String,AppRow> installedExactIndex=Collections.emptyMap();
  volatile Map<String,ArrayList<AppRow>> installedTokenIndex=Collections.emptyMap();
+ volatile boolean installedAppsLoading=false;
+ final ArrayList<Runnable> appLoadWaiters=new ArrayList<>();
 
  enum Mode{CHAT,APP,FILE}
  Mode mode=Mode.CHAT;
@@ -69,20 +71,27 @@ public class MainActivity extends Activity {
   if(currentChatId==null||!chatSessions.containsKey(currentChatId))newChat();
   else renderCurrentSession();
   refreshSidebar();
+  // Warm the chat path independently. Heavy app/catalog work must never
+  // compete with chat processing.
   new Thread(()->{
    try{
     android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
     engine.loadChat(this);
-    engine.loadCommands(this);
-    engine.loadApps(this);
    }catch(Exception ignored){}
-  },"response-warmup").start();
+  },"chat-warmup").start();
   new Thread(()->{
    try{
-    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-    loadInstalledApps();
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_LOWEST);
+    engine.loadCommands(this);
    }catch(Exception ignored){}
-  },"installed-app-index-warmup").start();
+  },"commands-warmup").start();
+  new Thread(()->{
+   try{
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_LOWEST);
+    engine.loadApps(this);
+   }catch(Exception ignored){}
+  },"app-catalog-warmup").start();
+  ensureInstalledApps(null);
  }
  
  TextView label(String s,float size,int color){
@@ -307,9 +316,13 @@ public class MainActivity extends Activity {
  }
 
  static class AppRow{
-  String label,packageName,activityName;
+  String label,packageName,activityName,normalizedLabel,normalizedPackage;
   boolean system,launchable;
-  AppRow(String l,String p,String a,boolean s,boolean z){label=l;packageName=p;activityName=a;system=s;launchable=z;}
+  AppRow(String l,String p,String a,boolean s,boolean z){
+   label=l;packageName=p;activityName=a;system=s;launchable=z;
+   normalizedLabel=OfflineEngine.normalize(l);
+   normalizedPackage=OfflineEngine.normalize(p);
+  }
  }
 
  void loadHistory(){
@@ -432,8 +445,8 @@ public class MainActivity extends Activity {
    HashMap<String,ArrayList<AppRow>> tokens=new HashMap<>();
    for(AppRow row:out){
     if(!row.launchable)continue;
-    String nl=OfflineEngine.normalize(row.label);
-    String np=OfflineEngine.normalize(row.packageName);
+    String nl=row.normalizedLabel;
+    String np=row.normalizedPackage;
     addInstalledExact(exact,nl,row);
     addInstalledExact(exact,np,row);
     String canon=OfflineEngine.normalize(engine.canonical(nl));
@@ -483,8 +496,8 @@ public class MainActivity extends Activity {
 
   AppRow best=null;int bestScore=0;
   for(AppRow row:candidates){
-   String label=OfflineEngine.normalize(row.label);
-   String pkg=OfflineEngine.normalize(row.packageName);
+   String label=row.normalizedLabel;
+   String pkg=row.normalizedPackage;
    int s=0;
    if(q.equals(label)||q.equals(pkg))s=120;
    else if(canonical.equals(label)||canonical.equals(pkg))s=115;
@@ -504,11 +517,27 @@ public class MainActivity extends Activity {
  }
 
  void ensureInstalledApps(Runnable done){
-  if(installedAppsLoaded){done.run();return;}
+  synchronized(appLoadWaiters){
+   if(installedAppsLoaded){
+    if(done!=null)runOnUiThread(done);
+    return;
+   }
+   if(done!=null)appLoadWaiters.add(done);
+   if(installedAppsLoading)return;
+   installedAppsLoading=true;
+  }
   new Thread(()->{
    loadInstalledApps();
-   runOnUiThread(done);
-  },"installed-app-loader-retry").start();
+   ArrayList<Runnable> waiters;
+   synchronized(appLoadWaiters){
+    installedAppsLoading=false;
+    waiters=new ArrayList<>(appLoadWaiters);
+    appLoadWaiters.clear();
+   }
+   runOnUiThread(()->{
+    for(Runnable r:waiters)try{r.run();}catch(Exception ignored){}
+   });
+  },"installed-app-loader").start();
  }
 
  String userAliases(String pkg){
@@ -654,7 +683,7 @@ public class MainActivity extends Activity {
    if(x.isEmpty())shown.addAll(all);
    else{
     for(AppRow r:all){
-     if(OfflineEngine.normalize(r.label).contains(x)||OfflineEngine.normalize(r.packageName).contains(x)||userAliases(r.packageName).contains(x))shown.add(r);
+     if(r.normalizedLabel.contains(x)||r.normalizedPackage.contains(x)||OfflineEngine.normalize(userAliases(r.packageName)).contains(x))shown.add(r);
     }
    }
    notifyDataSetChanged();
@@ -745,7 +774,12 @@ public class MainActivity extends Activity {
   return n.equals(t)||n.startsWith(t+" ")||n.endsWith(" "+t)||n.contains(" "+t+" ");
  }
  boolean hasAnyWordOrPhrase(String q,String...terms){for(String t:terms)if(hasWordOrPhrase(q,t))return true;return false;}
- boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
+ boolean openRequest(String q){
+  String x=norm(q);
+  // The opening verb must begin the request (optionally after "בבקשה"/"please").
+  // This makes app launching explicit instead of guessing user intent.
+  return anyStartsCommand(x,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");
+ }
  boolean startsCommand(String q,String term){
   String n=norm(q),t=norm(term);if(n.equals(t)||n.startsWith(t+" "))return true;
   return n.startsWith("בבקשה "+t)||n.startsWith("please "+t);
@@ -783,13 +817,8 @@ public class MainActivity extends Activity {
 
  void process(String q){
   try{
-  // Tier 0: tiny local conversational replies. These never touch app discovery
-  // or any catalog, so greetings remain instant during startup.
-  OfflineEngine.Resp greeting=instantChatResponse(q);
-  if(greeting!=null){
-   addMessage(english?greeting.en:greeting.he,"assistant");
-   return;
-  }
+  // CHAT mode is chat-only. App discovery is reached only from the explicit
+  // opening-command branch below.
   OfflineEngine.Resp instant=engine.quickResponse(q);
   if(instant!=null){
    addMessage(english?instant.en:instant.he,"assistant");
@@ -801,17 +830,14 @@ public class MainActivity extends Activity {
   if(mathRequest(q))return;
   if(systemToggle(q))return;
   if(coreAndroidCommand(q))return;
-  String customPkg=findCustomCommandPackage(q);if(customPkg!=null&&launchPackage(customPkg,q))return;
   if(direct(q))return;
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
   if(actionRequest(q)){runAction(q);return;}
   if(engine.commandsLoaded && likelyActionCommand(q) && engine.bestAction(q)!=null){runAction(q);return;}
 
-  // Natural Android commands: a user should be able to say just "מחשבון",
-  // "שעון", "דרייב", "גוגל פליי", etc. without adding the word "פתח".
-  if(appNameOnlyRequest(q)){openThing(q);return;}
-
+  // A plain app name is ordinary chat text in CHAT mode. Only the explicit
+  // openRequest() branch above may launch an app.
   chat(q);
   }catch(Exception ex){
    android.util.Log.e("Avraham","process failed",ex);
@@ -892,8 +918,6 @@ public class MainActivity extends Activity {
  }
 
  void chat(String q){
-  OfflineEngine.Resp fast=engine.quickResponse(q);
-  if(fast!=null){addMessage(english?fast.en:fast.he,"assistant");return;}
   final boolean responseEnglish=english;
   final int requestId=++responseRequestId;
   responseExecutor.execute(()->{
@@ -981,9 +1005,8 @@ public class MainActivity extends Activity {
    String target=targetOf(x);
    if(coreAppTarget(target))return true;
   }
-  if(appNameOnlyRequestCore(x)){
-   if(coreAppTarget(x))return true;
-  }
+  // Never open a core app merely because its name appeared in a chat message.
+  // Explicit openRequest() above is the only app-opening route.
   return false;
  }
 
