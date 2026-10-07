@@ -826,7 +826,8 @@ public class MainActivity extends Activity {
   if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){
    String ok=on?"הבלוטוס הופעל.":"הבלוטוס כובה.";
    if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"לא הצלחתי לשנות את הבלוטוס. פתחתי את הגדרות הבלוטוס.","bluetooth","בלוטוס","בלוטות"))return true;
-   return openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,on?"לא הצלחתי להפעיל את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.":"לא הצלחתי לכבות את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.");
+   openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,on?"לא הצלחתי להפעיל את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.":"לא הצלחתי לכבות את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.");
+   return true;
   }
   if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){
    String ok=on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.";
@@ -836,7 +837,8 @@ public class MainActivity extends Activity {
   if(hasAny(x,"מצב טיסה","airplane")){
    String ok=on?"מצב טיסה הופעל.":"מצב טיסה כובה.";
    if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"לא הצלחתי לשנות את מצב הטיסה. פתחתי את ההגדרות.","airplane","airplane mode","מצב טיסה"))return true;
-   return openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה.");
+   openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה.");
+   return true;
   }
   return false;
  }
