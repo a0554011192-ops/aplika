@@ -46,3 +46,5 @@ Final 1.ico icon build trigger v2.
 Clean aligned APK build trigger.
 
 Real Android emulator install verification build.
+
+Full source ZIP snapshot build.
