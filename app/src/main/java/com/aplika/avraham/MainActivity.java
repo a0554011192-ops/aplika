@@ -845,45 +845,7 @@ public class MainActivity extends Activity {
   }
  }
 
- boolean appNameOnlyRequest(String q){
-  String x=norm(q);
-  if(x.isEmpty()||tokenCount(x)>6)return false;
-
-  if(hasAnyWordOrPhrase(x,
-    "מחשבון","calculator","שעון","clock","דרייב","google drive",
-    "גוגל פליי","גוגל פלי","google play","play store","חנות","חנות play",
-    "סייר קבצים","מנהל קבצים","קבצים","files","file manager","file explorer",
-    "גלריה","gallery","תמונות","google photos","photos",
-    "מצלמה","camera","טלפון","phone","חייגן","dialer",
-    "הודעות","messages","sms","אנשי קשר","contacts","contact",
-    "יומן","לוח שנה","calendar","דפדפן","browser","אינטרנט",
-    "גוגל","google","מפות","google maps","maps",
-    "גימייל","gmail","דואר","email","יוטיוב","youtube",
-    "כרום","chrome","ווטסאפ","וואטסאפ","whatsapp",
-    "טלגרם","telegram","ספוטיפיי","spotify")){
-   return true;
-  }
-
-  if(findCustomCommandPackage(x)!=null||findUserAliasPackage(x)!=null)return true;
-
-  // Chat must win over app discovery for normal conversation. This is the
-  // critical routing guard that keeps greetings like "היי" out of PackageManager.
-  if(isClearlyConversational(x))return false;
-
-  // App-name-only detection is intentionally conservative.
-  if(tokenCount(x)>3)return false;
-
-  // Both app indexes are warmed in the background at startup. Never block a
-  // normal chat message by starting a PackageManager/catalog load here.
-  if(!installedAppsLoaded)return false;
-  if(findInstalledMatch(x)!=null)return true;
-
-  // Catalog knowledge is only consulted after the background warmup completed.
-  // openThing() still verifies that an app is actually installed before launch.
-  return engine.appsLoaded && engine.isKnownAppAlias(x);
- }
-
- boolean isClearlyConversational(String q){
+boolean isClearlyConversational(String q){
   String x=norm(q);
   if(x.isEmpty())return true;
   if(hasAnyWordOrPhrase(x,
@@ -899,19 +861,7 @@ public class MainActivity extends Activity {
   return false;
  }
 
- OfflineEngine.Resp instantChatResponse(String q){
-  String x=norm(q);
-  if(x.isEmpty())return null;
-  if(x.equals("היי")||x.equals("הי")||x.equals("שלום")||x.equals("אהלן"))
-   return new OfflineEngine.Resp("היי! 👋 איך אפשר לעזור?","Hi! 👋 How can I help?",new String[]{"היי"});
-  if(x.equals("מה נשמע")||x.equals("מה קורה")||x.equals("מה שלומך"))
-   return new OfflineEngine.Resp("מעולה 😊 אני כאן ומוכן לעזור.","Great 😊 I am here and ready to help.",new String[]{"מה נשמע"});
-  if(x.equals("תודה")||x.equals("תודה רבה"))
-   return new OfflineEngine.Resp("בשמחה!","You're welcome!",new String[]{"תודה"});
-  return null;
- }
-
- int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
+int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
 
  int bestInstalledScore(String target){
   return findInstalledMatch(target)==null?0:100;
@@ -1010,17 +960,7 @@ public class MainActivity extends Activity {
   return false;
  }
 
- boolean appNameOnlyRequestCore(String q){
-  String x=norm(q);
-  if(x.isEmpty() || tokenCount(x)>5)return false;
-  return hasAnyWordOrPhrase(x,"מחשבון","calculator","שעון","clock","סייר קבצים","מנהל קבצים",
-    "סייר הקבצים","קבצים","files","file manager","file explorer","גלריה","gallery",
-    "מצלמה","camera","יומן","לוח שנה","calendar","טלפון","phone","חייגן","dialer",
-    "הודעות","messages","אנשי קשר","contacts","דפדפן","browser","אינטרנט",
-    "מפות","maps","חנות","חנות play","google play","play store");
- }
-
- boolean coreAppTarget(String raw){
+boolean coreAppTarget(String raw){
   String w=OfflineEngine.normalize(engine.canonical(raw));
   PackageManager pm=getPackageManager();
   if(w.isEmpty())return false;
