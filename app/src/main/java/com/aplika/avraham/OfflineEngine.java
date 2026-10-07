@@ -256,6 +256,7 @@ final class OfflineEngine {
   if(qn.isEmpty()||tn.isEmpty())return 0;
   if(qn.equals(tn))return 100;
   if(tn.startsWith(qn) || tn.contains(" "+qn+" ") || tn.endsWith(" "+qn))return 82;
+  if(qn.startsWith(tn+" ") || qn.contains(" "+tn+" ") || qn.endsWith(" "+tn))return 78;
   String[] q=qn.split("\\s+"), t=tn.split("\\s+");
   int hits=0;
   for(String a:q){
