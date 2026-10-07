@@ -1243,7 +1243,7 @@ boolean coreAppTarget(String raw){
 
  boolean isHomeCommand(String q){
   String x=norm(q);
-  if(x.equals("בית")||x.equals("מסך בית")||x.equals("מסך הבית")||x.equals("דף בית")||x.equals("דף הבית")||x.equals("home"))return true;
+  // Never treat a bare word like "בית" or "home" as a device command.
   return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$")
     || x.matches("^(חזור|תחזור|חזור ל|עבור|עבור ל|עבור אל|תעביר אותי ל|תעביר אותי אל) (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$")
     || x.equals("חזור הביתה") || x.equals("חזרה למסך הבית") || x.equals("עבור למסך הבית");
@@ -1442,7 +1442,6 @@ boolean coreAppTarget(String raw){
  boolean openThing(String q){
   String target=targetOf(q);
   String wanted=engine.canonical(target);
-  PackageManager pm=getPackageManager();
 
   // Cheapest paths first: aliases and deterministic common-app mappings do
   // not need the installed-app catalog at all.
@@ -1483,16 +1482,9 @@ boolean coreAppTarget(String raw){
    return true;
   }
 
-  ResolveInfo semantic=semanticApp(pm,target);
-  if(semantic!=null){
-   try{
-    Intent i=new Intent();
-    i.setComponent(new ComponentName(semantic.activityInfo.packageName,semantic.activityInfo.name));
-    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    startActivity(i);
-    addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;
-   }catch(Exception ignored){}
-  }
+  // Do not run another PackageManager semantic scan on the UI thread here.
+  // The launchable-app index plus explicit common-app roles already cover the
+  // real launchable apps. Unknown names fail fast instead of stalling the UI.
 
   String t=OfflineEngine.normalize(target);
   if(t.contains("קבצים")||t.contains("סייר")||t.contains("file manager")||t.contains("file explorer")||t.equals("files")){
