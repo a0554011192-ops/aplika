@@ -74,8 +74,15 @@ public class MainActivity extends Activity {
     android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
     engine.loadChat(this);
     engine.loadCommands(this);
+    engine.loadApps(this);
    }catch(Exception ignored){}
   },"response-warmup").start();
+  new Thread(()->{
+   try{
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    loadInstalledApps();
+   }catch(Exception ignored){}
+  },"installed-app-index-warmup").start();
  }
  
  TextView label(String s,float size,int color){
@@ -776,7 +783,13 @@ public class MainActivity extends Activity {
 
  void process(String q){
   try{
-  // Tier 0: canned/common replies. These must never touch any catalog.
+  // Tier 0: tiny local conversational replies. These never touch app discovery
+  // or any catalog, so greetings remain instant during startup.
+  OfflineEngine.Resp greeting=instantChatResponse(q);
+  if(greeting!=null){
+   addMessage(english?greeting.en:greeting.he,"assistant");
+   return;
+  }
   OfflineEngine.Resp instant=engine.quickResponse(q);
   if(instant!=null){
    addMessage(english?instant.en:instant.he,"assistant");
@@ -827,33 +840,49 @@ public class MainActivity extends Activity {
 
   if(findCustomCommandPackage(x)!=null||findUserAliasPackage(x)!=null)return true;
 
-  // Do not start PackageManager scans for normal short chat sentences.
-  // App-name-only detection is intentionally conservative.
-  if(tokenCount(x)>3 || hasAnyWordOrPhrase(x,
-    "מה","איך","למה","מתי","איפה","מי","האם","אפשר","תוכל","תעזור",
-    "תסביר","ספר","תן","תתן","אני","אתה","אנחנו","מהו","מהי","למה זה"))return false;
+  // Chat must win over app discovery for normal conversation. This is the
+  // critical routing guard that keeps greetings like "היי" out of PackageManager.
+  if(isClearlyConversational(x))return false;
 
-  // Do not touch the 4,000-entry catalog for ordinary text. First use the
-  // tiny installed-app index; the big catalog is only a final fallback.
-  if(!installedAppsLoaded){
-   ensureInstalledApps(()->process(q));
-   return true;
-  }
+  // App-name-only detection is intentionally conservative.
+  if(tokenCount(x)>3)return false;
+
+  // Both app indexes are warmed in the background at startup. Never block a
+  // normal chat message by starting a PackageManager/catalog load here.
+  if(!installedAppsLoaded)return false;
   if(findInstalledMatch(x)!=null)return true;
 
-  // A name known only to the offline catalog is NOT evidence that the app is
-  // installed. Let openThing() report a clear "not found / may not be installed"
-  // message instead of silently waiting or looping.
-  if(engine.isKnownAppAlias(x))return true;
+  // Catalog knowledge is only consulted after the background warmup completed.
+  // openThing() still verifies that an app is actually installed before launch.
+  return engine.appsLoaded && engine.isKnownAppAlias(x);
+ }
 
-  if(!engine.appsLoaded){
-   new Thread(()->{
-    engine.loadApps(this);
-    runOnUiThread(()->process(q));
-   },"lazy-app-catalog-loader").start();
-   return true;
-  }
+ boolean isClearlyConversational(String q){
+  String x=norm(q);
+  if(x.isEmpty())return true;
+  if(hasAnyWordOrPhrase(x,
+    "היי","הי","שלום","אהלן","מה נשמע","מה קורה","בוקר טוב","ערב טוב","לילה טוב",
+    "תודה","תודה רבה","בבקשה","סבבה","מעולה","מצוין","נהדר","אוקיי","אוקי","כן","לא",
+    "חח","חחח","חחחח","מה שלומך","איך אתה","מי אתה","מה אתה עושה","רוצה לדבר",
+    "אפשר לדבר","בוא נדבר","ספר לי","תספר לי","תגיד לי","תקשיב","רגע","טוב"))return true;
+  if(x.endsWith("?")||x.endsWith("？"))return true;
+  if(hasAnyWordOrPhrase(x,
+    "מה","איך","למה","מתי","איפה","מי","האם","אפשר","תוכל","תעזור",
+    "תסביר","ספר","תן","תתן","אני","אתה","אנחנו","מהו","מהי","למה זה",
+    "רוצה","צריך","יכול","יכולה","יודע","יודעת","נראה","נשמע"))return true;
   return false;
+ }
+
+ OfflineEngine.Resp instantChatResponse(String q){
+  String x=norm(q);
+  if(x.isEmpty())return null;
+  if(x.equals("היי")||x.equals("הי")||x.equals("שלום")||x.equals("אהלן"))
+   return new OfflineEngine.Resp("היי! 👋 איך אפשר לעזור?","Hi! 👋 How can I help?",new String[]{"היי"});
+  if(x.equals("מה נשמע")||x.equals("מה קורה")||x.equals("מה שלומך"))
+   return new OfflineEngine.Resp("מעולה 😊 אני כאן ומוכן לעזור.","Great 😊 I am here and ready to help.",new String[]{"מה נשמע"});
+  if(x.equals("תודה")||x.equals("תודה רבה"))
+   return new OfflineEngine.Resp("בשמחה!","You're welcome!",new String[]{"תודה"});
+  return null;
  }
 
  int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
@@ -1257,24 +1286,26 @@ public class MainActivity extends Activity {
 
  boolean openThing(String q){
   String target=targetOf(q);
-  if(!installedAppsLoaded){
-   addMessage(english?"Loading the installed apps list...":"טוען את רשימת האפליקציות המותקנות...","assistant");
-   ensureInstalledApps(()->openThing(q));
-   return true;
-  }
-  // The 4,000-entry alias catalog is never loaded synchronously here.
-  // The tiny installed-app index handles the normal case first.
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
-  // Personal command/alias always wins.
+  // Cheapest paths first: aliases and deterministic common-app mappings do
+  // not need the installed-app catalog at all.
   String customPkg=findCustomCommandPackage(q);
   if(customPkg!=null&&launchPackage(customPkg,q))return true;
   String userPkg=findUserAliasPackage(target);
-  if(userPkg!=null && launchPackage(userPkg,target))return true;
-
-  // Deterministic mappings for common apps/Android components.
+  if(userPkg!=null&&launchPackage(userPkg,target))return true;
   if(launchKnownApp(target))return true;
+
+  if(!installedAppsLoaded){
+   // Startup indexing normally makes this path unnecessary. Keep it as a
+   // non-blocking fallback for a command typed immediately after launch.
+   ensureInstalledApps(()->openThing(q));
+   return true;
+  }
+
+  // Tiny installed-app search: exact lookup first, then at most 32
+  // token candidates. Never score the entire installed-app list.
 
   // Tiny installed-app search: exact lookup first, then at most 32
   // token candidates. Never score the entire installed-app list.
