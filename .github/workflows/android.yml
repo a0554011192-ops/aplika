@@ -22,6 +22,19 @@ jobs:
           distribution: temurin
           java-version: '17'
 
+      - name: Build app icon from repository 1.ico
+        run: |
+          set -e
+          test -f 1.ico
+          if ! command -v magick >/dev/null 2>&1; then
+            sudo apt-get update -qq
+            sudo apt-get install -y imagemagick
+          fi
+          mkdir -p app/src/main/res/drawable-nodpi
+          rm -f app/src/main/res/drawable/ic_avraham.xml
+          magick 1.ico -alpha on -background none -strip -resize 256x256 app/src/main/res/drawable-nodpi/ic_avraham.png
+          test -s app/src/main/res/drawable-nodpi/ic_avraham.png
+          file app/src/main/res/drawable-nodpi/ic_avraham.png
       - name: Verify 12,000 catalog records
         run: python3 tools/verify_catalogs.py
 
@@ -47,6 +60,6 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: avraham-haivri-android-full-signed
+          name: avraham-haivri-android-full-signed-${{ github.run_number }}
           path: app/build/outputs/apk/release/avraham-haivri-android.apk
           if-no-files-found: error
