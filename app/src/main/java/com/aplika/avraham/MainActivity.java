@@ -212,6 +212,21 @@ public class MainActivity extends Activity {
    try{startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));addMessage(english?"Opening Android settings.":"פותח את הגדרות Android.","assistant");}catch(Exception e){addMessage(english?"Could not open Android settings.":"לא הצלחתי לפתוח את הגדרות Android.","assistant");}
    return true;
   }
+  // Deterministic Android home command.
+  if(hasAny(x,"בית","מסך הבית","דף הבית","חזור הביתה","home") && !hasAny(x,"פתח","תפתח","open","launch")){
+   if(global(AccessibilityService.GLOBAL_ACTION_HOME)){addMessage(english?"Home.":"מסך הבית.","assistant");return true;}
+   try{
+    Intent home=new Intent(Intent.ACTION_MAIN);home.addCategory(Intent.CATEGORY_HOME);home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(home);addMessage(english?"Home.":"מסך הבית.","assistant");return true;
+   }catch(Exception ignored){}
+  }
+
+  // Explicit common-app resolution happens before fuzzy matching.
+  if(openRequest(q)){
+   String t=targetOf(q);
+   if(launchKnownApp(t)){return true;}
+  }
+
   if(hasAny(x,"בטל השתקה","unmute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);addMessage(english?"Media unmuted.":"ההשתקה בוטלה.","assistant");return true;}
   if(hasAny(x,"השתק","השתקה","שקט","mute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_MUTE,0);addMessage(english?"Media muted.":"השמע הושתק.","assistant");return true;}
   if(hasAny(x,"תגביה","תגביהה","הגבהה","תגביר","תעלה","תרים","הגבר","volume up","increase volume","louder")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,0);addMessage(english?"Volume increased.":"עוצמת השמע הוגברה.","assistant");return true;}
@@ -365,6 +380,62 @@ public class MainActivity extends Activity {
 
   addMessage(english?"I could not find that installed app.":"לא מצאתי את האפליקציה הזו בין האפליקציות המותקנות.","assistant");
   return true;
+ }
+
+ boolean launchKnownApp(String target){
+  String w=OfflineEngine.normalize(engine.canonical(target));
+  PackageManager pm=getPackageManager();
+
+  String[] packages=null;
+  if(w.equals("play store"))packages=new String[]{"com.android.vending"};
+  else if(w.equals("google drive"))packages=new String[]{"com.google.android.apps.docs"};
+  else if(w.equals("chrome")||w.equals("google chrome"))packages=new String[]{"com.android.chrome"};
+  else if(w.equals("gmail"))packages=new String[]{"com.google.android.gm"};
+  else if(w.equals("google maps")||w.equals("maps"))packages=new String[]{"com.google.android.apps.maps"};
+  else if(w.equals("youtube"))packages=new String[]{"com.google.android.youtube"};
+  else if(w.equals("google photos"))packages=new String[]{"com.google.android.apps.photos"};
+  else if(w.equals("google"))packages=new String[]{"com.google.android.googlequicksearchbox"};
+  else if(w.equals("calendar"))packages=new String[]{"com.google.android.calendar"};
+  else if(w.equals("google keep"))packages=new String[]{"com.google.android.keep"};
+  else if(w.equals("google translate"))packages=new String[]{"com.google.android.apps.translate"};
+  else if(w.equals("whatsapp"))packages=new String[]{"com.whatsapp"};
+  else if(w.equals("telegram"))packages=new String[]{"org.telegram.messenger"};
+  else if(w.equals("spotify"))packages=new String[]{"com.spotify.music"};
+  else if(w.equals("discord"))packages=new String[]{"com.discord"};
+  else if(w.equals("facebook"))packages=new String[]{"com.facebook.katana"};
+  else if(w.equals("instagram"))packages=new String[]{"com.instagram.android"};
+
+  if(packages!=null){
+   for(String pkg:packages){
+    try{
+     Intent i=pm.getLaunchIntentForPackage(pkg);
+     if(i!=null){i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);startActivity(i);
+      addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;}
+    }catch(Exception ignored){}
+   }
+  }
+
+  // Generic Android semantic apps. Useful for OEM calculators, clocks, galleries, etc.
+  String category=null;
+  if(w.equals("calculator"))category=Intent.CATEGORY_APP_CALCULATOR;
+  else if(w.equals("clock"))category=Intent.CATEGORY_APP_CLOCK;
+  else if(w.equals("gallery"))category=Intent.CATEGORY_APP_GALLERY;
+  else if(w.equals("music")||w.equals("media player"))category=Intent.CATEGORY_APP_MUSIC;
+  else if(w.equals("browser"))category=Intent.CATEGORY_APP_BROWSER;
+  else if(w.equals("calendar"))category=Intent.CATEGORY_APP_CALENDAR;
+  if(category!=null){
+   try{
+    Intent i=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,category);
+    List<ResolveInfo> list=pm.queryIntentActivities(i,PackageManager.MATCH_ALL);
+    if(!list.isEmpty()){
+     ResolveInfo ri=list.get(0);Intent launch=new Intent(i);
+     launch.setComponent(new ComponentName(ri.activityInfo.packageName,ri.activityInfo.name));
+     launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);startActivity(launch);
+     addMessage((english?"Opening ":"פותח ")+target,"assistant");return true;
+    }
+   }catch(Exception ignored){}
+  }
+  return false;
  }
 
  int appSpecialScore(String w,String pkg){
