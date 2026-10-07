@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
   status.setText("אופליין • מוכן");
   Thread warmup=new Thread(()->{
    try{
-    Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
     engine.loadChat(this);
    }catch(Exception ignored){}
   },"response-warmup");
