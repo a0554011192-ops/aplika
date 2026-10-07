@@ -47,18 +47,23 @@ for r in synonyms:
 assert len(synonyms) >= 500, ("too few meaningful synonyms", len(synonyms))
 
 response_keys = set()
+response_texts = set()
 trigger_keys = set()
 for r in responses:
     p = r.split("\t")
     assert len(p) >= 4 and p[1].strip() and p[3].strip(), ("bad response row", r)
     assert not re.search(r"\[\d+\]\s*$", p[1])
     assert not re.search(r"\b(Absolutely|Of course|Definitely|Certainly|Indeed)\.?\s*$", p[2], re.I)
+    assert "?" not in p[1] and "؟" not in p[1], ("question in chat response", r)
     key = p[1] + "\t" + p[3]
-    assert key not in response_keys, ("duplicate response", r)
+    assert key not in response_keys, ("duplicate response row", r)
     response_keys.add(key)
+    assert p[1] not in response_texts, ("duplicate Hebrew response text", r)
+    response_texts.add(p[1])
     trigger_keys.add(p[3])
-assert len(responses) >= 1000, ("too few response templates", len(responses))
-assert len(trigger_keys) >= 60, ("too few distinct response trigger groups", len(trigger_keys))
+assert len(responses) == 9000, ("responses.tsv must contain exactly 9,000 rows", len(responses))
+assert len(response_texts) == 9000, ("responses must contain 9,000 unique Hebrew responses", len(response_texts))
+assert len(trigger_keys) == 200, ("responses must contain exactly 200 daily-chat trigger groups", len(trigger_keys))
 
 required = {"מחשבון","שעון","דרייב","גוגל דרייב","גוגל פליי","כרום","יוטיוב","מצלמה","גלריה","סייר קבצים","Google Drive","Google Play","Chrome","YouTube","Calculator","Clock"}
 app_aliases = set()
