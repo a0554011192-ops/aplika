@@ -578,6 +578,12 @@ public class MainActivity extends Activity {
 
   if(findCustomCommandPackage(x)!=null||findUserAliasPackage(x)!=null)return true;
 
+  // Do not start PackageManager scans for normal short chat sentences.
+  // App-name-only detection is intentionally conservative.
+  if(tokenCount(x)>3 || hasAnyWordOrPhrase(x,
+    "מה","איך","למה","מתי","איפה","מי","האם","אפשר","תוכל","תעזור",
+    "תסביר","ספר","תן","תתן","אני","אתה","אנחנו","מהו","מהי","למה זה"))return false;
+
   // Do not touch the 4,000-entry catalog for ordinary text. First use the
   // tiny installed-app index; the big catalog is only a final fallback.
   if(!installedAppsLoaded){
@@ -995,7 +1001,8 @@ public class MainActivity extends Activity {
    ensureInstalledApps(()->openThing(q));
    return true;
   }
-  engine.loadApps(this);
+  // The 4,000-entry alias catalog is never loaded synchronously here.
+  // The tiny installed-app index handles the normal case first.
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
