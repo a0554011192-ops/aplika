@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 final class OfflineEngine {
- static final int APP_COUNT=3000,ACTION_COUNT=4000,RESPONSE_COUNT=5000,SYN_COUNT=6000;
+ static final int APP_COUNT=4000,ACTION_COUNT=4000,RESPONSE_COUNT=5000,SYN_COUNT=6000;
 
  static class Resp{
   String he,en;String[] triggers;
