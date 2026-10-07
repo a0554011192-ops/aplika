@@ -3,6 +3,7 @@ package com.aplika.avraham;
 import android.content.*;
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 final class OfflineEngine {
  static final int APP_COUNT=4000,ACTION_COUNT=4000,RESPONSE_COUNT=5000,SYN_COUNT=6000;
@@ -19,8 +20,8 @@ final class OfflineEngine {
 
  final ArrayList<Resp> responses=new ArrayList<>();
  final ArrayList<ActionEntry> actions=new ArrayList<>();
- final HashMap<String,String> synonyms=new HashMap<>();
- final HashMap<String,String> commonAliases=new HashMap<>();
+ final Map<String,String> synonyms=new ConcurrentHashMap<>();
+ final Map<String,String> commonAliases=new ConcurrentHashMap<>();
 
  final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
  final HashSet<String> loadedResponseKeys=new HashSet<>();
@@ -292,14 +293,20 @@ final class OfflineEngine {
   String n=normalize(q);
   if(n.isEmpty())return null;
   LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
+  // Response matching is intentionally independent of the large synonym map.
+  // This keeps the hot path lock-free while synonyms are loaded for app/actions.
   for(String raw:n.split("\\s+")){
-   String tok=canonicalWord(raw);
-   ArrayList<Resp> list=responseIndex.get(tok);
-   if(list==null&&synonymsLoaded)list=responseIndex.get(synonyms.get(tok));
-   if(list!=null){
-    candidates.addAll(list);
-    if(candidates.size()>=120)break;
+   String tok=raw;
+   String alias=commonAliases.get(raw);
+   if(alias!=null&&!alias.isEmpty())tok=normalize(alias);
+   for(String part:tok.split("\\s+")){
+    ArrayList<Resp> list=responseIndex.get(part);
+    if(list!=null){
+     candidates.addAll(list);
+     if(candidates.size()>=120)break;
+    }
    }
+   if(candidates.size()>=120)break;
   }
   Resp best=null;int bestScore=0;
   for(Resp r:candidates){
