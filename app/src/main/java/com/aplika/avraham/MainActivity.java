@@ -484,10 +484,19 @@ public class MainActivity extends Activity {
    return true;
   }
 
-  engine.loadApps(this);
-  if(engine.isKnownAppAlias(x))return true;
+  // Never parse the 4,000-row app catalog on the UI thread.
+  // It is prepared in the background during startup.
   if(findCustomCommandPackage(x)!=null)return true;
   if(findUserAliasPackage(x)!=null)return true;
+  if(!engine.appsLoaded){
+   new Thread(()->{
+    engine.loadApps(this);
+    runOnUiThread(()->process(q));
+   },"app-catalog-loader").start();
+   addMessage(english?"Loading the app catalog...":"טוען את מאגר האפליקציות...","assistant");
+   return true;
+  }
+  if(engine.isKnownAppAlias(x))return true;
 
   // Any short phrase that exactly/closely matches a currently installed app
   // is also considered an app command, even when it isn't in the offline catalog.
@@ -501,12 +510,21 @@ public class MainActivity extends Activity {
 
  int bestInstalledScore(String target){
   String q=OfflineEngine.normalize(target);
+  if(q.isEmpty())return 0;
+  String canonicalQ=engine.canonical(q);
   int best=0;
   for(AppRow row:installedApps){
-   String aliases=row.label+" "+row.packageName;
-   int s=engine.score(q,aliases);
-   if(engine.canonical(q).equals(engine.canonical(row.label)))s=Math.max(s,120);
-   best=Math.max(best,s);
+   String nl=OfflineEngine.normalize(row.label);
+   String np=OfflineEngine.normalize(row.packageName);
+   if(q.equals(nl)||q.equals(np)||canonicalQ.equals(engine.canonical(nl)))return 120;
+   int s=0;
+   if(q.length()>=3){
+    if(nl.contains(q)||np.contains(q))s=80;
+    else if(canonicalQ.length()>=3&&(nl.contains(canonicalQ)||np.contains(canonicalQ)))s=70;
+   }
+   if(s<45)s=engine.score(q,nl+" "+np);
+   if(s>best)best=s;
+   if(best>=80)return best;
   }
   return best;
  }
