@@ -540,7 +540,7 @@ public class MainActivity extends Activity {
  }
 
  int settingForRequest(String x){
-  if(hasAny(x,"wifi","wi fi","רשת אלחוטית","וויפי","וייפיי","אלחוטי"))return 0;
+  if(hasAny(x,"wifi","wi fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","וויפי","אלחוטי"))return 0;
   if(hasAny(x,"bluetooth","בלוטוס","בלוטות","בלוטות'"))return 1;
   if(hasAny(x,"מצב טיסה","airplane"))return 2;
   if(hasAny(x,"רשת סלולרית","mobile network","cellular"))return 3;
