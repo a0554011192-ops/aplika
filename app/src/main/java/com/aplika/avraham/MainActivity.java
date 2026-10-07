@@ -873,7 +873,7 @@ public class MainActivity extends Activity {
   String x=norm(q);
   // Opening must be explicit. Accept common natural variants, but never infer
   // an app launch from an app name appearing in ordinary conversation.
-  return anyStartsCommand(x,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run")
+  return anyStartsCommand(x,"פתח","תפתח","לפתוח","פתיחה","open","launch")
     || x.startsWith("תוכל לפתוח ")
     || x.startsWith("אפשר לפתוח ")
     || x.startsWith("בבקשה תפתח ")
@@ -955,8 +955,10 @@ public class MainActivity extends Activity {
     "השתק","השתקה","בטל השתקה","נגן","השהה","עצור","חזור אחורה","חזור הביתה",
     "אחורה","אפליקציות אחרונות","אחרונות","פתח התראות","התראות","הגדרות מהירות",
     "צלם מסך","צילום מסך","נעל מסך","נעילת מסך","הפעל","תפעיל","השבת","תכבה","כבה",
-    "פתח הגדרות","תפתח הגדרות","היכנס להגדרות","open settings","volume","mute","play","pause",
-    "stop","screenshot","lock","notifications","quick settings"))return true;
+    "פתח הגדרות","תפתח הגדרות","היכנס להגדרות","screenshot","lock","notifications","quick settings"))return true;
+  if(startsCommand(x,"turn up volume")||startsCommand(x,"increase volume")||
+     startsCommand(x,"turn down volume")||startsCommand(x,"decrease volume")||
+     startsCommand(x,"mute sound")||startsCommand(x,"unmute sound"))return true;
   return hasAnyWordOrPhrase(x,"מה השעה","מה השעה עכשיו","מה הזמן","what time is it","what's the time","current time")
     || x.equals("השעה");
  }
