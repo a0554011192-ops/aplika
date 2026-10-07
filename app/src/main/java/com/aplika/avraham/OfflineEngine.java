@@ -51,7 +51,14 @@ final class OfflineEngine {
   alias("player","media player");alias("מוזיקה","music");alias("music","music");
   alias("יומן","calendar");alias("לוח שנה","calendar");alias("calendar","calendar");
   alias("דפדפן","browser");alias("browser","browser");alias("אינטרנט","browser");alias("web browser","browser");
-  alias("חנות","play store");alias("חנות play","play store");alias("google play","play store");alias("play store","play store");
+  alias("חנות","play store");alias("חנות play","play store");alias("חנות גוגל","play store");
+  alias("גוגל פליי","play store");alias("גוגל פלי","play store");alias("גוגל play","play store");
+  alias("google play","play store");alias("google play store","play store");alias("play store","play store");
+  alias("play","play store");alias("store","play store");alias("פליי","play store");alias("פלי","play store");
+  alias("דרייב","google drive");alias("גוגל דרייב","google drive");alias("drive","google drive");alias("google drive","google drive");
+  alias("google drive","google drive");alias("google docs","google docs");alias("docs","google docs");
+  alias("google sheets","google sheets");alias("sheets","google sheets");
+  alias("google photos","google photos");alias("photos","google photos");
   alias("מוזיקה","music");alias("שירים","music");alias("דואר","email");
   alias("הגדרות","settings");
  }
