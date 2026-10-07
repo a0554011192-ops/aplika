@@ -77,9 +77,25 @@ final class OfflineEngine {
   load(c,"actions.tsv",1);
   commandsLoaded=true;
  }
- // Kept as a compatibility no-op: installed apps are matched dynamically by PackageManager,
- // so the 3000-row catalog never needs to be loaded into RAM.
- synchronized void loadApps(Context c){}
+ // Load the app catalog only as a compact alias table. Launching still uses the
+ // real PackageManager list, so a catalog entry can never invent an installed app.
+ synchronized void loadApps(Context c){
+  try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open("apps.tsv"),"UTF-8"))){
+   String l;
+   while((l=br.readLine())!=null){
+    String[] p=l.split("\\t",-1);
+    if(p.length>=4){
+     String he=normalize(p[1]), en=normalize(p[2]);
+     String canon=en.isEmpty()?he:en;
+     if(!he.isEmpty())alias(he,canon);
+     if(!en.isEmpty())alias(en,canon);
+     for(String t:p[3].split("\\|",-1)){
+      if(!normalize(t).isEmpty())alias(t,canon);
+     }
+    }
+   }
+  }catch(Exception ignored){}
+ }
 
 
  void load(Context c,String fn,int type){
