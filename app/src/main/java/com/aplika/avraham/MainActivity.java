@@ -845,22 +845,6 @@ public class MainActivity extends Activity {
   }
  }
 
-boolean isClearlyConversational(String q){
-  String x=norm(q);
-  if(x.isEmpty())return true;
-  if(hasAnyWordOrPhrase(x,
-    "היי","הי","שלום","אהלן","מה נשמע","מה קורה","בוקר טוב","ערב טוב","לילה טוב",
-    "תודה","תודה רבה","בבקשה","סבבה","מעולה","מצוין","נהדר","אוקיי","אוקי","כן","לא",
-    "חח","חחח","חחחח","מה שלומך","איך אתה","מי אתה","מה אתה עושה","רוצה לדבר",
-    "אפשר לדבר","בוא נדבר","ספר לי","תספר לי","תגיד לי","תקשיב","רגע","טוב"))return true;
-  if(x.endsWith("?")||x.endsWith("？"))return true;
-  if(hasAnyWordOrPhrase(x,
-    "מה","איך","למה","מתי","איפה","מי","האם","אפשר","תוכל","תעזור",
-    "תסביר","ספר","תן","תתן","אני","אתה","אנחנו","מהו","מהי","למה זה",
-    "רוצה","צריך","יכול","יכולה","יודע","יודעת","נראה","נשמע"))return true;
-  return false;
- }
-
 int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
 
  int bestInstalledScore(String target){
