@@ -160,7 +160,7 @@ final class OfflineEngine {
       if(!loadedResponseKeys.add(responseKey))continue;
       Resp rr=new Resp(he,en,tr.split("\\|",-1));
       responses.add(rr);
-      for(String t:rr.triggers)indexResponse(t,rr);
+      for(String t:rr.triggerNorms)indexResponseNormalized(t,rr);
      }
     }else if(type==3&&p.length>=3){
      synonyms.put(normalize(p[1]),normalize(p[2]));
@@ -169,8 +169,8 @@ final class OfflineEngine {
   }catch(Exception ignored){}
  }
 
- void indexResponse(String raw,Resp r){
-  String n=normalize(raw);
+ void indexResponse(String raw,Resp r){indexResponseNormalized(normalize(raw),r);}
+ void indexResponseNormalized(String n,Resp r){
   if(n.isEmpty())return;
   responseExact.putIfAbsent(n,r);
   for(String tok:n.split("\\s+")){
