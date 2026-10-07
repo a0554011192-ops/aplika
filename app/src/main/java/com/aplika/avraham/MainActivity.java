@@ -20,6 +20,9 @@ import android.accessibilityservice.AccessibilityService;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends Activity {
  LinearLayout root,chatList;
@@ -37,13 +40,22 @@ public class MainActivity extends Activity {
   t.setPriority(Thread.NORM_PRIORITY);
   return t;
  });
- volatile int responseRequestId=0;
  volatile Map<String,AppRow> installedExactIndex=Collections.emptyMap();
  volatile Map<String,ArrayList<AppRow>> installedTokenIndex=Collections.emptyMap();
  volatile boolean installedAppsLoading=false;
  final ArrayList<Runnable> appLoadWaiters=new ArrayList<>();
  volatile boolean appSearchLoaded=false,appSearchLoading=false;
  final ArrayList<Runnable> appSearchWaiters=new ArrayList<>();
+
+ // Chat is single-flight loaded: the UI never waits on catalog parsing.
+ volatile boolean chatLoading=false;
+ final ArrayList<Runnable> chatLoadWaiters=new ArrayList<>();
+ final ScheduledExecutorService historyExecutor=Executors.newSingleThreadScheduledExecutor(r->{
+  Thread t=new Thread(r,"history-writer");
+  t.setPriority(Thread.MIN_PRIORITY);
+  return t;
+ });
+ volatile ScheduledFuture<?> historySaveFuture;
 
  enum Mode{CHAT,APP,FILE}
  Mode mode=Mode.CHAT;
@@ -73,29 +85,9 @@ public class MainActivity extends Activity {
   if(currentChatId==null||!chatSessions.containsKey(currentChatId))newChat();
   else renderCurrentSession();
   refreshSidebar();
-  // Warm the chat path independently. Heavy app/catalog work must never
-  // compete with chat processing.
-  new Thread(()->{
-   try{
-    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
-    engine.loadChat(this);
-   }catch(Exception ignored){}
-  },"chat-warmup").start();
-  new Thread(()->{
-   try{
-    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_LOWEST);
-    engine.loadCommands(this);
-   }catch(Exception ignored){}
-  },"commands-warmup").start();
-  new Thread(()->{
-   try{
-    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_LOWEST);
-    engine.loadApps(this);
-   }catch(Exception ignored){}
-  },"app-catalog-warmup").start();
-  // Build only the launchable-app search index at startup. The full installed
-  // app list is loaded lazily for the manager screen, not for every open command.
-  ensureAppSearchIndex(null);
+  // Only warm the chat engine at startup. App catalogs and package scans stay
+  // completely out of the startup path and are loaded only when explicitly used.
+  ensureChatLoaded(null);
  }
  
  TextView label(String s,float size,int color){
@@ -251,14 +243,19 @@ public class MainActivity extends Activity {
   boolean user="user".equals(who);
   if(user&&!isActiveChat())setChatActive(true);
   renderMessage(text,who,true);
-  ChatSession cs=chatSessions.get(currentChatId);
-  if(cs!=null){
-   cs.messages.add(new ChatMessage(text,who));
-   if(user&&("שיחה חדשה".equals(cs.title)||cs.title.trim().isEmpty())){
-    String t=text.replaceAll("\\s+"," ").trim();cs.title=t.length()>28?t.substring(0,28)+"…":t;
+  boolean sidebarChanged=false;
+  synchronized(chatSessions){
+   ChatSession cs=chatSessions.get(currentChatId);
+   if(cs!=null){
+    cs.messages.add(new ChatMessage(text,who));
+    if(user&&("שיחה חדשה".equals(cs.title)||cs.title.trim().isEmpty())){
+     String t=text.replaceAll("\\s+"," ").trim();cs.title=t.length()>28?t.substring(0,28)+"…":t;
+     sidebarChanged=true;
+    }
    }
-   saveHistory();refreshSidebar();
   }
+  scheduleHistorySave();
+  if(sidebarChanged)refreshSidebar();
  }
 
  void renderMessage(String text,String who,boolean actions){
@@ -344,38 +341,74 @@ public class MainActivity extends Activity {
   }catch(Exception ignored){}
  }
 
- void saveHistory(){
+ void scheduleHistorySave(){
+  if(historyPrefs==null)return;
+  synchronized(historyExecutor){
+   if(historySaveFuture!=null)historySaveFuture.cancel(false);
+   historySaveFuture=historyExecutor.schedule(this::saveHistoryNow,350,TimeUnit.MILLISECONDS);
+  }
+ }
+
+ void saveHistoryNow(){
   if(historyPrefs==null)return;
   try{
-   JSONArray arr=new JSONArray();int skip=Math.max(0,chatSessions.size()-40),i=0;
-   for(ChatSession cs:chatSessions.values()){
-    if(i++<skip)continue;
+   ArrayList<ChatSession> snapshot=new ArrayList<>();
+   synchronized(chatSessions){
+    int skip=Math.max(0,chatSessions.size()-40),i=0;
+    for(ChatSession cs:chatSessions.values()){
+     if(i++<skip)continue;
+     ChatSession copy=new ChatSession(cs.id,cs.title);
+     int start=Math.max(0,cs.messages.size()-250);
+     for(int j=start;j<cs.messages.size();j++){
+      ChatMessage m=cs.messages.get(j);
+      copy.messages.add(new ChatMessage(m.text,m.who));
+     }
+     snapshot.add(copy);
+    }
+   }
+
+   JSONArray arr=new JSONArray();
+   for(ChatSession cs:snapshot){
     JSONObject o=new JSONObject();o.put("id",cs.id);o.put("title",cs.title);JSONArray ms=new JSONArray();
-    int start=Math.max(0,cs.messages.size()-250);
-    for(int j=start;j<cs.messages.size();j++){ChatMessage m=cs.messages.get(j);JSONObject x=new JSONObject();x.put("text",m.text);x.put("who",m.who);ms.put(x);}
+    for(ChatMessage m:cs.messages){
+     JSONObject x=new JSONObject();x.put("text",m.text);x.put("who",m.who);ms.put(x);
+    }
     o.put("messages",ms);arr.put(o);
    }
    historyPrefs.edit().putString("sessions",arr.toString()).apply();
-  }catch(Exception ignored){}
+  }catch(Exception ex){
+   android.util.Log.e("Avraham","history save failed",ex);
+  }
  }
 
  void newChat(){
   currentChatId=Long.toString(System.currentTimeMillis());
-  chatSessions.put(currentChatId,new ChatSession(currentChatId,"שיחה חדשה"));
-  chatList.removeAllViews();setChatActive(false);input.setText("");setMode(Mode.CHAT);saveHistory();refreshSidebar();
+  synchronized(chatSessions){
+   chatSessions.put(currentChatId,new ChatSession(currentChatId,"שיחה חדשה"));
+  }
+  chatList.removeAllViews();setChatActive(false);input.setText("");setMode(Mode.CHAT);scheduleHistorySave();refreshSidebar();
  }
 
  void renderCurrentSession(){
-  chatList.removeAllViews();ChatSession cs=chatSessions.get(currentChatId);
-  if(cs==null||cs.messages.isEmpty()){setChatActive(false);return;}
-  setChatActive(true);for(ChatMessage m:cs.messages)renderMessage(m.text,m.who,true);
+  chatList.removeAllViews();
+  ArrayList<ChatMessage> messages=new ArrayList<>();
+  synchronized(chatSessions){
+   ChatSession cs=chatSessions.get(currentChatId);
+   if(cs==null||cs.messages.isEmpty()){setChatActive(false);return;}
+   messages.addAll(cs.messages);
+  }
+  setChatActive(true);for(ChatMessage m:messages)renderMessage(m.text,m.who,true);
  }
 
  void openSession(String id){if(!chatSessions.containsKey(id))return;currentChatId=id;renderCurrentSession();refreshSidebar();}
  void deleteSession(String id){
-  chatSessions.remove(id);
-  if(chatSessions.isEmpty()){newChat();return;}
-  ArrayList<ChatSession> list=new ArrayList<>(chatSessions.values());currentChatId=list.get(list.size()-1).id;renderCurrentSession();saveHistory();refreshSidebar();
+  synchronized(chatSessions){chatSessions.remove(id);}
+  boolean empty;
+  synchronized(chatSessions){empty=chatSessions.isEmpty();}
+  if(empty){newChat();return;}
+  ArrayList<ChatSession> list;
+  synchronized(chatSessions){list=new ArrayList<>(chatSessions.values());}
+  currentChatId=list.get(list.size()-1).id;renderCurrentSession();scheduleHistorySave();refreshSidebar();
  }
 
  void refreshSidebar(){
@@ -913,31 +946,55 @@ int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").leng
   return findInstalledMatch(target)==null?0:100;
  }
 
- void chat(String q){
-  final boolean responseEnglish=english;
-  final int requestId=++responseRequestId;
+ void ensureChatLoaded(Runnable done){
+  synchronized(chatLoadWaiters){
+   if(engine.chatLoaded){
+    if(done!=null)done.run();
+    return;
+   }
+   if(done!=null)chatLoadWaiters.add(done);
+   if(chatLoading)return;
+   chatLoading=true;
+  }
+  new Thread(()->{
+   try{
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    engine.loadChat(this);
+   }catch(Exception ex){
+    android.util.Log.e("Avraham","chat engine load failed",ex);
+   }
+
+   ArrayList<Runnable> waiters;
+   synchronized(chatLoadWaiters){
+    chatLoading=false;
+    waiters=new ArrayList<>(chatLoadWaiters);
+    chatLoadWaiters.clear();
+   }
+   for(Runnable r:waiters)try{r.run();}catch(Exception ex){android.util.Log.e("Avraham","chat waiter failed",ex);}
+  },"chat-loader").start();
+ }
+
+ void submitChatResponse(String q,boolean responseEnglish){
   responseExecutor.execute(()->{
    try{
-    if(!engine.chatLoaded){
-     engine.loadChat(this);
-    }
-    // If a newer question arrived while loading, do not spend CPU matching
-    // an obsolete question. The latest request will be processed instead.
-    if(requestId!=responseRequestId)return;
     OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
     runOnUiThread(()->{
-     if(requestId!=responseRequestId)return;
-     if(r==null){fallbackFromChat(q,responseEnglish);}else{
+     if(r==null)fallbackFromChat(q,responseEnglish);else
       addMessage(responseEnglish?r.en:r.he,"assistant");
-     }
     });
    }catch(Exception ex){
     android.util.Log.e("Avraham","response worker failed",ex);
-    runOnUiThread(()->{
-     if(requestId==responseRequestId)addMessage(english?"Sorry, I had a local processing error.":"אירעה שגיאת עיבוד מקומית, אבל האפליקציה ממשיכה לפעול.","assistant");
-    });
+    runOnUiThread(()->addMessage(
+      english?"Sorry, I had a local processing error.":"אירעה שגיאת עיבוד מקומית, אבל האפליקציה ממשיכה לפעול.",
+      "assistant"));
    }
   });
+ }
+
+ void chat(String q){
+  final boolean responseEnglish=english;
+  if(engine.chatLoaded)submitChatResponse(q,responseEnglish);
+  else ensureChatLoaded(()->submitChatResponse(q,responseEnglish));
  }
 
  void fallbackFromChat(String q,boolean responseEnglish){
@@ -1506,6 +1563,10 @@ boolean coreAppTarget(String raw){
 
  @Override protected void onDestroy(){
   responseExecutor.shutdownNow();
+  synchronized(historyExecutor){
+   if(historySaveFuture!=null)historySaveFuture.cancel(false);
+  }
+  historyExecutor.shutdownNow();
   super.onDestroy();
  }
 
