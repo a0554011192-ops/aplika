@@ -38,3 +38,5 @@ Sidebar closed default fix build: 2026-10-07.
 Final icon verification build: 1.ico authoritative.
 
 Authoritative 1.ico APK rebuild trigger.
+
+Final 1.ico icon build trigger v2.
