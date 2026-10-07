@@ -288,8 +288,6 @@ public class MainActivity extends Activity {
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
-  // First use the real launcher registry. This sees the apps the user can actually open,
-  // instead of trusting the static 3,000-row catalog.
   Intent launcher=new Intent(Intent.ACTION_MAIN);
   launcher.addCategory(Intent.CATEGORY_LAUNCHER);
   List<ResolveInfo> launchers=pm.queryIntentActivities(launcher,PackageManager.MATCH_ALL);
@@ -300,49 +298,54 @@ public class MainActivity extends Activity {
    CharSequence label=ri.loadLabel(pm);
    String name=label==null?"":label.toString();
    String pkg=ri.activityInfo.packageName==null?"":ri.activityInfo.packageName;
-   int s=wanted.equals(engine.canonical(name))?100:engine.score(target,name);
-   s=Math.max(s,engine.score(target,pkg.replace('.',' ')));
+   int s=appSpecialScore(wanted,pkg);
+   if(s==0 && wanted.equals(engine.canonical(name)))s=120;
+   if(s==0)s=engine.score(target,name+" "+pkg.replace('.',' '));
    if(s>bs){bs=s;best=ri;bn=name;bp=pkg;}
   }
 
-  // Also try common Android semantic categories, so generic names such as
-  // "גלריה", "נגן", "דפדפן", "מחשבון" and "מייל" work even when the app's
-  // visible label is different from what the user said.
-  if(best==null || bs<18){
-   ResolveInfo semantic=semanticApp(pm,target);
-   if(semantic!=null){
-    CharSequence label=semantic.loadLabel(pm);
-    String name=label==null?"":label.toString();
-    best=semantic;bn=name;bp=semantic.activityInfo.packageName;bs=90;
-   }
+  ResolveInfo semantic=semanticApp(pm,target);
+  if(semantic!=null && (best==null||bs<25)){
+   best=semantic;bp=semantic.activityInfo.packageName;
+   CharSequence label=semantic.loadLabel(pm);bn=label==null?"":label.toString();bs=90;
   }
 
-  if(best!=null && bs>=18){
+  if(best!=null && bs>=10){
    try{
     Intent i=new Intent();
     i.setComponent(new ComponentName(bp,best.activityInfo.name));
     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     startActivity(i);
-    addMessage((english?"Opening ":"פותח ")+(bn.isEmpty()?target:bn),"assistant");
-    return true;
+    addMessage((english?"Opening ":"פותח ")+(bn.isEmpty()?target:bn),"assistant");return true;
    }catch(Exception ignored){}
   }
 
-  // Android file picker is a useful fallback for "סייר קבצים" even when the
-  // device does not expose a normal file-manager launcher.
   String t=OfflineEngine.normalize(target);
-  if(t.contains("סייר קבצים")||t.contains("מנהל קבצים")||t.contains("קבצים")||t.contains("file manager")||t.contains("file explorer")){
+  if(t.contains("קבצים")||t.contains("סייר")||t.contains("file manager")||t.contains("file explorer")||t.equals("files")){
    try{
     Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
     i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     startActivityForResult(i,11);
-    addMessage(english?"Opening the file browser.":"פותח את סייר הקבצים.","assistant");
-    return true;
+    addMessage(english?"Opening the file browser.":"פותח את סייר הקבצים.","assistant");return true;
    }catch(Exception ignored){}
   }
 
   addMessage(english?"I could not find that installed app.":"לא מצאתי את האפליקציה הזו בין האפליקציות המותקנות.","assistant");
   return true;
+ }
+
+ int appSpecialScore(String w,String pkg){
+  String p=pkg==null?"":pkg.toLowerCase(Locale.ROOT);
+  if(w.equals("play store") && p.equals("com.android.vending"))return 150;
+  if(w.equals("google drive") && p.contains("google.android.apps.docs"))return 150;
+  if(w.contains("chrome") && p.equals("com.android.chrome"))return 150;
+  if(w.contains("gmail") && p.equals("com.google.android.gm"))return 150;
+  if((w.equals("google photos")||w.equals("gallery")) && p.contains("google.android.apps.photos"))return 150;
+  if(w.equals("files") && (p.contains("google.android.apps.nbu.files")||p.contains("filemanager")||p.equals("com.google.android.documentsui")))return 140;
+  if(w.equals("clock") && (p.contains("deskclock")||p.contains("clock")))return 140;
+  if(w.equals("calculator") && p.contains("calculator"))return 140;
+  if(w.equals("calendar") && p.contains("calendar"))return 140;
+  return 0;
  }
 
  ResolveInfo semanticApp(PackageManager pm,String target){
