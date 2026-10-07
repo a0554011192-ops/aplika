@@ -25,7 +25,7 @@ final class OfflineEngine {
  final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
 
- volatile boolean chatLoaded=false,commandsLoaded=false;
+ volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false;
 
  OfflineEngine(Context c){
   alias("כרום","chrome");alias("גוגל כרום","google chrome");
@@ -103,6 +103,7 @@ final class OfflineEngine {
     }
    }
   }catch(Exception ignored){}
+  appsLoaded=true;
  }
 
 
