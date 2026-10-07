@@ -175,6 +175,11 @@ public class MainActivity extends Activity {
 
  boolean direct(String q){
   String x=norm(q);
+  if(hasAny(x,"פתח הגדרות","תפתח הגדרות","פתח את ההגדרות","תפתח את ההגדרות","היכנס להגדרות","open settings","settings") &&
+     !hasAny(x,"הגדרות התראות","התראות אפליקציה","notification settings","wifi","wi-fi","רשת אלחוטית","bluetooth","בלוטוס","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","מסך","תצוגה","display","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast")){
+   try{startActivity(new Intent(android.provider.Settings.ACTION_SETTINGS));addMessage(english?"Opening Android settings.":"פותח את הגדרות Android.","assistant");}catch(Exception e){addMessage(english?"Could not open Android settings.":"לא הצלחתי לפתוח את הגדרות Android.","assistant");}
+   return true;
+  }
   if(hasAny(x,"בטל השתקה","unmute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);addMessage(english?"Media unmuted.":"ההשתקה בוטלה.","assistant");return true;}
   if(hasAny(x,"השתק","השתקה","שקט","mute")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_MUTE,0);addMessage(english?"Media muted.":"השמע הושתק.","assistant");return true;}
   if(hasAny(x,"תגביה","תגביהה","הגבהה","תגביר","תעלה","תרים","הגבר","volume up","increase volume","louder")){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,0);addMessage(english?"Volume increased.":"עוצמת השמע הוגברה.","assistant");return true;}
