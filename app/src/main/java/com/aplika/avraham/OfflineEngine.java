@@ -149,15 +149,19 @@ final class OfflineEngine {
       indexAction(a.he,a);indexAction(a.en,a);
       for(String t:a.triggers)indexAction(t,a);
      }catch(Exception ignored){}
-    }else if(type==2&&p.length>=4){
-     String responseKey=normalize(p[1])+"\\u0000"+normalize(p[2])+"\\u0000"+normalize(p[3]);
-     // The catalog intentionally keeps stable numeric IDs, but several blocks
-     // are byte-for-byte duplicates apart from that ID. Do not load the same
-     // response five times into the matcher.
-     if(!loadedResponseKeys.add(responseKey))continue;
-     Resp rr=new Resp(p[1],p[2],p[3].split("\\|",-1));
-     responses.add(rr);
-     for(String t:rr.triggers)indexResponse(t,rr);
+    }else if(type==2){
+     int a=l.indexOf('\\t'), b=a<0?-1:l.indexOf('\\t',a+1), d=b<0?-1:l.indexOf('\\t',b+1);
+     if(d>0){
+      int idStart=a+1, heStart=b<0?0:a+1, enStart=b+1, trStart=d+1;
+      String he=l.substring(heStart,enStart-1);
+      String en=l.substring(enStart,d);
+      String tr=l.substring(trStart);
+      String responseKey=normalize(he)+"\\u0000"+normalize(en)+"\\u0000"+normalize(tr);
+      if(!loadedResponseKeys.add(responseKey))continue;
+      Resp rr=new Resp(he,en,tr.split("\\|",-1));
+      responses.add(rr);
+      for(String t:rr.triggers)indexResponse(t,rr);
+     }
     }else if(type==3&&p.length>=3){
      synonyms.put(normalize(p[1]),normalize(p[2]));
     }
