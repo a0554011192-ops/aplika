@@ -375,6 +375,9 @@ public class MainActivity extends Activity {
  }
 
  void process(String q){
+  // Resolve deterministic Android commands before the large offline catalogs.
+  // This prevents a known system command from being mistaken for ordinary chat.
+  if(coreAndroidCommand(q))return;
   if(direct(q))return;
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
@@ -446,10 +449,146 @@ public class MainActivity extends Activity {
   addMessage(english?r.en:r.he,"assistant");
  }
 
+ boolean coreAndroidCommand(String q){
+  String x=norm(q);
+  if(x.isEmpty())return false;
+
+  // Current time is an answer, not an app/settings command.
+  if(hasAny(x,"מה השעה","מה השעה עכשיו","השעה","מה הזמן","what time is it","what's the time","current time")){
+   String time=new java.text.SimpleDateFormat("HH:mm",java.util.Locale.getDefault()).format(new java.util.Date());
+   addMessage(english?"The time is "+time+".":"השעה עכשיו "+time+".","assistant");
+   return true;
+  }
+
+  // Android Home must work with both "מסך בית" and "מסך הבית".
+  if(hasAny(x,"מסך בית","מסך הבית","דף בית","דף הבית","בית","home") &&
+     (!hasAny(x,"הגדרות","settings") || isHomeCommand(x))){
+   if(global(AccessibilityService.GLOBAL_ACTION_HOME)){
+    addMessage(english?"Home.":"מסך הבית.","assistant");return true;
+   }
+   try{
+    Intent home=new Intent(Intent.ACTION_MAIN);
+    home.addCategory(Intent.CATEGORY_HOME);
+    home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(home);
+    addMessage(english?"Home.":"מסך הבית.","assistant");
+    return true;
+   }catch(Exception ignored){}
+  }
+
+  // Core apps are resolved directly from Android roles/package names before
+  // the 4,000-entry catalog. This is device-first and does not depend on a
+  // particular manufacturer or a particular app being in the catalog.
+  if(openRequest(x)){
+   String target=targetOf(x);
+   if(coreAppTarget(target))return true;
+  }
+  if(appNameOnlyRequestCore(x)){
+   if(coreAppTarget(x))return true;
+  }
+  return false;
+ }
+
+ boolean appNameOnlyRequestCore(String q){
+  String x=norm(q);
+  if(x.isEmpty() || tokenCount(x)>5)return false;
+  return hasAny(x,"מחשבון","calculator","שעון","clock","סייר קבצים","מנהל קבצים",
+    "סייר הקבצים","קבצים","files","file manager","file explorer","גלריה","gallery",
+    "מצלמה","camera","יומן","לוח שנה","calendar","טלפון","phone","חייגן","dialer",
+    "הודעות","messages","אנשי קשר","contacts","דפדפן","browser","אינטרנט","browser",
+    "מפות","maps","חנות","חנות play","google play","play store");
+ }
+
+ boolean coreAppTarget(String raw){
+  String w=OfflineEngine.normalize(engine.canonical(raw));
+  PackageManager pm=getPackageManager();
+  if(w.isEmpty())return false;
+
+  // Exact well-known package mappings first.
+  String[] packages=null;
+  if(w.equals("chrome")||w.equals("google chrome"))packages=new String[]{"com.android.chrome"};
+  else if(w.equals("calculator"))packages=new String[]{"com.google.android.calculator","com.android.calculator2"};
+  else if(w.equals("play store")||w.equals("google play"))packages=new String[]{"com.android.vending"};
+  else if(w.equals("google drive"))packages=new String[]{"com.google.android.apps.docs"};
+  else if(w.equals("gmail"))packages=new String[]{"com.google.android.gm"};
+  else if(w.equals("google maps")||w.equals("maps"))packages=new String[]{"com.google.android.apps.maps"};
+  else if(w.equals("youtube"))packages=new String[]{"com.google.android.youtube"};
+  else if(w.equals("google photos"))packages=new String[]{"com.google.android.apps.photos"};
+  else if(w.equals("whatsapp"))packages=new String[]{"com.whatsapp"};
+  else if(w.equals("telegram"))packages=new String[]{"org.telegram.messenger"};
+  else if(w.equals("spotify"))packages=new String[]{"com.spotify.music"};
+
+  if(packages!=null){
+   for(String pkg:packages)if(launchPackage(pkg,raw))return true;
+  }
+
+  // Android role/category resolution is more reliable than hard-coded vendor
+  // package names for Calculator, Files, Gallery, Browser, Calendar, etc.
+  String category=null;
+  if(w.equals("calculator"))category=Intent.CATEGORY_APP_CALCULATOR;
+  else if(w.equals("files"))category=Intent.CATEGORY_APP_FILES;
+  else if(w.equals("gallery"))category=Intent.CATEGORY_APP_GALLERY;
+  else if(w.equals("browser"))category=Intent.CATEGORY_APP_BROWSER;
+  else if(w.equals("calendar"))category=Intent.CATEGORY_APP_CALENDAR;
+  else if(w.equals("contacts"))category=Intent.CATEGORY_APP_CONTACTS;
+  else if(w.equals("email"))category=Intent.CATEGORY_APP_EMAIL;
+  else if(w.equals("maps"))category=Intent.CATEGORY_APP_MAPS;
+  else if(w.equals("messages"))category=Intent.CATEGORY_APP_MESSAGING;
+  else if(w.equals("music"))category=Intent.CATEGORY_APP_MUSIC;
+
+  if(category!=null){
+   try{
+    Intent selector=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,category);
+    List<ResolveInfo> rs=pm.queryIntentActivities(selector,PackageManager.MATCH_ALL);
+    if(!rs.isEmpty()){
+     ResolveInfo ri=rs.get(0);
+     Intent launch=new Intent();
+     launch.setComponent(new ComponentName(ri.activityInfo.packageName,ri.activityInfo.name));
+     launch.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+     startActivity(launch);
+     addMessage((english?"Opening ":"פותח ")+raw,"assistant");
+     return true;
+    }
+   }catch(Exception ignored){}
+  }
+
+  // Clock apps are not represented by one universal Android CATEGORY.
+  if(w.equals("clock")){
+   try{
+    Intent alarms=new Intent("android.intent.action.SHOW_ALARMS");
+    alarms.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    if(pm.resolveActivity(alarms,PackageManager.MATCH_ALL)!=null){
+     startActivity(alarms);
+     addMessage((english?"Opening ":"פותח ")+raw,"assistant");
+     return true;
+    }
+   }catch(Exception ignored){}
+   for(AppRow row:installedApps){
+    String z=OfflineEngine.normalize(row.label+" "+row.packageName);
+    if(z.contains("clock")||z.contains("שעון")||z.contains("deskclock")){
+     if(launchPackage(row.packageName,raw))return true;
+    }
+   }
+  }
+
+  // Files: if the OEM exposes no dedicated Files app, use Android's built-in
+  // document tree so "סייר קבצים" still performs a real file-browsing action.
+  if(w.equals("files")){
+   try{
+    Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+    i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    startActivityForResult(i,11);
+    addMessage(english?"Opening the file browser.":"פותח את סייר הקבצים.","assistant");
+    return true;
+   }catch(Exception ignored){}
+  }
+  return false;
+ }
+
  boolean isHomeCommand(String q){
   String x=norm(q);
-  if(x.equals("בית")||x.equals("מסך הבית")||x.equals("דף הבית")||x.equals("home"))return true;
-  return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך הבית|דף הבית|home)$");
+  if(x.equals("בית")||x.equals("מסך בית")||x.equals("מסך הבית")||x.equals("דף בית")||x.equals("דף הבית")||x.equals("home"))return true;
+  return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$");
  }
 
  boolean media(int k){
