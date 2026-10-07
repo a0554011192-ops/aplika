@@ -238,7 +238,7 @@ public class MainActivity extends Activity {
 
   LinearLayout actions=new LinearLayout(this);
   Button roles=softButton("בדיקת Android");roles.setOnClickListener(v->showAndroidRoles());
-  Button refresh=softButton("רענן");refresh.setOnClickListener(v->{loadInstalledApps();count.setText("נטענו "+installedApps.size()+" אפליקציות מהמכשיר");});
+  Button refresh=softButton("רענן");refresh.setOnClickListener(v->{refresh.setEnabled(false);new Thread(()->{loadInstalledApps();runOnUiThread(()->{count.setText("נטענו "+installedApps.size()+" אפליקציות מהמכשיר");adapter.reload(installedApps);refresh.setEnabled(true);});},"installed-app-refresh").start();});
   actions.addView(roles,new LinearLayout.LayoutParams(0,44,1));
   LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(0,44,1);rp.setMargins(8,0,0,0);actions.addView(refresh,rp);
   box.addView(actions);
@@ -286,6 +286,7 @@ public class MainActivity extends Activity {
    item.setOnClickListener(v->showAliasEditor(row));
    return item;
   }
+   void reload(ArrayList<AppRow> a){all=new ArrayList<>(a);filter("");}
   void filter(String q){
    String x=OfflineEngine.normalize(q);shown.clear();
    if(x.isEmpty())shown.addAll(all);
@@ -521,8 +522,7 @@ public class MainActivity extends Activity {
   }
 
   // Android Home must work with both "מסך בית" and "מסך הבית".
-  if(hasAny(x,"מסך בית","מסך הבית","דף בית","דף הבית","בית","home") &&
-     (!hasAny(x,"הגדרות","settings") || isHomeCommand(x))){
+  if(isHomeCommand(x)){
    if(global(AccessibilityService.GLOBAL_ACTION_HOME)){
     addMessage(english?"Home.":"מסך הבית.","assistant");return true;
    }
@@ -648,16 +648,43 @@ public class MainActivity extends Activity {
  boolean isHomeCommand(String q){
   String x=norm(q);
   if(x.equals("בית")||x.equals("מסך בית")||x.equals("מסך הבית")||x.equals("דף בית")||x.equals("דף הבית")||x.equals("home"))return true;
-  return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$");
+  return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$")
+    || x.matches("^(חזור|תחזור|חזור ל|עבור|עבור ל|עבור אל|תעביר אותי ל|תעביר אותי אל) (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$")
+    || x.equals("חזור הביתה") || x.equals("חזרה למסך הבית") || x.equals("עבור למסך הבית");
  }
 
- boolean quickToggle(String... labels){try{return ShortcutService.toggleQuickSetting(labels);}catch(Exception e){return false;}}
- boolean openSetting(String action,String ok){try{Intent i=new Intent(action);if(i.resolveActivity(getPackageManager())==null)return false;startActivity(i);addMessage(ok,"assistant");return true;}catch(Exception e){return false;}}
+ boolean openSetting(String action,String ok){
+  try{Intent i=new Intent(action);if(i.resolveActivity(getPackageManager())==null)return false;startActivity(i);addMessage(ok,"assistant");return true;}catch(Exception e){return false;}
+ }
+ boolean quickToggleVerified(final boolean on,final String successMessage,final String failureAction,final String failureMessage,final String... labels){
+  try{
+   return ShortcutService.toggleQuickSetting(
+    ()->addMessage(successMessage,"assistant"),
+    ()->{if(!openSetting(failureAction,failureMessage))addMessage("לא הצלחתי לבצע את פעולת המערכת.","assistant");},
+    labels);
+  }catch(Exception e){return false;}
+ }
  boolean systemToggle(String q){
-  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","שים","עבור למצב","תעביר אותי למצב","תעביר אותי למצב טיסה","שים במצב טיסה","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
-  if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){if(quickToggle("bluetooth","בלוטוס","בלוטות")){addMessage(on?"הבלוטוס הופעל.":"הבלוטוס כובה.","assistant");return true;}if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}if(openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס."))return true;}
-  if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){if(quickToggle("wifi","wi-fi","wi fi","ויפי","וויפיי","וייפיי")){addMessage(on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_WIFI_SETTINGS,"פתחתי את הגדרות ה־Wi‑Fi."))return true;}
-  if(hasAny(x,"מצב טיסה","airplane")){if(quickToggle("airplane","airplane mode","מצב טיסה")){addMessage(on?"מצב טיסה הופעל.":"מצב טיסה כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה."))return true;}
+  String x=norm(q);
+  boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","שים","עבור למצב","תעביר אותי למצב","תעביר אותי למצב טיסה","שים במצב טיסה","turn on","enable");
+  boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");
+  if(!on&&!off)return false;
+  if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){
+   String ok=on?"הבלוטוס הופעל.":"הבלוטוס כובה.";
+   if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"לא הצלחתי לשנות את הבלוטוס. פתחתי את הגדרות הבלוטוס.","bluetooth","בלוטוס","בלוטות"))return true;
+   if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}
+   return openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס.");
+  }
+  if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){
+   String ok=on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.";
+   if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_WIFI_SETTINGS,"לא הצלחתי לשנות את ה־Wi‑Fi. פתחתי את הגדרות ה־Wi‑Fi.","wifi","wi fi","ויפי","וויפיי","וייפיי","internet","אינטרנט"))return true;
+   return openSetting(android.provider.Settings.ACTION_WIFI_SETTINGS,"פתחתי את הגדרות ה־Wi‑Fi.");
+  }
+  if(hasAny(x,"מצב טיסה","airplane")){
+   String ok=on?"מצב טיסה הופעל.":"מצב טיסה כובה.";
+   if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"לא הצלחתי לשנות את מצב הטיסה. פתחתי את ההגדרות.","airplane","airplane mode","מצב טיסה"))return true;
+   return openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה.");
+  }
   return false;
  }
 
