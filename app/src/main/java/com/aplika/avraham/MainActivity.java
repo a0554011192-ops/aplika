@@ -277,7 +277,7 @@ public class MainActivity extends Activity {
    TextView name=label(row.label,15,TEXT);name.setTypeface(Typeface.DEFAULT,Typeface.BOLD);texts.addView(name);
    String a=userAliases(row.packageName);
    String sub=row.packageName+(row.launchable?"":" • ללא מסך פתיחה");
-   if(!a.isEmpty())sub+="\nכינוי: "+a.replace("|"," , ");
+   if(!a.isEmpty())sub+="\nפקודה: "+a.replace("|"," , ");
    TextView pkg=label(sub,11,MUTED);pkg.setPadding(0,4,0,0);texts.addView(pkg);
    item.addView(texts,new LinearLayout.LayoutParams(0,-2,1));
    Button edit=softButton(a.isEmpty()?"פקודה":"ערוך");edit.setTextSize(12);
@@ -305,7 +305,7 @@ public class MainActivity extends Activity {
   alias.setPadding(14,10,14,10);box.addView(alias,new LinearLayout.LayoutParams(-1,70));
   new AlertDialog.Builder(this).setTitle("יצירת פקודה").setView(box)
    .setPositiveButton("שמור", (d,w)->{saveAliases(row,alias.getText().toString());})
-   .setNeutralButton("מחק כינוי", (d,w)->{aliasPrefs.edit().remove(row.packageName).apply();})
+    .setNeutralButton("מחק פקודה", (d,w)->{aliasPrefs.edit().remove(row.packageName).apply();})
    .setNegativeButton("ביטול",null).show();
  }
 
