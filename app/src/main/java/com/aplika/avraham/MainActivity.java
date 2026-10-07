@@ -73,6 +73,7 @@ public class MainActivity extends Activity {
    try{
     android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
     engine.loadChat(this);
+    engine.loadCommands(this);
    }catch(Exception ignored){}
   },"response-warmup").start();
  }
