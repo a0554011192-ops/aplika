@@ -200,7 +200,7 @@ public class MainActivity extends Activity {
    for(String a:raw.split("\\|")){
     String x=OfflineEngine.normalize(a);
     if(x.isEmpty())continue;
-    if(q.equals(x)||engine.score(q,x)>=35)return e.getKey();
+    if(q.equals(x)||engine.score(q,x)>=55)return e.getKey();
    }
   }
   return null;
@@ -220,9 +220,32 @@ public class MainActivity extends Activity {
   LinkedHashSet<String> set=new LinkedHashSet<>();
   for(String a:clean.split("[,;|\\n]+")){
    String x=OfflineEngine.normalize(a);
-   if(!x.isEmpty()){set.add(x);String y=cleanUserCommand(x);if(!y.isEmpty())set.add(y);}
+   if(!x.isEmpty()){
+    set.add(x);
+    String y=cleanUserCommand(x);if(!y.isEmpty())set.add(y);
+    removeCommandFromOtherApps(x,row.packageName);
+    if(!y.isEmpty())removeCommandFromOtherApps(y,row.packageName);
+   }
   }
   aliasPrefs.edit().putString(row.packageName,String.join("|",set)).apply();
+ }
+ void removeCommandFromOtherApps(String command,String keepPackage){
+  if(aliasPrefs==null)return;
+  String q=OfflineEngine.normalize(command);
+  if(q.isEmpty())return;
+  SharedPreferences.Editor editor=aliasPrefs.edit();
+  boolean changed=false;
+  for(Map.Entry<String,?> e:aliasPrefs.getAll().entrySet()){
+   if(e.getKey().equals(keepPackage)||!(e.getValue() instanceof String))continue;
+   LinkedHashSet<String> keep=new LinkedHashSet<>();
+   for(String a:((String)e.getValue()).split("\\|")){
+    String x=OfflineEngine.normalize(a);
+    if(!x.equals(q))keep.add(x);
+    else changed=true;
+   }
+   if(changed)editor.putString(e.getKey(),String.join("|",keep));
+  }
+  if(changed)editor.apply();
  }
 
  void showAppManager(){
@@ -378,6 +401,11 @@ public class MainActivity extends Activity {
 
  String norm(String s){return OfflineEngine.normalize(s);}
  boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
+ boolean hasWordOrPhrase(String q,String term){
+  String n=norm(q),t=norm(term);if(n.isEmpty()||t.isEmpty())return false;
+  return n.equals(t)||n.startsWith(t+" ")||n.endsWith(" "+t)||n.contains(" "+t+" ");
+ }
+ boolean hasAnyWordOrPhrase(String q,String...terms){for(String t:terms)if(hasWordOrPhrase(q,t))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
  boolean actionRequest(String q){
   String x=norm(q);
@@ -397,7 +425,7 @@ public class MainActivity extends Activity {
  }
  boolean settingsRequest(String q){
   String x=norm(q);
-  if(!hasAny(x,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast","sound","שמע"))return false;
+  if(!hasAnyWordOrPhrase(x,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast","sound","שמע"))return false;
   if(openRequest(q)||actionRequest(q))return true;
   return x.equals("wifi")||x.equals("wi fi")||x.equals("ויפי")||x.equals("וויפיי")||x.equals("וייפיי")||
          x.equals("bluetooth")||x.equals("בלוטוס")||x.equals("בלוטות")||x.equals("מצב טיסה")||
@@ -435,7 +463,7 @@ public class MainActivity extends Activity {
 
   // Core Android apps and common aliases. These are intentional exact/phrase
   // matches so ordinary chat sentences are not accidentally treated as apps.
-  if(hasAny(x,
+  if(hasAnyWordOrPhrase(x,
     "מחשבון","calculator","שעון","clock","דרייב","google drive",
     "גוגל פליי","גוגל פלי","google play","play store","חנות","חנות play",
     "סייר קבצים","מנהל קבצים","קבצים","files","file manager","file explorer",
@@ -515,7 +543,7 @@ public class MainActivity extends Activity {
   if(x.isEmpty())return false;
 
   // Current time is an answer, not an app/settings command.
-  if(hasAny(x,"מה השעה","מה השעה עכשיו","השעה","מה הזמן","what time is it","what's the time","current time")){
+  if(hasAnyWordOrPhrase(x,"מה השעה","מה השעה עכשיו","מה הזמן","what time is it","what's the time","current time")||x.equals("השעה")){
    String time=new java.text.SimpleDateFormat("HH:mm",java.util.Locale.getDefault()).format(new java.util.Date());
    addMessage(english?"The time is "+time+".":"השעה עכשיו "+time+".","assistant");
    return true;
