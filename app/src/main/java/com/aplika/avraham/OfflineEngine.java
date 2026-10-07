@@ -123,7 +123,7 @@ final class OfflineEngine {
  }
  // Load the app catalog only as a compact alias table. Launching still uses the
  // real PackageManager list, so a catalog entry can never invent an installed app.
- synchronized boolean isKnownAppAlias(String s){
+ boolean isKnownAppAlias(String s){
   String x=normalize(s);
   if(x.isEmpty())return false;
   if(commonAliases.containsKey(x))return true;
@@ -147,7 +147,11 @@ final class OfflineEngine {
      }
     }
    }
-  }catch(Exception ignored){appsLoaded=false;return;}
+  }catch(Exception ex){
+   appsLoaded=false;
+   android.util.Log.e("Avraham","Failed to load app catalog",ex);
+   return;
+  }
   appsLoaded=true;
  }
 
