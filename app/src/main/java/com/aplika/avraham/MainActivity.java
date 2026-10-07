@@ -312,7 +312,7 @@ public class MainActivity extends Activity {
       List<ResolveInfo> rs=pm.queryIntentActivities(in,PackageManager.MATCH_ALL);
       if(!rs.isEmpty())found=labelOf(rs.get(0));
      }else if(i==13){
-      List<ResolveInfo> rs=pm.queryIntentActivities(new Intent(Intent.ACTION_IMAGE_CAPTURE),PackageManager.MATCH_ALL);
+      List<ResolveInfo> rs=pm.queryIntentActivities(new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE),PackageManager.MATCH_ALL);
       if(!rs.isEmpty())found=labelOf(rs.get(0));
      }else if(i==14){
       List<ResolveInfo> rs=pm.queryIntentActivities(new Intent(Intent.ACTION_DIAL),PackageManager.MATCH_ALL);
