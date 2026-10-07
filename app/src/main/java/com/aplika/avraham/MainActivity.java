@@ -36,6 +36,8 @@ public class MainActivity extends Activity {
   return t;
  });
  volatile int responseRequestId=0;
+ volatile Map<String,AppRow> installedExactIndex=Collections.emptyMap();
+ volatile Map<String,ArrayList<AppRow>> installedTokenIndex=Collections.emptyMap();
 
  final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
  final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
@@ -48,17 +50,13 @@ public class MainActivity extends Activity {
   engine=new OfflineEngine(this);
   aliasPrefs=getSharedPreferences("app_aliases",MODE_PRIVATE);
   buildChatUi();
-  new Thread(()->loadInstalledApps(),"installed-app-loader").start();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
   status.setText("טוען מאגר מקומי...");
   new Thread(()->{
    engine.loadChat(this);
    runOnUiThread(()->status.setText("אופליין • מוכן"));
   },"response-catalog-loader").start();
-  new Thread(()->{
-   engine.loadCommands(this);
-   engine.loadApps(this);
-  },"device-catalog-loader").start();
+  // App/action catalogs are lazy-loaded only when a command actually needs them.
  }
 
  TextView label(String s,float size,int color){
@@ -180,8 +178,80 @@ public class MainActivity extends Activity {
       (ai.flags & ApplicationInfo.FLAG_SYSTEM)!=0,launcherActivities.containsKey(pkg)));
    }
    Collections.sort(out,(a,b)->a.label.compareToIgnoreCase(b.label));
-   installedApps=out;installedAppsLoaded=true;
+
+   HashMap<String,AppRow> exact=new HashMap<>();
+   HashMap<String,ArrayList<AppRow>> tokens=new HashMap<>();
+   for(AppRow row:out){
+    if(!row.launchable)continue;
+    String nl=OfflineEngine.normalize(row.label);
+    String np=OfflineEngine.normalize(row.packageName);
+    addInstalledExact(exact,nl,row);
+    addInstalledExact(exact,np,row);
+    String canon=OfflineEngine.normalize(engine.canonical(nl));
+    addInstalledExact(exact,canon,row);
+    for(String tok:(nl+" "+np).split("\\s+")){
+     if(tok.length()<2)continue;
+     ArrayList<AppRow> list=tokens.get(tok);
+     if(list==null){list=new ArrayList<>();tokens.put(tok,list);}
+     if(list.size()<24&&!list.contains(row))list.add(row);
+    }
+   }
+   installedExactIndex=exact;
+   installedTokenIndex=tokens;
+   installedApps=out;
+   installedAppsLoaded=true;
   }catch(Exception ignored){}
+ }
+
+ void addInstalledExact(HashMap<String,AppRow> index,String key,AppRow row){
+  if(key==null||key.isEmpty())return;
+  if(!index.containsKey(key))index.put(key,row);
+ }
+
+ AppRow findInstalledMatch(String target){
+  String q=OfflineEngine.normalize(target);
+  if(q.isEmpty())return null;
+
+  AppRow exact=installedExactIndex.get(q);
+  if(exact!=null)return exact;
+
+  String canonical=OfflineEngine.normalize(engine.canonical(q));
+  if(!canonical.equals(q)){
+   exact=installedExactIndex.get(canonical);
+   if(exact!=null)return exact;
+  }
+
+  LinkedHashSet<AppRow> candidates=new LinkedHashSet<>();
+  for(String tok:q.split("\\s+")){
+   if(tok.length()<2)continue;
+   ArrayList<AppRow> list=installedTokenIndex.get(tok);
+   if(list!=null)for(AppRow row:list){
+    candidates.add(row);
+    if(candidates.size()>=32)break;
+   }
+   if(candidates.size()>=32)break;
+  }
+
+  AppRow best=null;int bestScore=0;
+  for(AppRow row:candidates){
+   String label=OfflineEngine.normalize(row.label);
+   String pkg=OfflineEngine.normalize(row.packageName);
+   int s=0;
+   if(q.equals(label)||q.equals(pkg))s=120;
+   else if(canonical.equals(label)||canonical.equals(pkg))s=115;
+   else if(label.startsWith(q)||pkg.startsWith(q))s=90;
+   else if(q.length()>=3&&(label.contains(q)||pkg.contains(q)))s=75;
+   else {
+    int hits=0;
+    for(String tok:q.split("\\s+")){
+     if(tok.length()<2)continue;
+     if(label.contains(tok)||pkg.contains(tok))hits++;
+    }
+    s=hits*22;
+   }
+   if(s>bestScore){bestScore=s;best=row;}
+  }
+  return bestScore>=22?best:null;
  }
 
  void ensureInstalledApps(Runnable done){
@@ -489,10 +559,8 @@ public class MainActivity extends Activity {
 
  boolean appNameOnlyRequest(String q){
   String x=norm(q);
-  if(x.isEmpty())return false;
+  if(x.isEmpty()||tokenCount(x)>6)return false;
 
-  // Core Android apps and common aliases. These are intentional exact/phrase
-  // matches so ordinary chat sentences are not accidentally treated as apps.
   if(hasAnyWordOrPhrase(x,
     "מחשבון","calculator","שעון","clock","דרייב","google drive",
     "גוגל פליי","גוגל פלי","google play","play store","חנות","חנות play",
@@ -508,47 +576,30 @@ public class MainActivity extends Activity {
    return true;
   }
 
-  // Never parse the 4,000-row app catalog on the UI thread.
-  // It is prepared in the background during startup.
-  if(findCustomCommandPackage(x)!=null)return true;
-  if(findUserAliasPackage(x)!=null)return true;
+  if(findCustomCommandPackage(x)!=null||findUserAliasPackage(x)!=null)return true;
+
+  // Do not touch the 4,000-entry catalog for ordinary text. First use the
+  // tiny installed-app index; the big catalog is only a final fallback.
+  if(!installedAppsLoaded){
+   ensureInstalledApps(()->process(q));
+   return true;
+  }
+  if(findInstalledMatch(x)!=null)return true;
+
   if(!engine.appsLoaded){
    new Thread(()->{
     engine.loadApps(this);
     runOnUiThread(()->process(q));
-   },"app-catalog-loader").start();
-   addMessage(english?"Loading the app catalog...":"טוען את מאגר האפליקציות...","assistant");
+   },"lazy-app-catalog-loader").start();
    return true;
   }
-  if(engine.isKnownAppAlias(x))return true;
-
-  // Any short phrase that exactly/closely matches a currently installed app
-  // is also considered an app command, even when it isn't in the offline catalog.
-  if(installedAppsLoaded && tokenCount(x)<=6){
-   return bestInstalledScore(x)>=45;
-  }
-  return false;
+  return engine.isKnownAppAlias(x);
  }
 
  int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
 
  int bestInstalledScore(String target){
-  String q=OfflineEngine.normalize(target);
-  if(q.isEmpty())return 0;
-  String canonicalQ=engine.canonical(q);
-  int best=0;
-  for(AppRow row:installedApps){
-   String nl=OfflineEngine.normalize(row.label);
-   String np=OfflineEngine.normalize(row.packageName);
-   if(q.equals(nl)||q.equals(np))return 120;
-   if(!canonicalQ.isEmpty()&&canonicalQ.equals(engine.canonical(nl)))return 120;
-   if(q.length()>=3){
-    if(nl.contains(q)||np.contains(q))best=Math.max(best,80);
-    else if(canonicalQ.length()>=3&&(nl.contains(canonicalQ)||np.contains(canonicalQ)))best=Math.max(best,70);
-   }
-   if(best>=80)return best;
-  }
-  return best;
+  return findInstalledMatch(target)==null?0:100;
  }
 
  void chat(String q){
@@ -957,18 +1008,19 @@ public class MainActivity extends Activity {
   // Deterministic mappings for common apps/Android components.
   if(launchKnownApp(target))return true;
 
-  AppRow best=null;int bestScore=0;
-  for(AppRow row:installedApps){
-   int s=appSpecialScore(wanted,row.packageName);
-   if(s==0 && wanted.equals(engine.canonical(row.label)))s=120;
-   String hay=row.label+" "+row.packageName.replace('.',' ');
-   s=Math.max(s,engine.score(target,hay));
-   s=Math.max(s,engine.score(wanted,hay));
-   if(s>bestScore){bestScore=s;best=row;}
-  }
+  // Tiny installed-app search: exact lookup first, then at most 32
+  // token candidates. Never score the entire installed-app list.
+  AppRow best=findInstalledMatch(wanted);
+  if(best!=null && launchPackage(best.packageName,target))return true;
 
-  if(best!=null && bestScore>=18){
-   if(launchPackage(best.packageName,target))return true;
+  // Only after the tiny search fails, allow the 4,000-name catalog as a
+  // one-time fallback. This path is off the UI thread and runs at most once.
+  if(!engine.appsLoaded){
+   new Thread(()->{
+    engine.loadApps(this);
+    runOnUiThread(()->openThing(q));
+   },"lazy-app-catalog-open").start();
+   return true;
   }
 
   ResolveInfo semantic=semanticApp(pm,target);
@@ -1000,14 +1052,8 @@ public class MainActivity extends Activity {
   String q=OfflineEngine.normalize(target);
   if(q.isEmpty())return false;
   if(!installedAppsLoaded)loadInstalledApps();
-  AppRow best=null;int bestScore=0;
-  for(AppRow row:installedApps){
-   int score=engine.score(q,row.label+" "+row.packageName.replace('.',' '));
-   String aliases=userAliases(row.packageName);
-   if(!aliases.isEmpty())score=Math.max(score,engine.score(q,aliases)+25);
-   if(score>bestScore){bestScore=score;best=row;}
-  }
-  return best!=null&&bestScore>=35&&launchPackage(best.packageName,target);
+  AppRow best=findInstalledMatch(q);
+  return best!=null&&launchPackage(best.packageName,target);
  }
 
  boolean launchPackage(String pkg,String spoken){
