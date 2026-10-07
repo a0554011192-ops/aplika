@@ -227,10 +227,180 @@ public class MainActivity extends Activity {
   process(q);
  }
 
+ void addMessage(String text,String who){
+  if(Looper.myLooper()!=Looper.getMainLooper()){runOnUiThread(()->addMessage(text,who));return;}
+  boolean user="user".equals(who);
+  if(user&&!isActiveChat())setChatActive(true);
+  renderMessage(text,who,true);
+  ChatSession cs=chatSessions.get(currentChatId);
+  if(cs!=null){
+   cs.messages.add(new ChatMessage(text,who));
+   if(user&&("שיחה חדשה".equals(cs.title)||cs.title.trim().isEmpty())){
+    String t=text.replaceAll("\\s+"," ").trim();cs.title=t.length()>28?t.substring(0,28)+"…":t;
+   }
+   saveHistory();refreshSidebar();
+  }
+ }
+
+ void renderMessage(String text,String who,boolean actions){
+  boolean user="user".equals(who);
+  LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.VERTICAL);row.setGravity(user?Gravity.RIGHT:Gravity.LEFT);row.setPadding(dp(8),dp(4),dp(8),dp(4));
+  TextView b=bubble(text,user);
+  LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-2,-2);bp.setMargins(user?dp(52):dp(8),dp(1),user?dp(8):dp(52),dp(1));row.addView(b,bp);
+  if(actions){
+   LinearLayout tools=new LinearLayout(this);tools.setGravity(user?Gravity.RIGHT:Gravity.LEFT);
+   Button copy=miniAction("העתק");copy.setOnClickListener(v->{
+    android.content.ClipboardManager cm=(android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+    cm.setPrimaryClip(android.content.ClipData.newPlainText("message",text));Toast.makeText(this,"הועתק",Toast.LENGTH_SHORT).show();
+   });
+   Button again=miniAction("שוב");again.setOnClickListener(v->replayMessage(text,user));
+   tools.addView(copy);tools.addView(again);
+   LinearLayout.LayoutParams tp=new LinearLayout.LayoutParams(-2,dp(32));tp.setMargins(user?dp(52):dp(8),0,user?dp(8):dp(52),0);row.addView(tools,tp);
+  }
+  chatList.addView(row,new LinearLayout.LayoutParams(-1,-2));chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
+ }
+
+ Button miniAction(String s){Button b=softButton(s);b.setTextSize(11);b.setMinHeight(dp(28));b.setPadding(dp(12),0,dp(12),0);b.setBackground(shape(Color.TRANSPARENT,12,0));return b;}
+ boolean isActiveChat(){return welcomePanel!=null&&welcomePanel.getVisibility()!=View.VISIBLE;}
+
+ void replayMessage(String text,boolean wasUser){
+  String q=wasUser?text:lastUserMessage();if(q==null||q.trim().isEmpty())return;
+  input.setText(q);input.setSelection(input.length());sendCurrent();
+ }
+
+ String lastUserMessage(){
+  ChatSession cs=chatSessions.get(currentChatId);if(cs==null)return null;
+  for(int i=cs.messages.size()-1;i>=0;i--)if("user".equals(cs.messages.get(i).who))return cs.messages.get(i).text;
+  return null;
+ }
+
+ void setChatActive(boolean active){
+  if(active){welcomePanel.setVisibility(View.GONE);chatScroll.setVisibility(View.VISIBLE);moveComposerToMain();}
+  else{chatScroll.setVisibility(View.GONE);welcomePanel.setVisibility(View.VISIBLE);moveComposerToWelcome();}
+ }
+
+ void moveComposerToWelcome(){
+  if(composer==null||welcomePanel==null)return;
+  if(composer.getParent()!=null)((ViewGroup)composer.getParent()).removeView(composer);
+  LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(-1,dp(70));cp.setMargins(0,dp(22),0,0);welcomePanel.addView(composer,cp);
+ }
+
+ void moveComposerToMain(){
+  if(composer==null||root==null)return;
+  if(composer.getParent()!=null)((ViewGroup)composer.getParent()).removeView(composer);
+  LinearLayout main=(LinearLayout)root.getChildAt(0);
+  LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(-1,dp(78));cp.setMargins(dp(16),0,dp(16),dp(10));main.addView(composer,cp);
+ }
+
+ void sendCurrent(){
+  String q=input.getText().toString().trim();if(q.isEmpty())return;
+  input.setText("");addMessage(q,"user");
+  if(mode==Mode.APP){openThing(q);return;}
+  if(mode==Mode.FILE){searchFiles(q,false);return;}
+  process(q);
+ }
+
  static class AppRow{
   String label,packageName,activityName;
   boolean system,launchable;
   AppRow(String l,String p,String a,boolean s,boolean z){label=l;packageName=p;activityName=a;system=s;launchable=z;}
+ }
+
+ void loadHistory(){
+  chatSessions.clear();
+  String raw=historyPrefs==null?"[]":historyPrefs.getString("sessions","[]");
+  try{
+   JSONArray arr=new JSONArray(raw);
+   for(int i=0;i<arr.length();i++){
+    JSONObject o=arr.getJSONObject(i);ChatSession cs=new ChatSession(o.optString("id",""),o.optString("title","שיחה חדשה"));
+    JSONArray ms=o.optJSONArray("messages");
+    if(ms!=null)for(int j=0;j<ms.length();j++){JSONObject m=ms.getJSONObject(j);cs.messages.add(new ChatMessage(m.optString("text",""),m.optString("who","assistant")));}
+    if(!cs.id.isEmpty())chatSessions.put(cs.id,cs);
+   }
+   if(!chatSessions.isEmpty()){ArrayList<ChatSession> list=new ArrayList<>(chatSessions.values());currentChatId=list.get(list.size()-1).id;}
+  }catch(Exception ignored){}
+ }
+
+ void saveHistory(){
+  if(historyPrefs==null)return;
+  try{
+   JSONArray arr=new JSONArray();int skip=Math.max(0,chatSessions.size()-40),i=0;
+   for(ChatSession cs:chatSessions.values()){
+    if(i++<skip)continue;
+    JSONObject o=new JSONObject();o.put("id",cs.id);o.put("title",cs.title);JSONArray ms=new JSONArray();
+    int start=Math.max(0,cs.messages.size()-250);
+    for(int j=start;j<cs.messages.size();j++){ChatMessage m=cs.messages.get(j);JSONObject x=new JSONObject();x.put("text",m.text);x.put("who",m.who);ms.put(x);}
+    o.put("messages",ms);arr.put(o);
+   }
+   historyPrefs.edit().putString("sessions",arr.toString()).apply();
+  }catch(Exception ignored){}
+ }
+
+ void newChat(){
+  currentChatId=Long.toString(System.currentTimeMillis());
+  chatSessions.put(currentChatId,new ChatSession(currentChatId,"שיחה חדשה"));
+  chatList.removeAllViews();setChatActive(false);input.setText("");setMode(Mode.CHAT);saveHistory();refreshSidebar();
+ }
+
+ void renderCurrentSession(){
+  chatList.removeAllViews();ChatSession cs=chatSessions.get(currentChatId);
+  if(cs==null||cs.messages.isEmpty()){setChatActive(false);return;}
+  setChatActive(true);for(ChatMessage m:cs.messages)renderMessage(m.text,m.who,true);
+ }
+
+ void openSession(String id){if(!chatSessions.containsKey(id))return;currentChatId=id;renderCurrentSession();refreshSidebar();}
+ void deleteSession(String id){
+  chatSessions.remove(id);
+  if(chatSessions.isEmpty()){newChat();return;}
+  ArrayList<ChatSession> list=new ArrayList<>(chatSessions.values());currentChatId=list.get(list.size()-1).id;renderCurrentSession();saveHistory();refreshSidebar();
+ }
+
+ void refreshSidebar(){
+  if(sidebarList==null)return;sidebarList.removeAllViews();
+  ArrayList<ChatSession> list=new ArrayList<>(chatSessions.values());Collections.reverse(list);
+  for(ChatSession cs:list){
+   LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(10),dp(3),dp(5),dp(3));
+   row.setBackground(shape(cs.id.equals(currentChatId)?Color.rgb(231,227,218):Color.TRANSPARENT,14,0);
+   TextView name=label(cs.title==null||cs.title.isEmpty()?"שיחה חדשה":cs.title,14,TEXT);name.setSingleLine(true);name.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);row.addView(name,new LinearLayout.LayoutParams(0,dp(44),1));
+   Button del=softButton("⌫");del.setTextSize(13);del.setPadding(0,0,0,0);del.setBackground(shape(Color.TRANSPARENT,12,0));del.setOnClickListener(v->deleteSession(cs.id));row.addView(del,new LinearLayout.LayoutParams(dp(40),dp(42)));
+   row.setOnClickListener(v->openSession(cs.id));sidebarList.addView(row,new LinearLayout.LayoutParams(-1,dp(48)));
+  }
+ }
+
+ void searchFiles(String q,boolean fromChat){
+  final String query=OfflineEngine.normalize(q);if(query.isEmpty())return;
+  String tree=getPreferences(MODE_PRIVATE).getString("tree","");
+  if(tree.isEmpty()){
+   if(fromChat)addMessage("לא מצאתי תשובה מתאימה, ולא נבחרה עדיין תיקייה לחיפוש קבצים.","assistant");
+   else{addMessage("בחר תיקייה לחיפוש קבצים, ואז אחפש בה לפי שם.","assistant");pickFolder();}
+   return;
+  }
+  addMessage("מחפש קובץ…","assistant");
+  new Thread(()->{
+   Uri treeUri;try{treeUri=Uri.parse(tree);}catch(Exception e){runOnUiThread(()->addMessage("לא הצלחתי לקרוא את תיקיית הקבצים השמורה.","assistant"));return;}
+   Uri found=null;String mime="*/*";int checked=0;ArrayDeque<String> queue=new ArrayDeque<>();
+   try{
+    String rootId=DocumentsContract.getTreeDocumentId(treeUri);queue.add(rootId+"\t0");
+    while(!queue.isEmpty()&&checked<2500&&found==null){
+     String[] item=queue.removeFirst().split("\\t",-1);String parentId=item[0];int depth=Integer.parseInt(item[1]);
+     Uri children=DocumentsContract.buildChildDocumentsUriUsingTree(treeUri,parentId);
+     try(android.database.Cursor cur=getContentResolver().query(children,new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID,DocumentsContract.Document.COLUMN_DISPLAY_NAME,DocumentsContract.Document.COLUMN_MIME_TYPE},null,null,null)){
+      if(cur==null)continue;
+      while(cur.moveToNext()&&checked<2500){
+       checked++;String id=cur.getString(0),name=cur.getString(1)==null?"":cur.getString(1),mt=cur.getString(2);String nn=OfflineEngine.normalize(name);
+       if(!DocumentsContract.Document.MIME_TYPE_DIR.equals(mt)&&(nn.equals(query)||nn.contains(query))){found=DocumentsContract.buildDocumentUriUsingTree(treeUri,id);mime=(mt==null||mt.isEmpty())?"*/*":mt;break;}
+       if(DocumentsContract.Document.MIME_TYPE_DIR.equals(mt)&&depth<8)queue.add(id+"\t"+(depth+1));
+      }
+     }
+    }
+   }catch(Exception ignored){}
+   Uri result=found;String resultMime=mime;
+   runOnUiThread(()->{
+    if(result==null){addMessage("לא מצאתי קובץ מתאים בתיקייה שבחרת.","assistant");return;}
+    try{Intent i=new Intent(Intent.ACTION_VIEW);i.setDataAndType(result,resultMime);i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);startActivity(i);addMessage("מצאתי קובץ ופתחתי אותו.","assistant");}
+    catch(Exception e){addMessage("מצאתי את הקובץ, אבל Android לא מצא אפליקציה מתאימה לפתיחה שלו.","assistant");}
+   });
+  },"file-search-worker").start();
  }
 
  void loadInstalledApps(){
@@ -709,9 +879,7 @@ public class MainActivity extends Activity {
     OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
     runOnUiThread(()->{
      if(requestId!=responseRequestId)return;
-     if(r==null){
-      addMessage(responseEnglish?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");
-     }else{
+     if(r==null){fallbackFromChat(q,responseEnglish);}else{
       addMessage(responseEnglish?r.en:r.he,"assistant");
      }
     });
@@ -722,6 +890,13 @@ public class MainActivity extends Activity {
     });
    }
   });
+ }
+
+ void fallbackFromChat(String q,boolean responseEnglish){
+  if(!installedAppsLoaded){ensureInstalledApps(()->fallbackFromChat(q,responseEnglish));return;}
+  String target=targetOf(q);AppRow app=findInstalledMatch(target);
+  if(app!=null&&launchPackage(app.packageName,target))return;
+  searchFiles(q,true);
  }
 
  boolean mathRequest(String raw){
