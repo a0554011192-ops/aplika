@@ -1,0 +1,1000 @@
+0001	פתח רשת אלחוטית	open Wi-Fi	0	פתח|open|רשת אלחוטית|Wi-Fi
+0002	הצג רשת אלחוטית	show Wi-Fi	0	הצג|show|רשת אלחוטית|Wi-Fi
+0003	נהל רשת אלחוטית	manage Wi-Fi	0	נהל|manage|רשת אלחוטית|Wi-Fi
+0004	בדוק רשת אלחוטית	check Wi-Fi	0	בדוק|check|רשת אלחוטית|Wi-Fi
+0005	כוון רשת אלחוטית	adjust Wi-Fi	0	כוון|adjust|רשת אלחוטית|Wi-Fi
+0006	בחר רשת אלחוטית	choose Wi-Fi	0	בחר|choose|רשת אלחוטית|Wi-Fi
+0007	העבר רשת אלחוטית	switch Wi-Fi	0	העבר|switch|רשת אלחוטית|Wi-Fi
+0008	הפעל רשת אלחוטית	enable Wi-Fi	0	הפעל|enable|רשת אלחוטית|Wi-Fi
+0009	השבת רשת אלחוטית	disable Wi-Fi	0	השבת|disable|רשת אלחוטית|Wi-Fi
+0010	עבור למסך רשת אלחוטית	go to Wi-Fi	0	עבור למסך|go to|רשת אלחוטית|Wi-Fi
+0011	פתח Bluetooth	open Bluetooth	1	פתח|open|Bluetooth|Bluetooth
+0012	הצג Bluetooth	show Bluetooth	1	הצג|show|Bluetooth|Bluetooth
+0013	נהל Bluetooth	manage Bluetooth	1	נהל|manage|Bluetooth|Bluetooth
+0014	בדוק Bluetooth	check Bluetooth	1	בדוק|check|Bluetooth|Bluetooth
+0015	כוון Bluetooth	adjust Bluetooth	1	כוון|adjust|Bluetooth|Bluetooth
+0016	בחר Bluetooth	choose Bluetooth	1	בחר|choose|Bluetooth|Bluetooth
+0017	העבר Bluetooth	switch Bluetooth	1	העבר|switch|Bluetooth|Bluetooth
+0018	הפעל Bluetooth	enable Bluetooth	1	הפעל|enable|Bluetooth|Bluetooth
+0019	השבת Bluetooth	disable Bluetooth	1	השבת|disable|Bluetooth|Bluetooth
+0020	עבור למסך Bluetooth	go to Bluetooth	1	עבור למסך|go to|Bluetooth|Bluetooth
+0021	פתח מצב טיסה	open Airplane mode	2	פתח|open|מצב טיסה|Airplane mode
+0022	הצג מצב טיסה	show Airplane mode	2	הצג|show|מצב טיסה|Airplane mode
+0023	נהל מצב טיסה	manage Airplane mode	2	נהל|manage|מצב טיסה|Airplane mode
+0024	בדוק מצב טיסה	check Airplane mode	2	בדוק|check|מצב טיסה|Airplane mode
+0025	כוון מצב טיסה	adjust Airplane mode	2	כוון|adjust|מצב טיסה|Airplane mode
+0026	בחר מצב טיסה	choose Airplane mode	2	בחר|choose|מצב טיסה|Airplane mode
+0027	העבר מצב טיסה	switch Airplane mode	2	העבר|switch|מצב טיסה|Airplane mode
+0028	הפעל מצב טיסה	enable Airplane mode	2	הפעל|enable|מצב טיסה|Airplane mode
+0029	השבת מצב טיסה	disable Airplane mode	2	השבת|disable|מצב טיסה|Airplane mode
+0030	עבור למסך מצב טיסה	go to Airplane mode	2	עבור למסך|go to|מצב טיסה|Airplane mode
+0031	פתח SIM	open SIM	3	פתח|open|SIM|SIM
+0032	הצג SIM	show SIM	3	הצג|show|SIM|SIM
+0033	נהל SIM	manage SIM	3	נהל|manage|SIM|SIM
+0034	בדוק SIM	check SIM	3	בדוק|check|SIM|SIM
+0035	כוון SIM	adjust SIM	3	כוון|adjust|SIM|SIM
+0036	בחר SIM	choose SIM	3	בחר|choose|SIM|SIM
+0037	העבר SIM	switch SIM	3	העבר|switch|SIM|SIM
+0038	הפעל SIM	enable SIM	3	הפעל|enable|SIM|SIM
+0039	השבת SIM	disable SIM	3	השבת|disable|SIM|SIM
+0040	עבור למסך SIM	go to SIM	3	עבור למסך|go to|SIM|SIM
+0041	פתח רשת סלולרית	open Mobile network	4	פתח|open|רשת סלולרית|Mobile network
+0042	הצג רשת סלולרית	show Mobile network	4	הצג|show|רשת סלולרית|Mobile network
+0043	נהל רשת סלולרית	manage Mobile network	4	נהל|manage|רשת סלולרית|Mobile network
+0044	בדוק רשת סלולרית	check Mobile network	4	בדוק|check|רשת סלולרית|Mobile network
+0045	כוון רשת סלולרית	adjust Mobile network	4	כוון|adjust|רשת סלולרית|Mobile network
+0046	בחר רשת סלולרית	choose Mobile network	4	בחר|choose|רשת סלולרית|Mobile network
+0047	העבר רשת סלולרית	switch Mobile network	4	העבר|switch|רשת סלולרית|Mobile network
+0048	הפעל רשת סלולרית	enable Mobile network	4	הפעל|enable|רשת סלולרית|Mobile network
+0049	השבת רשת סלולרית	disable Mobile network	4	השבת|disable|רשת סלולרית|Mobile network
+0050	עבור למסך רשת סלולרית	go to Mobile network	4	עבור למסך|go to|רשת סלולרית|Mobile network
+0051	פתח שימוש בנתונים	open Data usage	5	פתח|open|שימוש בנתונים|Data usage
+0052	הצג שימוש בנתונים	show Data usage	5	הצג|show|שימוש בנתונים|Data usage
+0053	נהל שימוש בנתונים	manage Data usage	5	נהל|manage|שימוש בנתונים|Data usage
+0054	בדוק שימוש בנתונים	check Data usage	5	בדוק|check|שימוש בנתונים|Data usage
+0055	כוון שימוש בנתונים	adjust Data usage	5	כוון|adjust|שימוש בנתונים|Data usage
+0056	בחר שימוש בנתונים	choose Data usage	5	בחר|choose|שימוש בנתונים|Data usage
+0057	העבר שימוש בנתונים	switch Data usage	5	העבר|switch|שימוש בנתונים|Data usage
+0058	הפעל שימוש בנתונים	enable Data usage	5	הפעל|enable|שימוש בנתונים|Data usage
+0059	השבת שימוש בנתונים	disable Data usage	5	השבת|disable|שימוש בנתונים|Data usage
+0060	עבור למסך שימוש בנתונים	go to Data usage	5	עבור למסך|go to|שימוש בנתונים|Data usage
+0061	פתח חיסכון בנתונים	open Data saver	6	פתח|open|חיסכון בנתונים|Data saver
+0062	הצג חיסכון בנתונים	show Data saver	6	הצג|show|חיסכון בנתונים|Data saver
+0063	נהל חיסכון בנתונים	manage Data saver	6	נהל|manage|חיסכון בנתונים|Data saver
+0064	בדוק חיסכון בנתונים	check Data saver	6	בדוק|check|חיסכון בנתונים|Data saver
+0065	כוון חיסכון בנתונים	adjust Data saver	6	כוון|adjust|חיסכון בנתונים|Data saver
+0066	בחר חיסכון בנתונים	choose Data saver	6	בחר|choose|חיסכון בנתונים|Data saver
+0067	העבר חיסכון בנתונים	switch Data saver	6	העבר|switch|חיסכון בנתונים|Data saver
+0068	הפעל חיסכון בנתונים	enable Data saver	6	הפעל|enable|חיסכון בנתונים|Data saver
+0069	השבת חיסכון בנתונים	disable Data saver	6	השבת|disable|חיסכון בנתונים|Data saver
+0070	עבור למסך חיסכון בנתונים	go to Data saver	6	עבור למסך|go to|חיסכון בנתונים|Data saver
+0071	פתח נקודה חמה	open Hotspot	7	פתח|open|נקודה חמה|Hotspot
+0072	הצג נקודה חמה	show Hotspot	7	הצג|show|נקודה חמה|Hotspot
+0073	נהל נקודה חמה	manage Hotspot	7	נהל|manage|נקודה חמה|Hotspot
+0074	בדוק נקודה חמה	check Hotspot	7	בדוק|check|נקודה חמה|Hotspot
+0075	כוון נקודה חמה	adjust Hotspot	7	כוון|adjust|נקודה חמה|Hotspot
+0076	בחר נקודה חמה	choose Hotspot	7	בחר|choose|נקודה חמה|Hotspot
+0077	העבר נקודה חמה	switch Hotspot	7	העבר|switch|נקודה חמה|Hotspot
+0078	הפעל נקודה חמה	enable Hotspot	7	הפעל|enable|נקודה חמה|Hotspot
+0079	השבת נקודה חמה	disable Hotspot	7	השבת|disable|נקודה חמה|Hotspot
+0080	עבור למסך נקודה חמה	go to Hotspot	7	עבור למסך|go to|נקודה חמה|Hotspot
+0081	פתח VPN	open VPN	8	פתח|open|VPN|VPN
+0082	הצג VPN	show VPN	8	הצג|show|VPN|VPN
+0083	נהל VPN	manage VPN	8	נהל|manage|VPN|VPN
+0084	בדוק VPN	check VPN	8	בדוק|check|VPN|VPN
+0085	כוון VPN	adjust VPN	8	כוון|adjust|VPN|VPN
+0086	בחר VPN	choose VPN	8	בחר|choose|VPN|VPN
+0087	העבר VPN	switch VPN	8	העבר|switch|VPN|VPN
+0088	הפעל VPN	enable VPN	8	הפעל|enable|VPN|VPN
+0089	השבת VPN	disable VPN	8	השבת|disable|VPN|VPN
+0090	עבור למסך VPN	go to VPN	8	עבור למסך|go to|VPN|VPN
+0091	פתח DNS פרטי	open Private DNS	9	פתח|open|DNS פרטי|Private DNS
+0092	הצג DNS פרטי	show Private DNS	9	הצג|show|DNS פרטי|Private DNS
+0093	נהל DNS פרטי	manage Private DNS	9	נהל|manage|DNS פרטי|Private DNS
+0094	בדוק DNS פרטי	check Private DNS	9	בדוק|check|DNS פרטי|Private DNS
+0095	כוון DNS פרטי	adjust Private DNS	9	כוון|adjust|DNS פרטי|Private DNS
+0096	בחר DNS פרטי	choose Private DNS	9	בחר|choose|DNS פרטי|Private DNS
+0097	העבר DNS פרטי	switch Private DNS	9	העבר|switch|DNS פרטי|Private DNS
+0098	הפעל DNS פרטי	enable Private DNS	9	הפעל|enable|DNS פרטי|Private DNS
+0099	השבת DNS פרטי	disable Private DNS	9	השבת|disable|DNS פרטי|Private DNS
+0100	עבור למסך DNS פרטי	go to Private DNS	9	עבור למסך|go to|DNS פרטי|Private DNS
+0101	פתח בהירות	open Brightness	10	פתח|open|בהירות|Brightness
+0102	הצג בהירות	show Brightness	10	הצג|show|בהירות|Brightness
+0103	נהל בהירות	manage Brightness	10	נהל|manage|בהירות|Brightness
+0104	בדוק בהירות	check Brightness	10	בדוק|check|בהירות|Brightness
+0105	כוון בהירות	adjust Brightness	10	כוון|adjust|בהירות|Brightness
+0106	בחר בהירות	choose Brightness	10	בחר|choose|בהירות|Brightness
+0107	העבר בהירות	switch Brightness	10	העבר|switch|בהירות|Brightness
+0108	הפעל בהירות	enable Brightness	10	הפעל|enable|בהירות|Brightness
+0109	השבת בהירות	disable Brightness	10	השבת|disable|בהירות|Brightness
+0110	עבור למסך בהירות	go to Brightness	10	עבור למסך|go to|בהירות|Brightness
+0111	פתח כיבוי מסך	open Screen timeout	11	פתח|open|כיבוי מסך|Screen timeout
+0112	הצג כיבוי מסך	show Screen timeout	11	הצג|show|כיבוי מסך|Screen timeout
+0113	נהל כיבוי מסך	manage Screen timeout	11	נהל|manage|כיבוי מסך|Screen timeout
+0114	בדוק כיבוי מסך	check Screen timeout	11	בדוק|check|כיבוי מסך|Screen timeout
+0115	כוון כיבוי מסך	adjust Screen timeout	11	כוון|adjust|כיבוי מסך|Screen timeout
+0116	בחר כיבוי מסך	choose Screen timeout	11	בחר|choose|כיבוי מסך|Screen timeout
+0117	העבר כיבוי מסך	switch Screen timeout	11	העבר|switch|כיבוי מסך|Screen timeout
+0118	הפעל כיבוי מסך	enable Screen timeout	11	הפעל|enable|כיבוי מסך|Screen timeout
+0119	השבת כיבוי מסך	disable Screen timeout	11	השבת|disable|כיבוי מסך|Screen timeout
+0120	עבור למסך כיבוי מסך	go to Screen timeout	11	עבור למסך|go to|כיבוי מסך|Screen timeout
+0121	פתח גודל טקסט	open Text size	12	פתח|open|גודל טקסט|Text size
+0122	הצג גודל טקסט	show Text size	12	הצג|show|גודל טקסט|Text size
+0123	נהל גודל טקסט	manage Text size	12	נהל|manage|גודל טקסט|Text size
+0124	בדוק גודל טקסט	check Text size	12	בדוק|check|גודל טקסט|Text size
+0125	כוון גודל טקסט	adjust Text size	12	כוון|adjust|גודל טקסט|Text size
+0126	בחר גודל טקסט	choose Text size	12	בחר|choose|גודל טקסט|Text size
+0127	העבר גודל טקסט	switch Text size	12	העבר|switch|גודל טקסט|Text size
+0128	הפעל גודל טקסט	enable Text size	12	הפעל|enable|גודל טקסט|Text size
+0129	השבת גודל טקסט	disable Text size	12	השבת|disable|גודל טקסט|Text size
+0130	עבור למסך גודל טקסט	go to Text size	12	עבור למסך|go to|גודל טקסט|Text size
+0131	פתח גודל תצוגה	open Display size	13	פתח|open|גודל תצוגה|Display size
+0132	הצג גודל תצוגה	show Display size	13	הצג|show|גודל תצוגה|Display size
+0133	נהל גודל תצוגה	manage Display size	13	נהל|manage|גודל תצוגה|Display size
+0134	בדוק גודל תצוגה	check Display size	13	בדוק|check|גודל תצוגה|Display size
+0135	כוון גודל תצוגה	adjust Display size	13	כוון|adjust|גודל תצוגה|Display size
+0136	בחר גודל תצוגה	choose Display size	13	בחר|choose|גודל תצוגה|Display size
+0137	העבר גודל תצוגה	switch Display size	13	העבר|switch|גודל תצוגה|Display size
+0138	הפעל גודל תצוגה	enable Display size	13	הפעל|enable|גודל תצוגה|Display size
+0139	השבת גודל תצוגה	disable Display size	13	השבת|disable|גודל תצוגה|Display size
+0140	עבור למסך גודל תצוגה	go to Display size	13	עבור למסך|go to|גודל תצוגה|Display size
+0141	פתח סיבוב מסך	open Screen rotation	14	פתח|open|סיבוב מסך|Screen rotation
+0142	הצג סיבוב מסך	show Screen rotation	14	הצג|show|סיבוב מסך|Screen rotation
+0143	נהל סיבוב מסך	manage Screen rotation	14	נהל|manage|סיבוב מסך|Screen rotation
+0144	בדוק סיבוב מסך	check Screen rotation	14	בדוק|check|סיבוב מסך|Screen rotation
+0145	כוון סיבוב מסך	adjust Screen rotation	14	כוון|adjust|סיבוב מסך|Screen rotation
+0146	בחר סיבוב מסך	choose Screen rotation	14	בחר|choose|סיבוב מסך|Screen rotation
+0147	העבר סיבוב מסך	switch Screen rotation	14	העבר|switch|סיבוב מסך|Screen rotation
+0148	הפעל סיבוב מסך	enable Screen rotation	14	הפעל|enable|סיבוב מסך|Screen rotation
+0149	השבת סיבוב מסך	disable Screen rotation	14	השבת|disable|סיבוב מסך|Screen rotation
+0150	עבור למסך סיבוב מסך	go to Screen rotation	14	עבור למסך|go to|סיבוב מסך|Screen rotation
+0151	פתח צבעי מסך	open Display colors	15	פתח|open|צבעי מסך|Display colors
+0152	הצג צבעי מסך	show Display colors	15	הצג|show|צבעי מסך|Display colors
+0153	נהל צבעי מסך	manage Display colors	15	נהל|manage|צבעי מסך|Display colors
+0154	בדוק צבעי מסך	check Display colors	15	בדוק|check|צבעי מסך|Display colors
+0155	כוון צבעי מסך	adjust Display colors	15	כוון|adjust|צבעי מסך|Display colors
+0156	בחר צבעי מסך	choose Display colors	15	בחר|choose|צבעי מסך|Display colors
+0157	העבר צבעי מסך	switch Display colors	15	העבר|switch|צבעי מסך|Display colors
+0158	הפעל צבעי מסך	enable Display colors	15	הפעל|enable|צבעי מסך|Display colors
+0159	השבת צבעי מסך	disable Display colors	15	השבת|disable|צבעי מסך|Display colors
+0160	עבור למסך צבעי מסך	go to Display colors	15	עבור למסך|go to|צבעי מסך|Display colors
+0161	פתח מסך נעילה	open Lock screen	16	פתח|open|מסך נעילה|Lock screen
+0162	הצג מסך נעילה	show Lock screen	16	הצג|show|מסך נעילה|Lock screen
+0163	נהל מסך נעילה	manage Lock screen	16	נהל|manage|מסך נעילה|Lock screen
+0164	בדוק מסך נעילה	check Lock screen	16	בדוק|check|מסך נעילה|Lock screen
+0165	כוון מסך נעילה	adjust Lock screen	16	כוון|adjust|מסך נעילה|Lock screen
+0166	בחר מסך נעילה	choose Lock screen	16	בחר|choose|מסך נעילה|Lock screen
+0167	העבר מסך נעילה	switch Lock screen	16	העבר|switch|מסך נעילה|Lock screen
+0168	הפעל מסך נעילה	enable Lock screen	16	הפעל|enable|מסך נעילה|Lock screen
+0169	השבת מסך נעילה	disable Lock screen	16	השבת|disable|מסך נעילה|Lock screen
+0170	עבור למסך מסך נעילה	go to Lock screen	16	עבור למסך|go to|מסך נעילה|Lock screen
+0171	פתח שומר מסך	open Screen saver	17	פתח|open|שומר מסך|Screen saver
+0172	הצג שומר מסך	show Screen saver	17	הצג|show|שומר מסך|Screen saver
+0173	נהל שומר מסך	manage Screen saver	17	נהל|manage|שומר מסך|Screen saver
+0174	בדוק שומר מסך	check Screen saver	17	בדוק|check|שומר מסך|Screen saver
+0175	כוון שומר מסך	adjust Screen saver	17	כוון|adjust|שומר מסך|Screen saver
+0176	בחר שומר מסך	choose Screen saver	17	בחר|choose|שומר מסך|Screen saver
+0177	העבר שומר מסך	switch Screen saver	17	העבר|switch|שומר מסך|Screen saver
+0178	הפעל שומר מסך	enable Screen saver	17	הפעל|enable|שומר מסך|Screen saver
+0179	השבת שומר מסך	disable Screen saver	17	השבת|disable|שומר מסך|Screen saver
+0180	עבור למסך שומר מסך	go to Screen saver	17	עבור למסך|go to|שומר מסך|Screen saver
+0181	פתח טפט	open Wallpaper	18	פתח|open|טפט|Wallpaper
+0182	הצג טפט	show Wallpaper	18	הצג|show|טפט|Wallpaper
+0183	נהל טפט	manage Wallpaper	18	נהל|manage|טפט|Wallpaper
+0184	בדוק טפט	check Wallpaper	18	בדוק|check|טפט|Wallpaper
+0185	כוון טפט	adjust Wallpaper	18	כוון|adjust|טפט|Wallpaper
+0186	בחר טפט	choose Wallpaper	18	בחר|choose|טפט|Wallpaper
+0187	העבר טפט	switch Wallpaper	18	העבר|switch|טפט|Wallpaper
+0188	הפעל טפט	enable Wallpaper	18	הפעל|enable|טפט|Wallpaper
+0189	השבת טפט	disable Wallpaper	18	השבת|disable|טפט|Wallpaper
+0190	עבור למסך טפט	go to Wallpaper	18	עבור למסך|go to|טפט|Wallpaper
+0191	פתח מצב כהה	open Dark mode	19	פתח|open|מצב כהה|Dark mode
+0192	הצג מצב כהה	show Dark mode	19	הצג|show|מצב כהה|Dark mode
+0193	נהל מצב כהה	manage Dark mode	19	נהל|manage|מצב כהה|Dark mode
+0194	בדוק מצב כהה	check Dark mode	19	בדוק|check|מצב כהה|Dark mode
+0195	כוון מצב כהה	adjust Dark mode	19	כוון|adjust|מצב כהה|Dark mode
+0196	בחר מצב כהה	choose Dark mode	19	בחר|choose|מצב כהה|Dark mode
+0197	העבר מצב כהה	switch Dark mode	19	העבר|switch|מצב כהה|Dark mode
+0198	הפעל מצב כהה	enable Dark mode	19	הפעל|enable|מצב כהה|Dark mode
+0199	השבת מצב כהה	disable Dark mode	19	השבת|disable|מצב כהה|Dark mode
+0200	עבור למסך מצב כהה	go to Dark mode	19	עבור למסך|go to|מצב כהה|Dark mode
+0201	פתח ניגודיות	open Contrast	20	פתח|open|ניגודיות|Contrast
+0202	הצג ניגודיות	show Contrast	20	הצג|show|ניגודיות|Contrast
+0203	נהל ניגודיות	manage Contrast	20	נהל|manage|ניגודיות|Contrast
+0204	בדוק ניגודיות	check Contrast	20	בדוק|check|ניגודיות|Contrast
+0205	כוון ניגודיות	adjust Contrast	20	כוון|adjust|ניגודיות|Contrast
+0206	בחר ניגודיות	choose Contrast	20	בחר|choose|ניגודיות|Contrast
+0207	העבר ניגודיות	switch Contrast	20	העבר|switch|ניגודיות|Contrast
+0208	הפעל ניגודיות	enable Contrast	20	הפעל|enable|ניגודיות|Contrast
+0209	השבת ניגודיות	disable Contrast	20	השבת|disable|ניגודיות|Contrast
+0210	עבור למסך ניגודיות	go to Contrast	20	עבור למסך|go to|ניגודיות|Contrast
+0211	פתח היפוך צבעים	open Color inversion	21	פתח|open|היפוך צבעים|Color inversion
+0212	הצג היפוך צבעים	show Color inversion	21	הצג|show|היפוך צבעים|Color inversion
+0213	נהל היפוך צבעים	manage Color inversion	21	נהל|manage|היפוך צבעים|Color inversion
+0214	בדוק היפוך צבעים	check Color inversion	21	בדוק|check|היפוך צבעים|Color inversion
+0215	כוון היפוך צבעים	adjust Color inversion	21	כוון|adjust|היפוך צבעים|Color inversion
+0216	בחר היפוך צבעים	choose Color inversion	21	בחר|choose|היפוך צבעים|Color inversion
+0217	העבר היפוך צבעים	switch Color inversion	21	העבר|switch|היפוך צבעים|Color inversion
+0218	הפעל היפוך צבעים	enable Color inversion	21	הפעל|enable|היפוך צבעים|Color inversion
+0219	השבת היפוך צבעים	disable Color inversion	21	השבת|disable|היפוך צבעים|Color inversion
+0220	עבור למסך היפוך צבעים	go to Color inversion	21	עבור למסך|go to|היפוך צבעים|Color inversion
+0221	פתח כתוביות	open Captions	22	פתח|open|כתוביות|Captions
+0222	הצג כתוביות	show Captions	22	הצג|show|כתוביות|Captions
+0223	נהל כתוביות	manage Captions	22	נהל|manage|כתוביות|Captions
+0224	בדוק כתוביות	check Captions	22	בדוק|check|כתוביות|Captions
+0225	כוון כתוביות	adjust Captions	22	כוון|adjust|כתוביות|Captions
+0226	בחר כתוביות	choose Captions	22	בחר|choose|כתוביות|Captions
+0227	העבר כתוביות	switch Captions	22	העבר|switch|כתוביות|Captions
+0228	הפעל כתוביות	enable Captions	22	הפעל|enable|כתוביות|Captions
+0229	השבת כתוביות	disable Captions	22	השבת|disable|כתוביות|Captions
+0230	עבור למסך כתוביות	go to Captions	22	עבור למסך|go to|כתוביות|Captions
+0231	פתח שמע מונו	open Mono audio	23	פתח|open|שמע מונו|Mono audio
+0232	הצג שמע מונו	show Mono audio	23	הצג|show|שמע מונו|Mono audio
+0233	נהל שמע מונו	manage Mono audio	23	נהל|manage|שמע מונו|Mono audio
+0234	בדוק שמע מונו	check Mono audio	23	בדוק|check|שמע מונו|Mono audio
+0235	כוון שמע מונו	adjust Mono audio	23	כוון|adjust|שמע מונו|Mono audio
+0236	בחר שמע מונו	choose Mono audio	23	בחר|choose|שמע מונו|Mono audio
+0237	העבר שמע מונו	switch Mono audio	23	העבר|switch|שמע מונו|Mono audio
+0238	הפעל שמע מונו	enable Mono audio	23	הפעל|enable|שמע מונו|Mono audio
+0239	השבת שמע מונו	disable Mono audio	23	השבת|disable|שמע מונו|Mono audio
+0240	עבור למסך שמע מונו	go to Mono audio	23	עבור למסך|go to|שמע מונו|Mono audio
+0241	פתח איזון שמע	open Audio balance	24	פתח|open|איזון שמע|Audio balance
+0242	הצג איזון שמע	show Audio balance	24	הצג|show|איזון שמע|Audio balance
+0243	נהל איזון שמע	manage Audio balance	24	נהל|manage|איזון שמע|Audio balance
+0244	בדוק איזון שמע	check Audio balance	24	בדוק|check|איזון שמע|Audio balance
+0245	כוון איזון שמע	adjust Audio balance	24	כוון|adjust|איזון שמע|Audio balance
+0246	בחר איזון שמע	choose Audio balance	24	בחר|choose|איזון שמע|Audio balance
+0247	העבר איזון שמע	switch Audio balance	24	העבר|switch|איזון שמע|Audio balance
+0248	הפעל איזון שמע	enable Audio balance	24	הפעל|enable|איזון שמע|Audio balance
+0249	השבת איזון שמע	disable Audio balance	24	השבת|disable|איזון שמע|Audio balance
+0250	עבור למסך איזון שמע	go to Audio balance	24	עבור למסך|go to|איזון שמע|Audio balance
+0251	פתח עוצמת מדיה	open Media volume	25	פתח|open|עוצמת מדיה|Media volume
+0252	הצג עוצמת מדיה	show Media volume	25	הצג|show|עוצמת מדיה|Media volume
+0253	נהל עוצמת מדיה	manage Media volume	25	נהל|manage|עוצמת מדיה|Media volume
+0254	בדוק עוצמת מדיה	check Media volume	25	בדוק|check|עוצמת מדיה|Media volume
+0255	כוון עוצמת מדיה	adjust Media volume	25	כוון|adjust|עוצמת מדיה|Media volume
+0256	בחר עוצמת מדיה	choose Media volume	25	בחר|choose|עוצמת מדיה|Media volume
+0257	העבר עוצמת מדיה	switch Media volume	25	העבר|switch|עוצמת מדיה|Media volume
+0258	הפעל עוצמת מדיה	enable Media volume	25	הפעל|enable|עוצמת מדיה|Media volume
+0259	השבת עוצמת מדיה	disable Media volume	25	השבת|disable|עוצמת מדיה|Media volume
+0260	עבור למסך עוצמת מדיה	go to Media volume	25	עבור למסך|go to|עוצמת מדיה|Media volume
+0261	פתח עוצמת צלצול	open Ringer volume	26	פתח|open|עוצמת צלצול|Ringer volume
+0262	הצג עוצמת צלצול	show Ringer volume	26	הצג|show|עוצמת צלצול|Ringer volume
+0263	נהל עוצמת צלצול	manage Ringer volume	26	נהל|manage|עוצמת צלצול|Ringer volume
+0264	בדוק עוצמת צלצול	check Ringer volume	26	בדוק|check|עוצמת צלצול|Ringer volume
+0265	כוון עוצמת צלצול	adjust Ringer volume	26	כוון|adjust|עוצמת צלצול|Ringer volume
+0266	בחר עוצמת צלצול	choose Ringer volume	26	בחר|choose|עוצמת צלצול|Ringer volume
+0267	העבר עוצמת צלצול	switch Ringer volume	26	העבר|switch|עוצמת צלצול|Ringer volume
+0268	הפעל עוצמת צלצול	enable Ringer volume	26	הפעל|enable|עוצמת צלצול|Ringer volume
+0269	השבת עוצמת צלצול	disable Ringer volume	26	השבת|disable|עוצמת צלצול|Ringer volume
+0270	עבור למסך עוצמת צלצול	go to Ringer volume	26	עבור למסך|go to|עוצמת צלצול|Ringer volume
+0271	פתח עוצמת התראות	open Notification volume	27	פתח|open|עוצמת התראות|Notification volume
+0272	הצג עוצמת התראות	show Notification volume	27	הצג|show|עוצמת התראות|Notification volume
+0273	נהל עוצמת התראות	manage Notification volume	27	נהל|manage|עוצמת התראות|Notification volume
+0274	בדוק עוצמת התראות	check Notification volume	27	בדוק|check|עוצמת התראות|Notification volume
+0275	כוון עוצמת התראות	adjust Notification volume	27	כוון|adjust|עוצמת התראות|Notification volume
+0276	בחר עוצמת התראות	choose Notification volume	27	בחר|choose|עוצמת התראות|Notification volume
+0277	העבר עוצמת התראות	switch Notification volume	27	העבר|switch|עוצמת התראות|Notification volume
+0278	הפעל עוצמת התראות	enable Notification volume	27	הפעל|enable|עוצמת התראות|Notification volume
+0279	השבת עוצמת התראות	disable Notification volume	27	השבת|disable|עוצמת התראות|Notification volume
+0280	עבור למסך עוצמת התראות	go to Notification volume	27	עבור למסך|go to|עוצמת התראות|Notification volume
+0281	פתח מצב שקט	open Silent mode	28	פתח|open|מצב שקט|Silent mode
+0282	הצג מצב שקט	show Silent mode	28	הצג|show|מצב שקט|Silent mode
+0283	נהל מצב שקט	manage Silent mode	28	נהל|manage|מצב שקט|Silent mode
+0284	בדוק מצב שקט	check Silent mode	28	בדוק|check|מצב שקט|Silent mode
+0285	כוון מצב שקט	adjust Silent mode	28	כוון|adjust|מצב שקט|Silent mode
+0286	בחר מצב שקט	choose Silent mode	28	בחר|choose|מצב שקט|Silent mode
+0287	העבר מצב שקט	switch Silent mode	28	העבר|switch|מצב שקט|Silent mode
+0288	הפעל מצב שקט	enable Silent mode	28	הפעל|enable|מצב שקט|Silent mode
+0289	השבת מצב שקט	disable Silent mode	28	השבת|disable|מצב שקט|Silent mode
+0290	עבור למסך מצב שקט	go to Silent mode	28	עבור למסך|go to|מצב שקט|Silent mode
+0291	פתח נא לא להפריע	open Do Not Disturb	29	פתח|open|נא לא להפריע|Do Not Disturb
+0292	הצג נא לא להפריע	show Do Not Disturb	29	הצג|show|נא לא להפריע|Do Not Disturb
+0293	נהל נא לא להפריע	manage Do Not Disturb	29	נהל|manage|נא לא להפריע|Do Not Disturb
+0294	בדוק נא לא להפריע	check Do Not Disturb	29	בדוק|check|נא לא להפריע|Do Not Disturb
+0295	כוון נא לא להפריע	adjust Do Not Disturb	29	כוון|adjust|נא לא להפריע|Do Not Disturb
+0296	בחר נא לא להפריע	choose Do Not Disturb	29	בחר|choose|נא לא להפריע|Do Not Disturb
+0297	העבר נא לא להפריע	switch Do Not Disturb	29	העבר|switch|נא לא להפריע|Do Not Disturb
+0298	הפעל נא לא להפריע	enable Do Not Disturb	29	הפעל|enable|נא לא להפריע|Do Not Disturb
+0299	השבת נא לא להפריע	disable Do Not Disturb	29	השבת|disable|נא לא להפריע|Do Not Disturb
+0300	עבור למסך נא לא להפריע	go to Do Not Disturb	29	עבור למסך|go to|נא לא להפריע|Do Not Disturb
+0301	פתח רטט מגע	open Touch vibration	30	פתח|open|רטט מגע|Touch vibration
+0302	הצג רטט מגע	show Touch vibration	30	הצג|show|רטט מגע|Touch vibration
+0303	נהל רטט מגע	manage Touch vibration	30	נהל|manage|רטט מגע|Touch vibration
+0304	בדוק רטט מגע	check Touch vibration	30	בדוק|check|רטט מגע|Touch vibration
+0305	כוון רטט מגע	adjust Touch vibration	30	כוון|adjust|רטט מגע|Touch vibration
+0306	בחר רטט מגע	choose Touch vibration	30	בחר|choose|רטט מגע|Touch vibration
+0307	העבר רטט מגע	switch Touch vibration	30	העבר|switch|רטט מגע|Touch vibration
+0308	הפעל רטט מגע	enable Touch vibration	30	הפעל|enable|רטט מגע|Touch vibration
+0309	השבת רטט מגע	disable Touch vibration	30	השבת|disable|רטט מגע|Touch vibration
+0310	עבור למסך רטט מגע	go to Touch vibration	30	עבור למסך|go to|רטט מגע|Touch vibration
+0311	פתח צליל נעילה	open Lock sound	31	פתח|open|צליל נעילה|Lock sound
+0312	הצג צליל נעילה	show Lock sound	31	הצג|show|צליל נעילה|Lock sound
+0313	נהל צליל נעילה	manage Lock sound	31	נהל|manage|צליל נעילה|Lock sound
+0314	בדוק צליל נעילה	check Lock sound	31	בדוק|check|צליל נעילה|Lock sound
+0315	כוון צליל נעילה	adjust Lock sound	31	כוון|adjust|צליל נעילה|Lock sound
+0316	בחר צליל נעילה	choose Lock sound	31	בחר|choose|צליל נעילה|Lock sound
+0317	העבר צליל נעילה	switch Lock sound	31	העבר|switch|צליל נעילה|Lock sound
+0318	הפעל צליל נעילה	enable Lock sound	31	הפעל|enable|צליל נעילה|Lock sound
+0319	השבת צליל נעילה	disable Lock sound	31	השבת|disable|צליל נעילה|Lock sound
+0320	עבור למסך צליל נעילה	go to Lock sound	31	עבור למסך|go to|צליל נעילה|Lock sound
+0321	פתח צליל הקלדה	open Keyboard sound	32	פתח|open|צליל הקלדה|Keyboard sound
+0322	הצג צליל הקלדה	show Keyboard sound	32	הצג|show|צליל הקלדה|Keyboard sound
+0323	נהל צליל הקלדה	manage Keyboard sound	32	נהל|manage|צליל הקלדה|Keyboard sound
+0324	בדוק צליל הקלדה	check Keyboard sound	32	בדוק|check|צליל הקלדה|Keyboard sound
+0325	כוון צליל הקלדה	adjust Keyboard sound	32	כוון|adjust|צליל הקלדה|Keyboard sound
+0326	בחר צליל הקלדה	choose Keyboard sound	32	בחר|choose|צליל הקלדה|Keyboard sound
+0327	העבר צליל הקלדה	switch Keyboard sound	32	העבר|switch|צליל הקלדה|Keyboard sound
+0328	הפעל צליל הקלדה	enable Keyboard sound	32	הפעל|enable|צליל הקלדה|Keyboard sound
+0329	השבת צליל הקלדה	disable Keyboard sound	32	השבת|disable|צליל הקלדה|Keyboard sound
+0330	עבור למסך צליל הקלדה	go to Keyboard sound	32	עבור למסך|go to|צליל הקלדה|Keyboard sound
+0331	פתח התראות	open Notifications	33	פתח|open|התראות|Notifications
+0332	הצג התראות	show Notifications	33	הצג|show|התראות|Notifications
+0333	נהל התראות	manage Notifications	33	נהל|manage|התראות|Notifications
+0334	בדוק התראות	check Notifications	33	בדוק|check|התראות|Notifications
+0335	כוון התראות	adjust Notifications	33	כוון|adjust|התראות|Notifications
+0336	בחר התראות	choose Notifications	33	בחר|choose|התראות|Notifications
+0337	העבר התראות	switch Notifications	33	העבר|switch|התראות|Notifications
+0338	הפעל התראות	enable Notifications	33	הפעל|enable|התראות|Notifications
+0339	השבת התראות	disable Notifications	33	השבת|disable|התראות|Notifications
+0340	עבור למסך התראות	go to Notifications	33	עבור למסך|go to|התראות|Notifications
+0341	פתח הרשאות	open Permissions	34	פתח|open|הרשאות|Permissions
+0342	הצג הרשאות	show Permissions	34	הצג|show|הרשאות|Permissions
+0343	נהל הרשאות	manage Permissions	34	נהל|manage|הרשאות|Permissions
+0344	בדוק הרשאות	check Permissions	34	בדוק|check|הרשאות|Permissions
+0345	כוון הרשאות	adjust Permissions	34	כוון|adjust|הרשאות|Permissions
+0346	בחר הרשאות	choose Permissions	34	בחר|choose|הרשאות|Permissions
+0347	העבר הרשאות	switch Permissions	34	העבר|switch|הרשאות|Permissions
+0348	הפעל הרשאות	enable Permissions	34	הפעל|enable|הרשאות|Permissions
+0349	השבת הרשאות	disable Permissions	34	השבת|disable|הרשאות|Permissions
+0350	עבור למסך הרשאות	go to Permissions	34	עבור למסך|go to|הרשאות|Permissions
+0351	פתח התראות במסך נעילה	open Lock-screen notifications	35	פתח|open|התראות במסך נעילה|Lock-screen notifications
+0352	הצג התראות במסך נעילה	show Lock-screen notifications	35	הצג|show|התראות במסך נעילה|Lock-screen notifications
+0353	נהל התראות במסך נעילה	manage Lock-screen notifications	35	נהל|manage|התראות במסך נעילה|Lock-screen notifications
+0354	בדוק התראות במסך נעילה	check Lock-screen notifications	35	בדוק|check|התראות במסך נעילה|Lock-screen notifications
+0355	כוון התראות במסך נעילה	adjust Lock-screen notifications	35	כוון|adjust|התראות במסך נעילה|Lock-screen notifications
+0356	בחר התראות במסך נעילה	choose Lock-screen notifications	35	בחר|choose|התראות במסך נעילה|Lock-screen notifications
+0357	העבר התראות במסך נעילה	switch Lock-screen notifications	35	העבר|switch|התראות במסך נעילה|Lock-screen notifications
+0358	הפעל התראות במסך נעילה	enable Lock-screen notifications	35	הפעל|enable|התראות במסך נעילה|Lock-screen notifications
+0359	השבת התראות במסך נעילה	disable Lock-screen notifications	35	השבת|disable|התראות במסך נעילה|Lock-screen notifications
+0360	עבור למסך התראות במסך נעילה	go to Lock-screen notifications	35	עבור למסך|go to|התראות במסך נעילה|Lock-screen notifications
+0361	פתח היסטוריית התראות	open Notification history	36	פתח|open|היסטוריית התראות|Notification history
+0362	הצג היסטוריית התראות	show Notification history	36	הצג|show|היסטוריית התראות|Notification history
+0363	נהל היסטוריית התראות	manage Notification history	36	נהל|manage|היסטוריית התראות|Notification history
+0364	בדוק היסטוריית התראות	check Notification history	36	בדוק|check|היסטוריית התראות|Notification history
+0365	כוון היסטוריית התראות	adjust Notification history	36	כוון|adjust|היסטוריית התראות|Notification history
+0366	בחר היסטוריית התראות	choose Notification history	36	בחר|choose|היסטוריית התראות|Notification history
+0367	העבר היסטוריית התראות	switch Notification history	36	העבר|switch|היסטוריית התראות|Notification history
+0368	הפעל היסטוריית התראות	enable Notification history	36	הפעל|enable|היסטוריית התראות|Notification history
+0369	השבת היסטוריית התראות	disable Notification history	36	השבת|disable|היסטוריית התראות|Notification history
+0370	עבור למסך היסטוריית התראות	go to Notification history	36	עבור למסך|go to|היסטוריית התראות|Notification history
+0371	פתח בועות	open Bubbles	37	פתח|open|בועות|Bubbles
+0372	הצג בועות	show Bubbles	37	הצג|show|בועות|Bubbles
+0373	נהל בועות	manage Bubbles	37	נהל|manage|בועות|Bubbles
+0374	בדוק בועות	check Bubbles	37	בדוק|check|בועות|Bubbles
+0375	כוון בועות	adjust Bubbles	37	כוון|adjust|בועות|Bubbles
+0376	בחר בועות	choose Bubbles	37	בחר|choose|בועות|Bubbles
+0377	העבר בועות	switch Bubbles	37	העבר|switch|בועות|Bubbles
+0378	הפעל בועות	enable Bubbles	37	הפעל|enable|בועות|Bubbles
+0379	השבת בועות	disable Bubbles	37	השבת|disable|בועות|Bubbles
+0380	עבור למסך בועות	go to Bubbles	37	עבור למסך|go to|בועות|Bubbles
+0381	פתח טלפון ברירת מחדל	open Default phone app	38	פתח|open|טלפון ברירת מחדל|Default phone app
+0382	הצג טלפון ברירת מחדל	show Default phone app	38	הצג|show|טלפון ברירת מחדל|Default phone app
+0383	נהל טלפון ברירת מחדל	manage Default phone app	38	נהל|manage|טלפון ברירת מחדל|Default phone app
+0384	בדוק טלפון ברירת מחדל	check Default phone app	38	בדוק|check|טלפון ברירת מחדל|Default phone app
+0385	כוון טלפון ברירת מחדל	adjust Default phone app	38	כוון|adjust|טלפון ברירת מחדל|Default phone app
+0386	בחר טלפון ברירת מחדל	choose Default phone app	38	בחר|choose|טלפון ברירת מחדל|Default phone app
+0387	העבר טלפון ברירת מחדל	switch Default phone app	38	העבר|switch|טלפון ברירת מחדל|Default phone app
+0388	הפעל טלפון ברירת מחדל	enable Default phone app	38	הפעל|enable|טלפון ברירת מחדל|Default phone app
+0389	השבת טלפון ברירת מחדל	disable Default phone app	38	השבת|disable|טלפון ברירת מחדל|Default phone app
+0390	עבור למסך טלפון ברירת מחדל	go to Default phone app	38	עבור למסך|go to|טלפון ברירת מחדל|Default phone app
+0391	פתח דפדפן ברירת מחדל	open Default browser	39	פתח|open|דפדפן ברירת מחדל|Default browser
+0392	הצג דפדפן ברירת מחדל	show Default browser	39	הצג|show|דפדפן ברירת מחדל|Default browser
+0393	נהל דפדפן ברירת מחדל	manage Default browser	39	נהל|manage|דפדפן ברירת מחדל|Default browser
+0394	בדוק דפדפן ברירת מחדל	check Default browser	39	בדוק|check|דפדפן ברירת מחדל|Default browser
+0395	כוון דפדפן ברירת מחדל	adjust Default browser	39	כוון|adjust|דפדפן ברירת מחדל|Default browser
+0396	בחר דפדפן ברירת מחדל	choose Default browser	39	בחר|choose|דפדפן ברירת מחדל|Default browser
+0397	העבר דפדפן ברירת מחדל	switch Default browser	39	העבר|switch|דפדפן ברירת מחדל|Default browser
+0398	הפעל דפדפן ברירת מחדל	enable Default browser	39	הפעל|enable|דפדפן ברירת מחדל|Default browser
+0399	השבת דפדפן ברירת מחדל	disable Default browser	39	השבת|disable|דפדפן ברירת מחדל|Default browser
+0400	עבור למסך דפדפן ברירת מחדל	go to Default browser	39	עבור למסך|go to|דפדפן ברירת מחדל|Default browser
+0401	פתח עוזר דיגיטלי	open Digital assistant	40	פתח|open|עוזר דיגיטלי|Digital assistant
+0402	הצג עוזר דיגיטלי	show Digital assistant	40	הצג|show|עוזר דיגיטלי|Digital assistant
+0403	נהל עוזר דיגיטלי	manage Digital assistant	40	נהל|manage|עוזר דיגיטלי|Digital assistant
+0404	בדוק עוזר דיגיטלי	check Digital assistant	40	בדוק|check|עוזר דיגיטלי|Digital assistant
+0405	כוון עוזר דיגיטלי	adjust Digital assistant	40	כוון|adjust|עוזר דיגיטלי|Digital assistant
+0406	בחר עוזר דיגיטלי	choose Digital assistant	40	בחר|choose|עוזר דיגיטלי|Digital assistant
+0407	העבר עוזר דיגיטלי	switch Digital assistant	40	העבר|switch|עוזר דיגיטלי|Digital assistant
+0408	הפעל עוזר דיגיטלי	enable Digital assistant	40	הפעל|enable|עוזר דיגיטלי|Digital assistant
+0409	השבת עוזר דיגיטלי	disable Digital assistant	40	השבת|disable|עוזר דיגיטלי|Digital assistant
+0410	עבור למסך עוזר דיגיטלי	go to Digital assistant	40	עבור למסך|go to|עוזר דיגיטלי|Digital assistant
+0411	פתח אפליקציית בית	open Home app	41	פתח|open|אפליקציית בית|Home app
+0412	הצג אפליקציית בית	show Home app	41	הצג|show|אפליקציית בית|Home app
+0413	נהל אפליקציית בית	manage Home app	41	נהל|manage|אפליקציית בית|Home app
+0414	בדוק אפליקציית בית	check Home app	41	בדוק|check|אפליקציית בית|Home app
+0415	כוון אפליקציית בית	adjust Home app	41	כוון|adjust|אפליקציית בית|Home app
+0416	בחר אפליקציית בית	choose Home app	41	בחר|choose|אפליקציית בית|Home app
+0417	העבר אפליקציית בית	switch Home app	41	העבר|switch|אפליקציית בית|Home app
+0418	הפעל אפליקציית בית	enable Home app	41	הפעל|enable|אפליקציית בית|Home app
+0419	השבת אפליקציית בית	disable Home app	41	השבת|disable|אפליקציית בית|Home app
+0420	עבור למסך אפליקציית בית	go to Home app	41	עבור למסך|go to|אפליקציית בית|Home app
+0421	פתח ניהול יישומים	open App management	42	פתח|open|ניהול יישומים|App management
+0422	הצג ניהול יישומים	show App management	42	הצג|show|ניהול יישומים|App management
+0423	נהל ניהול יישומים	manage App management	42	נהל|manage|ניהול יישומים|App management
+0424	בדוק ניהול יישומים	check App management	42	בדוק|check|ניהול יישומים|App management
+0425	כוון ניהול יישומים	adjust App management	42	כוון|adjust|ניהול יישומים|App management
+0426	בחר ניהול יישומים	choose App management	42	בחר|choose|ניהול יישומים|App management
+0427	העבר ניהול יישומים	switch App management	42	העבר|switch|ניהול יישומים|App management
+0428	הפעל ניהול יישומים	enable App management	42	הפעל|enable|ניהול יישומים|App management
+0429	השבת ניהול יישומים	disable App management	42	השבת|disable|ניהול יישומים|App management
+0430	עבור למסך ניהול יישומים	go to App management	42	עבור למסך|go to|ניהול יישומים|App management
+0431	פתח יישומים אחרונים	open Recent apps	43	פתח|open|יישומים אחרונים|Recent apps
+0432	הצג יישומים אחרונים	show Recent apps	43	הצג|show|יישומים אחרונים|Recent apps
+0433	נהל יישומים אחרונים	manage Recent apps	43	נהל|manage|יישומים אחרונים|Recent apps
+0434	בדוק יישומים אחרונים	check Recent apps	43	בדוק|check|יישומים אחרונים|Recent apps
+0435	כוון יישומים אחרונים	adjust Recent apps	43	כוון|adjust|יישומים אחרונים|Recent apps
+0436	בחר יישומים אחרונים	choose Recent apps	43	בחר|choose|יישומים אחרונים|Recent apps
+0437	העבר יישומים אחרונים	switch Recent apps	43	העבר|switch|יישומים אחרונים|Recent apps
+0438	הפעל יישומים אחרונים	enable Recent apps	43	הפעל|enable|יישומים אחרונים|Recent apps
+0439	השבת יישומים אחרונים	disable Recent apps	43	השבת|disable|יישומים אחרונים|Recent apps
+0440	עבור למסך יישומים אחרונים	go to Recent apps	43	עבור למסך|go to|יישומים אחרונים|Recent apps
+0441	פתח גישה מיוחדת	open Special app access	44	פתח|open|גישה מיוחדת|Special app access
+0442	הצג גישה מיוחדת	show Special app access	44	הצג|show|גישה מיוחדת|Special app access
+0443	נהל גישה מיוחדת	manage Special app access	44	נהל|manage|גישה מיוחדת|Special app access
+0444	בדוק גישה מיוחדת	check Special app access	44	בדוק|check|גישה מיוחדת|Special app access
+0445	כוון גישה מיוחדת	adjust Special app access	44	כוון|adjust|גישה מיוחדת|Special app access
+0446	בחר גישה מיוחדת	choose Special app access	44	בחר|choose|גישה מיוחדת|Special app access
+0447	העבר גישה מיוחדת	switch Special app access	44	העבר|switch|גישה מיוחדת|Special app access
+0448	הפעל גישה מיוחדת	enable Special app access	44	הפעל|enable|גישה מיוחדת|Special app access
+0449	השבת גישה מיוחדת	disable Special app access	44	השבת|disable|גישה מיוחדת|Special app access
+0450	עבור למסך גישה מיוחדת	go to Special app access	44	עבור למסך|go to|גישה מיוחדת|Special app access
+0451	פתח יישומי מערכת	open System apps	45	פתח|open|יישומי מערכת|System apps
+0452	הצג יישומי מערכת	show System apps	45	הצג|show|יישומי מערכת|System apps
+0453	נהל יישומי מערכת	manage System apps	45	נהל|manage|יישומי מערכת|System apps
+0454	בדוק יישומי מערכת	check System apps	45	בדוק|check|יישומי מערכת|System apps
+0455	כוון יישומי מערכת	adjust System apps	45	כוון|adjust|יישומי מערכת|System apps
+0456	בחר יישומי מערכת	choose System apps	45	בחר|choose|יישומי מערכת|System apps
+0457	העבר יישומי מערכת	switch System apps	45	העבר|switch|יישומי מערכת|System apps
+0458	הפעל יישומי מערכת	enable System apps	45	הפעל|enable|יישומי מערכת|System apps
+0459	השבת יישומי מערכת	disable System apps	45	השבת|disable|יישומי מערכת|System apps
+0460	עבור למסך יישומי מערכת	go to System apps	45	עבור למסך|go to|יישומי מערכת|System apps
+0461	פתח אחסון	open Storage	46	פתח|open|אחסון|Storage
+0462	הצג אחסון	show Storage	46	הצג|show|אחסון|Storage
+0463	נהל אחסון	manage Storage	46	נהל|manage|אחסון|Storage
+0464	בדוק אחסון	check Storage	46	בדוק|check|אחסון|Storage
+0465	כוון אחסון	adjust Storage	46	כוון|adjust|אחסון|Storage
+0466	בחר אחסון	choose Storage	46	בחר|choose|אחסון|Storage
+0467	העבר אחסון	switch Storage	46	העבר|switch|אחסון|Storage
+0468	הפעל אחסון	enable Storage	46	הפעל|enable|אחסון|Storage
+0469	השבת אחסון	disable Storage	46	השבת|disable|אחסון|Storage
+0470	עבור למסך אחסון	go to Storage	46	עבור למסך|go to|אחסון|Storage
+0471	פתח מטמון	open Cache	47	פתח|open|מטמון|Cache
+0472	הצג מטמון	show Cache	47	הצג|show|מטמון|Cache
+0473	נהל מטמון	manage Cache	47	נהל|manage|מטמון|Cache
+0474	בדוק מטמון	check Cache	47	בדוק|check|מטמון|Cache
+0475	כוון מטמון	adjust Cache	47	כוון|adjust|מטמון|Cache
+0476	בחר מטמון	choose Cache	47	בחר|choose|מטמון|Cache
+0477	העבר מטמון	switch Cache	47	העבר|switch|מטמון|Cache
+0478	הפעל מטמון	enable Cache	47	הפעל|enable|מטמון|Cache
+0479	השבת מטמון	disable Cache	47	השבת|disable|מטמון|Cache
+0480	עבור למסך מטמון	go to Cache	47	עבור למסך|go to|מטמון|Cache
+0481	פתח הצפנת מכשיר	open Device encryption	48	פתח|open|הצפנת מכשיר|Device encryption
+0482	הצג הצפנת מכשיר	show Device encryption	48	הצג|show|הצפנת מכשיר|Device encryption
+0483	נהל הצפנת מכשיר	manage Device encryption	48	נהל|manage|הצפנת מכשיר|Device encryption
+0484	בדוק הצפנת מכשיר	check Device encryption	48	בדוק|check|הצפנת מכשיר|Device encryption
+0485	כוון הצפנת מכשיר	adjust Device encryption	48	כוון|adjust|הצפנת מכשיר|Device encryption
+0486	בחר הצפנת מכשיר	choose Device encryption	48	בחר|choose|הצפנת מכשיר|Device encryption
+0487	העבר הצפנת מכשיר	switch Device encryption	48	העבר|switch|הצפנת מכשיר|Device encryption
+0488	הפעל הצפנת מכשיר	enable Device encryption	48	הפעל|enable|הצפנת מכשיר|Device encryption
+0489	השבת הצפנת מכשיר	disable Device encryption	48	השבת|disable|הצפנת מכשיר|Device encryption
+0490	עבור למסך הצפנת מכשיר	go to Device encryption	48	עבור למסך|go to|הצפנת מכשיר|Device encryption
+0491	פתח סיסמת נעילה	open Lock password	49	פתח|open|סיסמת נעילה|Lock password
+0492	הצג סיסמת נעילה	show Lock password	49	הצג|show|סיסמת נעילה|Lock password
+0493	נהל סיסמת נעילה	manage Lock password	49	נהל|manage|סיסמת נעילה|Lock password
+0494	בדוק סיסמת נעילה	check Lock password	49	בדוק|check|סיסמת נעילה|Lock password
+0495	כוון סיסמת נעילה	adjust Lock password	49	כוון|adjust|סיסמת נעילה|Lock password
+0496	בחר סיסמת נעילה	choose Lock password	49	בחר|choose|סיסמת נעילה|Lock password
+0497	העבר סיסמת נעילה	switch Lock password	49	העבר|switch|סיסמת נעילה|Lock password
+0498	הפעל סיסמת נעילה	enable Lock password	49	הפעל|enable|סיסמת נעילה|Lock password
+0499	השבת סיסמת נעילה	disable Lock password	49	השבת|disable|סיסמת נעילה|Lock password
+0500	עבור למסך סיסמת נעילה	go to Lock password	49	עבור למסך|go to|סיסמת נעילה|Lock password
+0501	פתח טביעת אצבע	open Fingerprint	50	פתח|open|טביעת אצבע|Fingerprint
+0502	הצג טביעת אצבע	show Fingerprint	50	הצג|show|טביעת אצבע|Fingerprint
+0503	נהל טביעת אצבע	manage Fingerprint	50	נהל|manage|טביעת אצבע|Fingerprint
+0504	בדוק טביעת אצבע	check Fingerprint	50	בדוק|check|טביעת אצבע|Fingerprint
+0505	כוון טביעת אצבע	adjust Fingerprint	50	כוון|adjust|טביעת אצבע|Fingerprint
+0506	בחר טביעת אצבע	choose Fingerprint	50	בחר|choose|טביעת אצבע|Fingerprint
+0507	העבר טביעת אצבע	switch Fingerprint	50	העבר|switch|טביעת אצבע|Fingerprint
+0508	הפעל טביעת אצבע	enable Fingerprint	50	הפעל|enable|טביעת אצבע|Fingerprint
+0509	השבת טביעת אצבע	disable Fingerprint	50	השבת|disable|טביעת אצבע|Fingerprint
+0510	עבור למסך טביעת אצבע	go to Fingerprint	50	עבור למסך|go to|טביעת אצבע|Fingerprint
+0511	פתח זיהוי פנים	open Face unlock	51	פתח|open|זיהוי פנים|Face unlock
+0512	הצג זיהוי פנים	show Face unlock	51	הצג|show|זיהוי פנים|Face unlock
+0513	נהל זיהוי פנים	manage Face unlock	51	נהל|manage|זיהוי פנים|Face unlock
+0514	בדוק זיהוי פנים	check Face unlock	51	בדוק|check|זיהוי פנים|Face unlock
+0515	כוון זיהוי פנים	adjust Face unlock	51	כוון|adjust|זיהוי פנים|Face unlock
+0516	בחר זיהוי פנים	choose Face unlock	51	בחר|choose|זיהוי פנים|Face unlock
+0517	העבר זיהוי פנים	switch Face unlock	51	העבר|switch|זיהוי פנים|Face unlock
+0518	הפעל זיהוי פנים	enable Face unlock	51	הפעל|enable|זיהוי פנים|Face unlock
+0519	השבת זיהוי פנים	disable Face unlock	51	השבת|disable|זיהוי פנים|Face unlock
+0520	עבור למסך זיהוי פנים	go to Face unlock	51	עבור למסך|go to|זיהוי פנים|Face unlock
+0521	פתח מנהל סיסמאות	open Password manager	52	פתח|open|מנהל סיסמאות|Password manager
+0522	הצג מנהל סיסמאות	show Password manager	52	הצג|show|מנהל סיסמאות|Password manager
+0523	נהל מנהל סיסמאות	manage Password manager	52	נהל|manage|מנהל סיסמאות|Password manager
+0524	בדוק מנהל סיסמאות	check Password manager	52	בדוק|check|מנהל סיסמאות|Password manager
+0525	כוון מנהל סיסמאות	adjust Password manager	52	כוון|adjust|מנהל סיסמאות|Password manager
+0526	בחר מנהל סיסמאות	choose Password manager	52	בחר|choose|מנהל סיסמאות|Password manager
+0527	העבר מנהל סיסמאות	switch Password manager	52	העבר|switch|מנהל סיסמאות|Password manager
+0528	הפעל מנהל סיסמאות	enable Password manager	52	הפעל|enable|מנהל סיסמאות|Password manager
+0529	השבת מנהל סיסמאות	disable Password manager	52	השבת|disable|מנהל סיסמאות|Password manager
+0530	עבור למסך מנהל סיסמאות	go to Password manager	52	עבור למסך|go to|מנהל סיסמאות|Password manager
+0531	פתח מיקום	open Location	53	פתח|open|מיקום|Location
+0532	הצג מיקום	show Location	53	הצג|show|מיקום|Location
+0533	נהל מיקום	manage Location	53	נהל|manage|מיקום|Location
+0534	בדוק מיקום	check Location	53	בדוק|check|מיקום|Location
+0535	כוון מיקום	adjust Location	53	כוון|adjust|מיקום|Location
+0536	בחר מיקום	choose Location	53	בחר|choose|מיקום|Location
+0537	העבר מיקום	switch Location	53	העבר|switch|מיקום|Location
+0538	הפעל מיקום	enable Location	53	הפעל|enable|מיקום|Location
+0539	השבת מיקום	disable Location	53	השבת|disable|מיקום|Location
+0540	עבור למסך מיקום	go to Location	53	עבור למסך|go to|מיקום|Location
+0541	פתח סריקת WiFi	open WiFi scanning	54	פתח|open|סריקת WiFi|WiFi scanning
+0542	הצג סריקת WiFi	show WiFi scanning	54	הצג|show|סריקת WiFi|WiFi scanning
+0543	נהל סריקת WiFi	manage WiFi scanning	54	נהל|manage|סריקת WiFi|WiFi scanning
+0544	בדוק סריקת WiFi	check WiFi scanning	54	בדוק|check|סריקת WiFi|WiFi scanning
+0545	כוון סריקת WiFi	adjust WiFi scanning	54	כוון|adjust|סריקת WiFi|WiFi scanning
+0546	בחר סריקת WiFi	choose WiFi scanning	54	בחר|choose|סריקת WiFi|WiFi scanning
+0547	העבר סריקת WiFi	switch WiFi scanning	54	העבר|switch|סריקת WiFi|WiFi scanning
+0548	הפעל סריקת WiFi	enable WiFi scanning	54	הפעל|enable|סריקת WiFi|WiFi scanning
+0549	השבת סריקת WiFi	disable WiFi scanning	54	השבת|disable|סריקת WiFi|WiFi scanning
+0550	עבור למסך סריקת WiFi	go to WiFi scanning	54	עבור למסך|go to|סריקת WiFi|WiFi scanning
+0551	פתח סריקת Bluetooth	open Bluetooth scanning	55	פתח|open|סריקת Bluetooth|Bluetooth scanning
+0552	הצג סריקת Bluetooth	show Bluetooth scanning	55	הצג|show|סריקת Bluetooth|Bluetooth scanning
+0553	נהל סריקת Bluetooth	manage Bluetooth scanning	55	נהל|manage|סריקת Bluetooth|Bluetooth scanning
+0554	בדוק סריקת Bluetooth	check Bluetooth scanning	55	בדוק|check|סריקת Bluetooth|Bluetooth scanning
+0555	כוון סריקת Bluetooth	adjust Bluetooth scanning	55	כוון|adjust|סריקת Bluetooth|Bluetooth scanning
+0556	בחר סריקת Bluetooth	choose Bluetooth scanning	55	בחר|choose|סריקת Bluetooth|Bluetooth scanning
+0557	העבר סריקת Bluetooth	switch Bluetooth scanning	55	העבר|switch|סריקת Bluetooth|Bluetooth scanning
+0558	הפעל סריקת Bluetooth	enable Bluetooth scanning	55	הפעל|enable|סריקת Bluetooth|Bluetooth scanning
+0559	השבת סריקת Bluetooth	disable Bluetooth scanning	55	השבת|disable|סריקת Bluetooth|Bluetooth scanning
+0560	עבור למסך סריקת Bluetooth	go to Bluetooth scanning	55	עבור למסך|go to|סריקת Bluetooth|Bluetooth scanning
+0561	פתח שירותי מיקום	open Location services	56	פתח|open|שירותי מיקום|Location services
+0562	הצג שירותי מיקום	show Location services	56	הצג|show|שירותי מיקום|Location services
+0563	נהל שירותי מיקום	manage Location services	56	נהל|manage|שירותי מיקום|Location services
+0564	בדוק שירותי מיקום	check Location services	56	בדוק|check|שירותי מיקום|Location services
+0565	כוון שירותי מיקום	adjust Location services	56	כוון|adjust|שירותי מיקום|Location services
+0566	בחר שירותי מיקום	choose Location services	56	בחר|choose|שירותי מיקום|Location services
+0567	העבר שירותי מיקום	switch Location services	56	העבר|switch|שירותי מיקום|Location services
+0568	הפעל שירותי מיקום	enable Location services	56	הפעל|enable|שירותי מיקום|Location services
+0569	השבת שירותי מיקום	disable Location services	56	השבת|disable|שירותי מיקום|Location services
+0570	עבור למסך שירותי מיקום	go to Location services	56	עבור למסך|go to|שירותי מיקום|Location services
+0571	פתח מצלמה	open Camera	57	פתח|open|מצלמה|Camera
+0572	הצג מצלמה	show Camera	57	הצג|show|מצלמה|Camera
+0573	נהל מצלמה	manage Camera	57	נהל|manage|מצלמה|Camera
+0574	בדוק מצלמה	check Camera	57	בדוק|check|מצלמה|Camera
+0575	כוון מצלמה	adjust Camera	57	כוון|adjust|מצלמה|Camera
+0576	בחר מצלמה	choose Camera	57	בחר|choose|מצלמה|Camera
+0577	העבר מצלמה	switch Camera	57	העבר|switch|מצלמה|Camera
+0578	הפעל מצלמה	enable Camera	57	הפעל|enable|מצלמה|Camera
+0579	השבת מצלמה	disable Camera	57	השבת|disable|מצלמה|Camera
+0580	עבור למסך מצלמה	go to Camera	57	עבור למסך|go to|מצלמה|Camera
+0581	פתח מיקרופון	open Microphone	58	פתח|open|מיקרופון|Microphone
+0582	הצג מיקרופון	show Microphone	58	הצג|show|מיקרופון|Microphone
+0583	נהל מיקרופון	manage Microphone	58	נהל|manage|מיקרופון|Microphone
+0584	בדוק מיקרופון	check Microphone	58	בדוק|check|מיקרופון|Microphone
+0585	כוון מיקרופון	adjust Microphone	58	כוון|adjust|מיקרופון|Microphone
+0586	בחר מיקרופון	choose Microphone	58	בחר|choose|מיקרופון|Microphone
+0587	העבר מיקרופון	switch Microphone	58	העבר|switch|מיקרופון|Microphone
+0588	הפעל מיקרופון	enable Microphone	58	הפעל|enable|מיקרופון|Microphone
+0589	השבת מיקרופון	disable Microphone	58	השבת|disable|מיקרופון|Microphone
+0590	עבור למסך מיקרופון	go to Microphone	58	עבור למסך|go to|מיקרופון|Microphone
+0591	פתח הרשאות מצלמה	open Camera permissions	59	פתח|open|הרשאות מצלמה|Camera permissions
+0592	הצג הרשאות מצלמה	show Camera permissions	59	הצג|show|הרשאות מצלמה|Camera permissions
+0593	נהל הרשאות מצלמה	manage Camera permissions	59	נהל|manage|הרשאות מצלמה|Camera permissions
+0594	בדוק הרשאות מצלמה	check Camera permissions	59	בדוק|check|הרשאות מצלמה|Camera permissions
+0595	כוון הרשאות מצלמה	adjust Camera permissions	59	כוון|adjust|הרשאות מצלמה|Camera permissions
+0596	בחר הרשאות מצלמה	choose Camera permissions	59	בחר|choose|הרשאות מצלמה|Camera permissions
+0597	העבר הרשאות מצלמה	switch Camera permissions	59	העבר|switch|הרשאות מצלמה|Camera permissions
+0598	הפעל הרשאות מצלמה	enable Camera permissions	59	הפעל|enable|הרשאות מצלמה|Camera permissions
+0599	השבת הרשאות מצלמה	disable Camera permissions	59	השבת|disable|הרשאות מצלמה|Camera permissions
+0600	עבור למסך הרשאות מצלמה	go to Camera permissions	59	עבור למסך|go to|הרשאות מצלמה|Camera permissions
+0601	פתח הרשאות מיקרופון	open Microphone permissions	60	פתח|open|הרשאות מיקרופון|Microphone permissions
+0602	הצג הרשאות מיקרופון	show Microphone permissions	60	הצג|show|הרשאות מיקרופון|Microphone permissions
+0603	נהל הרשאות מיקרופון	manage Microphone permissions	60	נהל|manage|הרשאות מיקרופון|Microphone permissions
+0604	בדוק הרשאות מיקרופון	check Microphone permissions	60	בדוק|check|הרשאות מיקרופון|Microphone permissions
+0605	כוון הרשאות מיקרופון	adjust Microphone permissions	60	כוון|adjust|הרשאות מיקרופון|Microphone permissions
+0606	בחר הרשאות מיקרופון	choose Microphone permissions	60	בחר|choose|הרשאות מיקרופון|Microphone permissions
+0607	העבר הרשאות מיקרופון	switch Microphone permissions	60	העבר|switch|הרשאות מיקרופון|Microphone permissions
+0608	הפעל הרשאות מיקרופון	enable Microphone permissions	60	הפעל|enable|הרשאות מיקרופון|Microphone permissions
+0609	השבת הרשאות מיקרופון	disable Microphone permissions	60	השבת|disable|הרשאות מיקרופון|Microphone permissions
+0610	עבור למסך הרשאות מיקרופון	go to Microphone permissions	60	עבור למסך|go to|הרשאות מיקרופון|Microphone permissions
+0611	פתח גישה להתראות	open Notification access	61	פתח|open|גישה להתראות|Notification access
+0612	הצג גישה להתראות	show Notification access	61	הצג|show|גישה להתראות|Notification access
+0613	נהל גישה להתראות	manage Notification access	61	נהל|manage|גישה להתראות|Notification access
+0614	בדוק גישה להתראות	check Notification access	61	בדוק|check|גישה להתראות|Notification access
+0615	כוון גישה להתראות	adjust Notification access	61	כוון|adjust|גישה להתראות|Notification access
+0616	בחר גישה להתראות	choose Notification access	61	בחר|choose|גישה להתראות|Notification access
+0617	העבר גישה להתראות	switch Notification access	61	העבר|switch|גישה להתראות|Notification access
+0618	הפעל גישה להתראות	enable Notification access	61	הפעל|enable|גישה להתראות|Notification access
+0619	השבת גישה להתראות	disable Notification access	61	השבת|disable|גישה להתראות|Notification access
+0620	עבור למסך גישה להתראות	go to Notification access	61	עבור למסך|go to|גישה להתראות|Notification access
+0621	פתח שירותי נגישות	open Accessibility services	62	פתח|open|שירותי נגישות|Accessibility services
+0622	הצג שירותי נגישות	show Accessibility services	62	הצג|show|שירותי נגישות|Accessibility services
+0623	נהל שירותי נגישות	manage Accessibility services	62	נהל|manage|שירותי נגישות|Accessibility services
+0624	בדוק שירותי נגישות	check Accessibility services	62	בדוק|check|שירותי נגישות|Accessibility services
+0625	כוון שירותי נגישות	adjust Accessibility services	62	כוון|adjust|שירותי נגישות|Accessibility services
+0626	בחר שירותי נגישות	choose Accessibility services	62	בחר|choose|שירותי נגישות|Accessibility services
+0627	העבר שירותי נגישות	switch Accessibility services	62	העבר|switch|שירותי נגישות|Accessibility services
+0628	הפעל שירותי נגישות	enable Accessibility services	62	הפעל|enable|שירותי נגישות|Accessibility services
+0629	השבת שירותי נגישות	disable Accessibility services	62	השבת|disable|שירותי נגישות|Accessibility services
+0630	עבור למסך שירותי נגישות	go to Accessibility services	62	עבור למסך|go to|שירותי נגישות|Accessibility services
+0631	פתח קורא מסך	open Screen reader	63	פתח|open|קורא מסך|Screen reader
+0632	הצג קורא מסך	show Screen reader	63	הצג|show|קורא מסך|Screen reader
+0633	נהל קורא מסך	manage Screen reader	63	נהל|manage|קורא מסך|Screen reader
+0634	בדוק קורא מסך	check Screen reader	63	בדוק|check|קורא מסך|Screen reader
+0635	כוון קורא מסך	adjust Screen reader	63	כוון|adjust|קורא מסך|Screen reader
+0636	בחר קורא מסך	choose Screen reader	63	בחר|choose|קורא מסך|Screen reader
+0637	העבר קורא מסך	switch Screen reader	63	העבר|switch|קורא מסך|Screen reader
+0638	הפעל קורא מסך	enable Screen reader	63	הפעל|enable|קורא מסך|Screen reader
+0639	השבת קורא מסך	disable Screen reader	63	השבת|disable|קורא מסך|Screen reader
+0640	עבור למסך קורא מסך	go to Screen reader	63	עבור למסך|go to|קורא מסך|Screen reader
+0641	פתח הגדלה	open Magnification	64	פתח|open|הגדלה|Magnification
+0642	הצג הגדלה	show Magnification	64	הצג|show|הגדלה|Magnification
+0643	נהל הגדלה	manage Magnification	64	נהל|manage|הגדלה|Magnification
+0644	בדוק הגדלה	check Magnification	64	בדוק|check|הגדלה|Magnification
+0645	כוון הגדלה	adjust Magnification	64	כוון|adjust|הגדלה|Magnification
+0646	בחר הגדלה	choose Magnification	64	בחר|choose|הגדלה|Magnification
+0647	העבר הגדלה	switch Magnification	64	העבר|switch|הגדלה|Magnification
+0648	הפעל הגדלה	enable Magnification	64	הפעל|enable|הגדלה|Magnification
+0649	השבת הגדלה	disable Magnification	64	השבת|disable|הגדלה|Magnification
+0650	עבור למסך הגדלה	go to Magnification	64	עבור למסך|go to|הגדלה|Magnification
+0651	פתח הקראת בחירה	open Select to speak	65	פתח|open|הקראת בחירה|Select to speak
+0652	הצג הקראת בחירה	show Select to speak	65	הצג|show|הקראת בחירה|Select to speak
+0653	נהל הקראת בחירה	manage Select to speak	65	נהל|manage|הקראת בחירה|Select to speak
+0654	בדוק הקראת בחירה	check Select to speak	65	בדוק|check|הקראת בחירה|Select to speak
+0655	כוון הקראת בחירה	adjust Select to speak	65	כוון|adjust|הקראת בחירה|Select to speak
+0656	בחר הקראת בחירה	choose Select to speak	65	בחר|choose|הקראת בחירה|Select to speak
+0657	העבר הקראת בחירה	switch Select to speak	65	העבר|switch|הקראת בחירה|Select to speak
+0658	הפעל הקראת בחירה	enable Select to speak	65	הפעל|enable|הקראת בחירה|Select to speak
+0659	השבת הקראת בחירה	disable Select to speak	65	השבת|disable|הקראת בחירה|Select to speak
+0660	עבור למסך הקראת בחירה	go to Select to speak	65	עבור למסך|go to|הקראת בחירה|Select to speak
+0661	פתח מצביע עכבר	open Mouse pointer	66	פתח|open|מצביע עכבר|Mouse pointer
+0662	הצג מצביע עכבר	show Mouse pointer	66	הצג|show|מצביע עכבר|Mouse pointer
+0663	נהל מצביע עכבר	manage Mouse pointer	66	נהל|manage|מצביע עכבר|Mouse pointer
+0664	בדוק מצביע עכבר	check Mouse pointer	66	בדוק|check|מצביע עכבר|Mouse pointer
+0665	כוון מצביע עכבר	adjust Mouse pointer	66	כוון|adjust|מצביע עכבר|Mouse pointer
+0666	בחר מצביע עכבר	choose Mouse pointer	66	בחר|choose|מצביע עכבר|Mouse pointer
+0667	העבר מצביע עכבר	switch Mouse pointer	66	העבר|switch|מצביע עכבר|Mouse pointer
+0668	הפעל מצביע עכבר	enable Mouse pointer	66	הפעל|enable|מצביע עכבר|Mouse pointer
+0669	השבת מצביע עכבר	disable Mouse pointer	66	השבת|disable|מצביע עכבר|Mouse pointer
+0670	עבור למסך מצביע עכבר	go to Mouse pointer	66	עבור למסך|go to|מצביע עכבר|Mouse pointer
+0671	פתח מתגים	open Switch access	67	פתח|open|מתגים|Switch access
+0672	הצג מתגים	show Switch access	67	הצג|show|מתגים|Switch access
+0673	נהל מתגים	manage Switch access	67	נהל|manage|מתגים|Switch access
+0674	בדוק מתגים	check Switch access	67	בדוק|check|מתגים|Switch access
+0675	כוון מתגים	adjust Switch access	67	כוון|adjust|מתגים|Switch access
+0676	בחר מתגים	choose Switch access	67	בחר|choose|מתגים|Switch access
+0677	העבר מתגים	switch Switch access	67	העבר|switch|מתגים|Switch access
+0678	הפעל מתגים	enable Switch access	67	הפעל|enable|מתגים|Switch access
+0679	השבת מתגים	disable Switch access	67	השבת|disable|מתגים|Switch access
+0680	עבור למסך מתגים	go to Switch access	67	עבור למסך|go to|מתגים|Switch access
+0681	פתח קיצורי נגישות	open Accessibility shortcuts	68	פתח|open|קיצורי נגישות|Accessibility shortcuts
+0682	הצג קיצורי נגישות	show Accessibility shortcuts	68	הצג|show|קיצורי נגישות|Accessibility shortcuts
+0683	נהל קיצורי נגישות	manage Accessibility shortcuts	68	נהל|manage|קיצורי נגישות|Accessibility shortcuts
+0684	בדוק קיצורי נגישות	check Accessibility shortcuts	68	בדוק|check|קיצורי נגישות|Accessibility shortcuts
+0685	כוון קיצורי נגישות	adjust Accessibility shortcuts	68	כוון|adjust|קיצורי נגישות|Accessibility shortcuts
+0686	בחר קיצורי נגישות	choose Accessibility shortcuts	68	בחר|choose|קיצורי נגישות|Accessibility shortcuts
+0687	העבר קיצורי נגישות	switch Accessibility shortcuts	68	העבר|switch|קיצורי נגישות|Accessibility shortcuts
+0688	הפעל קיצורי נגישות	enable Accessibility shortcuts	68	הפעל|enable|קיצורי נגישות|Accessibility shortcuts
+0689	השבת קיצורי נגישות	disable Accessibility shortcuts	68	השבת|disable|קיצורי נגישות|Accessibility shortcuts
+0690	עבור למסך קיצורי נגישות	go to Accessibility shortcuts	68	עבור למסך|go to|קיצורי נגישות|Accessibility shortcuts
+0691	פתח כתוביות חיות	open Live captions	69	פתח|open|כתוביות חיות|Live captions
+0692	הצג כתוביות חיות	show Live captions	69	הצג|show|כתוביות חיות|Live captions
+0693	נהל כתוביות חיות	manage Live captions	69	נהל|manage|כתוביות חיות|Live captions
+0694	בדוק כתוביות חיות	check Live captions	69	בדוק|check|כתוביות חיות|Live captions
+0695	כוון כתוביות חיות	adjust Live captions	69	כוון|adjust|כתוביות חיות|Live captions
+0696	בחר כתוביות חיות	choose Live captions	69	בחר|choose|כתוביות חיות|Live captions
+0697	העבר כתוביות חיות	switch Live captions	69	העבר|switch|כתוביות חיות|Live captions
+0698	הפעל כתוביות חיות	enable Live captions	69	הפעל|enable|כתוביות חיות|Live captions
+0699	השבת כתוביות חיות	disable Live captions	69	השבת|disable|כתוביות חיות|Live captions
+0700	עבור למסך כתוביות חיות	go to Live captions	69	עבור למסך|go to|כתוביות חיות|Live captions
+0701	פתח כפתור נגישות	open Accessibility button	70	פתח|open|כפתור נגישות|Accessibility button
+0702	הצג כפתור נגישות	show Accessibility button	70	הצג|show|כפתור נגישות|Accessibility button
+0703	נהל כפתור נגישות	manage Accessibility button	70	נהל|manage|כפתור נגישות|Accessibility button
+0704	בדוק כפתור נגישות	check Accessibility button	70	בדוק|check|כפתור נגישות|Accessibility button
+0705	כוון כפתור נגישות	adjust Accessibility button	70	כוון|adjust|כפתור נגישות|Accessibility button
+0706	בחר כפתור נגישות	choose Accessibility button	70	בחר|choose|כפתור נגישות|Accessibility button
+0707	העבר כפתור נגישות	switch Accessibility button	70	העבר|switch|כפתור נגישות|Accessibility button
+0708	הפעל כפתור נגישות	enable Accessibility button	70	הפעל|enable|כפתור נגישות|Accessibility button
+0709	השבת כפתור נגישות	disable Accessibility button	70	השבת|disable|כפתור נגישות|Accessibility button
+0710	עבור למסך כפתור נגישות	go to Accessibility button	70	עבור למסך|go to|כפתור נגישות|Accessibility button
+0711	פתח סוללה	open Battery	71	פתח|open|סוללה|Battery
+0712	הצג סוללה	show Battery	71	הצג|show|סוללה|Battery
+0713	נהל סוללה	manage Battery	71	נהל|manage|סוללה|Battery
+0714	בדוק סוללה	check Battery	71	בדוק|check|סוללה|Battery
+0715	כוון סוללה	adjust Battery	71	כוון|adjust|סוללה|Battery
+0716	בחר סוללה	choose Battery	71	בחר|choose|סוללה|Battery
+0717	העבר סוללה	switch Battery	71	העבר|switch|סוללה|Battery
+0718	הפעל סוללה	enable Battery	71	הפעל|enable|סוללה|Battery
+0719	השבת סוללה	disable Battery	71	השבת|disable|סוללה|Battery
+0720	עבור למסך סוללה	go to Battery	71	עבור למסך|go to|סוללה|Battery
+0721	פתח חיסכון בסוללה	open Battery saver	72	פתח|open|חיסכון בסוללה|Battery saver
+0722	הצג חיסכון בסוללה	show Battery saver	72	הצג|show|חיסכון בסוללה|Battery saver
+0723	נהל חיסכון בסוללה	manage Battery saver	72	נהל|manage|חיסכון בסוללה|Battery saver
+0724	בדוק חיסכון בסוללה	check Battery saver	72	בדוק|check|חיסכון בסוללה|Battery saver
+0725	כוון חיסכון בסוללה	adjust Battery saver	72	כוון|adjust|חיסכון בסוללה|Battery saver
+0726	בחר חיסכון בסוללה	choose Battery saver	72	בחר|choose|חיסכון בסוללה|Battery saver
+0727	העבר חיסכון בסוללה	switch Battery saver	72	העבר|switch|חיסכון בסוללה|Battery saver
+0728	הפעל חיסכון בסוללה	enable Battery saver	72	הפעל|enable|חיסכון בסוללה|Battery saver
+0729	השבת חיסכון בסוללה	disable Battery saver	72	השבת|disable|חיסכון בסוללה|Battery saver
+0730	עבור למסך חיסכון בסוללה	go to Battery saver	72	עבור למסך|go to|חיסכון בסוללה|Battery saver
+0731	פתח אחוז סוללה	open Battery percentage	73	פתח|open|אחוז סוללה|Battery percentage
+0732	הצג אחוז סוללה	show Battery percentage	73	הצג|show|אחוז סוללה|Battery percentage
+0733	נהל אחוז סוללה	manage Battery percentage	73	נהל|manage|אחוז סוללה|Battery percentage
+0734	בדוק אחוז סוללה	check Battery percentage	73	בדוק|check|אחוז סוללה|Battery percentage
+0735	כוון אחוז סוללה	adjust Battery percentage	73	כוון|adjust|אחוז סוללה|Battery percentage
+0736	בחר אחוז סוללה	choose Battery percentage	73	בחר|choose|אחוז סוללה|Battery percentage
+0737	העבר אחוז סוללה	switch Battery percentage	73	העבר|switch|אחוז סוללה|Battery percentage
+0738	הפעל אחוז סוללה	enable Battery percentage	73	הפעל|enable|אחוז סוללה|Battery percentage
+0739	השבת אחוז סוללה	disable Battery percentage	73	השבת|disable|אחוז סוללה|Battery percentage
+0740	עבור למסך אחוז סוללה	go to Battery percentage	73	עבור למסך|go to|אחוז סוללה|Battery percentage
+0741	פתח שימוש בסוללה	open Battery usage	74	פתח|open|שימוש בסוללה|Battery usage
+0742	הצג שימוש בסוללה	show Battery usage	74	הצג|show|שימוש בסוללה|Battery usage
+0743	נהל שימוש בסוללה	manage Battery usage	74	נהל|manage|שימוש בסוללה|Battery usage
+0744	בדוק שימוש בסוללה	check Battery usage	74	בדוק|check|שימוש בסוללה|Battery usage
+0745	כוון שימוש בסוללה	adjust Battery usage	74	כוון|adjust|שימוש בסוללה|Battery usage
+0746	בחר שימוש בסוללה	choose Battery usage	74	בחר|choose|שימוש בסוללה|Battery usage
+0747	העבר שימוש בסוללה	switch Battery usage	74	העבר|switch|שימוש בסוללה|Battery usage
+0748	הפעל שימוש בסוללה	enable Battery usage	74	הפעל|enable|שימוש בסוללה|Battery usage
+0749	השבת שימוש בסוללה	disable Battery usage	74	השבת|disable|שימוש בסוללה|Battery usage
+0750	עבור למסך שימוש בסוללה	go to Battery usage	74	עבור למסך|go to|שימוש בסוללה|Battery usage
+0751	פתח הגבלות סוללה	open Battery restrictions	75	פתח|open|הגבלות סוללה|Battery restrictions
+0752	הצג הגבלות סוללה	show Battery restrictions	75	הצג|show|הגבלות סוללה|Battery restrictions
+0753	נהל הגבלות סוללה	manage Battery restrictions	75	נהל|manage|הגבלות סוללה|Battery restrictions
+0754	בדוק הגבלות סוללה	check Battery restrictions	75	בדוק|check|הגבלות סוללה|Battery restrictions
+0755	כוון הגבלות סוללה	adjust Battery restrictions	75	כוון|adjust|הגבלות סוללה|Battery restrictions
+0756	בחר הגבלות סוללה	choose Battery restrictions	75	בחר|choose|הגבלות סוללה|Battery restrictions
+0757	העבר הגבלות סוללה	switch Battery restrictions	75	העבר|switch|הגבלות סוללה|Battery restrictions
+0758	הפעל הגבלות סוללה	enable Battery restrictions	75	הפעל|enable|הגבלות סוללה|Battery restrictions
+0759	השבת הגבלות סוללה	disable Battery restrictions	75	השבת|disable|הגבלות סוללה|Battery restrictions
+0760	עבור למסך הגבלות סוללה	go to Battery restrictions	75	עבור למסך|go to|הגבלות סוללה|Battery restrictions
+0761	פתח ניהול אחסון	open Storage management	76	פתח|open|ניהול אחסון|Storage management
+0762	הצג ניהול אחסון	show Storage management	76	הצג|show|ניהול אחסון|Storage management
+0763	נהל ניהול אחסון	manage Storage management	76	נהל|manage|ניהול אחסון|Storage management
+0764	בדוק ניהול אחסון	check Storage management	76	בדוק|check|ניהול אחסון|Storage management
+0765	כוון ניהול אחסון	adjust Storage management	76	כוון|adjust|ניהול אחסון|Storage management
+0766	בחר ניהול אחסון	choose Storage management	76	בחר|choose|ניהול אחסון|Storage management
+0767	העבר ניהול אחסון	switch Storage management	76	העבר|switch|ניהול אחסון|Storage management
+0768	הפעל ניהול אחסון	enable Storage management	76	הפעל|enable|ניהול אחסון|Storage management
+0769	השבת ניהול אחסון	disable Storage management	76	השבת|disable|ניהול אחסון|Storage management
+0770	עבור למסך ניהול אחסון	go to Storage management	76	עבור למסך|go to|ניהול אחסון|Storage management
+0771	פתח קבצים זמניים	open Temporary files	77	פתח|open|קבצים זמניים|Temporary files
+0772	הצג קבצים זמניים	show Temporary files	77	הצג|show|קבצים זמניים|Temporary files
+0773	נהל קבצים זמניים	manage Temporary files	77	נהל|manage|קבצים זמניים|Temporary files
+0774	בדוק קבצים זמניים	check Temporary files	77	בדוק|check|קבצים זמניים|Temporary files
+0775	כוון קבצים זמניים	adjust Temporary files	77	כוון|adjust|קבצים זמניים|Temporary files
+0776	בחר קבצים זמניים	choose Temporary files	77	בחר|choose|קבצים זמניים|Temporary files
+0777	העבר קבצים זמניים	switch Temporary files	77	העבר|switch|קבצים זמניים|Temporary files
+0778	הפעל קבצים זמניים	enable Temporary files	77	הפעל|enable|קבצים זמניים|Temporary files
+0779	השבת קבצים זמניים	disable Temporary files	77	השבת|disable|קבצים זמניים|Temporary files
+0780	עבור למסך קבצים זמניים	go to Temporary files	77	עבור למסך|go to|קבצים זמניים|Temporary files
+0781	פתח הורדות	open Downloads	78	פתח|open|הורדות|Downloads
+0782	הצג הורדות	show Downloads	78	הצג|show|הורדות|Downloads
+0783	נהל הורדות	manage Downloads	78	נהל|manage|הורדות|Downloads
+0784	בדוק הורדות	check Downloads	78	בדוק|check|הורדות|Downloads
+0785	כוון הורדות	adjust Downloads	78	כוון|adjust|הורדות|Downloads
+0786	בחר הורדות	choose Downloads	78	בחר|choose|הורדות|Downloads
+0787	העבר הורדות	switch Downloads	78	העבר|switch|הורדות|Downloads
+0788	הפעל הורדות	enable Downloads	78	הפעל|enable|הורדות|Downloads
+0789	השבת הורדות	disable Downloads	78	השבת|disable|הורדות|Downloads
+0790	עבור למסך הורדות	go to Downloads	78	עבור למסך|go to|הורדות|Downloads
+0791	פתח גיבוי	open Backup	79	פתח|open|גיבוי|Backup
+0792	הצג גיבוי	show Backup	79	הצג|show|גיבוי|Backup
+0793	נהל גיבוי	manage Backup	79	נהל|manage|גיבוי|Backup
+0794	בדוק גיבוי	check Backup	79	בדוק|check|גיבוי|Backup
+0795	כוון גיבוי	adjust Backup	79	כוון|adjust|גיבוי|Backup
+0796	בחר גיבוי	choose Backup	79	בחר|choose|גיבוי|Backup
+0797	העבר גיבוי	switch Backup	79	העבר|switch|גיבוי|Backup
+0798	הפעל גיבוי	enable Backup	79	הפעל|enable|גיבוי|Backup
+0799	השבת גיבוי	disable Backup	79	השבת|disable|גיבוי|Backup
+0800	עבור למסך גיבוי	go to Backup	79	עבור למסך|go to|גיבוי|Backup
+0801	פתח שחזור	open Restore	80	פתח|open|שחזור|Restore
+0802	הצג שחזור	show Restore	80	הצג|show|שחזור|Restore
+0803	נהל שחזור	manage Restore	80	נהל|manage|שחזור|Restore
+0804	בדוק שחזור	check Restore	80	בדוק|check|שחזור|Restore
+0805	כוון שחזור	adjust Restore	80	כוון|adjust|שחזור|Restore
+0806	בחר שחזור	choose Restore	80	בחר|choose|שחזור|Restore
+0807	העבר שחזור	switch Restore	80	העבר|switch|שחזור|Restore
+0808	הפעל שחזור	enable Restore	80	הפעל|enable|שחזור|Restore
+0809	השבת שחזור	disable Restore	80	השבת|disable|שחזור|Restore
+0810	עבור למסך שחזור	go to Restore	80	עבור למסך|go to|שחזור|Restore
+0811	פתח סנכרון	open Account sync	81	פתח|open|סנכרון|Account sync
+0812	הצג סנכרון	show Account sync	81	הצג|show|סנכרון|Account sync
+0813	נהל סנכרון	manage Account sync	81	נהל|manage|סנכרון|Account sync
+0814	בדוק סנכרון	check Account sync	81	בדוק|check|סנכרון|Account sync
+0815	כוון סנכרון	adjust Account sync	81	כוון|adjust|סנכרון|Account sync
+0816	בחר סנכרון	choose Account sync	81	בחר|choose|סנכרון|Account sync
+0817	העבר סנכרון	switch Account sync	81	העבר|switch|סנכרון|Account sync
+0818	הפעל סנכרון	enable Account sync	81	הפעל|enable|סנכרון|Account sync
+0819	השבת סנכרון	disable Account sync	81	השבת|disable|סנכרון|Account sync
+0820	עבור למסך סנכרון	go to Account sync	81	עבור למסך|go to|סנכרון|Account sync
+0821	פתח הוספת חשבון	open Add account	82	פתח|open|הוספת חשבון|Add account
+0822	הצג הוספת חשבון	show Add account	82	הצג|show|הוספת חשבון|Add account
+0823	נהל הוספת חשבון	manage Add account	82	נהל|manage|הוספת חשבון|Add account
+0824	בדוק הוספת חשבון	check Add account	82	בדוק|check|הוספת חשבון|Add account
+0825	כוון הוספת חשבון	adjust Add account	82	כוון|adjust|הוספת חשבון|Add account
+0826	בחר הוספת חשבון	choose Add account	82	בחר|choose|הוספת חשבון|Add account
+0827	העבר הוספת חשבון	switch Add account	82	העבר|switch|הוספת חשבון|Add account
+0828	הפעל הוספת חשבון	enable Add account	82	הפעל|enable|הוספת חשבון|Add account
+0829	השבת הוספת חשבון	disable Add account	82	השבת|disable|הוספת חשבון|Add account
+0830	עבור למסך הוספת חשבון	go to Add account	82	עבור למסך|go to|הוספת חשבון|Add account
+0831	פתח הסרת חשבון	open Remove account	83	פתח|open|הסרת חשבון|Remove account
+0832	הצג הסרת חשבון	show Remove account	83	הצג|show|הסרת חשבון|Remove account
+0833	נהל הסרת חשבון	manage Remove account	83	נהל|manage|הסרת חשבון|Remove account
+0834	בדוק הסרת חשבון	check Remove account	83	בדוק|check|הסרת חשבון|Remove account
+0835	כוון הסרת חשבון	adjust Remove account	83	כוון|adjust|הסרת חשבון|Remove account
+0836	בחר הסרת חשבון	choose Remove account	83	בחר|choose|הסרת חשבון|Remove account
+0837	העבר הסרת חשבון	switch Remove account	83	העבר|switch|הסרת חשבון|Remove account
+0838	הפעל הסרת חשבון	enable Remove account	83	הפעל|enable|הסרת חשבון|Remove account
+0839	השבת הסרת חשבון	disable Remove account	83	השבת|disable|הסרת חשבון|Remove account
+0840	עבור למסך הסרת חשבון	go to Remove account	83	עבור למסך|go to|הסרת חשבון|Remove account
+0841	פתח תאריך	open Date	84	פתח|open|תאריך|Date
+0842	הצג תאריך	show Date	84	הצג|show|תאריך|Date
+0843	נהל תאריך	manage Date	84	נהל|manage|תאריך|Date
+0844	בדוק תאריך	check Date	84	בדוק|check|תאריך|Date
+0845	כוון תאריך	adjust Date	84	כוון|adjust|תאריך|Date
+0846	בחר תאריך	choose Date	84	בחר|choose|תאריך|Date
+0847	העבר תאריך	switch Date	84	העבר|switch|תאריך|Date
+0848	הפעל תאריך	enable Date	84	הפעל|enable|תאריך|Date
+0849	השבת תאריך	disable Date	84	השבת|disable|תאריך|Date
+0850	עבור למסך תאריך	go to Date	84	עבור למסך|go to|תאריך|Date
+0851	פתח שעה	open Time	85	פתח|open|שעה|Time
+0852	הצג שעה	show Time	85	הצג|show|שעה|Time
+0853	נהל שעה	manage Time	85	נהל|manage|שעה|Time
+0854	בדוק שעה	check Time	85	בדוק|check|שעה|Time
+0855	כוון שעה	adjust Time	85	כוון|adjust|שעה|Time
+0856	בחר שעה	choose Time	85	בחר|choose|שעה|Time
+0857	העבר שעה	switch Time	85	העבר|switch|שעה|Time
+0858	הפעל שעה	enable Time	85	הפעל|enable|שעה|Time
+0859	השבת שעה	disable Time	85	השבת|disable|שעה|Time
+0860	עבור למסך שעה	go to Time	85	עבור למסך|go to|שעה|Time
+0861	פתח אזור זמן	open Time zone	86	פתח|open|אזור זמן|Time zone
+0862	הצג אזור זמן	show Time zone	86	הצג|show|אזור זמן|Time zone
+0863	נהל אזור זמן	manage Time zone	86	נהל|manage|אזור זמן|Time zone
+0864	בדוק אזור זמן	check Time zone	86	בדוק|check|אזור זמן|Time zone
+0865	כוון אזור זמן	adjust Time zone	86	כוון|adjust|אזור זמן|Time zone
+0866	בחר אזור זמן	choose Time zone	86	בחר|choose|אזור זמן|Time zone
+0867	העבר אזור זמן	switch Time zone	86	העבר|switch|אזור זמן|Time zone
+0868	הפעל אזור זמן	enable Time zone	86	הפעל|enable|אזור זמן|Time zone
+0869	השבת אזור זמן	disable Time zone	86	השבת|disable|אזור זמן|Time zone
+0870	עבור למסך אזור זמן	go to Time zone	86	עבור למסך|go to|אזור זמן|Time zone
+0871	פתח פורמט שעה	open Hour format	87	פתח|open|פורמט שעה|Hour format
+0872	הצג פורמט שעה	show Hour format	87	הצג|show|פורמט שעה|Hour format
+0873	נהל פורמט שעה	manage Hour format	87	נהל|manage|פורמט שעה|Hour format
+0874	בדוק פורמט שעה	check Hour format	87	בדוק|check|פורמט שעה|Hour format
+0875	כוון פורמט שעה	adjust Hour format	87	כוון|adjust|פורמט שעה|Hour format
+0876	בחר פורמט שעה	choose Hour format	87	בחר|choose|פורמט שעה|Hour format
+0877	העבר פורמט שעה	switch Hour format	87	העבר|switch|פורמט שעה|Hour format
+0878	הפעל פורמט שעה	enable Hour format	87	הפעל|enable|פורמט שעה|Hour format
+0879	השבת פורמט שעה	disable Hour format	87	השבת|disable|פורמט שעה|Hour format
+0880	עבור למסך פורמט שעה	go to Hour format	87	עבור למסך|go to|פורמט שעה|Hour format
+0881	פתח שפת מערכת	open System language	88	פתח|open|שפת מערכת|System language
+0882	הצג שפת מערכת	show System language	88	הצג|show|שפת מערכת|System language
+0883	נהל שפת מערכת	manage System language	88	נהל|manage|שפת מערכת|System language
+0884	בדוק שפת מערכת	check System language	88	בדוק|check|שפת מערכת|System language
+0885	כוון שפת מערכת	adjust System language	88	כוון|adjust|שפת מערכת|System language
+0886	בחר שפת מערכת	choose System language	88	בחר|choose|שפת מערכת|System language
+0887	העבר שפת מערכת	switch System language	88	העבר|switch|שפת מערכת|System language
+0888	הפעל שפת מערכת	enable System language	88	הפעל|enable|שפת מערכת|System language
+0889	השבת שפת מערכת	disable System language	88	השבת|disable|שפת מערכת|System language
+0890	עבור למסך שפת מערכת	go to System language	88	עבור למסך|go to|שפת מערכת|System language
+0891	פתח שפות אפליקציות	open App languages	89	פתח|open|שפות אפליקציות|App languages
+0892	הצג שפות אפליקציות	show App languages	89	הצג|show|שפות אפליקציות|App languages
+0893	נהל שפות אפליקציות	manage App languages	89	נהל|manage|שפות אפליקציות|App languages
+0894	בדוק שפות אפליקציות	check App languages	89	בדוק|check|שפות אפליקציות|App languages
+0895	כוון שפות אפליקציות	adjust App languages	89	כוון|adjust|שפות אפליקציות|App languages
+0896	בחר שפות אפליקציות	choose App languages	89	בחר|choose|שפות אפליקציות|App languages
+0897	העבר שפות אפליקציות	switch App languages	89	העבר|switch|שפות אפליקציות|App languages
+0898	הפעל שפות אפליקציות	enable App languages	89	הפעל|enable|שפות אפליקציות|App languages
+0899	השבת שפות אפליקציות	disable App languages	89	השבת|disable|שפות אפליקציות|App languages
+0900	עבור למסך שפות אפליקציות	go to App languages	89	עבור למסך|go to|שפות אפליקציות|App languages
+0901	פתח מקלדת	open Keyboard	90	פתח|open|מקלדת|Keyboard
+0902	הצג מקלדת	show Keyboard	90	הצג|show|מקלדת|Keyboard
+0903	נהל מקלדת	manage Keyboard	90	נהל|manage|מקלדת|Keyboard
+0904	בדוק מקלדת	check Keyboard	90	בדוק|check|מקלדת|Keyboard
+0905	כוון מקלדת	adjust Keyboard	90	כוון|adjust|מקלדת|Keyboard
+0906	בחר מקלדת	choose Keyboard	90	בחר|choose|מקלדת|Keyboard
+0907	העבר מקלדת	switch Keyboard	90	העבר|switch|מקלדת|Keyboard
+0908	הפעל מקלדת	enable Keyboard	90	הפעל|enable|מקלדת|Keyboard
+0909	השבת מקלדת	disable Keyboard	90	השבת|disable|מקלדת|Keyboard
+0910	עבור למסך מקלדת	go to Keyboard	90	עבור למסך|go to|מקלדת|Keyboard
+0911	פתח שפות מקלדת	open Keyboard languages	91	פתח|open|שפות מקלדת|Keyboard languages
+0912	הצג שפות מקלדת	show Keyboard languages	91	הצג|show|שפות מקלדת|Keyboard languages
+0913	נהל שפות מקלדת	manage Keyboard languages	91	נהל|manage|שפות מקלדת|Keyboard languages
+0914	בדוק שפות מקלדת	check Keyboard languages	91	בדוק|check|שפות מקלדת|Keyboard languages
+0915	כוון שפות מקלדת	adjust Keyboard languages	91	כוון|adjust|שפות מקלדת|Keyboard languages
+0916	בחר שפות מקלדת	choose Keyboard languages	91	בחר|choose|שפות מקלדת|Keyboard languages
+0917	העבר שפות מקלדת	switch Keyboard languages	91	העבר|switch|שפות מקלדת|Keyboard languages
+0918	הפעל שפות מקלדת	enable Keyboard languages	91	הפעל|enable|שפות מקלדת|Keyboard languages
+0919	השבת שפות מקלדת	disable Keyboard languages	91	השבת|disable|שפות מקלדת|Keyboard languages
+0920	עבור למסך שפות מקלדת	go to Keyboard languages	91	עבור למסך|go to|שפות מקלדת|Keyboard languages
+0921	פתח תיקון אוטומטי	open Auto correction	92	פתח|open|תיקון אוטומטי|Auto correction
+0922	הצג תיקון אוטומטי	show Auto correction	92	הצג|show|תיקון אוטומטי|Auto correction
+0923	נהל תיקון אוטומטי	manage Auto correction	92	נהל|manage|תיקון אוטומטי|Auto correction
+0924	בדוק תיקון אוטומטי	check Auto correction	92	בדוק|check|תיקון אוטומטי|Auto correction
+0925	כוון תיקון אוטומטי	adjust Auto correction	92	כוון|adjust|תיקון אוטומטי|Auto correction
+0926	בחר תיקון אוטומטי	choose Auto correction	92	בחר|choose|תיקון אוטומטי|Auto correction
+0927	העבר תיקון אוטומטי	switch Auto correction	92	העבר|switch|תיקון אוטומטי|Auto correction
+0928	הפעל תיקון אוטומטי	enable Auto correction	92	הפעל|enable|תיקון אוטומטי|Auto correction
+0929	השבת תיקון אוטומטי	disable Auto correction	92	השבת|disable|תיקון אוטומטי|Auto correction
+0930	עבור למסך תיקון אוטומטי	go to Auto correction	92	עבור למסך|go to|תיקון אוטומטי|Auto correction
+0931	פתח הצעות הקלדה	open Typing suggestions	93	פתח|open|הצעות הקלדה|Typing suggestions
+0932	הצג הצעות הקלדה	show Typing suggestions	93	הצג|show|הצעות הקלדה|Typing suggestions
+0933	נהל הצעות הקלדה	manage Typing suggestions	93	נהל|manage|הצעות הקלדה|Typing suggestions
+0934	בדוק הצעות הקלדה	check Typing suggestions	93	בדוק|check|הצעות הקלדה|Typing suggestions
+0935	כוון הצעות הקלדה	adjust Typing suggestions	93	כוון|adjust|הצעות הקלדה|Typing suggestions
+0936	בחר הצעות הקלדה	choose Typing suggestions	93	בחר|choose|הצעות הקלדה|Typing suggestions
+0937	העבר הצעות הקלדה	switch Typing suggestions	93	העבר|switch|הצעות הקלדה|Typing suggestions
+0938	הפעל הצעות הקלדה	enable Typing suggestions	93	הפעל|enable|הצעות הקלדה|Typing suggestions
+0939	השבת הצעות הקלדה	disable Typing suggestions	93	השבת|disable|הצעות הקלדה|Typing suggestions
+0940	עבור למסך הצעות הקלדה	go to Typing suggestions	93	עבור למסך|go to|הצעות הקלדה|Typing suggestions
+0941	פתח מילון אישי	open Personal dictionary	94	פתח|open|מילון אישי|Personal dictionary
+0942	הצג מילון אישי	show Personal dictionary	94	הצג|show|מילון אישי|Personal dictionary
+0943	נהל מילון אישי	manage Personal dictionary	94	נהל|manage|מילון אישי|Personal dictionary
+0944	בדוק מילון אישי	check Personal dictionary	94	בדוק|check|מילון אישי|Personal dictionary
+0945	כוון מילון אישי	adjust Personal dictionary	94	כוון|adjust|מילון אישי|Personal dictionary
+0946	בחר מילון אישי	choose Personal dictionary	94	בחר|choose|מילון אישי|Personal dictionary
+0947	העבר מילון אישי	switch Personal dictionary	94	העבר|switch|מילון אישי|Personal dictionary
+0948	הפעל מילון אישי	enable Personal dictionary	94	הפעל|enable|מילון אישי|Personal dictionary
+0949	השבת מילון אישי	disable Personal dictionary	94	השבת|disable|מילון אישי|Personal dictionary
+0950	עבור למסך מילון אישי	go to Personal dictionary	94	עבור למסך|go to|מילון אישי|Personal dictionary
+0951	פתח הדפסה	open Printing	95	פתח|open|הדפסה|Printing
+0952	הצג הדפסה	show Printing	95	הצג|show|הדפסה|Printing
+0953	נהל הדפסה	manage Printing	95	נהל|manage|הדפסה|Printing
+0954	בדוק הדפסה	check Printing	95	בדוק|check|הדפסה|Printing
+0955	כוון הדפסה	adjust Printing	95	כוון|adjust|הדפסה|Printing
+0956	בחר הדפסה	choose Printing	95	בחר|choose|הדפסה|Printing
+0957	העבר הדפסה	switch Printing	95	העבר|switch|הדפסה|Printing
+0958	הפעל הדפסה	enable Printing	95	הפעל|enable|הדפסה|Printing
+0959	השבת הדפסה	disable Printing	95	השבת|disable|הדפסה|Printing
+0960	עבור למסך הדפסה	go to Printing	95	עבור למסך|go to|הדפסה|Printing
+0961	פתח שיתוף קרוב	open Nearby sharing	96	פתח|open|שיתוף קרוב|Nearby sharing
+0962	הצג שיתוף קרוב	show Nearby sharing	96	הצג|show|שיתוף קרוב|Nearby sharing
+0963	נהל שיתוף קרוב	manage Nearby sharing	96	נהל|manage|שיתוף קרוב|Nearby sharing
+0964	בדוק שיתוף קרוב	check Nearby sharing	96	בדוק|check|שיתוף קרוב|Nearby sharing
+0965	כוון שיתוף קרוב	adjust Nearby sharing	96	כוון|adjust|שיתוף קרוב|Nearby sharing
+0966	בחר שיתוף קרוב	choose Nearby sharing	96	בחר|choose|שיתוף קרוב|Nearby sharing
+0967	העבר שיתוף קרוב	switch Nearby sharing	96	העבר|switch|שיתוף קרוב|Nearby sharing
+0968	הפעל שיתוף קרוב	enable Nearby sharing	96	הפעל|enable|שיתוף קרוב|Nearby sharing
+0969	השבת שיתוף קרוב	disable Nearby sharing	96	השבת|disable|שיתוף קרוב|Nearby sharing
+0970	עבור למסך שיתוף קרוב	go to Nearby sharing	96	עבור למסך|go to|שיתוף קרוב|Nearby sharing
+0971	פתח NFC	open NFC	97	פתח|open|NFC|NFC
+0972	הצג NFC	show NFC	97	הצג|show|NFC|NFC
+0973	נהל NFC	manage NFC	97	נהל|manage|NFC|NFC
+0974	בדוק NFC	check NFC	97	בדוק|check|NFC|NFC
+0975	כוון NFC	adjust NFC	97	כוון|adjust|NFC|NFC
+0976	בחר NFC	choose NFC	97	בחר|choose|NFC|NFC
+0977	העבר NFC	switch NFC	97	העבר|switch|NFC|NFC
+0978	הפעל NFC	enable NFC	97	הפעל|enable|NFC|NFC
+0979	השבת NFC	disable NFC	97	השבת|disable|NFC|NFC
+0980	עבור למסך NFC	go to NFC	97	עבור למסך|go to|NFC|NFC
+0981	פתח USB	open USB	98	פתח|open|USB|USB
+0982	הצג USB	show USB	98	הצג|show|USB|USB
+0983	נהל USB	manage USB	98	נהל|manage|USB|USB
+0984	בדוק USB	check USB	98	בדוק|check|USB|USB
+0985	כוון USB	adjust USB	98	כוון|adjust|USB|USB
+0986	בחר USB	choose USB	98	בחר|choose|USB|USB
+0987	העבר USB	switch USB	98	העבר|switch|USB|USB
+0988	הפעל USB	enable USB	98	הפעל|enable|USB|USB
+0989	השבת USB	disable USB	98	השבת|disable|USB|USB
+0990	עבור למסך USB	go to USB	98	עבור למסך|go to|USB|USB
+0991	פתח הקלטת מסך	open Screen recording	99	פתח|open|הקלטת מסך|Screen recording
+0992	הצג הקלטת מסך	show Screen recording	99	הצג|show|הקלטת מסך|Screen recording
+0993	נהל הקלטת מסך	manage Screen recording	99	נהל|manage|הקלטת מסך|Screen recording
+0994	בדוק הקלטת מסך	check Screen recording	99	בדוק|check|הקלטת מסך|Screen recording
+0995	כוון הקלטת מסך	adjust Screen recording	99	כוון|adjust|הקלטת מסך|Screen recording
+0996	בחר הקלטת מסך	choose Screen recording	99	בחר|choose|הקלטת מסך|Screen recording
+0997	העבר הקלטת מסך	switch Screen recording	99	העבר|switch|הקלטת מסך|Screen recording
+0998	הפעל הקלטת מסך	enable Screen recording	99	הפעל|enable|הקלטת מסך|Screen recording
+0999	השבת הקלטת מסך	disable Screen recording	99	השבת|disable|הקלטת מסך|Screen recording
+1000	עבור למסך הקלטת מסך	go to Screen recording	99	עבור למסך|go to|הקלטת מסך|Screen recording
