@@ -93,48 +93,106 @@ public class MainActivity extends Activity {
  }
 
  void buildChatUi(){
-  root=new LinearLayout(this);root.setOrientation(LinearLayout.VERTICAL);root.setBackgroundColor(BG);
-  root.setPadding(14,10,14,10);
+  root=new LinearLayout(this);root.setOrientation(LinearLayout.HORIZONTAL);root.setBackgroundColor(BG);
 
-  LinearLayout top=new LinearLayout(this);top.setGravity(Gravity.CENTER_VERTICAL);top.setPadding(6,4,4,8);
-  ImageView avatar=new ImageView(this);avatar.setImageResource(R.drawable.ic_avraham);
-  top.addView(avatar,new LinearLayout.LayoutParams(48,48));
-  LinearLayout titleBox=new LinearLayout(this);titleBox.setOrientation(LinearLayout.VERTICAL);titleBox.setPadding(10,0,0,0);
-  TextView title=label("אברהם העברי",20,TEXT);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);
-  titleBox.addView(title);
-  status=label("אופליין • מוכן",12,MUTED);titleBox.addView(status);
-  top.addView(titleBox,new LinearLayout.LayoutParams(0,-2,1));
-  LinearLayout topButtons=new LinearLayout(this);topButtons.setGravity(Gravity.CENTER_VERTICAL);
-  ImageButton settings=new ImageButton(this);settings.setImageResource(R.drawable.ic_settings);settings.setContentDescription("הגדרות");settings.setBackground(shape(Color.WHITE,24,1));settings.setPadding(11,11,11,11);settings.setOnClickListener(v->showAppManager());
-  topButtons.addView(settings,new LinearLayout.LayoutParams(48,44));
-  Button tools=softButton("כלים");tools.setOnClickListener(v->showTools());
-  LinearLayout.LayoutParams tlp=new LinearLayout.LayoutParams(78,44);tlp.setMargins(6,0,0,0);topButtons.addView(tools,tlp);
-  top.addView(topButtons);
-  root.addView(top);
+  LinearLayout main=new LinearLayout(this);main.setOrientation(LinearLayout.VERTICAL);main.setBackgroundColor(BG);main.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-  View line=new View(this);line.setBackgroundColor(BORDER);root.addView(line,new LinearLayout.LayoutParams(-1,1));
+  LinearLayout head=new LinearLayout(this);head.setGravity(Gravity.CENTER_VERTICAL);head.setPadding(dp(18),dp(10),dp(18),dp(8));
+  ImageView mini=new ImageView(this);mini.setImageResource(R.drawable.ic_avraham);head.addView(mini,new LinearLayout.LayoutParams(dp(38),dp(38)));
+  LinearLayout ht=new LinearLayout(this);ht.setOrientation(LinearLayout.VERTICAL);ht.setPadding(dp(10),0,0,0);
+  TextView title=label("אברהם העברי",18,TEXT);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);ht.addView(title);
+  status=label("אופליין • מוכן",11,MUTED);ht.addView(status);
+  head.addView(ht,new LinearLayout.LayoutParams(0,-2,1));main.addView(head,new LinearLayout.LayoutParams(-1,dp(62)));
+
+  mainFrame=new FrameLayout(this);main.addView(mainFrame,new LinearLayout.LayoutParams(-1,0,1));
+
+  welcomePanel=new LinearLayout(this);welcomePanel.setOrientation(LinearLayout.VERTICAL);welcomePanel.setGravity(Gravity.CENTER_HORIZONTAL);
+  welcomePanel.setPadding(dp(24),0,dp(24),dp(8));
+  ImageView welcomeIcon=new ImageView(this);welcomeIcon.setImageResource(R.drawable.ic_avraham);
+  welcomePanel.addView(welcomeIcon,new LinearLayout.LayoutParams(dp(112),dp(112)));
+  TextView welcomeTitle=label("אברהם העברי",25,TEXT);welcomeTitle.setTypeface(Typeface.DEFAULT,Typeface.BOLD);welcomeTitle.setGravity(Gravity.CENTER);
+  welcomePanel.addView(welcomeTitle,new LinearLayout.LayoutParams(-1,dp(42)));
+  TextView welcomeSub=label("העוזר המקומי שלך",14,MUTED);welcomeSub.setGravity(Gravity.CENTER);
+  welcomePanel.addView(welcomeSub,new LinearLayout.LayoutParams(-1,dp(30)));
+
+  composer=buildComposer();
+  LinearLayout.LayoutParams cp=new LinearLayout.LayoutParams(-1,dp(70));cp.setMargins(0,dp(22),0,0);welcomePanel.addView(composer,cp);
+  FrameLayout.LayoutParams wp=new FrameLayout.LayoutParams(-1,-2);wp.gravity=Gravity.CENTER;mainFrame.addView(welcomePanel,wp);
 
   chatScroll=new ScrollView(this);chatScroll.setFillViewport(true);chatScroll.setVerticalScrollBarEnabled(false);
-  chatList=new LinearLayout(this);chatList.setOrientation(LinearLayout.VERTICAL);chatList.setPadding(3,12,3,12);
+  chatList=new LinearLayout(this);chatList.setOrientation(LinearLayout.VERTICAL);chatList.setPadding(dp(12),dp(14),dp(12),dp(96));
   chatScroll.addView(chatList,new ScrollView.LayoutParams(-1,-2));
-  root.addView(chatScroll,new LinearLayout.LayoutParams(-1,0,1));
+  FrameLayout.LayoutParams sp=new FrameLayout.LayoutParams(-1,-1);sp.gravity=Gravity.FILL;mainFrame.addView(chatScroll,sp);chatScroll.setVisibility(View.GONE);
 
-  LinearLayout suggestions=new LinearLayout(this);suggestions.setOrientation(LinearLayout.HORIZONTAL);suggestions.setGravity(Gravity.CENTER_VERTICAL);
-  suggestions.setPadding(0,3,0,7);
-  addSuggestion(suggestions,"פתח לי כרום");addSuggestion(suggestions,"תגביה שמע");addSuggestion(suggestions,"תעביר לשיר הבא");
-  root.addView(suggestions,new LinearLayout.LayoutParams(-1,50));
+  root.addView(main,new LinearLayout.LayoutParams(0,-1,1));
 
-  LinearLayout composer=new LinearLayout(this);composer.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);composer.setPadding(0,4,0,0);
-  input=new EditText(this);input.setTextSize(16);input.setTextColor(TEXT);input.setHintTextColor(Color.rgb(150,147,160));
-  input.setHint("כתוב הודעה...");input.setSingleLine(false);input.setMaxLines(4);input.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);
-  input.setPadding(18,10,18,10);input.setBackground(shape(Color.WHITE,28,1));
-  composer.addView(input,new LinearLayout.LayoutParams(0,58,1));
-  Button send=softButton("שלח");send.setTextColor(Color.WHITE);send.setBackground(shape(Color.rgb(109,94,245),28,0));
-  send.setOnClickListener(v->sendCurrent());composer.addView(send,new LinearLayout.LayoutParams(78,58));
-  root.addView(composer,new LinearLayout.LayoutParams(-1,64));
+  sidebar=new LinearLayout(this);sidebar.setOrientation(LinearLayout.VERTICAL);sidebar.setBackgroundColor(PANEL);sidebar.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+  LinearLayout sbHead=new LinearLayout(this);sbHead.setGravity(Gravity.CENTER_VERTICAL);sbHead.setPadding(dp(10),dp(10),dp(10),dp(10));
 
+  Button sbPlus=softButton("+");sbPlus.setTextSize(22);sbPlus.setTextColor(Color.WHITE);sbPlus.setBackground(shape(DARK,14,0));sbPlus.setOnClickListener(v->showModeMenu(v));
+  sbHead.addView(sbPlus,new LinearLayout.LayoutParams(dp(44),dp(44)));
+  Button gear=softButton("⚙");gear.setTextSize(18);gear.setPadding(0,0,0,0);gear.setOnClickListener(v->showAppManager());
+  LinearLayout.LayoutParams gp=new LinearLayout.LayoutParams(dp(44),dp(44));gp.setMargins(dp(6),0,0,0);sbHead.addView(gear,gp);
+  TextView sbTitle=label("השיחות שלי",16,TEXT);sbTitle.setTypeface(Typeface.DEFAULT,Typeface.BOLD);sbTitle.setGravity(Gravity.CENTER);sbHead.addView(sbTitle,new LinearLayout.LayoutParams(0,dp(44),1));
+  TextView collapse=label("‹",25,MUTED);collapse.setGravity(Gravity.CENTER);sbHead.addView(collapse,new LinearLayout.LayoutParams(dp(30),dp(44)));
+  sidebar.addView(sbHead);
+
+  View divider=new View(this);divider.setBackgroundColor(BORDER);sidebar.addView(divider,new LinearLayout.LayoutParams(-1,1));
+
+  Button newChatBtn=softButton("שיחה חדשה");newChatBtn.setTypeface(Typeface.DEFAULT,Typeface.BOLD);newChatBtn.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);newChatBtn.setOnClickListener(v->newChat());
+  LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(-1,dp(48));np.setMargins(dp(10),dp(10),dp(10),dp(6));sidebar.addView(newChatBtn,np);
+
+  sidebarList=new LinearLayout(this);sidebarList.setOrientation(LinearLayout.VERTICAL);sidebarList.setPadding(dp(10),0,dp(10),0);
+  ScrollView hs=new ScrollView(this);hs.setVerticalScrollBarEnabled(false);hs.addView(sidebarList,new ScrollView.LayoutParams(-1,-2));
+  sidebar.addView(hs,new LinearLayout.LayoutParams(-1,0,1));
+
+  root.addView(sidebar,new LinearLayout.LayoutParams(dp(286),-1));
   setContentView(root);
   getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+ }
+
+ LinearLayout buildComposer(){
+  LinearLayout wrap=new LinearLayout(this);wrap.setOrientation(LinearLayout.HORIZONTAL);wrap.setGravity(Gravity.CENTER_VERTICAL);
+  wrap.setPadding(dp(8),dp(6),dp(8),dp(6));wrap.setBackground(shape(BUBBLE,24,1));
+
+  Button send=softButton("➤");send.setTextSize(20);send.setTextColor(Color.WHITE);send.setPadding(0,0,0,2);send.setBackground(shape(DARK,17,0));send.setOnClickListener(v->sendCurrent());
+  wrap.addView(send,new LinearLayout.LayoutParams(dp(48),dp(56)));
+
+  input=new EditText(this);input.setTextSize(16);input.setTextColor(TEXT);input.setHintTextColor(Color.rgb(155,149,139));
+  input.setHint("כתוב הודעה...");input.setSingleLine(false);input.setMaxLines(3);input.setGravity(Gravity.RIGHT|Gravity.CENTER_VERTICAL);input.setPadding(dp(10),dp(8),dp(10),dp(8));input.setBackgroundColor(Color.TRANSPARENT);
+  wrap.addView(input,new LinearLayout.LayoutParams(0,dp(56),1));
+
+  modeLabel=label("צ׳אט",12,MUTED);modeLabel.setGravity(Gravity.CENTER);wrap.addView(modeLabel,new LinearLayout.LayoutParams(dp(52),dp(40)));
+
+  Button plus=softButton("+");plus.setTextSize(22);plus.setPadding(0,0,0,2);plus.setBackground(shape(Color.TRANSPARENT,18,0));plus.setOnClickListener(v->showModeMenu(v));
+  wrap.addView(plus,new LinearLayout.LayoutParams(dp(44),dp(56)));
+  return wrap;
+ }
+
+ int dp(int v){return (int)(v*getResources().getDisplayMetrics().density+0.5f);}
+
+ void showModeMenu(View anchor){
+  LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(dp(10),dp(10),dp(10),dp(10));box.setBackground(shape(PANEL,18,1));
+  PopupWindow pw=new PopupWindow(box,dp(250),-2,true);pw.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));pw.setElevation(dp(8));
+  addModeItem(box,pw,"חיפוש קובץ","חפש קובץ בתיקייה שנבחרה ופתח אותו",Mode.FILE);
+  addModeItem(box,pw,"פתיחת אפליקציה","חפש אפליקציה מותקנת ופתח אותה",Mode.APP);
+  addModeItem(box,pw,"צ׳אט","נסה תשובה; אם אין התאמה, נסה אפליקציה ואז קבצים",Mode.CHAT);
+  pw.showAsDropDown(anchor,-dp(190),-dp(220));
+ }
+
+ void addModeItem(LinearLayout box,PopupWindow pw,String titleText,String sub,Mode m){
+  LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.VERTICAL);row.setPadding(dp(14),dp(8),dp(14),dp(8));row.setBackground(shape(BUBBLE,14,1));
+  TextView a=label(titleText,15,TEXT);a.setTypeface(Typeface.DEFAULT,Typeface.BOLD);a.setGravity(Gravity.RIGHT);row.addView(a);
+  TextView b=label(sub,11,MUTED);b.setGravity(Gravity.RIGHT);row.addView(b);
+  row.setOnClickListener(v->{setMode(m);pw.dismiss();});
+  LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(-1,dp(62));rp.setMargins(0,dp(4),0,dp(4));box.addView(row,rp);
+ }
+
+ void setMode(Mode m){
+  mode=m;
+  String name=mode==Mode.CHAT?"צ׳אט":mode==Mode.APP?"אפליקציה":"קובץ";
+  modeLabel.setText(name);
+  input.setHint(mode==Mode.CHAT?"כתוב הודעה...":mode==Mode.APP?"שם האפליקציה לפתיחה...":"שם הקובץ לחיפוש...");
  }
 
  void addSuggestion(LinearLayout box,String text){
