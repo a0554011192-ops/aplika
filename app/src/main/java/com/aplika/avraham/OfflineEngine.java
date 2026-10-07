@@ -168,11 +168,12 @@ final class OfflineEngine {
  void indexResponse(String raw,Resp r){
   String n=normalize(raw);
   if(n.isEmpty())return;
+  responseExact.putIfAbsent(n,r);
   for(String tok:n.split("\\s+")){
    if(tok.length()<2)continue;
    ArrayList<Resp> list=responseIndex.get(tok);
    if(list==null){list=new ArrayList<>();responseIndex.put(tok,list);}
-   if(!list.contains(r))list.add(r);
+   if(list.size()<48&&!list.contains(r))list.add(r);
   }
  }
 
