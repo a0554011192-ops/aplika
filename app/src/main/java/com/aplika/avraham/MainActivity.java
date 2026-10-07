@@ -146,9 +146,11 @@ public class MainActivity extends Activity {
  boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
  boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","נעל מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings");}
+ boolean settingsRequest(String q){return hasAny(q,"wifi","wi-fi","רשת אלחוטית","וויפי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast");}
 
  void process(String q){
   if(direct(q))return;
+  if(settingsRequest(q)&&(openRequest(q)||actionRequest(q))){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
   if(actionRequest(q)){runAction(q);return;}
   chat(q);
