@@ -238,12 +238,13 @@ public class MainActivity extends Activity {
   for(Map.Entry<String,?> e:aliasPrefs.getAll().entrySet()){
    if(e.getKey().equals(keepPackage)||!(e.getValue() instanceof String))continue;
    LinkedHashSet<String> keep=new LinkedHashSet<>();
+   boolean packageChanged=false;
    for(String a:((String)e.getValue()).split("\\|")){
     String x=OfflineEngine.normalize(a);
     if(!x.equals(q))keep.add(x);
-    else changed=true;
+    else packageChanged=true;
    }
-   if(changed)editor.putString(e.getKey(),String.join("|",keep));
+   if(packageChanged){changed=true;editor.putString(e.getKey(),String.join("|",keep));}
   }
   if(changed)editor.apply();
  }
@@ -259,19 +260,19 @@ public class MainActivity extends Activity {
   TextView info=label("בחר אפליקציה, כתוב פקודה בעברית שתפתח אותה, ושמור. הפקודה נשמרת במכשיר ותעבוד גם אחרי הפעלה מחדש.",13,MUTED);
   info.setPadding(0,6,0,12);box.addView(info);
 
-  LinearLayout actions=new LinearLayout(this);
-  Button roles=softButton("בדיקת Android");roles.setOnClickListener(v->showAndroidRoles());
-  Button refresh=softButton("רענן");refresh.setOnClickListener(v->{refresh.setEnabled(false);new Thread(()->{loadInstalledApps();runOnUiThread(()->{count.setText("נטענו "+installedApps.size()+" אפליקציות מהמכשיר");adapter.reload(installedApps);refresh.setEnabled(true);});},"installed-app-refresh").start();});
-  actions.addView(roles,new LinearLayout.LayoutParams(0,44,1));
-  LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(0,44,1);rp.setMargins(8,0,0,0);actions.addView(refresh,rp);
-  box.addView(actions);
-
   EditText search=new EditText(this);search.setHint("חפש אפליקציה או חבילה...");search.setSingleLine(true);
   search.setTextSize(15);search.setPadding(16,8,16,8);search.setBackground(shape(Color.WHITE,22,1));
   LinearLayout.LayoutParams sp=new LinearLayout.LayoutParams(-1,50);sp.setMargins(0,12,0,10);box.addView(search,sp);
 
   ListView list=new ListView(this);list.setDividerHeight(1);
   AppAdapter adapter=new AppAdapter(installedApps);list.setAdapter(adapter);
+
+  LinearLayout actions=new LinearLayout(this);
+  Button roles=softButton("בדיקת Android");roles.setOnClickListener(v->showAndroidRoles());
+  Button refresh=softButton("רענן");refresh.setOnClickListener(v->{refresh.setEnabled(false);new Thread(()->{loadInstalledApps();runOnUiThread(()->{count.setText("נטענו "+installedApps.size()+" אפליקציות מהמכשיר");adapter.reload(installedApps);refresh.setEnabled(true);});},"installed-app-refresh").start();});
+  actions.addView(roles,new LinearLayout.LayoutParams(0,44,1));
+  LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(0,44,1);rp.setMargins(8,0,0,0);actions.addView(refresh,rp);
+  box.addView(actions);
   search.addTextChangedListener(new android.text.TextWatcher(){
    public void beforeTextChanged(CharSequence s,int st,int c,int a){}
    public void onTextChanged(CharSequence s,int st,int b,int c){adapter.filter(s.toString());}
