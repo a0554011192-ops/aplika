@@ -516,14 +516,12 @@ public class MainActivity extends Activity {
   for(AppRow row:installedApps){
    String nl=OfflineEngine.normalize(row.label);
    String np=OfflineEngine.normalize(row.packageName);
-   if(q.equals(nl)||q.equals(np)||canonicalQ.equals(engine.canonical(nl)))return 120;
-   int s=0;
+   if(q.equals(nl)||q.equals(np))return 120;
+   if(!canonicalQ.isEmpty()&&canonicalQ.equals(engine.canonical(nl)))return 120;
    if(q.length()>=3){
-    if(nl.contains(q)||np.contains(q))s=80;
-    else if(canonicalQ.length()>=3&&(nl.contains(canonicalQ)||np.contains(canonicalQ)))s=70;
+    if(nl.contains(q)||np.contains(q))best=Math.max(best,80);
+    else if(canonicalQ.length()>=3&&(nl.contains(canonicalQ)||np.contains(canonicalQ)))best=Math.max(best,70);
    }
-   if(s<45)s=engine.score(q,nl+" "+np);
-   if(s>best)best=s;
    if(best>=80)return best;
   }
   return best;
@@ -533,12 +531,28 @@ public class MainActivity extends Activity {
   OfflineEngine.Resp fast=engine.quickResponse(q);
   if(fast!=null){addMessage(english?fast.en:fast.he,"assistant");return;}
   if(!engine.chatLoaded){
-   new Thread(()->{engine.loadChat(this);runOnUiThread(()->chat(q));},"chat-loader").start();
+   status.setText("טוען מאגר...");
+   new Thread(()->{
+    engine.loadChat(this);
+    runOnUiThread(()->{
+     status.setText("אופליין • מוכן");
+     chat(q);
+    });
+   },"chat-loader").start();
    return;
   }
-  OfflineEngine.Resp r=engine.bestResponse(q,english);
-  if(r==null){addMessage(english?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");return;}
-  addMessage(english?r.en:r.he,"assistant");
+  // Never run the full response matcher on the Android UI thread.
+  final boolean responseEnglish=english;
+  new Thread(()->{
+   OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
+   runOnUiThread(()->{
+    if(r==null){
+     addMessage(responseEnglish?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");
+    }else{
+     addMessage(responseEnglish?r.en:r.he,"assistant");
+    }
+   });
+  },"response-matcher").start();
  }
 
  boolean mathRequest(String raw){
