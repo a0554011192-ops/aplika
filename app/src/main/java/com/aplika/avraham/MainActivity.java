@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
   if(hasAny(x,"ווליום","עוצמה","volume","שמע","קול")&&m.find()){int p=Math.max(0,Math.min(100,Integer.parseInt(m.group(1))));int max=audio.getStreamMaxVolume(AudioManager.STREAM_MUSIC);audio.setStreamVolume(AudioManager.STREAM_MUSIC,(max*p)/100,0);addMessage((english?"Volume set to ":"עוצמת השמע הוגדרה ל-")+p+"%","assistant");return true;}
   if(hasAny(x,"תעביר לשיר הבא","שיר הבא","הבא","next track","next song")&&hasAny(x,"שיר","מוזיקה","track","song")){if(media(KeyEvent.KEYCODE_MEDIA_NEXT)){addMessage(english?"Next track.":"השיר הבא.","assistant");return true;}}
   if(hasAny(x,"שיר קודם","שיר הקודם","previous track","previous song")&&hasAny(x,"שיר","מוזיקה","track","song")){if(media(KeyEvent.KEYCODE_MEDIA_PREVIOUS)){addMessage(english?"Previous track.":"השיר הקודם.","assistant");return true;}}
-  if(hasAny(x,"נגן","נגינה","play music","play")){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){addMessage(english?"Play.":"ניגון.","assistant");return true;}}
+  if(!openRequest(q) && hasAny(x,"נגן","נגינה","play music","play")){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){addMessage(english?"Play.":"ניגון.","assistant");return true;}}
   if(hasAny(x,"השהה","השהייה","pause")){if(media(KeyEvent.KEYCODE_MEDIA_PAUSE)){addMessage(english?"Paused.":"הושהה.","assistant");return true;}}
   if(hasAny(x,"עצור מוזיקה","stop music")){if(media(KeyEvent.KEYCODE_MEDIA_STOP)){addMessage(english?"Stopped.":"המוזיקה נעצרה.","assistant");return true;}}
   int g=-1;String msg=null;
@@ -222,22 +222,91 @@ public class MainActivity extends Activity {
   return x.trim();
  }
 
- void openThing(String q){
+ boolean openThing(String q){
   String target=targetOf(q);
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
-  ApplicationInfo best=null;String bn="";int bs=0;
-  for(ApplicationInfo a:pm.getInstalledApplications(PackageManager.GET_META_DATA)){
-   String n=pm.getApplicationLabel(a).toString();
-   String cn=engine.canonical(n);
-   int s=wanted.equals(cn)?100:engine.score(target,n);
-   if(s>bs){bs=s;best=a;bn=n;}
+
+  // First use the real launcher registry. This sees the apps the user can actually open,
+  // instead of trusting the static 3,000-row catalog.
+  Intent launcher=new Intent(Intent.ACTION_MAIN);
+  launcher.addCategory(Intent.CATEGORY_LAUNCHER);
+  List<ResolveInfo> launchers=pm.queryIntentActivities(launcher,PackageManager.MATCH_ALL);
+  ResolveInfo best=null;String bn="";String bp="";int bs=0;
+
+  for(ResolveInfo ri:launchers){
+   if(ri.activityInfo==null)continue;
+   CharSequence label=ri.loadLabel(pm);
+   String name=label==null?"":label.toString();
+   String pkg=ri.activityInfo.packageName==null?"":ri.activityInfo.packageName;
+   int s=wanted.equals(engine.canonical(name))?100:engine.score(target,name);
+   s=Math.max(s,engine.score(target,pkg.replace('.',' ')));
+   if(s>bs){bs=s;best=ri;bn=name;bp=pkg;}
   }
-  if(best!=null&&bs>=1){
-   Intent i=pm.getLaunchIntentForPackage(best.packageName);
-   if(i!=null){startActivity(i);addMessage((english?"Opening ":"פותח ")+bn,"assistant");return;}
+
+  // Also try common Android semantic categories, so generic names such as
+  // "גלריה", "נגן", "דפדפן", "מחשבון" and "מייל" work even when the app's
+  // visible label is different from what the user said.
+  if(best==null || bs<18){
+   ResolveInfo semantic=semanticApp(pm,target);
+   if(semantic!=null){
+    CharSequence label=semantic.loadLabel(pm);
+    String name=label==null?"":label.toString();
+    best=semantic;bn=name;bp=semantic.activityInfo.packageName;bs=90;
+   }
   }
+
+  if(best!=null && bs>=18){
+   try{
+    Intent i=new Intent();
+    i.setComponent(new ComponentName(bp,best.activityInfo.name));
+    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    startActivity(i);
+    addMessage((english?"Opening ":"פותח ")+(bn.isEmpty()?target:bn),"assistant");
+    return true;
+   }catch(Exception ignored){}
+  }
+
+  // Android file picker is a useful fallback for "סייר קבצים" even when the
+  // device does not expose a normal file-manager launcher.
+  String t=OfflineEngine.normalize(target);
+  if(t.contains("סייר קבצים")||t.contains("מנהל קבצים")||t.contains("קבצים")||t.contains("file manager")||t.contains("file explorer")){
+   try{
+    Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+    i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    startActivityForResult(i,11);
+    addMessage(english?"Opening the file browser.":"פותח את סייר הקבצים.","assistant");
+    return true;
+   }catch(Exception ignored){}
+  }
+
   addMessage(english?"I could not find that installed app.":"לא מצאתי את האפליקציה הזו בין האפליקציות המותקנות.","assistant");
+  return true;
+ }
+
+ ResolveInfo semanticApp(PackageManager pm,String target){
+  String t=OfflineEngine.normalize(target);
+  String category=null;
+  if(t.contains("דפדפן")||t.equals("browser")||t.contains("אינטרנט")||t.contains("chrome")||t.contains("כרום"))
+   category=Intent.CATEGORY_APP_BROWSER;
+  else if(t.contains("גלריה")||t.contains("תמונות")||t.contains("photos")||t.contains("gallery"))
+   category=Intent.CATEGORY_APP_GALLERY;
+  else if(t.contains("נגן")||t.contains("מוזיקה")||t.contains("music")||t.contains("media player"))
+   category=Intent.CATEGORY_APP_MUSIC;
+  else if(t.contains("מחשבון")||t.contains("calculator"))
+   category=Intent.CATEGORY_APP_CALCULATOR;
+  else if(t.contains("יומן")||t.contains("לוח שנה")||t.contains("calendar"))
+   category=Intent.CATEGORY_APP_CALENDAR;
+  else if(t.contains("מפות")||t.contains("maps")||t.contains("ניווט")||t.contains("navigation"))
+   category=Intent.CATEGORY_APP_MAPS;
+  else if(t.contains("דואר")||t.contains("מייל")||t.contains("email")||t.contains("gmail"))
+   category=Intent.CATEGORY_APP_EMAIL;
+  if(category==null)return null;
+  try{
+   Intent i=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,category);
+   List<ResolveInfo> r=pm.queryIntentActivities(i,PackageManager.MATCH_ALL);
+   return r.isEmpty()?null:r.get(0);
+  }catch(Exception e){return null;}
  }
 
  void pickFolder(){
