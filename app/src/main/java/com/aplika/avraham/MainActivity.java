@@ -292,33 +292,47 @@ public class MainActivity extends Activity {
 
  void showAndroidRoles(){
   ensureInstalledApps(()->{
-   String[] names={"דפדפן","מחשבון","יומן","אנשי קשר","דואר","קבצים","גלריה","מפות","חנות אפליקציות","הודעות","מוזיקה","מזג אוויר","בית","מצלמה","טלפון","הגדרות"};
-   String[] cats={Intent.CATEGORY_APP_BROWSER,Intent.CATEGORY_APP_CALCULATOR,Intent.CATEGORY_APP_CALENDAR,Intent.CATEGORY_APP_CONTACTS,Intent.CATEGORY_APP_EMAIL,Intent.CATEGORY_APP_FILES,Intent.CATEGORY_APP_GALLERY,Intent.CATEGORY_APP_MAPS,Intent.CATEGORY_APP_MARKET,Intent.CATEGORY_APP_MESSAGING,Intent.CATEGORY_APP_MUSIC,Intent.CATEGORY_APP_WEATHER,null,null,null,null};
+   String[] names={"דפדפן","מחשבון","יומן","אנשי קשר","דואר","קבצים","גלריה","מפות","חנות אפליקציות","הודעות","מוזיקה","מזג אוויר","בית","מצלמה","טלפון","שעון","הגדרות"};
+   String[] cats={Intent.CATEGORY_APP_BROWSER,Intent.CATEGORY_APP_CALCULATOR,Intent.CATEGORY_APP_CALENDAR,Intent.CATEGORY_APP_CONTACTS,Intent.CATEGORY_APP_EMAIL,Intent.CATEGORY_APP_FILES,Intent.CATEGORY_APP_GALLERY,Intent.CATEGORY_APP_MAPS,Intent.CATEGORY_APP_MARKET,Intent.CATEGORY_APP_MESSAGING,Intent.CATEGORY_APP_MUSIC,Intent.CATEGORY_APP_WEATHER,null,null,null,null,null};
    StringBuilder sb=new StringBuilder();
+   PackageManager pm=getPackageManager();
    for(int i=0;i<names.length;i++){
     String found=null;
     try{
      if(cats[i]!=null){
-      if(i==5 && Build.VERSION.SDK_INT<29){found="לא זמין בגרסה זו";}else{
+      if(cats[i].equals(Intent.CATEGORY_APP_FILES) && Build.VERSION.SDK_INT<29){
+       found="לא זמין בגרסה זו";
+      }else{
        Intent in=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,cats[i]);
-       List<ResolveInfo> rs=getPackageManager().queryIntentActivities(in,PackageManager.MATCH_ALL);
+       List<ResolveInfo> rs=pm.queryIntentActivities(in,PackageManager.MATCH_ALL);
        if(!rs.isEmpty())found=labelOf(rs.get(0));
       }
      }else if(i==12){
-      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME),PackageManager.MATCH_ALL);
+      Intent in=new Intent(Intent.ACTION_MAIN);in.addCategory(Intent.CATEGORY_HOME);
+      List<ResolveInfo> rs=pm.queryIntentActivities(in,PackageManager.MATCH_ALL);
       if(!rs.isEmpty())found=labelOf(rs.get(0));
      }else if(i==13){
-      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_IMAGE_CAPTURE),PackageManager.MATCH_ALL);
+      List<ResolveInfo> rs=pm.queryIntentActivities(new Intent(Intent.ACTION_IMAGE_CAPTURE),PackageManager.MATCH_ALL);
       if(!rs.isEmpty())found=labelOf(rs.get(0));
      }else if(i==14){
-      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_DIAL),PackageManager.MATCH_ALL);
+      List<ResolveInfo> rs=pm.queryIntentActivities(new Intent(Intent.ACTION_DIAL),PackageManager.MATCH_ALL);
       if(!rs.isEmpty())found=labelOf(rs.get(0));
-     }else{
-      found="מסך Android";
+     }else if(i==15){
+      for(AppRow row:installedApps){
+       String z=(row.label+" "+row.packageName).toLowerCase(Locale.ROOT);
+       if(z.contains("clock")||z.contains("deskclock")||OfflineEngine.normalize(row.label).equals("שעון")){
+        found=row.label;break;
+       }
+      }
+     }else if(i==16){
+      Intent in=new Intent(android.provider.Settings.ACTION_SETTINGS);
+      List<ResolveInfo> rs=pm.queryIntentActivities(in,PackageManager.MATCH_ALL);
+      found=rs.isEmpty()?"Android Settings":"Android Settings";
      }
     }catch(Exception ignored){}
     sb.append(names[i]).append(": ").append(found==null?"לא נמצא":found).append("\n");
    }
+   sb.append("\nהערה: Android לא משתמש באותה אפליקציית ברירת מחדל בכל יצרן. הבדיקה בודקת את התפקיד שהמכשיר הנוכחי חושף.");
    new AlertDialog.Builder(this).setTitle("בדיקת אפליקציות/תפקידי Android").setMessage(sb.toString()).setPositiveButton("סגור",null).show();
   });
  }
