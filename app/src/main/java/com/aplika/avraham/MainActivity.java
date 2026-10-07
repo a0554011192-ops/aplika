@@ -316,6 +316,7 @@ public class MainActivity extends Activity {
 
  boolean openThing(String q){
   String target=targetOf(q);
+  engine.loadApps(this);
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
