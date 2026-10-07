@@ -25,6 +25,9 @@ public class MainActivity extends Activity {
  OfflineEngine engine;
  AudioManager audio;
  boolean english=false;
+ ArrayList<AppRow> installedApps=new ArrayList<>();
+ volatile boolean installedAppsLoaded=false;
+ SharedPreferences aliasPrefs;
 
  final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
  final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
@@ -35,7 +38,9 @@ public class MainActivity extends Activity {
   getWindow().setNavigationBarColor(BG);
   audio=(AudioManager)getSystemService(AUDIO_SERVICE);
   engine=new OfflineEngine(this);
+  aliasPrefs=getSharedPreferences("app_aliases",MODE_PRIVATE);
   buildChatUi();
+  new Thread(()->loadInstalledApps(),"installed-app-loader").start();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
   status.setText("טוען מאגר מקומי...");
   new Thread(()->{ engine.loadChat(this); runOnUiThread(()->status.setText("אופליין • מוכן")); engine.loadCommands(this); engine.loadApps(this); },"catalog-loader").start();
@@ -71,8 +76,12 @@ public class MainActivity extends Activity {
   titleBox.addView(title);
   status=label("אופליין • מוכן",12,MUTED);titleBox.addView(status);
   top.addView(titleBox,new LinearLayout.LayoutParams(0,-2,1));
+  LinearLayout topButtons=new LinearLayout(this);topButtons.setGravity(Gravity.CENTER_VERTICAL);
+  Button settings=softButton("הגדרות");settings.setOnClickListener(v->showAppManager());
+  topButtons.addView(settings,new LinearLayout.LayoutParams(92,44));
   Button tools=softButton("כלים");tools.setOnClickListener(v->showTools());
-  top.addView(tools,new LinearLayout.LayoutParams(82,44));
+  LinearLayout.LayoutParams tlp=new LinearLayout.LayoutParams(78,44);tlp.setMargins(6,0,0,0);topButtons.addView(tools,tlp);
+  top.addView(topButtons);
   root.addView(top);
 
   View line=new View(this);line.setBackgroundColor(BORDER);root.addView(line,new LinearLayout.LayoutParams(-1,1));
@@ -126,6 +135,197 @@ public class MainActivity extends Activity {
   input.setText("");
   addMessage(q,"user");
   process(q);
+ }
+
+ static class AppRow{
+  String label,packageName,activityName;
+  boolean system,launchable;
+  AppRow(String l,String p,String a,boolean s,boolean z){label=l;packageName=p;activityName=a;system=s;launchable=z;}
+ }
+
+ void loadInstalledApps(){
+  try{
+   PackageManager pm=getPackageManager();
+   HashMap<String,String> launcherActivities=new HashMap<>();
+   Intent launcher=new Intent(Intent.ACTION_MAIN);launcher.addCategory(Intent.CATEGORY_LAUNCHER);
+   for(ResolveInfo ri:pm.queryIntentActivities(launcher,PackageManager.MATCH_ALL)){
+    if(ri.activityInfo!=null)launcherActivities.put(ri.activityInfo.packageName,ri.activityInfo.name);
+   }
+   ArrayList<AppRow> out=new ArrayList<>();
+   for(ApplicationInfo ai:pm.getInstalledApplications(PackageManager.MATCH_ALL)){
+    String pkg=ai.packageName==null?"":ai.packageName;
+    if(pkg.isEmpty())continue;
+    CharSequence cs=ai.loadLabel(pm);
+    String label=cs==null?pkg:cs.toString();
+    out.add(new AppRow(label,pkg,launcherActivities.get(pkg),
+      (ai.flags & ApplicationInfo.FLAG_SYSTEM)!=0,launcherActivities.containsKey(pkg)));
+   }
+   Collections.sort(out,(a,b)->a.label.compareToIgnoreCase(b.label));
+   installedApps=out;installedAppsLoaded=true;
+  }catch(Exception ignored){}
+ }
+
+ void ensureInstalledApps(Runnable done){
+  if(installedAppsLoaded){done.run();return;}
+  new Thread(()->{
+   loadInstalledApps();
+   runOnUiThread(done);
+  },"installed-app-loader-retry").start();
+ }
+
+ String userAliases(String pkg){
+  return aliasPrefs==null?"":aliasPrefs.getString(pkg,"");
+ }
+
+ String findUserAliasPackage(String query){
+  String q=OfflineEngine.normalize(query);
+  if(q.isEmpty()||aliasPrefs==null)return null;
+  for(Map.Entry<String,?> e:aliasPrefs.getAll().entrySet()){
+   Object value=e.getValue();
+   if(!(value instanceof String))continue;
+   String raw=(String)value;
+   for(String a:raw.split("\\|")){
+    String x=OfflineEngine.normalize(a);
+    if(x.isEmpty())continue;
+    if(q.equals(x)||engine.score(q,x)>=35)return e.getKey();
+   }
+  }
+  return null;
+ }
+
+ void saveAliases(AppRow row,String raw){
+  String clean=raw==null?"":raw.trim();
+  if(clean.isEmpty())aliasPrefs.edit().remove(row.packageName).apply();
+  else{
+   LinkedHashSet<String> set=new LinkedHashSet<>();
+   for(String a:clean.split("[,;|\\n]+")){
+    String x=OfflineEngine.normalize(a);
+    if(!x.isEmpty())set.add(x);
+   }
+   aliasPrefs.edit().putString(row.packageName,String.join("|",set)).apply();
+  }
+ }
+
+ void showAppManager(){
+  ensureInstalledApps(()->buildAppManagerDialog());
+ }
+
+ void buildAppManagerDialog(){
+  LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(24,18,24,12);
+  TextView count=label("נטענו "+installedApps.size()+" אפליקציות מהמכשיר",16,TEXT);
+  count.setTypeface(Typeface.DEFAULT,Typeface.BOLD);box.addView(count);
+  TextView info=label("בחר אפליקציה כדי להגדיר לה כינוי. הכינוי נשמר במכשיר ויעבוד גם עם „פתח” וגם כשאומרים רק את הכינוי.",13,MUTED);
+  info.setPadding(0,6,0,12);box.addView(info);
+
+  LinearLayout actions=new LinearLayout(this);
+  Button roles=softButton("בדיקת Android");roles.setOnClickListener(v->showAndroidRoles());
+  Button refresh=softButton("רענן");refresh.setOnClickListener(v->{loadInstalledApps();count.setText("נטענו "+installedApps.size()+" אפליקציות מהמכשיר");});
+  actions.addView(roles,new LinearLayout.LayoutParams(0,44,1));
+  LinearLayout.LayoutParams rp=new LinearLayout.LayoutParams(0,44,1);rp.setMargins(8,0,0,0);actions.addView(refresh,rp);
+  box.addView(actions);
+
+  EditText search=new EditText(this);search.setHint("חפש אפליקציה או חבילה...");search.setSingleLine(true);
+  search.setTextSize(15);search.setPadding(16,8,16,8);search.setBackground(shape(Color.WHITE,22,1));
+  LinearLayout.LayoutParams sp=new LinearLayout.LayoutParams(-1,50);sp.setMargins(0,12,0,10);box.addView(search,sp);
+
+  ListView list=new ListView(this);list.setDividerHeight(1);
+  AppAdapter adapter=new AppAdapter(installedApps);list.setAdapter(adapter);
+  search.addTextChangedListener(new android.text.TextWatcher(){
+   public void beforeTextChanged(CharSequence s,int st,int c,int a){}
+   public void onTextChanged(CharSequence s,int st,int b,int c){adapter.filter(s.toString());}
+   public void afterTextChanged(android.text.Editable e){}
+  });
+  box.addView(list,new LinearLayout.LayoutParams(-1,0,1));
+
+  AlertDialog dialog=new AlertDialog.Builder(this).setTitle("הגדרות אפליקציות וכינויים").setView(box).setNegativeButton("סגור",null).create();
+  dialog.setOnShowListener(v->{
+   Window w=dialog.getWindow();
+   if(w!=null)w.setLayout((int)(getResources().getDisplayMetrics().widthPixels*0.94f),(int)(getResources().getDisplayMetrics().heightPixels*0.88f));
+  });
+  dialog.show();
+ }
+
+ class AppAdapter extends BaseAdapter{
+  ArrayList<AppRow> all,shown;
+  AppAdapter(ArrayList<AppRow> a){all=new ArrayList<>(a);shown=new ArrayList<>(a);}
+  public int getCount(){return shown.size();}
+  public Object getItem(int i){return shown.get(i);}
+  public long getItemId(int i){return i;}
+  public View getView(int pos,View convert,android.view.ViewGroup parent){
+   AppRow row=shown.get(pos);
+   LinearLayout item=new LinearLayout(MainActivity.this);item.setGravity(Gravity.CENTER_VERTICAL);item.setPadding(10,10,6,10);
+   LinearLayout texts=new LinearLayout(MainActivity.this);texts.setOrientation(LinearLayout.VERTICAL);
+   TextView name=label(row.label,15,TEXT);name.setTypeface(Typeface.DEFAULT,Typeface.BOLD);texts.addView(name);
+   String a=userAliases(row.packageName);
+   String sub=row.packageName+(row.launchable?"":" • ללא מסך פתיחה");
+   if(!a.isEmpty())sub+="\nכינוי: "+a.replace("|"," , ");
+   TextView pkg=label(sub,11,MUTED);pkg.setPadding(0,4,0,0);texts.addView(pkg);
+   item.addView(texts,new LinearLayout.LayoutParams(0,-2,1));
+   Button edit=softButton(a.isEmpty()?"כינוי":"ערוך");edit.setTextSize(12);
+   edit.setOnClickListener(v->showAliasEditor(row));
+   item.addView(edit,new LinearLayout.LayoutParams(70,42));
+   item.setOnClickListener(v->showAliasEditor(row));
+   return item;
+  }
+  void filter(String q){
+   String x=OfflineEngine.normalize(q);shown.clear();
+   if(x.isEmpty())shown.addAll(all);
+   else{
+    for(AppRow r:all){
+     if(OfflineEngine.normalize(r.label).contains(x)||OfflineEngine.normalize(r.packageName).contains(x)||userAliases(r.packageName).contains(x))shown.add(r);
+    }
+   }
+   notifyDataSetChanged();
+  }
+ }
+
+ void showAliasEditor(AppRow row){
+  LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(24,8,24,4);
+  TextView app=label(row.label+"\n"+row.packageName,15,TEXT);box.addView(app);
+  EditText alias= new EditText(this);alias.setHint("למשל: המחשבון שלי, מחשבון, calc");alias.setText(userAliases(row.packageName).replace("|",", "));alias.setSingleLine(false);alias.setMaxLines(3);
+  alias.setPadding(14,10,14,10);box.addView(alias,new LinearLayout.LayoutParams(-1,70));
+  new AlertDialog.Builder(this).setTitle("כינוי לאפליקציה").setView(box)
+   .setPositiveButton("שמור", (d,w)->{saveAliases(row,alias.getText().toString());})
+   .setNeutralButton("מחק כינוי", (d,w)->{aliasPrefs.edit().remove(row.packageName).apply();})
+   .setNegativeButton("ביטול",null).show();
+ }
+
+ void showAndroidRoles(){
+  ensureInstalledApps(()->{
+   String[] names={"דפדפן","מחשבון","יומן","אנשי קשר","דואר","קבצים","גלריה","מפות","חנות אפליקציות","הודעות","מוזיקה","מזג אוויר","בית","מצלמה","טלפון","הגדרות"};
+   String[] cats={Intent.CATEGORY_APP_BROWSER,Intent.CATEGORY_APP_CALCULATOR,Intent.CATEGORY_APP_CALENDAR,Intent.CATEGORY_APP_CONTACTS,Intent.CATEGORY_APP_EMAIL,Intent.CATEGORY_APP_FILES,Intent.CATEGORY_APP_GALLERY,Intent.CATEGORY_APP_MAPS,Intent.CATEGORY_APP_MARKET,Intent.CATEGORY_APP_MESSAGING,Intent.CATEGORY_APP_MUSIC,Intent.CATEGORY_APP_WEATHER,null,null,null,null};
+   StringBuilder sb=new StringBuilder();
+   for(int i=0;i<names.length;i++){
+    String found=null;
+    try{
+     if(cats[i]!=null){
+      if(i==5 && Build.VERSION.SDK_INT<29){found="לא זמין בגרסה זו";}else{
+       Intent in=Intent.makeMainSelectorActivity(Intent.ACTION_MAIN,cats[i]);
+       List<ResolveInfo> rs=getPackageManager().queryIntentActivities(in,PackageManager.MATCH_ALL);
+       if(!rs.isEmpty())found=labelOf(rs.get(0));
+      }
+     }else if(i==12){
+      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME),PackageManager.MATCH_ALL);
+      if(!rs.isEmpty())found=labelOf(rs.get(0));
+     }else if(i==13){
+      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_IMAGE_CAPTURE),PackageManager.MATCH_ALL);
+      if(!rs.isEmpty())found=labelOf(rs.get(0));
+     }else if(i==14){
+      List<ResolveInfo> rs=getPackageManager().queryIntentActivities(new Intent(Intent.ACTION_DIAL),PackageManager.MATCH_ALL);
+      if(!rs.isEmpty())found=labelOf(rs.get(0));
+     }else{
+      found="מסך Android";
+     }
+    }catch(Exception ignored){}
+    sb.append(names[i]).append(": ").append(found==null?"לא נמצא":found).append("\n");
+   }
+   new AlertDialog.Builder(this).setTitle("בדיקת אפליקציות/תפקידי Android").setMessage(sb.toString()).setPositiveButton("סגור",null).show();
+  });
+ }
+
+ String labelOf(ResolveInfo r){
+  try{CharSequence s=r.loadLabel(getPackageManager());return s==null?r.activityInfo.packageName:s.toString();}
+  catch(Exception e){return r.activityInfo==null?"":r.activityInfo.packageName;}
  }
 
  void showTools(){
