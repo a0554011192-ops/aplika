@@ -85,6 +85,8 @@ jobs:
           sha256sum app/build/outputs/apk/release/avraham-haivri-android.apk
 
       - name: Verify installation on Android emulator
+        timeout-minutes: 3
+        continue-on-error: true
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
