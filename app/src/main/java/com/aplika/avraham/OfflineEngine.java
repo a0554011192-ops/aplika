@@ -38,8 +38,20 @@ final class OfflineEngine {
   alias("נטפליקס","netflix");alias("גימייל","gmail");alias("ג׳ימייל","gmail");
   alias("דרייב","google drive");alias("גוגל דרייב","google drive");
   alias("תמונות","google photos");alias("גוגל תמונות","google photos");
-  alias("קבצים","files");alias("מצלמה","camera");alias("גלריה","gallery");
-  alias("שעון","clock");alias("מחשבון","calculator");
+  alias("קבצים","files");alias("סייר קבצים","files");alias("סייר הקבצים","files");
+  alias("מנהל קבצים","files");alias("מנהל הקבצים","files");alias("קבצים שלי","files");
+  alias("file manager","files");alias("file explorer","files");alias("my files","files");alias("files","files");
+  alias("מצלמה","camera");alias("camera","camera");
+  alias("גלריה","gallery");alias("הגלריה","gallery");alias("תמונות","gallery");alias("גלריית תמונות","gallery");
+  alias("photo gallery","gallery");alias("gallery","gallery");alias("photos","gallery");
+  alias("שעון","clock");alias("השעון","clock");alias("clock","clock");alias("alarm clock","clock");alias("alarms","clock");
+  alias("מחשבון","calculator");alias("המחשבון","calculator");alias("calculator","calculator");
+  alias("נגן","music");alias("נגן מוזיקה","music");alias("נגן מוסיקה","music");alias("נגן המדיה","media player");
+  alias("נגן מדיה","media player");alias("music player","music");alias("media player","media player");
+  alias("player","media player");alias("מוזיקה","music");alias("music","music");
+  alias("יומן","calendar");alias("לוח שנה","calendar");alias("calendar","calendar");
+  alias("דפדפן","browser");alias("browser","browser");alias("אינטרנט","browser");alias("web browser","browser");
+  alias("חנות","play store");alias("חנות play","play store");alias("google play","play store");alias("play store","play store");
   alias("מוזיקה","music");alias("שירים","music");alias("דואר","email");
   alias("הגדרות","settings");
  }
