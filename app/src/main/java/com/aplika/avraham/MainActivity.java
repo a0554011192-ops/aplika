@@ -77,8 +77,8 @@ public class MainActivity extends Activity {
   status=label("אופליין • מוכן",12,MUTED);titleBox.addView(status);
   top.addView(titleBox,new LinearLayout.LayoutParams(0,-2,1));
   LinearLayout topButtons=new LinearLayout(this);topButtons.setGravity(Gravity.CENTER_VERTICAL);
-  Button settings=softButton("הגדרות");settings.setOnClickListener(v->showAppManager());
-  topButtons.addView(settings,new LinearLayout.LayoutParams(92,44));
+  ImageButton settings=new ImageButton(this);settings.setImageResource(R.drawable.ic_settings);settings.setContentDescription("הגדרות");settings.setBackground(shape(Color.WHITE,24,1));settings.setPadding(11,11,11,11);settings.setOnClickListener(v->showAppManager());
+  topButtons.addView(settings,new LinearLayout.LayoutParams(48,44));
   Button tools=softButton("כלים");tools.setOnClickListener(v->showTools());
   LinearLayout.LayoutParams tlp=new LinearLayout.LayoutParams(78,44);tlp.setMargins(6,0,0,0);topButtons.addView(tools,tlp);
   top.addView(topButtons);
@@ -177,6 +177,19 @@ public class MainActivity extends Activity {
   return aliasPrefs==null?"":aliasPrefs.getString(pkg,"");
  }
 
+ String findCustomCommandPackage(String query){
+  String q=OfflineEngine.normalize(query);
+  if(q.isEmpty()||aliasPrefs==null)return null;
+  for(Map.Entry<String,?> e:aliasPrefs.getAll().entrySet()){
+   Object value=e.getValue();if(!(value instanceof String))continue;
+   for(String a:((String)value).split("\\|")){
+    String x=OfflineEngine.normalize(a);
+    if(!x.isEmpty()&&(q.equals(x)||cleanUserCommand(q).equals(x)))return e.getKey();
+   }
+  }
+  return null;
+ }
+
  String findUserAliasPackage(String query){
   String q=OfflineEngine.normalize(query);
   if(q.isEmpty()||aliasPrefs==null)return null;
@@ -193,17 +206,23 @@ public class MainActivity extends Activity {
   return null;
  }
 
+ String cleanUserCommand(String raw){
+  String x=OfflineEngine.normalize(raw);
+  if(x.isEmpty())return "";
+  x=x.replaceAll("^(תפתח|פתח|לפתוח|פתיחה|open|launch|start|run)\\s+","");
+  x=x.replaceAll("\\b(לי|את|האפליקציה|אפליקציה|אפליקציית|שלי)\\b"," ").replaceAll("\\s+"," ").trim();
+  return x;
+ }
+
  void saveAliases(AppRow row,String raw){
   String clean=raw==null?"":raw.trim();
-  if(clean.isEmpty())aliasPrefs.edit().remove(row.packageName).apply();
-  else{
-   LinkedHashSet<String> set=new LinkedHashSet<>();
-   for(String a:clean.split("[,;|\\n]+")){
-    String x=OfflineEngine.normalize(a);
-    if(!x.isEmpty())set.add(x);
-   }
-   aliasPrefs.edit().putString(row.packageName,String.join("|",set)).apply();
+  if(clean.isEmpty()){aliasPrefs.edit().remove(row.packageName).apply();return;}
+  LinkedHashSet<String> set=new LinkedHashSet<>();
+  for(String a:clean.split("[,;|\\n]+")){
+   String x=OfflineEngine.normalize(a);
+   if(!x.isEmpty()){set.add(x);String y=cleanUserCommand(x);if(!y.isEmpty())set.add(y);}
   }
+  aliasPrefs.edit().putString(row.packageName,String.join("|",set)).apply();
  }
 
  void showAppManager(){
@@ -214,7 +233,7 @@ public class MainActivity extends Activity {
   LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(24,18,24,12);
   TextView count=label("נטענו "+installedApps.size()+" אפליקציות מהמכשיר",16,TEXT);
   count.setTypeface(Typeface.DEFAULT,Typeface.BOLD);box.addView(count);
-  TextView info=label("בחר אפליקציה כדי להגדיר לה כינוי. הכינוי נשמר במכשיר ויעבוד גם עם „פתח” וגם כשאומרים רק את הכינוי.",13,MUTED);
+  TextView info=label("בחר אפליקציה, כתוב פקודה בעברית שתפתח אותה, ושמור. הפקודה נשמרת במכשיר ותעבוד גם אחרי הפעלה מחדש.",13,MUTED);
   info.setPadding(0,6,0,12);box.addView(info);
 
   LinearLayout actions=new LinearLayout(this);
@@ -237,7 +256,7 @@ public class MainActivity extends Activity {
   });
   box.addView(list,new LinearLayout.LayoutParams(-1,0,1));
 
-  AlertDialog dialog=new AlertDialog.Builder(this).setTitle("הגדרות אפליקציות וכינויים").setView(box).setNegativeButton("סגור",null).create();
+  AlertDialog dialog=new AlertDialog.Builder(this).setTitle("יצירת פקודות לאפליקציות").setView(box).setNegativeButton("סגור",null).create();
   dialog.setOnShowListener(v->{
    Window w=dialog.getWindow();
    if(w!=null)w.setLayout((int)(getResources().getDisplayMetrics().widthPixels*0.94f),(int)(getResources().getDisplayMetrics().heightPixels*0.88f));
@@ -261,7 +280,7 @@ public class MainActivity extends Activity {
    if(!a.isEmpty())sub+="\nכינוי: "+a.replace("|"," , ");
    TextView pkg=label(sub,11,MUTED);pkg.setPadding(0,4,0,0);texts.addView(pkg);
    item.addView(texts,new LinearLayout.LayoutParams(0,-2,1));
-   Button edit=softButton(a.isEmpty()?"כינוי":"ערוך");edit.setTextSize(12);
+   Button edit=softButton(a.isEmpty()?"פקודה":"ערוך");edit.setTextSize(12);
    edit.setOnClickListener(v->showAliasEditor(row));
    item.addView(edit,new LinearLayout.LayoutParams(70,42));
    item.setOnClickListener(v->showAliasEditor(row));
@@ -282,9 +301,9 @@ public class MainActivity extends Activity {
  void showAliasEditor(AppRow row){
   LinearLayout box=new LinearLayout(this);box.setOrientation(LinearLayout.VERTICAL);box.setPadding(24,8,24,4);
   TextView app=label(row.label+"\n"+row.packageName,15,TEXT);box.addView(app);
-  EditText alias= new EditText(this);alias.setHint("למשל: המחשבון שלי, מחשבון, calc");alias.setText(userAliases(row.packageName).replace("|",", "));alias.setSingleLine(false);alias.setMaxLines(3);
+  EditText alias= new EditText(this);alias.setHint("למשל: תפתח את המחשבון שלי");alias.setText(userAliases(row.packageName).replace("|",", "));alias.setSingleLine(false);alias.setMaxLines(3);
   alias.setPadding(14,10,14,10);box.addView(alias,new LinearLayout.LayoutParams(-1,70));
-  new AlertDialog.Builder(this).setTitle("כינוי לאפליקציה").setView(box)
+  new AlertDialog.Builder(this).setTitle("יצירת פקודה").setView(box)
    .setPositiveButton("שמור", (d,w)->{saveAliases(row,alias.getText().toString());})
    .setNeutralButton("מחק כינוי", (d,w)->{aliasPrefs.edit().remove(row.packageName).apply();})
    .setNegativeButton("ביטול",null).show();
@@ -377,7 +396,10 @@ public class MainActivity extends Activity {
  void process(String q){
   // Resolve deterministic Android commands before the large offline catalogs.
   // This prevents a known system command from being mistaken for ordinary chat.
+  if(mathRequest(q))return;
+  if(systemToggle(q))return;
   if(coreAndroidCommand(q))return;
+  String customPkg=findCustomCommandPackage(q);if(customPkg!=null&&launchPackage(customPkg,q))return;
   if(direct(q))return;
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
@@ -413,6 +435,7 @@ public class MainActivity extends Activity {
 
   engine.loadApps(this);
   if(engine.isKnownAppAlias(x))return true;
+  if(findCustomCommandPackage(x)!=null)return true;
   if(findUserAliasPackage(x)!=null)return true;
 
   // Any short phrase that exactly/closely matches a currently installed app
@@ -447,6 +470,27 @@ public class MainActivity extends Activity {
   OfflineEngine.Resp r=engine.bestResponse(q,english);
   if(r==null){addMessage(english?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");return;}
   addMessage(english?r.en:r.he,"assistant");
+ }
+
+ boolean mathRequest(String raw){
+  String x=raw==null?"":raw.trim();if(x.isEmpty())return false;
+  String n=x.toLowerCase(Locale.ROOT).replace("×","*").replace("÷","/");
+  n=n.replaceAll("(?i)\\bplus\\b","+").replaceAll("(?i)\\bminus\\b","-").replaceAll("(?i)\\btimes\\b","*").replaceAll("(?i)\\bdivided by\\b","/");
+  n=n.replace("ועוד","+").replace("פלוס","+").replace("פחות","-").replace("כפול","*").replace("חלקי","/").replace("לחלק ב","/").replace("לחלק","/");
+  n=n.replaceAll("(?i)כמה זה"," ").replaceAll("(?i)מה יוצא"," ").replaceAll("(?i)חשב"," ").replaceAll("="," ");
+  if(!n.matches(".*\\d.*")||!n.matches("[\\d\\s+*/().,%.-]+"))return false;
+  try{
+   double v=new MathParser(n).parse();if(Double.isNaN(v)||Double.isInfinite(v)||Math.abs(v)>1e15)return false;
+   String out;if(Math.abs(v-Math.rint(v))<1e-10)out=Long.toString(Math.round(v));else out=String.format(Locale.getDefault(),"%.10f",v).replaceAll("0+$","").replaceAll("[.,]$","");
+   addMessage("התוצאה היא "+out+".","assistant");return true;
+  }catch(Exception e){return false;}
+ }
+ static class MathParser{
+  final String s;int p=0;MathParser(String x){s=x.replaceAll("\\s+","");}
+  double parse(){double v=expr();if(p<s.length())throw new IllegalArgumentException();return v;}
+  double expr(){double v=term();while(p<s.length()){char c=s.charAt(p);if(c=='+'){p++;v+=term();}else if(c=='-'){p++;v-=term();}else break;}return v;}
+  double term(){double v=factor();while(p<s.length()){char c=s.charAt(p);if(c=='*'){p++;v*=factor();}else if(c=='/'){p++;double d=factor();if(Math.abs(d)<1e-15)throw new ArithmeticException();v/=d;}else break;}return v;}
+  double factor(){if(p>=s.length())throw new IllegalArgumentException();char c=s.charAt(p);if(c=='+'){p++;return factor();}if(c=='-'){p++;return -factor();}if(c=='('){p++;double v=expr();if(p>=s.length()||s.charAt(p)!=')')throw new IllegalArgumentException();p++;return v;}int st=p;while(p<s.length()&&(Character.isDigit(s.charAt(p))||s.charAt(p)=='.'||s.charAt(p)==','))p++;if(st==p)throw new IllegalArgumentException();return Double.parseDouble(s.substring(st,p).replace(',','.'));}
  }
 
  boolean coreAndroidCommand(String q){
@@ -591,6 +635,16 @@ public class MainActivity extends Activity {
   return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך בית|מסך הבית|דף בית|דף הבית|home)$");
  }
 
+ boolean quickToggle(String... labels){try{return ShortcutService.toggleQuickSetting(labels);}catch(Exception e){return false;}}
+ boolean openSetting(String action,String ok){try{Intent i=new Intent(action);if(i.resolveActivity(getPackageManager())==null)return false;startActivity(i);addMessage(ok,"assistant");return true;}catch(Exception e){return false;}}
+ boolean systemToggle(String q){
+  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
+  if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){if(quickToggle("bluetooth","בלוטוס","בלוטות")){addMessage(on?"הבלוטוס הופעל.":"הבלוטוס כובה.","assistant");return true;}if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}if(openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס."))return true;}
+  if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){if(quickToggle("wifi","wi-fi","wi fi","ויפי","וויפיי","וייפיי")){addMessage(on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_WIFI_SETTINGS,"פתחתי את הגדרות ה־Wi‑Fi."))return true;}
+  if(hasAny(x,"מצב טיסה","airplane")){if(quickToggle("airplane","airplane mode","מצב טיסה")){addMessage(on?"מצב טיסה הופעל.":"מצב טיסה כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה."))return true;}
+  return false;
+ }
+
  boolean media(int k){
   try{audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,k));audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,k));return true;}catch(Exception e){return false;}
  }
@@ -716,6 +770,8 @@ public class MainActivity extends Activity {
 
  String targetOf(String q){
   String x=norm(q);
+  x=x.replaceAll("^(תפתח|פתח|לפתוח|פתיחה|open|launch|start|run)\\s+","");
+  x=x.replaceAll("\\b(לי|את|האפליקציה|אפליקציה|אפליקציית|שלי)\\b"," ").replaceAll("\\s+"," ").trim();
   String[] filler={"פתח","תפתח","לפתוח","פתיחה","לי","את","בבקשה","open","launch","start","run","please","app"};
   for(String w:filler)x=x.replaceAll("(?iu)(^| )"+java.util.regex.Pattern.quote(norm(w))+"(?= |$)"," ");
   return x.trim();
@@ -850,6 +906,7 @@ public class MainActivity extends Activity {
     }
    }catch(Exception ignored){}
   }
+  if(launchBestInstalled(target))return true;
   return false;
  }
 
