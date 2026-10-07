@@ -37,7 +37,8 @@ public class MainActivity extends Activity {
   engine=new OfflineEngine(this);
   buildChatUi();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
-  new Thread(()->engine.loadAll(this),"catalog-loader").start();
+  status.setText("טוען מאגר מקומי...");
+  new Thread(()->{ engine.loadChat(this); runOnUiThread(()->status.setText("אופליין • מוכן")); engine.loadCommands(this); engine.loadApps(this); },"catalog-loader").start();
  }
 
  TextView label(String s,float size,int color){
@@ -188,6 +189,11 @@ public class MainActivity extends Activity {
  }
 
  void runAction(String q){
+  if(!engine.commandsLoaded){
+   addMessage(english?"Loading the command catalog once...":"טוען את מאגר הפעולות פעם אחת...","assistant");
+   new Thread(()->{engine.loadCommands(this);runOnUiThread(()->runAction(q));},"command-loader").start();
+   return;
+  }
   OfflineEngine.ActionEntry a=engine.bestAction(q);
   if(a==null){addMessage(english?"I could not match that system action.":"לא הצלחתי לזהות את פעולת המערכת הזאת.","assistant");return;}
   try{
