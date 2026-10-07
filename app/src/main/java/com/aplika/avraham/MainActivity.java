@@ -148,15 +148,21 @@ public class MainActivity extends Activity {
  boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","נעל מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings");}
 
  void process(String q){
-  String n=norm(q);
-  if(openRequest(q)&&!hasAny(n,"הגדרות","מסך הגדרות")){openThing(q);return;}
-  if(actionRequest(q)){if(direct(q))return;runAction(q);return;}
+  if(direct(q))return;
+  if(openRequest(q)){openThing(q);return;}
+  if(actionRequest(q)){runAction(q);return;}
   chat(q);
  }
 
  void chat(String q){
+  OfflineEngine.Resp fast=engine.quickResponse(q);
+  if(fast!=null){addMessage(english?fast.en:fast.he,"assistant");return;}
+  if(!engine.chatLoaded){
+   new Thread(()->{engine.loadChat(this);runOnUiThread(()->chat(q));},"chat-loader").start();
+   return;
+  }
   OfflineEngine.Resp r=engine.bestResponse(q,english);
-  if(r==null){addMessage(english?"I did not find a matching offline answer. Try another wording.":"לא מצאתי תשובה תואמת במאגר האופליין. נסה ניסוח אחר.","assistant");return;}
+  if(r==null){addMessage(english?"I could not match that request yet. Try another wording with the main keyword.":"עדיין לא מצאתי התאמה טובה. נסה לנסח עם מילת המפתח העיקרית.","assistant");return;}
   addMessage(english?r.en:r.he,"assistant");
  }
 
