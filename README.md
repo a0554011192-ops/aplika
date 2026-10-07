@@ -24,3 +24,5 @@ The main screen includes a Settings button with an installed-app manager. You ca
 The 4,000-name catalog combines public Google Play category snapshots from privacy-tech-lab/gpc-android with a cleaned public Google Play snapshot. The runtime still uses PackageManager as the authoritative source for what can actually be opened on the device.
 
 ציון Clean Build אחרון: 2026-10-07 — build חדש ומבודד.
+
+Clean fast-loader revision: 2026-10-07.
