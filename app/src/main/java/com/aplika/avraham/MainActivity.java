@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
   // completely out of the startup path and are loaded only when explicitly used.
   if(status!=null)status.setText("אופליין • מכין צ׳אט…");
   ensureChatLoaded(()->runOnUiThread(()->{
-   if(status!=null)status.setText("אופליין • מוכן");
+   if(status!=null)status.setText(engine.chatLoaded?"אופליין • מוכן":"אופליין • שגיאה בטעינת הצ׳אט");
   }));
  }
  
@@ -1039,11 +1039,20 @@ int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").leng
    chatLoading=true;
   }
   new Thread(()->{
+   boolean loaded=false;
    try{
-    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_DEFAULT);
     engine.loadChat(this);
+    loaded=engine.chatLoaded;
    }catch(Exception ex){
     android.util.Log.e("Avraham","chat engine load failed",ex);
+   }
+
+   if(!loaded){
+    runOnUiThread(()->{
+     if(status!=null)status.setText("אופליין • שגיאה בטעינת הצ׳אט");
+    });
+    android.util.Log.e("Avraham","Chat catalog is not ready after load attempt");
    }
 
    ArrayList<Runnable> waiters;
