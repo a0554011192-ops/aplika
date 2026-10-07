@@ -26,3 +26,5 @@ The 4,000-name catalog combines public Google Play category snapshots from priva
 ציון Clean Build אחרון: 2026-10-07 — build חדש ומבודד.
 
 Clean fast-loader revision: 2026-10-07.
+
+Clean fast-loader build trigger: 2026-10-07-fix.
