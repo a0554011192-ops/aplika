@@ -50,14 +50,22 @@ jobs:
       - name: Build release
         run: gradle assembleRelease --no-daemon --stacktrace
 
-      - name: Create temporary signing certificate
+      - name: Zipalign release before signing
+        run: |
+          set -e
+          rm -f app/build/outputs/apk/release/avraham-haivri-aligned.apk app/build/outputs/apk/release/avraham-haivri-android.apk
+          "$ANDROID_HOME/build-tools/35.0.0/zipalign" -f -p 4 app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/avraham-haivri-aligned.apk
+          "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -P 16 -v 4 app/build/outputs/apk/release/avraham-haivri-aligned.apk
+
+      - name: Create signing certificate and sign aligned APK
         run: |
           set -e
           PASS=avraham-offline-2026
           mkdir -p build/keys
           keytool -genkeypair -v -keystore build/keys/avraham-release.jks -alias avraham -keyalg RSA -keysize 2048 -validity 10000 -storepass "$PASS" -keypass "$PASS" -dname "CN=Avraham HaIvri, OU=Aplika, O=Aplika, L=Israel, C=IL"
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign --ks build/keys/avraham-release.jks --ks-pass pass:$PASS --ks-key-alias avraham --key-pass pass:$PASS --out app/build/outputs/apk/release/avraham-haivri-android.apk app/build/outputs/apk/release/app-release-unsigned.apk
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign --ks build/keys/avraham-release.jks --ks-pass pass:$PASS --ks-key-alias avraham --key-pass pass:$PASS --out app/build/outputs/apk/release/avraham-haivri-android.apk app/build/outputs/apk/release/avraham-haivri-aligned.apk
           "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose app/build/outputs/apk/release/avraham-haivri-android.apk
+          "$ANDROID_HOME/build-tools/35.0.0/zipalign" -c -P 16 -v 4 app/build/outputs/apk/release/avraham-haivri-android.apk
 
       - uses: actions/upload-artifact@v4
         with:
