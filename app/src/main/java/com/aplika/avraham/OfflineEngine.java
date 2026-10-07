@@ -13,120 +13,98 @@ final class OfflineEngine {
  final ArrayList<ActionEntry> actions=new ArrayList<>();
  final ArrayList<Resp> responses=new ArrayList<>();
  final HashMap<String,String> synonyms=new HashMap<>();
+ final HashMap<String,String> commonAliases=new HashMap<>();
  final HashMap<String,Resp> responseIndex=new HashMap<>();
  final HashMap<String,ActionEntry> actionIndex=new HashMap<>();
- volatile boolean loaded=false;
+ volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false;
 
- OfflineEngine(Context c){}
-
- void loadAll(Context c){
-  load(c,"synonyms.tsv",3);
-  load(c,"responses.tsv",2);
-  load(c,"actions.tsv",1);
-  load(c,"apps.tsv",0);
-  loaded=true;
+ OfflineEngine(Context c){
+  alias("כרום","chrome");alias("גוגל כרום","google chrome");alias("וואטסאפ","whatsapp");alias("ווטסאפ","whatsapp");
+  alias("יוטיוב","youtube");alias("מפות","maps");alias("וויז","waze");alias("ווייז","waze");alias("טלגרם","telegram");
+  alias("דיסקורד","discord");alias("אינסטגרם","instagram");alias("טיקטוק","tiktok");alias("פייסבוק","facebook");
+  alias("ספוטיפיי","spotify");alias("נטפליקס","netflix");alias("גימייל","gmail");alias("ג׳ימייל","gmail");
+  alias("דרייב","google drive");alias("גוגל דרייב","google drive");alias("תמונות","google photos");alias("גוגל תמונות","google photos");
+  alias("קבצים","files");alias("מצלמה","camera");alias("גלריה","gallery");alias("שעון","clock");alias("מחשבון","calculator");
+  alias("מוזיקה","music");alias("שירים","music");alias("דואר","email");alias("הגדרות","settings");
  }
+
+ void alias(String a,String c){commonAliases.put(normalize(a),normalize(c));}
+
+ synchronized void loadChat(Context c){
+  if(chatLoaded)return;
+  load(c,"synonyms.tsv",3);load(c,"responses.tsv",2);chatLoaded=true;
+ }
+
+ synchronized void loadCommands(Context c){
+  if(commandsLoaded)return;
+  load(c,"actions.tsv",1);commandsLoaded=true;
+ }
+
+ synchronized void loadApps(Context c){
+  if(appsLoaded)return;
+  load(c,"apps.tsv",0);appsLoaded=true;
+ }
+
+ void loadAll(Context c){loadChat(c);loadCommands(c);loadApps(c);}
 
  void load(Context c,String fn,int type){
   try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open(fn),"UTF-8"))){
-   String l;
-   while((l=br.readLine())!=null){
+   String l;while((l=br.readLine())!=null){
     String[] p=l.split("\\t",-1);
     if(type==0&&p.length>=3)apps.add(new AppEntry(p[1],p[2]));
     else if(type==1&&p.length>=6){
-     ActionEntry a=new ActionEntry(p[1],p[2],Integer.parseInt(p[3]),p[4],p[5].split("\\|",-1));
-     actions.add(a);
-     for(String tr:a.triggers)index(actionIndex,tr,a);
-     index(actionIndex,a.he,a);index(actionIndex,a.en,a);
+     ActionEntry a=new ActionEntry(p[1],p[2],Integer.parseInt(p[3]),p[4],p[5].split("\\|",-1));actions.add(a);
+     index(actionIndex,a.he,a);index(actionIndex,a.en,a);for(String tr:a.triggers)index(actionIndex,tr,a);
     } else if(type==2&&p.length>=4){
-     Resp r=new Resp(p[1],p[2],p[3].split("\\|",-1));
-     responses.add(r);
+     Resp r=new Resp(p[1],p[2],p[3].split("\\|",-1));responses.add(r);
      for(String tr:r.triggers)index(responseIndex,tr,r);
-    } else if(type==3&&p.length>=3){
-     synonyms.put(normalize(p[1]),normalize(p[2]));
-    }
+    } else if(type==3&&p.length>=3)synonyms.put(normalize(p[1]),normalize(p[2]));
    }
   }catch(Exception ignored){}
  }
 
- <T> void index(HashMap<String,T> map,String raw,T value){
-  String k=normalize(raw);
-  if(!k.isEmpty())map.put(k,value);
- }
+ <T> void index(HashMap<String,T> map,String raw,T value){String k=normalize(raw);if(!k.isEmpty())map.put(k,value);}
 
- static String normalize(String s){
-  return s.toLowerCase(Locale.ROOT).replace("׳","'").replaceAll("[^\\p{L}\\p{N}]+"," ").trim();
- }
+ static String normalize(String s){return s.toLowerCase(Locale.ROOT).replace("׳","'").replaceAll("[^\\p{L}\\p{N}]+"," ").trim();}
 
  String canonical(String s){
-  String n=normalize(s),x=synonyms.get(n);
-  return x==null?n:x;
+  String n=normalize(s),x=commonAliases.get(n);if(x!=null)return x;
+  x=synonyms.get(n);return x==null?n:x;
  }
 
  String[] tokens(String s){
-  String n=normalize(s);
-  if(n.isEmpty())return new String[0];
+  String n=normalize(s);if(n.isEmpty())return new String[0];
   String[] a=n.split("\\s+");
-  for(int i=0;i<a.length;i++){
-   String x=synonyms.get(a[i]);
-   if(x!=null)a[i]=x;
-  }
+  for(int i=0;i<a.length;i++){String x=commonAliases.get(a[i]);if(x==null)x=synonyms.get(a[i]);if(x!=null)a[i]=x;}
   return a;
  }
 
  int score(String q,String text){
-  String nq=normalize(q),nt=normalize(text);
-  if(nq.isEmpty()||nt.isEmpty())return 0;
-  String cq=canonical(nq),ct=canonical(nt);
-  if(cq.equals(ct))return 20;
-  if(nq.equals(nt))return 20;
-  int s=0;
-  String[] qs=tokens(q),ts=tokens(text);
+  String nq=normalize(q),nt=normalize(text);if(nq.isEmpty()||nt.isEmpty())return 0;
+  if(canonical(nq).equals(canonical(nt))||nq.equals(nt))return 20;
+  int s=0;String[] qs=tokens(q),ts=tokens(text);
   for(String a:qs)for(String b:ts)if(a.equals(b)){s+=6;break;}
   return s;
  }
 
  Resp bestResponse(String q,boolean en){
-  String n=normalize(q);
-  if(n.isEmpty())return null;
-  String[] builtins={
-   "שלום","היי","הי","מה נשמע","מי אתה","מה אתה יכול לעשות","עזרה",
-   "hello","hi","how are you","who are you","help"
-  };
-  String[] heb={
-   "שלום! אני אברהם העברי. אני עובד אופליין ויכול לחפש, לפתוח אפליקציות ולעזור בבקשות מערכת מוכרות.",
-   "היי. אני כאן ועובד מקומית על המכשיר.",
-   "היי. כתוב לי מה לבצע ואני אנסה לזהות את הבקשה.",
-   "אני בסדר. מה תרצה שאעשה?",
-   "אני אברהם העברי, מנוע עזר אופליין לאנדרואיד.",
-   "אני יכול לזהות בקשות, לחפש אפליקציות, לבצע פעולות מערכת נתמכות ולהגיב ממאגר מקומי.",
-   "אפשר לכתוב לי בקשה רגילה. המנוע מנסה להבין מילות מפתח, שמות וכינויים בלי מודל חיצוני.",
-   "שלום! אני עובד אופליין.",
-   "היי. אני זמין.",
-   "אני בסדר. תודה.",
-   "אני אברהם העברי.",
-   "אני יכול לעזור עם אפליקציות, הגדרות, שמע, ניווט ופעולות מוכרות.",
-   "עזרה זמינה מתוך הצ׳אט.",
-   "אפשר לנסות: פתח לי כרום, תגביה שמע, או תעביר לשיר הבא."
-  };
-  for(int i=0;i<builtins.length;i++)if(n.equals(normalize(builtins[i])))return new Resp(heb[i%heb.length],"Hi. I am Avraham HaIvri, an offline Android assistant.",new String[]{builtins[i]});
-  Resp r=responseIndex.get(n);
-  if(r!=null)return r;
+  String n=normalize(q);if(n.isEmpty())return null;
+  if(n.equals("שלום")||n.equals("היי")||n.equals("הי")||n.equals("hello")||n.equals("hi"))
+   return new Resp("שלום! אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.","Hello. I am Avraham HaIvri. I work offline and fast, without an external model.",new String[]{"שלום"});
+  if(n.contains("מה נשמע")||n.equals("how are you"))
+   return new Resp("אני בסדר. מה תרצה שאעשה?","I am ready. What would you like me to do?",new String[]{"מה נשמע"});
+  if(n.contains("מי אתה")||n.equals("who are you"))
+   return new Resp("אני אברהם העברי, עוזר אופליין לאנדרואיד. אני משתמש במאגר מקומי ומנוע התאמה מהיר.","I am Avraham HaIvri, an offline Android assistant using a local fast matching engine.",new String[]{"מי אתה"});
+  if(n.contains("עזרה")||n.equals("help"))
+   return new Resp("אפשר לבקש ממני לפתוח אפליקציות, לבצע פעולות מערכת נתמכות, לשלוט בשמע, ולעבוד עם מאגר הפקודות האופליין.","I can open apps, run supported system actions, control media, and use the offline command catalog.",new String[]{"עזרה"});
+  Resp r=responseIndex.get(n);if(r!=null)return r;
   for(String t:tokens(q)){r=responseIndex.get(t);if(r!=null)return r;}
   return null;
  }
 
  ActionEntry bestAction(String q){
-  String n=normalize(q);ActionEntry a=actionIndex.get(n);if(a!=null)return a;
+  ActionEntry a=actionIndex.get(normalize(q));if(a!=null)return a;
   for(String t:tokens(q)){a=actionIndex.get(t);if(a!=null)return a;}
-  return null;
- }
-
- AppEntry bestApp(String q){
-  String n=normalize(q),cn=canonical(n);
-  for(AppEntry a:apps){
-   if(cn.equals(canonical(a.en))||cn.equals(canonical(a.he)))return a;
-  }
   return null;
  }
 
