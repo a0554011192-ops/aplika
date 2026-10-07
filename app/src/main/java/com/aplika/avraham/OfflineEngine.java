@@ -73,17 +73,21 @@ final class OfflineEngine {
 
  synchronized void loadChat(Context c){
   if(chatLoaded)return;
-  load(c,"synonyms.tsv",3);
-  load(c,"responses.tsv",2);
-  chatLoaded=true;
+  try{
+   load(c,"synonyms.tsv",3);
+   load(c,"responses.tsv",2);
+   chatLoaded=true;
+  }catch(Exception ignored){chatLoaded=false;}
  }
 
  synchronized void loadCommands(Context c){
   if(commandsLoaded)return;
   actions.clear();
   actionIndex.clear();
-  load(c,"actions.tsv",1);
-  commandsLoaded=true;
+  try{
+   load(c,"actions.tsv",1);
+   commandsLoaded=true;
+  }catch(Exception ignored){commandsLoaded=false;}
  }
  // Load the app catalog only as a compact alias table. Launching still uses the
  // real PackageManager list, so a catalog entry can never invent an installed app.
@@ -110,7 +114,7 @@ final class OfflineEngine {
      }
     }
    }
-  }catch(Exception ignored){}
+  }catch(Exception ignored){appsLoaded=false;return;}
   appsLoaded=true;
  }
 
@@ -121,10 +125,12 @@ final class OfflineEngine {
    while((l=br.readLine())!=null){
     String[] p=l.split("\\t",-1);
     if(type==1&&p.length>=6){
-     ActionEntry a=new ActionEntry(p[1],p[2],Integer.parseInt(p[3]),p[4],p[5].split("\\|",-1));
-     actions.add(a);
-     indexAction(a.he,a);indexAction(a.en,a);
-     for(String t:a.triggers)indexAction(t,a);
+     try{
+      ActionEntry a=new ActionEntry(p[1],p[2],Integer.parseInt(p[3]),p[4],p[5].split("\\|",-1));
+      actions.add(a);
+      indexAction(a.he,a);indexAction(a.en,a);
+      for(String t:a.triggers)indexAction(t,a);
+     }catch(Exception ignored){}
     }else if(type==2&&p.length>=4){
      String responseKey=normalize(p[1])+"\\u0000"+normalize(p[2])+"\\u0000"+normalize(p[3]);
      // The catalog intentionally keeps stable numeric IDs, but several blocks
