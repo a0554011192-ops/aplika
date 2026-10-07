@@ -706,8 +706,7 @@ public class MainActivity extends Activity {
   if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){
    String ok=on?"הבלוטוס הופעל.":"הבלוטוס כובה.";
    if(quickToggleVerified(on,ok,android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"לא הצלחתי לשנות את הבלוטוס. פתחתי את הגדרות הבלוטוס.","bluetooth","בלוטוס","בלוטות"))return true;
-   if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}
-   return openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס.");
+   return openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,on?"לא הצלחתי להפעיל את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.":"לא הצלחתי לכבות את הבלוטוס אוטומטית. פתחתי את הגדרות הבלוטוס.");
   }
   if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){
    String ok=on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.";
