@@ -1,503 +1,503 @@
-0001	קיבלתי את הבקשה לגבי עזרה. [1]	Received את The request about עזרה. [1]	עזרה|help
-0002	קיבלתי את הבקשה לגבי שלום. [2]	Received את The request about שלום. [2]	שלום|hello
-0003	קיבלתי את הבקשה לגבי סוללה. [3]	Received את The request about סוללה. [3]	סוללה|battery
-0004	קיבלתי את הבקשה לגבי אחסון. [4]	Received את The request about אחסון. [4]	אחסון|storage
-0005	קיבלתי את הבקשה לגבי שמע. [5]	Received את The request about שמע. [5]	שמע|sound
-0006	קיבלתי את הבקשה לגבי קול. [6]	Received את The request about קול. [6]	קול|volume
-0007	קיבלתי את הבקשה לגבי מוזיקה. [7]	Received את The request about מוזיקה. [7]	מוזיקה|music
-0008	קיבלתי את הבקשה לגבי שיר. [8]	Received את The request about שיר. [8]	שיר|track
-0009	קיבלתי את הבקשה לגבי מסך. [9]	Received את The request about מסך. [9]	מסך|display
-0010	קיבלתי את הבקשה לגבי רשת. [10]	Received את The request about רשת. [10]	רשת|network
-0011	קיבלתי את הבקשה לגבי Wi-Fi. [11]	Received את The request about Wi-Fi. [11]	Wi-Fi|Wi-Fi
-0012	קיבלתי את הבקשה לגבי Bluetooth. [12]	Received את The request about Bluetooth. [12]	Bluetooth|Bluetooth
-0013	קיבלתי את הבקשה לגבי התראות. [13]	Received את The request about התראות. [13]	התראות|notifications
-0014	קיבלתי את הבקשה לגבי קבצים. [14]	Received את The request about קבצים. [14]	קבצים|files
-0015	קיבלתי את הבקשה לגבי תמונות. [15]	Received את The request about תמונות. [15]	תמונות|photos
-0016	קיבלתי את הבקשה לגבי מצלמה. [16]	Received את The request about מצלמה. [16]	מצלמה|camera
-0017	קיבלתי את הבקשה לגבי מיקרופון. [17]	Received את The request about מיקרופון. [17]	מיקרופון|microphone
-0018	קיבלתי את הבקשה לגבי מיקום. [18]	Received את The request about מיקום. [18]	מיקום|location
-0019	קיבלתי את הבקשה לגבי אפליקציות. [19]	Received את The request about אפליקציות. [19]	אפליקציות|apps
-0020	קיבלתי את הבקשה לגבי דפדפן. [20]	Received את The request about דפדפן. [20]	דפדפן|browser
-0021	קיבלתי את הבקשה לגבי הגדרות. [21]	Received את The request about הגדרות. [21]	הגדרות|settings
-0022	קיבלתי את הבקשה לגבי מקלדת. [22]	Received את The request about מקלדת. [22]	מקלדת|keyboard
-0023	קיבלתי את הבקשה לגבי שפה. [23]	Received את The request about שפה. [23]	שפה|language
-0024	קיבלתי את הבקשה לגבי שעה. [24]	Received את The request about שעה. [24]	שעה|time
-0025	קיבלתי את הבקשה לגבי תאריך. [25]	Received את The request about תאריך. [25]	תאריך|date
-0026	קיבלתי את הבקשה לגבי פרטיות. [26]	Received את The request about פרטיות. [26]	פרטיות|privacy
-0027	קיבלתי את הבקשה לגבי הרשאות. [27]	Received את The request about הרשאות. [27]	הרשאות|permissions
-0028	קיבלתי את הבקשה לגבי גיבוי. [28]	Received את The request about גיבוי. [28]	גיבוי|backup
-0029	קיבלתי את הבקשה לגבי עדכונים. [29]	Received את The request about עדכונים. [29]	עדכונים|updates
-0030	קיבלתי את הבקשה לגבי נקודה חמה. [30]	Received את The request about נקודה חמה. [30]	נקודה חמה|hotspot
-0031	קיבלתי את הבקשה לגבי VPN. [31]	Received את The request about VPN. [31]	VPN|VPN
-0032	קיבלתי את הבקשה לגבי שיתוף. [32]	Received את The request about שיתוף. [32]	שיתוף|sharing
-0033	קיבלתי את הבקשה לגבי הורדות. [33]	Received את The request about הורדות. [33]	הורדות|downloads
-0034	קיבלתי את הבקשה לגבי חיפוש. [34]	Received את The request about חיפוש. [34]	חיפוש|search
-0035	קיבלתי את הבקשה לגבי חנות. [35]	Received את The request about חנות. [35]	חנות|store
-0036	קיבלתי את הבקשה לגבי משחקים. [36]	Received את The request about משחקים. [36]	משחקים|games
-0037	קיבלתי את הבקשה לגבי לימודים. [37]	Received את The request about לימודים. [37]	לימודים|study
-0038	קיבלתי את הבקשה לגבי קוד. [38]	Received את The request about קוד. [38]	קוד|code
-0039	קיבלתי את הבקשה לגבי WhatsApp. [39]	Received את The request about WhatsApp. [39]	WhatsApp|WhatsApp
-0040	קיבלתי את הבקשה לגבי YouTube. [40]	Received את The request about YouTube. [40]	YouTube|YouTube
-0041	קיבלתי את הבקשה לגבי Chrome. [41]	Received את The request about Chrome. [41]	Chrome|Chrome
-0042	קיבלתי את הבקשה לגבי Gmail. [42]	Received את The request about Gmail. [42]	Gmail|Gmail
-0043	קיבלתי את הבקשה לגבי Maps. [43]	Received את The request about Maps. [43]	Maps|Maps
-0044	קיבלתי את הבקשה לגבי Waze. [44]	Received את The request about Waze. [44]	Waze|Waze
-0045	קיבלתי את הבקשה לגבי Spotify. [45]	Received את The request about Spotify. [45]	Spotify|Spotify
-0046	קיבלתי את הבקשה לגבי Telegram. [46]	Received את The request about Telegram. [46]	Telegram|Telegram
-0047	קיבלתי את הבקשה לגבי Discord. [47]	Received את The request about Discord. [47]	Discord|Discord
-0048	קיבלתי את הבקשה לגבי Instagram. [48]	Received את The request about Instagram. [48]	Instagram|Instagram
-0049	קיבלתי את הבקשה לגבי TikTok. [49]	Received את The request about TikTok. [49]	TikTok|TikTok
-0050	קיבלתי את הבקשה לגבי Facebook. [50]	Received את The request about Facebook. [50]	Facebook|Facebook
-0051	קיבלתי את הבקשה לגבי Netflix. [51]	Received את The request about Netflix. [51]	Netflix|Netflix
-0052	קיבלתי את הבקשה לגבי צילום מסך. [52]	Received את The request about צילום מסך. [52]	צילום מסך|screenshot
-0053	קיבלתי את הבקשה לגבי מסך הבית. [53]	Received את The request about מסך הבית. [53]	מסך הבית|home screen
-0054	קיבלתי את הבקשה לגבי השיר הבא. [54]	Received את The request about השיר הבא. [54]	השיר הבא|next track
-0055	קיבלתי את הבקשה לגבי השיר הקודם. [55]	Received את The request about השיר הקודם. [55]	השיר הקודם|previous track
-0056	זיהיתי את הנושא עזרה במנוע האופליין. [56]	Detected את The topic עזרה בoffline engine. [56]	עזרה|help
-0057	זיהיתי את הנושא שלום במנוע האופליין. [57]	Detected את The topic שלום בoffline engine. [57]	שלום|hello
-0058	זיהיתי את הנושא סוללה במנוע האופליין. [58]	Detected את The topic סוללה בoffline engine. [58]	סוללה|battery
-0059	זיהיתי את הנושא אחסון במנוע האופליין. [59]	Detected את The topic אחסון בoffline engine. [59]	אחסון|storage
-0060	זיהיתי את הנושא שמע במנוע האופליין. [60]	Detected את The topic שמע בoffline engine. [60]	שמע|sound
-0061	זיהיתי את הנושא קול במנוע האופליין. [61]	Detected את The topic קול בoffline engine. [61]	קול|volume
-0062	זיהיתי את הנושא מוזיקה במנוע האופליין. [62]	Detected את The topic מוזיקה בoffline engine. [62]	מוזיקה|music
-0063	זיהיתי את הנושא שיר במנוע האופליין. [63]	Detected את The topic שיר בoffline engine. [63]	שיר|track
-0064	זיהיתי את הנושא מסך במנוע האופליין. [64]	Detected את The topic מסך בoffline engine. [64]	מסך|display
-0065	זיהיתי את הנושא רשת במנוע האופליין. [65]	Detected את The topic רשת בoffline engine. [65]	רשת|network
-0066	זיהיתי את הנושא Wi-Fi במנוע האופליין. [66]	Detected את The topic Wi-Fi בoffline engine. [66]	Wi-Fi|Wi-Fi
-0067	זיהיתי את הנושא Bluetooth במנוע האופליין. [67]	Detected את The topic Bluetooth בoffline engine. [67]	Bluetooth|Bluetooth
-0068	זיהיתי את הנושא התראות במנוע האופליין. [68]	Detected את The topic התראות בoffline engine. [68]	התראות|notifications
-0069	זיהיתי את הנושא קבצים במנוע האופליין. [69]	Detected את The topic קבצים בoffline engine. [69]	קבצים|files
-0070	זיהיתי את הנושא תמונות במנוע האופליין. [70]	Detected את The topic תמונות בoffline engine. [70]	תמונות|photos
-0071	זיהיתי את הנושא מצלמה במנוע האופליין. [71]	Detected את The topic מצלמה בoffline engine. [71]	מצלמה|camera
-0072	זיהיתי את הנושא מיקרופון במנוע האופליין. [72]	Detected את The topic מיקרופון בoffline engine. [72]	מיקרופון|microphone
-0073	זיהיתי את הנושא מיקום במנוע האופליין. [73]	Detected את The topic מיקום בoffline engine. [73]	מיקום|location
-0074	זיהיתי את הנושא אפליקציות במנוע האופליין. [74]	Detected את The topic אפליקציות בoffline engine. [74]	אפליקציות|apps
-0075	זיהיתי את הנושא דפדפן במנוע האופליין. [75]	Detected את The topic דפדפן בoffline engine. [75]	דפדפן|browser
-0076	זיהיתי את הנושא הגדרות במנוע האופליין. [76]	Detected את The topic הגדרות בoffline engine. [76]	הגדרות|settings
-0077	זיהיתי את הנושא מקלדת במנוע האופליין. [77]	Detected את The topic מקלדת בoffline engine. [77]	מקלדת|keyboard
-0078	זיהיתי את הנושא שפה במנוע האופליין. [78]	Detected את The topic שפה בoffline engine. [78]	שפה|language
-0079	זיהיתי את הנושא שעה במנוע האופליין. [79]	Detected את The topic שעה בoffline engine. [79]	שעה|time
-0080	זיהיתי את הנושא תאריך במנוע האופליין. [80]	Detected את The topic תאריך בoffline engine. [80]	תאריך|date
-0081	זיהיתי את הנושא פרטיות במנוע האופליין. [81]	Detected את The topic פרטיות בoffline engine. [81]	פרטיות|privacy
-0082	זיהיתי את הנושא הרשאות במנוע האופליין. [82]	Detected את The topic הרשאות בoffline engine. [82]	הרשאות|permissions
-0083	זיהיתי את הנושא גיבוי במנוע האופליין. [83]	Detected את The topic גיבוי בoffline engine. [83]	גיבוי|backup
-0084	זיהיתי את הנושא עדכונים במנוע האופליין. [84]	Detected את The topic עדכונים בoffline engine. [84]	עדכונים|updates
-0085	זיהיתי את הנושא נקודה חמה במנוע האופליין. [85]	Detected את The topic נקודה חמה בoffline engine. [85]	נקודה חמה|hotspot
-0086	זיהיתי את הנושא VPN במנוע האופליין. [86]	Detected את The topic VPN בoffline engine. [86]	VPN|VPN
-0087	זיהיתי את הנושא שיתוף במנוע האופליין. [87]	Detected את The topic שיתוף בoffline engine. [87]	שיתוף|sharing
-0088	זיהיתי את הנושא הורדות במנוע האופליין. [88]	Detected את The topic הורדות בoffline engine. [88]	הורדות|downloads
-0089	זיהיתי את הנושא חיפוש במנוע האופליין. [89]	Detected את The topic חיפוש בoffline engine. [89]	חיפוש|search
-0090	זיהיתי את הנושא חנות במנוע האופליין. [90]	Detected את The topic חנות בoffline engine. [90]	חנות|store
-0091	זיהיתי את הנושא משחקים במנוע האופליין. [91]	Detected את The topic משחקים בoffline engine. [91]	משחקים|games
-0092	זיהיתי את הנושא לימודים במנוע האופליין. [92]	Detected את The topic לימודים בoffline engine. [92]	לימודים|study
-0093	זיהיתי את הנושא קוד במנוע האופליין. [93]	Detected את The topic קוד בoffline engine. [93]	קוד|code
-0094	זיהיתי את הנושא WhatsApp במנוע האופליין. [94]	Detected את The topic WhatsApp בoffline engine. [94]	WhatsApp|WhatsApp
-0095	זיהיתי את הנושא YouTube במנוע האופליין. [95]	Detected את The topic YouTube בoffline engine. [95]	YouTube|YouTube
-0096	זיהיתי את הנושא Chrome במנוע האופליין. [96]	Detected את The topic Chrome בoffline engine. [96]	Chrome|Chrome
-0097	זיהיתי את הנושא Gmail במנוע האופליין. [97]	Detected את The topic Gmail בoffline engine. [97]	Gmail|Gmail
-0098	זיהיתי את הנושא Maps במנוע האופליין. [98]	Detected את The topic Maps בoffline engine. [98]	Maps|Maps
-0099	זיהיתי את הנושא Waze במנוע האופליין. [99]	Detected את The topic Waze בoffline engine. [99]	Waze|Waze
-0100	זיהיתי את הנושא Spotify במנוע האופליין. [100]	Detected את The topic Spotify בoffline engine. [100]	Spotify|Spotify
-0101	זיהיתי את הנושא Telegram במנוע האופליין. [101]	Detected את The topic Telegram בoffline engine. [101]	Telegram|Telegram
-0102	זיהיתי את הנושא Discord במנוע האופליין. [102]	Detected את The topic Discord בoffline engine. [102]	Discord|Discord
-0103	זיהיתי את הנושא Instagram במנוע האופליין. [103]	Detected את The topic Instagram בoffline engine. [103]	Instagram|Instagram
-0104	זיהיתי את הנושא TikTok במנוע האופליין. [104]	Detected את The topic TikTok בoffline engine. [104]	TikTok|TikTok
-0105	זיהיתי את הנושא Facebook במנוע האופליין. [105]	Detected את The topic Facebook בoffline engine. [105]	Facebook|Facebook
-0106	זיהיתי את הנושא Netflix במנוע האופליין. [106]	Detected את The topic Netflix בoffline engine. [106]	Netflix|Netflix
-0107	זיהיתי את הנושא צילום מסך במנוע האופליין. [107]	Detected את The topic צילום מסך בoffline engine. [107]	צילום מסך|screenshot
-0108	זיהיתי את הנושא מסך הבית במנוע האופליין. [108]	Detected את The topic מסך הבית בoffline engine. [108]	מסך הבית|home screen
-0109	זיהיתי את הנושא השיר הבא במנוע האופליין. [109]	Detected את The topic השיר הבא בoffline engine. [109]	השיר הבא|next track
-0110	זיהיתי את הנושא השיר הקודם במנוע האופליין. [110]	Detected את The topic השיר הקודם בoffline engine. [110]	השיר הקודם|previous track
-0111	הבקשה בנושא עזרה נמצאת במאגר המקומי. [111]	The request בנושא עזרה נמצאת במאגר הlocal. [111]	עזרה|help
-0112	הבקשה בנושא שלום נמצאת במאגר המקומי. [112]	The request בנושא שלום נמצאת במאגר הlocal. [112]	שלום|hello
-0113	הבקשה בנושא סוללה נמצאת במאגר המקומי. [113]	The request בנושא סוללה נמצאת במאגר הlocal. [113]	סוללה|battery
-0114	הבקשה בנושא אחסון נמצאת במאגר המקומי. [114]	The request בנושא אחסון נמצאת במאגר הlocal. [114]	אחסון|storage
-0115	הבקשה בנושא שמע נמצאת במאגר המקומי. [115]	The request בנושא שמע נמצאת במאגר הlocal. [115]	שמע|sound
-0116	הבקשה בנושא קול נמצאת במאגר המקומי. [116]	The request בנושא קול נמצאת במאגר הlocal. [116]	קול|volume
-0117	הבקשה בנושא מוזיקה נמצאת במאגר המקומי. [117]	The request בנושא מוזיקה נמצאת במאגר הlocal. [117]	מוזיקה|music
-0118	הבקשה בנושא שיר נמצאת במאגר המקומי. [118]	The request בנושא שיר נמצאת במאגר הlocal. [118]	שיר|track
-0119	הבקשה בנושא מסך נמצאת במאגר המקומי. [119]	The request בנושא מסך נמצאת במאגר הlocal. [119]	מסך|display
-0120	הבקשה בנושא רשת נמצאת במאגר המקומי. [120]	The request בנושא רשת נמצאת במאגר הlocal. [120]	רשת|network
-0121	הבקשה בנושא Wi-Fi נמצאת במאגר המקומי. [121]	The request בנושא Wi-Fi נמצאת במאגר הlocal. [121]	Wi-Fi|Wi-Fi
-0122	הבקשה בנושא Bluetooth נמצאת במאגר המקומי. [122]	The request בנושא Bluetooth נמצאת במאגר הlocal. [122]	Bluetooth|Bluetooth
-0123	הבקשה בנושא התראות נמצאת במאגר המקומי. [123]	The request בנושא התראות נמצאת במאגר הlocal. [123]	התראות|notifications
-0124	הבקשה בנושא קבצים נמצאת במאגר המקומי. [124]	The request בנושא קבצים נמצאת במאגר הlocal. [124]	קבצים|files
-0125	הבקשה בנושא תמונות נמצאת במאגר המקומי. [125]	The request בנושא תמונות נמצאת במאגר הlocal. [125]	תמונות|photos
-0126	הבקשה בנושא מצלמה נמצאת במאגר המקומי. [126]	The request בנושא מצלמה נמצאת במאגר הlocal. [126]	מצלמה|camera
-0127	הבקשה בנושא מיקרופון נמצאת במאגר המקומי. [127]	The request בנושא מיקרופון נמצאת במאגר הlocal. [127]	מיקרופון|microphone
-0128	הבקשה בנושא מיקום נמצאת במאגר המקומי. [128]	The request בנושא מיקום נמצאת במאגר הlocal. [128]	מיקום|location
-0129	הבקשה בנושא אפליקציות נמצאת במאגר המקומי. [129]	The request בנושא אפליקציות נמצאת במאגר הlocal. [129]	אפליקציות|apps
-0130	הבקשה בנושא דפדפן נמצאת במאגר המקומי. [130]	The request בנושא דפדפן נמצאת במאגר הlocal. [130]	דפדפן|browser
-0131	הבקשה בנושא הגדרות נמצאת במאגר המקומי. [131]	The request בנושא הגדרות נמצאת במאגר הlocal. [131]	הגדרות|settings
-0132	הבקשה בנושא מקלדת נמצאת במאגר המקומי. [132]	The request בנושא מקלדת נמצאת במאגר הlocal. [132]	מקלדת|keyboard
-0133	הבקשה בנושא שפה נמצאת במאגר המקומי. [133]	The request בנושא שפה נמצאת במאגר הlocal. [133]	שפה|language
-0134	הבקשה בנושא שעה נמצאת במאגר המקומי. [134]	The request בנושא שעה נמצאת במאגר הlocal. [134]	שעה|time
-0135	הבקשה בנושא תאריך נמצאת במאגר המקומי. [135]	The request בנושא תאריך נמצאת במאגר הlocal. [135]	תאריך|date
-0136	הבקשה בנושא פרטיות נמצאת במאגר המקומי. [136]	The request בנושא פרטיות נמצאת במאגר הlocal. [136]	פרטיות|privacy
-0137	הבקשה בנושא הרשאות נמצאת במאגר המקומי. [137]	The request בנושא הרשאות נמצאת במאגר הlocal. [137]	הרשאות|permissions
-0138	הבקשה בנושא גיבוי נמצאת במאגר המקומי. [138]	The request בנושא גיבוי נמצאת במאגר הlocal. [138]	גיבוי|backup
-0139	הבקשה בנושא עדכונים נמצאת במאגר המקומי. [139]	The request בנושא עדכונים נמצאת במאגר הlocal. [139]	עדכונים|updates
-0140	הבקשה בנושא נקודה חמה נמצאת במאגר המקומי. [140]	The request בנושא נקודה חמה נמצאת במאגר הlocal. [140]	נקודה חמה|hotspot
-0141	הבקשה בנושא VPN נמצאת במאגר המקומי. [141]	The request בנושא VPN נמצאת במאגר הlocal. [141]	VPN|VPN
-0142	הבקשה בנושא שיתוף נמצאת במאגר המקומי. [142]	The request בנושא שיתוף נמצאת במאגר הlocal. [142]	שיתוף|sharing
-0143	הבקשה בנושא הורדות נמצאת במאגר המקומי. [143]	The request בנושא הורדות נמצאת במאגר הlocal. [143]	הורדות|downloads
-0144	הבקשה בנושא חיפוש נמצאת במאגר המקומי. [144]	The request בנושא חיפוש נמצאת במאגר הlocal. [144]	חיפוש|search
-0145	הבקשה בנושא חנות נמצאת במאגר המקומי. [145]	The request בנושא חנות נמצאת במאגר הlocal. [145]	חנות|store
-0146	הבקשה בנושא משחקים נמצאת במאגר המקומי. [146]	The request בנושא משחקים נמצאת במאגר הlocal. [146]	משחקים|games
-0147	הבקשה בנושא לימודים נמצאת במאגר המקומי. [147]	The request בנושא לימודים נמצאת במאגר הlocal. [147]	לימודים|study
-0148	הבקשה בנושא קוד נמצאת במאגר המקומי. [148]	The request בנושא קוד נמצאת במאגר הlocal. [148]	קוד|code
-0149	הבקשה בנושא WhatsApp נמצאת במאגר המקומי. [149]	The request בנושא WhatsApp נמצאת במאגר הlocal. [149]	WhatsApp|WhatsApp
-0150	הבקשה בנושא YouTube נמצאת במאגר המקומי. [150]	The request בנושא YouTube נמצאת במאגר הlocal. [150]	YouTube|YouTube
-0151	הבקשה בנושא Chrome נמצאת במאגר המקומי. [151]	The request בנושא Chrome נמצאת במאגר הlocal. [151]	Chrome|Chrome
-0152	הבקשה בנושא Gmail נמצאת במאגר המקומי. [152]	The request בנושא Gmail נמצאת במאגר הlocal. [152]	Gmail|Gmail
-0153	הבקשה בנושא Maps נמצאת במאגר המקומי. [153]	The request בנושא Maps נמצאת במאגר הlocal. [153]	Maps|Maps
-0154	הבקשה בנושא Waze נמצאת במאגר המקומי. [154]	The request בנושא Waze נמצאת במאגר הlocal. [154]	Waze|Waze
-0155	הבקשה בנושא Spotify נמצאת במאגר המקומי. [155]	The request בנושא Spotify נמצאת במאגר הlocal. [155]	Spotify|Spotify
-0156	הבקשה בנושא Telegram נמצאת במאגר המקומי. [156]	The request בנושא Telegram נמצאת במאגר הlocal. [156]	Telegram|Telegram
-0157	הבקשה בנושא Discord נמצאת במאגר המקומי. [157]	The request בנושא Discord נמצאת במאגר הlocal. [157]	Discord|Discord
-0158	הבקשה בנושא Instagram נמצאת במאגר המקומי. [158]	The request בנושא Instagram נמצאת במאגר הlocal. [158]	Instagram|Instagram
-0159	הבקשה בנושא TikTok נמצאת במאגר המקומי. [159]	The request בנושא TikTok נמצאת במאגר הlocal. [159]	TikTok|TikTok
-0160	הבקשה בנושא Facebook נמצאת במאגר המקומי. [160]	The request בנושא Facebook נמצאת במאגר הlocal. [160]	Facebook|Facebook
-0161	הבקשה בנושא Netflix נמצאת במאגר המקומי. [161]	The request בנושא Netflix נמצאת במאגר הlocal. [161]	Netflix|Netflix
-0162	הבקשה בנושא צילום מסך נמצאת במאגר המקומי. [162]	The request בנושא צילום מסך נמצאת במאגר הlocal. [162]	צילום מסך|screenshot
-0163	הבקשה בנושא מסך הבית נמצאת במאגר המקומי. [163]	The request בנושא מסך הבית נמצאת במאגר הlocal. [163]	מסך הבית|home screen
-0164	הבקשה בנושא השיר הבא נמצאת במאגר המקומי. [164]	The request בנושא השיר הבא נמצאת במאגר הlocal. [164]	השיר הבא|next track
-0165	הבקשה בנושא השיר הקודם נמצאת במאגר המקומי. [165]	The request בנושא השיר הקודם נמצאת במאגר הlocal. [165]	השיר הקודם|previous track
-0166	בוצעה התאמה למונחי עזרה. [166]	Matched terms for עזרה. [166]	עזרה|help
-0167	בוצעה התאמה למונחי שלום. [167]	Matched terms for שלום. [167]	שלום|hello
-0168	בוצעה התאמה למונחי סוללה. [168]	Matched terms for סוללה. [168]	סוללה|battery
-0169	בוצעה התאמה למונחי אחסון. [169]	Matched terms for אחסון. [169]	אחסון|storage
-0170	בוצעה התאמה למונחי שמע. [170]	Matched terms for שמע. [170]	שמע|sound
-0171	בוצעה התאמה למונחי קול. [171]	Matched terms for קול. [171]	קול|volume
-0172	בוצעה התאמה למונחי מוזיקה. [172]	Matched terms for מוזיקה. [172]	מוזיקה|music
-0173	בוצעה התאמה למונחי שיר. [173]	Matched terms for שיר. [173]	שיר|track
-0174	בוצעה התאמה למונחי מסך. [174]	Matched terms for מסך. [174]	מסך|display
-0175	בוצעה התאמה למונחי רשת. [175]	Matched terms for רשת. [175]	רשת|network
-0176	בוצעה התאמה למונחי Wi-Fi. [176]	Matched terms for Wi-Fi. [176]	Wi-Fi|Wi-Fi
-0177	בוצעה התאמה למונחי Bluetooth. [177]	Matched terms for Bluetooth. [177]	Bluetooth|Bluetooth
-0178	בוצעה התאמה למונחי התראות. [178]	Matched terms for התראות. [178]	התראות|notifications
-0179	בוצעה התאמה למונחי קבצים. [179]	Matched terms for קבצים. [179]	קבצים|files
-0180	בוצעה התאמה למונחי תמונות. [180]	Matched terms for תמונות. [180]	תמונות|photos
-0181	בוצעה התאמה למונחי מצלמה. [181]	Matched terms for מצלמה. [181]	מצלמה|camera
-0182	בוצעה התאמה למונחי מיקרופון. [182]	Matched terms for מיקרופון. [182]	מיקרופון|microphone
-0183	בוצעה התאמה למונחי מיקום. [183]	Matched terms for מיקום. [183]	מיקום|location
-0184	בוצעה התאמה למונחי אפליקציות. [184]	Matched terms for אפליקציות. [184]	אפליקציות|apps
-0185	בוצעה התאמה למונחי דפדפן. [185]	Matched terms for דפדפן. [185]	דפדפן|browser
-0186	בוצעה התאמה למונחי הגדרות. [186]	Matched terms for הגדרות. [186]	הגדרות|settings
-0187	בוצעה התאמה למונחי מקלדת. [187]	Matched terms for מקלדת. [187]	מקלדת|keyboard
-0188	בוצעה התאמה למונחי שפה. [188]	Matched terms for שפה. [188]	שפה|language
-0189	בוצעה התאמה למונחי שעה. [189]	Matched terms for שעה. [189]	שעה|time
-0190	בוצעה התאמה למונחי תאריך. [190]	Matched terms for תאריך. [190]	תאריך|date
-0191	בוצעה התאמה למונחי פרטיות. [191]	Matched terms for פרטיות. [191]	פרטיות|privacy
-0192	בוצעה התאמה למונחי הרשאות. [192]	Matched terms for הרשאות. [192]	הרשאות|permissions
-0193	בוצעה התאמה למונחי גיבוי. [193]	Matched terms for גיבוי. [193]	גיבוי|backup
-0194	בוצעה התאמה למונחי עדכונים. [194]	Matched terms for עדכונים. [194]	עדכונים|updates
-0195	בוצעה התאמה למונחי נקודה חמה. [195]	Matched terms for נקודה חמה. [195]	נקודה חמה|hotspot
-0196	בוצעה התאמה למונחי VPN. [196]	Matched terms for VPN. [196]	VPN|VPN
-0197	בוצעה התאמה למונחי שיתוף. [197]	Matched terms for שיתוף. [197]	שיתוף|sharing
-0198	בוצעה התאמה למונחי הורדות. [198]	Matched terms for הורדות. [198]	הורדות|downloads
-0199	בוצעה התאמה למונחי חיפוש. [199]	Matched terms for חיפוש. [199]	חיפוש|search
-0200	בוצעה התאמה למונחי חנות. [200]	Matched terms for חנות. [200]	חנות|store
-0201	בוצעה התאמה למונחי משחקים. [201]	Matched terms for משחקים. [201]	משחקים|games
-0202	בוצעה התאמה למונחי לימודים. [202]	Matched terms for לימודים. [202]	לימודים|study
-0203	בוצעה התאמה למונחי קוד. [203]	Matched terms for קוד. [203]	קוד|code
-0204	בוצעה התאמה למונחי WhatsApp. [204]	Matched terms for WhatsApp. [204]	WhatsApp|WhatsApp
-0205	בוצעה התאמה למונחי YouTube. [205]	Matched terms for YouTube. [205]	YouTube|YouTube
-0206	בוצעה התאמה למונחי Chrome. [206]	Matched terms for Chrome. [206]	Chrome|Chrome
-0207	בוצעה התאמה למונחי Gmail. [207]	Matched terms for Gmail. [207]	Gmail|Gmail
-0208	בוצעה התאמה למונחי Maps. [208]	Matched terms for Maps. [208]	Maps|Maps
-0209	בוצעה התאמה למונחי Waze. [209]	Matched terms for Waze. [209]	Waze|Waze
-0210	בוצעה התאמה למונחי Spotify. [210]	Matched terms for Spotify. [210]	Spotify|Spotify
-0211	בוצעה התאמה למונחי Telegram. [211]	Matched terms for Telegram. [211]	Telegram|Telegram
-0212	בוצעה התאמה למונחי Discord. [212]	Matched terms for Discord. [212]	Discord|Discord
-0213	בוצעה התאמה למונחי Instagram. [213]	Matched terms for Instagram. [213]	Instagram|Instagram
-0214	בוצעה התאמה למונחי TikTok. [214]	Matched terms for TikTok. [214]	TikTok|TikTok
-0215	בוצעה התאמה למונחי Facebook. [215]	Matched terms for Facebook. [215]	Facebook|Facebook
-0216	בוצעה התאמה למונחי Netflix. [216]	Matched terms for Netflix. [216]	Netflix|Netflix
-0217	בוצעה התאמה למונחי צילום מסך. [217]	Matched terms for צילום מסך. [217]	צילום מסך|screenshot
-0218	בוצעה התאמה למונחי מסך הבית. [218]	Matched terms for מסך הבית. [218]	מסך הבית|home screen
-0219	בוצעה התאמה למונחי השיר הבא. [219]	Matched terms for השיר הבא. [219]	השיר הבא|next track
-0220	בוצעה התאמה למונחי השיר הקודם. [220]	Matched terms for השיר הקודם. [220]	השיר הקודם|previous track
-0221	המערכת זיהתה את עזרה. [221]	The system detected עזרה. [221]	עזרה|help
-0222	המערכת זיהתה את שלום. [222]	The system detected שלום. [222]	שלום|hello
-0223	המערכת זיהתה את סוללה. [223]	The system detected סוללה. [223]	סוללה|battery
-0224	המערכת זיהתה את אחסון. [224]	The system detected אחסון. [224]	אחסון|storage
-0225	המערכת זיהתה את שמע. [225]	The system detected שמע. [225]	שמע|sound
-0226	המערכת זיהתה את קול. [226]	The system detected קול. [226]	קול|volume
-0227	המערכת זיהתה את מוזיקה. [227]	The system detected מוזיקה. [227]	מוזיקה|music
-0228	המערכת זיהתה את שיר. [228]	The system detected שיר. [228]	שיר|track
-0229	המערכת זיהתה את מסך. [229]	The system detected מסך. [229]	מסך|display
-0230	המערכת זיהתה את רשת. [230]	The system detected רשת. [230]	רשת|network
-0231	המערכת זיהתה את Wi-Fi. [231]	The system detected Wi-Fi. [231]	Wi-Fi|Wi-Fi
-0232	המערכת זיהתה את Bluetooth. [232]	The system detected Bluetooth. [232]	Bluetooth|Bluetooth
-0233	המערכת זיהתה את התראות. [233]	The system detected התראות. [233]	התראות|notifications
-0234	המערכת זיהתה את קבצים. [234]	The system detected קבצים. [234]	קבצים|files
-0235	המערכת זיהתה את תמונות. [235]	The system detected תמונות. [235]	תמונות|photos
-0236	המערכת זיהתה את מצלמה. [236]	The system detected מצלמה. [236]	מצלמה|camera
-0237	המערכת זיהתה את מיקרופון. [237]	The system detected מיקרופון. [237]	מיקרופון|microphone
-0238	המערכת זיהתה את מיקום. [238]	The system detected מיקום. [238]	מיקום|location
-0239	המערכת זיהתה את אפליקציות. [239]	The system detected אפליקציות. [239]	אפליקציות|apps
-0240	המערכת זיהתה את דפדפן. [240]	The system detected דפדפן. [240]	דפדפן|browser
-0241	המערכת זיהתה את הגדרות. [241]	The system detected הגדרות. [241]	הגדרות|settings
-0242	המערכת זיהתה את מקלדת. [242]	The system detected מקלדת. [242]	מקלדת|keyboard
-0243	המערכת זיהתה את שפה. [243]	The system detected שפה. [243]	שפה|language
-0244	המערכת זיהתה את שעה. [244]	The system detected שעה. [244]	שעה|time
-0245	המערכת זיהתה את תאריך. [245]	The system detected תאריך. [245]	תאריך|date
-0246	המערכת זיהתה את פרטיות. [246]	The system detected פרטיות. [246]	פרטיות|privacy
-0247	המערכת זיהתה את הרשאות. [247]	The system detected הרשאות. [247]	הרשאות|permissions
-0248	המערכת זיהתה את גיבוי. [248]	The system detected גיבוי. [248]	גיבוי|backup
-0249	המערכת זיהתה את עדכונים. [249]	The system detected עדכונים. [249]	עדכונים|updates
-0250	המערכת זיהתה את נקודה חמה. [250]	The system detected נקודה חמה. [250]	נקודה חמה|hotspot
-0251	המערכת זיהתה את VPN. [251]	The system detected VPN. [251]	VPN|VPN
-0252	המערכת זיהתה את שיתוף. [252]	The system detected שיתוף. [252]	שיתוף|sharing
-0253	המערכת זיהתה את הורדות. [253]	The system detected הורדות. [253]	הורדות|downloads
-0254	המערכת זיהתה את חיפוש. [254]	The system detected חיפוש. [254]	חיפוש|search
-0255	המערכת זיהתה את חנות. [255]	The system detected חנות. [255]	חנות|store
-0256	המערכת זיהתה את משחקים. [256]	The system detected משחקים. [256]	משחקים|games
-0257	המערכת זיהתה את לימודים. [257]	The system detected לימודים. [257]	לימודים|study
-0258	המערכת זיהתה את קוד. [258]	The system detected קוד. [258]	קוד|code
-0259	המערכת זיהתה את WhatsApp. [259]	The system detected WhatsApp. [259]	WhatsApp|WhatsApp
-0260	המערכת זיהתה את YouTube. [260]	The system detected YouTube. [260]	YouTube|YouTube
-0261	המערכת זיהתה את Chrome. [261]	The system detected Chrome. [261]	Chrome|Chrome
-0262	המערכת זיהתה את Gmail. [262]	The system detected Gmail. [262]	Gmail|Gmail
-0263	המערכת זיהתה את Maps. [263]	The system detected Maps. [263]	Maps|Maps
-0264	המערכת זיהתה את Waze. [264]	The system detected Waze. [264]	Waze|Waze
-0265	המערכת זיהתה את Spotify. [265]	The system detected Spotify. [265]	Spotify|Spotify
-0266	המערכת זיהתה את Telegram. [266]	The system detected Telegram. [266]	Telegram|Telegram
-0267	המערכת זיהתה את Discord. [267]	The system detected Discord. [267]	Discord|Discord
-0268	המערכת זיהתה את Instagram. [268]	The system detected Instagram. [268]	Instagram|Instagram
-0269	המערכת זיהתה את TikTok. [269]	The system detected TikTok. [269]	TikTok|TikTok
-0270	המערכת זיהתה את Facebook. [270]	The system detected Facebook. [270]	Facebook|Facebook
-0271	המערכת זיהתה את Netflix. [271]	The system detected Netflix. [271]	Netflix|Netflix
-0272	המערכת זיהתה את צילום מסך. [272]	The system detected צילום מסך. [272]	צילום מסך|screenshot
-0273	המערכת זיהתה את מסך הבית. [273]	The system detected מסך הבית. [273]	מסך הבית|home screen
-0274	המערכת זיהתה את השיר הבא. [274]	The system detected השיר הבא. [274]	השיר הבא|next track
-0275	המערכת זיהתה את השיר הקודם. [275]	The system detected השיר הקודם. [275]	השיר הקודם|previous track
-0276	יש התאמה טובה עבור עזרה. [276]	Good match for עזרה. [276]	עזרה|help
-0277	יש התאמה טובה עבור שלום. [277]	Good match for שלום. [277]	שלום|hello
-0278	יש התאמה טובה עבור סוללה. [278]	Good match for סוללה. [278]	סוללה|battery
-0279	יש התאמה טובה עבור אחסון. [279]	Good match for אחסון. [279]	אחסון|storage
-0280	יש התאמה טובה עבור שמע. [280]	Good match for שמע. [280]	שמע|sound
-0281	יש התאמה טובה עבור קול. [281]	Good match for קול. [281]	קול|volume
-0282	יש התאמה טובה עבור מוזיקה. [282]	Good match for מוזיקה. [282]	מוזיקה|music
-0283	יש התאמה טובה עבור שיר. [283]	Good match for שיר. [283]	שיר|track
-0284	יש התאמה טובה עבור מסך. [284]	Good match for מסך. [284]	מסך|display
-0285	יש התאמה טובה עבור רשת. [285]	Good match for רשת. [285]	רשת|network
-0286	יש התאמה טובה עבור Wi-Fi. [286]	Good match for Wi-Fi. [286]	Wi-Fi|Wi-Fi
-0287	יש התאמה טובה עבור Bluetooth. [287]	Good match for Bluetooth. [287]	Bluetooth|Bluetooth
-0288	יש התאמה טובה עבור התראות. [288]	Good match for התראות. [288]	התראות|notifications
-0289	יש התאמה טובה עבור קבצים. [289]	Good match for קבצים. [289]	קבצים|files
-0290	יש התאמה טובה עבור תמונות. [290]	Good match for תמונות. [290]	תמונות|photos
-0291	יש התאמה טובה עבור מצלמה. [291]	Good match for מצלמה. [291]	מצלמה|camera
-0292	יש התאמה טובה עבור מיקרופון. [292]	Good match for מיקרופון. [292]	מיקרופון|microphone
-0293	יש התאמה טובה עבור מיקום. [293]	Good match for מיקום. [293]	מיקום|location
-0294	יש התאמה טובה עבור אפליקציות. [294]	Good match for אפליקציות. [294]	אפליקציות|apps
-0295	יש התאמה טובה עבור דפדפן. [295]	Good match for דפדפן. [295]	דפדפן|browser
-0296	יש התאמה טובה עבור הגדרות. [296]	Good match for הגדרות. [296]	הגדרות|settings
-0297	יש התאמה טובה עבור מקלדת. [297]	Good match for מקלדת. [297]	מקלדת|keyboard
-0298	יש התאמה טובה עבור שפה. [298]	Good match for שפה. [298]	שפה|language
-0299	יש התאמה טובה עבור שעה. [299]	Good match for שעה. [299]	שעה|time
-0300	יש התאמה טובה עבור תאריך. [300]	Good match for תאריך. [300]	תאריך|date
-0301	יש התאמה טובה עבור פרטיות. [301]	Good match for פרטיות. [301]	פרטיות|privacy
-0302	יש התאמה טובה עבור הרשאות. [302]	Good match for הרשאות. [302]	הרשאות|permissions
-0303	יש התאמה טובה עבור גיבוי. [303]	Good match for גיבוי. [303]	גיבוי|backup
-0304	יש התאמה טובה עבור עדכונים. [304]	Good match for עדכונים. [304]	עדכונים|updates
-0305	יש התאמה טובה עבור נקודה חמה. [305]	Good match for נקודה חמה. [305]	נקודה חמה|hotspot
-0306	יש התאמה טובה עבור VPN. [306]	Good match for VPN. [306]	VPN|VPN
-0307	יש התאמה טובה עבור שיתוף. [307]	Good match for שיתוף. [307]	שיתוף|sharing
-0308	יש התאמה טובה עבור הורדות. [308]	Good match for הורדות. [308]	הורדות|downloads
-0309	יש התאמה טובה עבור חיפוש. [309]	Good match for חיפוש. [309]	חיפוש|search
-0310	יש התאמה טובה עבור חנות. [310]	Good match for חנות. [310]	חנות|store
-0311	יש התאמה טובה עבור משחקים. [311]	Good match for משחקים. [311]	משחקים|games
-0312	יש התאמה טובה עבור לימודים. [312]	Good match for לימודים. [312]	לימודים|study
-0313	יש התאמה טובה עבור קוד. [313]	Good match for קוד. [313]	קוד|code
-0314	יש התאמה טובה עבור WhatsApp. [314]	Good match for WhatsApp. [314]	WhatsApp|WhatsApp
-0315	יש התאמה טובה עבור YouTube. [315]	Good match for YouTube. [315]	YouTube|YouTube
-0316	יש התאמה טובה עבור Chrome. [316]	Good match for Chrome. [316]	Chrome|Chrome
-0317	יש התאמה טובה עבור Gmail. [317]	Good match for Gmail. [317]	Gmail|Gmail
-0318	יש התאמה טובה עבור Maps. [318]	Good match for Maps. [318]	Maps|Maps
-0319	יש התאמה טובה עבור Waze. [319]	Good match for Waze. [319]	Waze|Waze
-0320	יש התאמה טובה עבור Spotify. [320]	Good match for Spotify. [320]	Spotify|Spotify
-0321	יש התאמה טובה עבור Telegram. [321]	Good match for Telegram. [321]	Telegram|Telegram
-0322	יש התאמה טובה עבור Discord. [322]	Good match for Discord. [322]	Discord|Discord
-0323	יש התאמה טובה עבור Instagram. [323]	Good match for Instagram. [323]	Instagram|Instagram
-0324	יש התאמה טובה עבור TikTok. [324]	Good match for TikTok. [324]	TikTok|TikTok
-0325	יש התאמה טובה עבור Facebook. [325]	Good match for Facebook. [325]	Facebook|Facebook
-0326	יש התאמה טובה עבור Netflix. [326]	Good match for Netflix. [326]	Netflix|Netflix
-0327	יש התאמה טובה עבור צילום מסך. [327]	Good match for צילום מסך. [327]	צילום מסך|screenshot
-0328	יש התאמה טובה עבור מסך הבית. [328]	Good match for מסך הבית. [328]	מסך הבית|home screen
-0329	יש התאמה טובה עבור השיר הבא. [329]	Good match for השיר הבא. [329]	השיר הבא|next track
-0330	יש התאמה טובה עבור השיר הקודם. [330]	Good match for השיר הקודם. [330]	השיר הקודם|previous track
-0331	מנוע החיפוש המקומי מכיר את עזרה. [331]	מנוע החיפוש הlocal מכיר את עזרה. [331]	עזרה|help
-0332	מנוע החיפוש המקומי מכיר את שלום. [332]	מנוע החיפוש הlocal מכיר את שלום. [332]	שלום|hello
-0333	מנוע החיפוש המקומי מכיר את סוללה. [333]	מנוע החיפוש הlocal מכיר את סוללה. [333]	סוללה|battery
-0334	מנוע החיפוש המקומי מכיר את אחסון. [334]	מנוע החיפוש הlocal מכיר את אחסון. [334]	אחסון|storage
-0335	מנוע החיפוש המקומי מכיר את שמע. [335]	מנוע החיפוש הlocal מכיר את שמע. [335]	שמע|sound
-0336	מנוע החיפוש המקומי מכיר את קול. [336]	מנוע החיפוש הlocal מכיר את קול. [336]	קול|volume
-0337	מנוע החיפוש המקומי מכיר את מוזיקה. [337]	מנוע החיפוש הlocal מכיר את מוזיקה. [337]	מוזיקה|music
-0338	מנוע החיפוש המקומי מכיר את שיר. [338]	מנוע החיפוש הlocal מכיר את שיר. [338]	שיר|track
-0339	מנוע החיפוש המקומי מכיר את מסך. [339]	מנוע החיפוש הlocal מכיר את מסך. [339]	מסך|display
-0340	מנוע החיפוש המקומי מכיר את רשת. [340]	מנוע החיפוש הlocal מכיר את רשת. [340]	רשת|network
-0341	מנוע החיפוש המקומי מכיר את Wi-Fi. [341]	מנוע החיפוש הlocal מכיר את Wi-Fi. [341]	Wi-Fi|Wi-Fi
-0342	מנוע החיפוש המקומי מכיר את Bluetooth. [342]	מנוע החיפוש הlocal מכיר את Bluetooth. [342]	Bluetooth|Bluetooth
-0343	מנוע החיפוש המקומי מכיר את התראות. [343]	מנוע החיפוש הlocal מכיר את התראות. [343]	התראות|notifications
-0344	מנוע החיפוש המקומי מכיר את קבצים. [344]	מנוע החיפוש הlocal מכיר את קבצים. [344]	קבצים|files
-0345	מנוע החיפוש המקומי מכיר את תמונות. [345]	מנוע החיפוש הlocal מכיר את תמונות. [345]	תמונות|photos
-0346	מנוע החיפוש המקומי מכיר את מצלמה. [346]	מנוע החיפוש הlocal מכיר את מצלמה. [346]	מצלמה|camera
-0347	מנוע החיפוש המקומי מכיר את מיקרופון. [347]	מנוע החיפוש הlocal מכיר את מיקרופון. [347]	מיקרופון|microphone
-0348	מנוע החיפוש המקומי מכיר את מיקום. [348]	מנוע החיפוש הlocal מכיר את מיקום. [348]	מיקום|location
-0349	מנוע החיפוש המקומי מכיר את אפליקציות. [349]	מנוע החיפוש הlocal מכיר את אפליקציות. [349]	אפליקציות|apps
-0350	מנוע החיפוש המקומי מכיר את דפדפן. [350]	מנוע החיפוש הlocal מכיר את דפדפן. [350]	דפדפן|browser
-0351	מנוע החיפוש המקומי מכיר את הגדרות. [351]	מנוע החיפוש הlocal מכיר את הגדרות. [351]	הגדרות|settings
-0352	מנוע החיפוש המקומי מכיר את מקלדת. [352]	מנוע החיפוש הlocal מכיר את מקלדת. [352]	מקלדת|keyboard
-0353	מנוע החיפוש המקומי מכיר את שפה. [353]	מנוע החיפוש הlocal מכיר את שפה. [353]	שפה|language
-0354	מנוע החיפוש המקומי מכיר את שעה. [354]	מנוע החיפוש הlocal מכיר את שעה. [354]	שעה|time
-0355	מנוע החיפוש המקומי מכיר את תאריך. [355]	מנוע החיפוש הlocal מכיר את תאריך. [355]	תאריך|date
-0356	מנוע החיפוש המקומי מכיר את פרטיות. [356]	מנוע החיפוש הlocal מכיר את פרטיות. [356]	פרטיות|privacy
-0357	מנוע החיפוש המקומי מכיר את הרשאות. [357]	מנוע החיפוש הlocal מכיר את הרשאות. [357]	הרשאות|permissions
-0358	מנוע החיפוש המקומי מכיר את גיבוי. [358]	מנוע החיפוש הlocal מכיר את גיבוי. [358]	גיבוי|backup
-0359	מנוע החיפוש המקומי מכיר את עדכונים. [359]	מנוע החיפוש הlocal מכיר את עדכונים. [359]	עדכונים|updates
-0360	מנוע החיפוש המקומי מכיר את נקודה חמה. [360]	מנוע החיפוש הlocal מכיר את נקודה חמה. [360]	נקודה חמה|hotspot
-0361	מנוע החיפוש המקומי מכיר את VPN. [361]	מנוע החיפוש הlocal מכיר את VPN. [361]	VPN|VPN
-0362	מנוע החיפוש המקומי מכיר את שיתוף. [362]	מנוע החיפוש הlocal מכיר את שיתוף. [362]	שיתוף|sharing
-0363	מנוע החיפוש המקומי מכיר את הורדות. [363]	מנוע החיפוש הlocal מכיר את הורדות. [363]	הורדות|downloads
-0364	מנוע החיפוש המקומי מכיר את חיפוש. [364]	מנוע החיפוש הlocal מכיר את חיפוש. [364]	חיפוש|search
-0365	מנוע החיפוש המקומי מכיר את חנות. [365]	מנוע החיפוש הlocal מכיר את חנות. [365]	חנות|store
-0366	מנוע החיפוש המקומי מכיר את משחקים. [366]	מנוע החיפוש הlocal מכיר את משחקים. [366]	משחקים|games
-0367	מנוע החיפוש המקומי מכיר את לימודים. [367]	מנוע החיפוש הlocal מכיר את לימודים. [367]	לימודים|study
-0368	מנוע החיפוש המקומי מכיר את קוד. [368]	מנוע החיפוש הlocal מכיר את קוד. [368]	קוד|code
-0369	מנוע החיפוש המקומי מכיר את WhatsApp. [369]	מנוע החיפוש הlocal מכיר את WhatsApp. [369]	WhatsApp|WhatsApp
-0370	מנוע החיפוש המקומי מכיר את YouTube. [370]	מנוע החיפוש הlocal מכיר את YouTube. [370]	YouTube|YouTube
-0371	מנוע החיפוש המקומי מכיר את Chrome. [371]	מנוע החיפוש הlocal מכיר את Chrome. [371]	Chrome|Chrome
-0372	מנוע החיפוש המקומי מכיר את Gmail. [372]	מנוע החיפוש הlocal מכיר את Gmail. [372]	Gmail|Gmail
-0373	מנוע החיפוש המקומי מכיר את Maps. [373]	מנוע החיפוש הlocal מכיר את Maps. [373]	Maps|Maps
-0374	מנוע החיפוש המקומי מכיר את Waze. [374]	מנוע החיפוש הlocal מכיר את Waze. [374]	Waze|Waze
-0375	מנוע החיפוש המקומי מכיר את Spotify. [375]	מנוע החיפוש הlocal מכיר את Spotify. [375]	Spotify|Spotify
-0376	מנוע החיפוש המקומי מכיר את Telegram. [376]	מנוע החיפוש הlocal מכיר את Telegram. [376]	Telegram|Telegram
-0377	מנוע החיפוש המקומי מכיר את Discord. [377]	מנוע החיפוש הlocal מכיר את Discord. [377]	Discord|Discord
-0378	מנוע החיפוש המקומי מכיר את Instagram. [378]	מנוע החיפוש הlocal מכיר את Instagram. [378]	Instagram|Instagram
-0379	מנוע החיפוש המקומי מכיר את TikTok. [379]	מנוע החיפוש הlocal מכיר את TikTok. [379]	TikTok|TikTok
-0380	מנוע החיפוש המקומי מכיר את Facebook. [380]	מנוע החיפוש הlocal מכיר את Facebook. [380]	Facebook|Facebook
-0381	מנוע החיפוש המקומי מכיר את Netflix. [381]	מנוע החיפוש הlocal מכיר את Netflix. [381]	Netflix|Netflix
-0382	מנוע החיפוש המקומי מכיר את צילום מסך. [382]	מנוע החיפוש הlocal מכיר את צילום מסך. [382]	צילום מסך|screenshot
-0383	מנוע החיפוש המקומי מכיר את מסך הבית. [383]	מנוע החיפוש הlocal מכיר את מסך הבית. [383]	מסך הבית|home screen
-0384	מנוע החיפוש המקומי מכיר את השיר הבא. [384]	מנוע החיפוש הlocal מכיר את השיר הבא. [384]	השיר הבא|next track
-0385	מנוע החיפוש המקומי מכיר את השיר הקודם. [385]	מנוע החיפוש הlocal מכיר את השיר הקודם. [385]	השיר הקודם|previous track
-0386	הבקשה סווגה תחת עזרה. [386]	The request סווגה תחת עזרה. [386]	עזרה|help
-0387	הבקשה סווגה תחת שלום. [387]	The request סווגה תחת שלום. [387]	שלום|hello
-0388	הבקשה סווגה תחת סוללה. [388]	The request סווגה תחת סוללה. [388]	סוללה|battery
-0389	הבקשה סווגה תחת אחסון. [389]	The request סווגה תחת אחסון. [389]	אחסון|storage
-0390	הבקשה סווגה תחת שמע. [390]	The request סווגה תחת שמע. [390]	שמע|sound
-0391	הבקשה סווגה תחת קול. [391]	The request סווגה תחת קול. [391]	קול|volume
-0392	הבקשה סווגה תחת מוזיקה. [392]	The request סווגה תחת מוזיקה. [392]	מוזיקה|music
-0393	הבקשה סווגה תחת שיר. [393]	The request סווגה תחת שיר. [393]	שיר|track
-0394	הבקשה סווגה תחת מסך. [394]	The request סווגה תחת מסך. [394]	מסך|display
-0395	הבקשה סווגה תחת רשת. [395]	The request סווגה תחת רשת. [395]	רשת|network
-0396	הבקשה סווגה תחת Wi-Fi. [396]	The request סווגה תחת Wi-Fi. [396]	Wi-Fi|Wi-Fi
-0397	הבקשה סווגה תחת Bluetooth. [397]	The request סווגה תחת Bluetooth. [397]	Bluetooth|Bluetooth
-0398	הבקשה סווגה תחת התראות. [398]	The request סווגה תחת התראות. [398]	התראות|notifications
-0399	הבקשה סווגה תחת קבצים. [399]	The request סווגה תחת קבצים. [399]	קבצים|files
-0400	הבקשה סווגה תחת תמונות. [400]	The request סווגה תחת תמונות. [400]	תמונות|photos
-0401	הבקשה סווגה תחת מצלמה. [401]	The request סווגה תחת מצלמה. [401]	מצלמה|camera
-0402	הבקשה סווגה תחת מיקרופון. [402]	The request סווגה תחת מיקרופון. [402]	מיקרופון|microphone
-0403	הבקשה סווגה תחת מיקום. [403]	The request סווגה תחת מיקום. [403]	מיקום|location
-0404	הבקשה סווגה תחת אפליקציות. [404]	The request סווגה תחת אפליקציות. [404]	אפליקציות|apps
-0405	הבקשה סווגה תחת דפדפן. [405]	The request סווגה תחת דפדפן. [405]	דפדפן|browser
-0406	הבקשה סווגה תחת הגדרות. [406]	The request סווגה תחת הגדרות. [406]	הגדרות|settings
-0407	הבקשה סווגה תחת מקלדת. [407]	The request סווגה תחת מקלדת. [407]	מקלדת|keyboard
-0408	הבקשה סווגה תחת שפה. [408]	The request סווגה תחת שפה. [408]	שפה|language
-0409	הבקשה סווגה תחת שעה. [409]	The request סווגה תחת שעה. [409]	שעה|time
-0410	הבקשה סווגה תחת תאריך. [410]	The request סווגה תחת תאריך. [410]	תאריך|date
-0411	הבקשה סווגה תחת פרטיות. [411]	The request סווגה תחת פרטיות. [411]	פרטיות|privacy
-0412	הבקשה סווגה תחת הרשאות. [412]	The request סווגה תחת הרשאות. [412]	הרשאות|permissions
-0413	הבקשה סווגה תחת גיבוי. [413]	The request סווגה תחת גיבוי. [413]	גיבוי|backup
-0414	הבקשה סווגה תחת עדכונים. [414]	The request סווגה תחת עדכונים. [414]	עדכונים|updates
-0415	הבקשה סווגה תחת נקודה חמה. [415]	The request סווגה תחת נקודה חמה. [415]	נקודה חמה|hotspot
-0416	הבקשה סווגה תחת VPN. [416]	The request סווגה תחת VPN. [416]	VPN|VPN
-0417	הבקשה סווגה תחת שיתוף. [417]	The request סווגה תחת שיתוף. [417]	שיתוף|sharing
-0418	הבקשה סווגה תחת הורדות. [418]	The request סווגה תחת הורדות. [418]	הורדות|downloads
-0419	הבקשה סווגה תחת חיפוש. [419]	The request סווגה תחת חיפוש. [419]	חיפוש|search
-0420	הבקשה סווגה תחת חנות. [420]	The request סווגה תחת חנות. [420]	חנות|store
-0421	הבקשה סווגה תחת משחקים. [421]	The request סווגה תחת משחקים. [421]	משחקים|games
-0422	הבקשה סווגה תחת לימודים. [422]	The request סווגה תחת לימודים. [422]	לימודים|study
-0423	הבקשה סווגה תחת קוד. [423]	The request סווגה תחת קוד. [423]	קוד|code
-0424	הבקשה סווגה תחת WhatsApp. [424]	The request סווגה תחת WhatsApp. [424]	WhatsApp|WhatsApp
-0425	הבקשה סווגה תחת YouTube. [425]	The request סווגה תחת YouTube. [425]	YouTube|YouTube
-0426	הבקשה סווגה תחת Chrome. [426]	The request סווגה תחת Chrome. [426]	Chrome|Chrome
-0427	הבקשה סווגה תחת Gmail. [427]	The request סווגה תחת Gmail. [427]	Gmail|Gmail
-0428	הבקשה סווגה תחת Maps. [428]	The request סווגה תחת Maps. [428]	Maps|Maps
-0429	הבקשה סווגה תחת Waze. [429]	The request סווגה תחת Waze. [429]	Waze|Waze
-0430	הבקשה סווגה תחת Spotify. [430]	The request סווגה תחת Spotify. [430]	Spotify|Spotify
-0431	הבקשה סווגה תחת Telegram. [431]	The request סווגה תחת Telegram. [431]	Telegram|Telegram
-0432	הבקשה סווגה תחת Discord. [432]	The request סווגה תחת Discord. [432]	Discord|Discord
-0433	הבקשה סווגה תחת Instagram. [433]	The request סווגה תחת Instagram. [433]	Instagram|Instagram
-0434	הבקשה סווגה תחת TikTok. [434]	The request סווגה תחת TikTok. [434]	TikTok|TikTok
-0435	הבקשה סווגה תחת Facebook. [435]	The request סווגה תחת Facebook. [435]	Facebook|Facebook
-0436	הבקשה סווגה תחת Netflix. [436]	The request סווגה תחת Netflix. [436]	Netflix|Netflix
-0437	הבקשה סווגה תחת צילום מסך. [437]	The request סווגה תחת צילום מסך. [437]	צילום מסך|screenshot
-0438	הבקשה סווגה תחת מסך הבית. [438]	The request סווגה תחת מסך הבית. [438]	מסך הבית|home screen
-0439	הבקשה סווגה תחת השיר הבא. [439]	The request סווגה תחת השיר הבא. [439]	השיר הבא|next track
-0440	הבקשה סווגה תחת השיר הקודם. [440]	The request סווגה תחת השיר הקודם. [440]	השיר הקודם|previous track
-0441	זוהו מילות מפתח הקשורות ל-עזרה. [441]	Keywords related to עזרה. [441]	עזרה|help
-0442	זוהו מילות מפתח הקשורות ל-שלום. [442]	Keywords related to שלום. [442]	שלום|hello
-0443	זוהו מילות מפתח הקשורות ל-סוללה. [443]	Keywords related to סוללה. [443]	סוללה|battery
-0444	זוהו מילות מפתח הקשורות ל-אחסון. [444]	Keywords related to אחסון. [444]	אחסון|storage
-0445	זוהו מילות מפתח הקשורות ל-שמע. [445]	Keywords related to שמע. [445]	שמע|sound
-0446	זוהו מילות מפתח הקשורות ל-קול. [446]	Keywords related to קול. [446]	קול|volume
-0447	זוהו מילות מפתח הקשורות ל-מוזיקה. [447]	Keywords related to מוזיקה. [447]	מוזיקה|music
-0448	זוהו מילות מפתח הקשורות ל-שיר. [448]	Keywords related to שיר. [448]	שיר|track
-0449	זוהו מילות מפתח הקשורות ל-מסך. [449]	Keywords related to מסך. [449]	מסך|display
-0450	זוהו מילות מפתח הקשורות ל-רשת. [450]	Keywords related to רשת. [450]	רשת|network
-0451	זוהו מילות מפתח הקשורות ל-Wi-Fi. [451]	Keywords related to Wi-Fi. [451]	Wi-Fi|Wi-Fi
-0452	זוהו מילות מפתח הקשורות ל-Bluetooth. [452]	Keywords related to Bluetooth. [452]	Bluetooth|Bluetooth
-0453	זוהו מילות מפתח הקשורות ל-התראות. [453]	Keywords related to התראות. [453]	התראות|notifications
-0454	זוהו מילות מפתח הקשורות ל-קבצים. [454]	Keywords related to קבצים. [454]	קבצים|files
-0455	זוהו מילות מפתח הקשורות ל-תמונות. [455]	Keywords related to תמונות. [455]	תמונות|photos
-0456	זוהו מילות מפתח הקשורות ל-מצלמה. [456]	Keywords related to מצלמה. [456]	מצלמה|camera
-0457	זוהו מילות מפתח הקשורות ל-מיקרופון. [457]	Keywords related to מיקרופון. [457]	מיקרופון|microphone
-0458	זוהו מילות מפתח הקשורות ל-מיקום. [458]	Keywords related to מיקום. [458]	מיקום|location
-0459	זוהו מילות מפתח הקשורות ל-אפליקציות. [459]	Keywords related to אפליקציות. [459]	אפליקציות|apps
-0460	זוהו מילות מפתח הקשורות ל-דפדפן. [460]	Keywords related to דפדפן. [460]	דפדפן|browser
-0461	זוהו מילות מפתח הקשורות ל-הגדרות. [461]	Keywords related to הגדרות. [461]	הגדרות|settings
-0462	זוהו מילות מפתח הקשורות ל-מקלדת. [462]	Keywords related to מקלדת. [462]	מקלדת|keyboard
-0463	זוהו מילות מפתח הקשורות ל-שפה. [463]	Keywords related to שפה. [463]	שפה|language
-0464	זוהו מילות מפתח הקשורות ל-שעה. [464]	Keywords related to שעה. [464]	שעה|time
-0465	זוהו מילות מפתח הקשורות ל-תאריך. [465]	Keywords related to תאריך. [465]	תאריך|date
-0466	זוהו מילות מפתח הקשורות ל-פרטיות. [466]	Keywords related to פרטיות. [466]	פרטיות|privacy
-0467	זוהו מילות מפתח הקשורות ל-הרשאות. [467]	Keywords related to הרשאות. [467]	הרשאות|permissions
-0468	זוהו מילות מפתח הקשורות ל-גיבוי. [468]	Keywords related to גיבוי. [468]	גיבוי|backup
-0469	זוהו מילות מפתח הקשורות ל-עדכונים. [469]	Keywords related to עדכונים. [469]	עדכונים|updates
-0470	זוהו מילות מפתח הקשורות ל-נקודה חמה. [470]	Keywords related to נקודה חמה. [470]	נקודה חמה|hotspot
-0471	זוהו מילות מפתח הקשורות ל-VPN. [471]	Keywords related to VPN. [471]	VPN|VPN
-0472	זוהו מילות מפתח הקשורות ל-שיתוף. [472]	Keywords related to שיתוף. [472]	שיתוף|sharing
-0473	זוהו מילות מפתח הקשורות ל-הורדות. [473]	Keywords related to הורדות. [473]	הורדות|downloads
-0474	זוהו מילות מפתח הקשורות ל-חיפוש. [474]	Keywords related to חיפוש. [474]	חיפוש|search
-0475	זוהו מילות מפתח הקשורות ל-חנות. [475]	Keywords related to חנות. [475]	חנות|store
-0476	זוהו מילות מפתח הקשורות ל-משחקים. [476]	Keywords related to משחקים. [476]	משחקים|games
-0477	זוהו מילות מפתח הקשורות ל-לימודים. [477]	Keywords related to לימודים. [477]	לימודים|study
-0478	זוהו מילות מפתח הקשורות ל-קוד. [478]	Keywords related to קוד. [478]	קוד|code
-0479	זוהו מילות מפתח הקשורות ל-WhatsApp. [479]	Keywords related to WhatsApp. [479]	WhatsApp|WhatsApp
-0480	זוהו מילות מפתח הקשורות ל-YouTube. [480]	Keywords related to YouTube. [480]	YouTube|YouTube
-0481	זוהו מילות מפתח הקשורות ל-Chrome. [481]	Keywords related to Chrome. [481]	Chrome|Chrome
-0482	זוהו מילות מפתח הקשורות ל-Gmail. [482]	Keywords related to Gmail. [482]	Gmail|Gmail
-0483	זוהו מילות מפתח הקשורות ל-Maps. [483]	Keywords related to Maps. [483]	Maps|Maps
-0484	זוהו מילות מפתח הקשורות ל-Waze. [484]	Keywords related to Waze. [484]	Waze|Waze
-0485	זוהו מילות מפתח הקשורות ל-Spotify. [485]	Keywords related to Spotify. [485]	Spotify|Spotify
-0486	זוהו מילות מפתח הקשורות ל-Telegram. [486]	Keywords related to Telegram. [486]	Telegram|Telegram
-0487	זוהו מילות מפתח הקשורות ל-Discord. [487]	Keywords related to Discord. [487]	Discord|Discord
-0488	זוהו מילות מפתח הקשורות ל-Instagram. [488]	Keywords related to Instagram. [488]	Instagram|Instagram
-0489	זוהו מילות מפתח הקשורות ל-TikTok. [489]	Keywords related to TikTok. [489]	TikTok|TikTok
-0490	זוהו מילות מפתח הקשורות ל-Facebook. [490]	Keywords related to Facebook. [490]	Facebook|Facebook
-0491	זוהו מילות מפתח הקשורות ל-Netflix. [491]	Keywords related to Netflix. [491]	Netflix|Netflix
-0492	זוהו מילות מפתח הקשורות ל-צילום מסך. [492]	Keywords related to צילום מסך. [492]	צילום מסך|screenshot
-0493	זוהו מילות מפתח הקשורות ל-מסך הבית. [493]	Keywords related to מסך הבית. [493]	מסך הבית|home screen
-0494	זוהו מילות מפתח הקשורות ל-השיר הבא. [494]	Keywords related to השיר הבא. [494]	השיר הבא|next track
-0495	זוהו מילות מפתח הקשורות ל-השיר הקודם. [495]	Keywords related to השיר הקודם. [495]	השיר הקודם|previous track
-0496	הנושא עזרה זמין במאגר ללא רשת. [496]	The topic עזרה is available offline. [496]	עזרה|help
-0497	הנושא שלום זמין במאגר ללא רשת. [497]	The topic שלום is available offline. [497]	שלום|hello
-0498	הנושא סוללה זמין במאגר ללא רשת. [498]	The topic סוללה is available offline. [498]	סוללה|battery
-0499	הנושא אחסון זמין במאגר ללא רשת. [499]	The topic אחסון is available offline. [499]	אחסון|storage
-0500	הנושא שמע זמין במאגר ללא רשת. [500]	The topic שמע is available offline. [500]	שמע|sound
+0001	שלום! אני אברהם העברי. מה תרצה לעשות?	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0002	היי! אני כאן ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Absolutely.	שלום|היי|הי|hello|hi
+0003	שלום! אפשר לכתוב לי בקשה רגילה.	Hello! I am Avraham HaIvri. What would you like to do? Of course.	שלום|היי|הי|hello|hi
+0004	היי, שמח לראות אותך.	Hello! I am Avraham HaIvri. What would you like to do? Definitely.	שלום|היי|הי|hello|hi
+0005	שלום! הצ׳אט פתוח ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Yes.	שלום|היי|הי|hello|hi
+0006	היי! אפשר לשאול אותי או לתת לי בקשה.	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0007	שלום! אני עובד אופליין על המכשיר.	Hello! I am Avraham HaIvri. What would you like to do? Great.	שלום|היי|הי|hello|hi
+0008	היי. כתוב לי מה תרצה.	Hello! I am Avraham HaIvri. What would you like to do? Certainly.	שלום|היי|הי|hello|hi
+0009	שלום! אפשר לנסות גם ניסוחים טבעיים.	Hello! I am Avraham HaIvri. What would you like to do? Clear.	שלום|היי|הי|hello|hi
+0010	היי! אין צורך לכתוב פקודה מדויקת.	Hello! I am Avraham HaIvri. What would you like to do? Indeed.	שלום|היי|הי|hello|hi
+0011	שלום! אני אברהם העברי. מה תרצה לעשות?	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0012	היי! אני כאן ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Absolutely.	שלום|היי|הי|hello|hi
+0013	שלום! אפשר לכתוב לי בקשה רגילה.	Hello! I am Avraham HaIvri. What would you like to do? Of course.	שלום|היי|הי|hello|hi
+0014	היי, שמח לראות אותך.	Hello! I am Avraham HaIvri. What would you like to do? Definitely.	שלום|היי|הי|hello|hi
+0015	שלום! הצ׳אט פתוח ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Yes.	שלום|היי|הי|hello|hi
+0016	היי! אפשר לשאול אותי או לתת לי בקשה.	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0017	שלום! אני עובד אופליין על המכשיר.	Hello! I am Avraham HaIvri. What would you like to do? Great.	שלום|היי|הי|hello|hi
+0018	היי. כתוב לי מה תרצה.	Hello! I am Avraham HaIvri. What would you like to do? Certainly.	שלום|היי|הי|hello|hi
+0019	שלום! אפשר לנסות גם ניסוחים טבעיים.	Hello! I am Avraham HaIvri. What would you like to do? Clear.	שלום|היי|הי|hello|hi
+0020	היי! אין צורך לכתוב פקודה מדויקת.	Hello! I am Avraham HaIvri. What would you like to do? Indeed.	שלום|היי|הי|hello|hi
+0021	שלום! אני אברהם העברי. מה תרצה לעשות?	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0022	היי! אני כאן ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Absolutely.	שלום|היי|הי|hello|hi
+0023	שלום! אפשר לכתוב לי בקשה רגילה.	Hello! I am Avraham HaIvri. What would you like to do? Of course.	שלום|היי|הי|hello|hi
+0024	היי, שמח לראות אותך.	Hello! I am Avraham HaIvri. What would you like to do? Definitely.	שלום|היי|הי|hello|hi
+0025	שלום! הצ׳אט פתוח ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Yes.	שלום|היי|הי|hello|hi
+0026	היי! אפשר לשאול אותי או לתת לי בקשה.	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0027	שלום! אני עובד אופליין על המכשיר.	Hello! I am Avraham HaIvri. What would you like to do? Great.	שלום|היי|הי|hello|hi
+0028	היי. כתוב לי מה תרצה.	Hello! I am Avraham HaIvri. What would you like to do? Certainly.	שלום|היי|הי|hello|hi
+0029	שלום! אפשר לנסות גם ניסוחים טבעיים.	Hello! I am Avraham HaIvri. What would you like to do? Clear.	שלום|היי|הי|hello|hi
+0030	היי! אין צורך לכתוב פקודה מדויקת.	Hello! I am Avraham HaIvri. What would you like to do? Indeed.	שלום|היי|הי|hello|hi
+0031	שלום! אני אברהם העברי. מה תרצה לעשות?	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0032	היי! אני כאן ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Absolutely.	שלום|היי|הי|hello|hi
+0033	שלום! אפשר לכתוב לי בקשה רגילה.	Hello! I am Avraham HaIvri. What would you like to do? Of course.	שלום|היי|הי|hello|hi
+0034	היי, שמח לראות אותך.	Hello! I am Avraham HaIvri. What would you like to do? Definitely.	שלום|היי|הי|hello|hi
+0035	שלום! הצ׳אט פתוח ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Yes.	שלום|היי|הי|hello|hi
+0036	היי! אפשר לשאול אותי או לתת לי בקשה.	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0037	שלום! אני עובד אופליין על המכשיר.	Hello! I am Avraham HaIvri. What would you like to do? Great.	שלום|היי|הי|hello|hi
+0038	היי. כתוב לי מה תרצה.	Hello! I am Avraham HaIvri. What would you like to do? Certainly.	שלום|היי|הי|hello|hi
+0039	שלום! אפשר לנסות גם ניסוחים טבעיים.	Hello! I am Avraham HaIvri. What would you like to do? Clear.	שלום|היי|הי|hello|hi
+0040	היי! אין צורך לכתוב פקודה מדויקת.	Hello! I am Avraham HaIvri. What would you like to do? Indeed.	שלום|היי|הי|hello|hi
+0041	שלום! אני אברהם העברי. מה תרצה לעשות?	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0042	היי! אני כאן ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Absolutely.	שלום|היי|הי|hello|hi
+0043	שלום! אפשר לכתוב לי בקשה רגילה.	Hello! I am Avraham HaIvri. What would you like to do? Of course.	שלום|היי|הי|hello|hi
+0044	היי, שמח לראות אותך.	Hello! I am Avraham HaIvri. What would you like to do? Definitely.	שלום|היי|הי|hello|hi
+0045	שלום! הצ׳אט פתוח ומוכן.	Hello! I am Avraham HaIvri. What would you like to do? Yes.	שלום|היי|הי|hello|hi
+0046	היי! אפשר לשאול אותי או לתת לי בקשה.	Hello! I am Avraham HaIvri. What would you like to do?	שלום|היי|הי|hello|hi
+0047	שלום! אני עובד אופליין על המכשיר.	Hello! I am Avraham HaIvri. What would you like to do? Great.	שלום|היי|הי|hello|hi
+0048	היי. כתוב לי מה תרצה.	Hello! I am Avraham HaIvri. What would you like to do? Certainly.	שלום|היי|הי|hello|hi
+0049	שלום! אפשר לנסות גם ניסוחים טבעיים.	Hello! I am Avraham HaIvri. What would you like to do? Clear.	שלום|היי|הי|hello|hi
+0050	היי! אין צורך לכתוב פקודה מדויקת.	Hello! I am Avraham HaIvri. What would you like to do? Indeed.	שלום|היי|הי|hello|hi
+0051	השם שלי הוא אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0052	אני נקרא אברהם העברי.	My name is Avraham HaIvri. Absolutely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0053	שם העוזר הוא אברהם העברי.	My name is Avraham HaIvri. Of course.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0054	אני אברהם העברי.	My name is Avraham HaIvri. Definitely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0055	השם שלי: אברהם העברי.	My name is Avraham HaIvri. Yes.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0056	קוראים לי אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0057	אברהם העברי — זה השם שלי.	My name is Avraham HaIvri. Great.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0058	אני העוזר המקומי שנקרא אברהם העברי.	My name is Avraham HaIvri. Certainly.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0059	שם המערכת בצ׳אט הוא אברהם העברי.	My name is Avraham HaIvri. Clear.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0060	פשוט אפשר לקרוא לי אברהם.	My name is Avraham HaIvri. Indeed.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0061	השם שלי הוא אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0062	אני נקרא אברהם העברי.	My name is Avraham HaIvri. Absolutely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0063	שם העוזר הוא אברהם העברי.	My name is Avraham HaIvri. Of course.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0064	אני אברהם העברי.	My name is Avraham HaIvri. Definitely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0065	השם שלי: אברהם העברי.	My name is Avraham HaIvri. Yes.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0066	קוראים לי אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0067	אברהם העברי — זה השם שלי.	My name is Avraham HaIvri. Great.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0068	אני העוזר המקומי שנקרא אברהם העברי.	My name is Avraham HaIvri. Certainly.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0069	שם המערכת בצ׳אט הוא אברהם העברי.	My name is Avraham HaIvri. Clear.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0070	פשוט אפשר לקרוא לי אברהם.	My name is Avraham HaIvri. Indeed.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0071	השם שלי הוא אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0072	אני נקרא אברהם העברי.	My name is Avraham HaIvri. Absolutely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0073	שם העוזר הוא אברהם העברי.	My name is Avraham HaIvri. Of course.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0074	אני אברהם העברי.	My name is Avraham HaIvri. Definitely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0075	השם שלי: אברהם העברי.	My name is Avraham HaIvri. Yes.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0076	קוראים לי אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0077	אברהם העברי — זה השם שלי.	My name is Avraham HaIvri. Great.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0078	אני העוזר המקומי שנקרא אברהם העברי.	My name is Avraham HaIvri. Certainly.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0079	שם המערכת בצ׳אט הוא אברהם העברי.	My name is Avraham HaIvri. Clear.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0080	פשוט אפשר לקרוא לי אברהם.	My name is Avraham HaIvri. Indeed.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0081	השם שלי הוא אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0082	אני נקרא אברהם העברי.	My name is Avraham HaIvri. Absolutely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0083	שם העוזר הוא אברהם העברי.	My name is Avraham HaIvri. Of course.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0084	אני אברהם העברי.	My name is Avraham HaIvri. Definitely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0085	השם שלי: אברהם העברי.	My name is Avraham HaIvri. Yes.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0086	קוראים לי אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0087	אברהם העברי — זה השם שלי.	My name is Avraham HaIvri. Great.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0088	אני העוזר המקומי שנקרא אברהם העברי.	My name is Avraham HaIvri. Certainly.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0089	שם המערכת בצ׳אט הוא אברהם העברי.	My name is Avraham HaIvri. Clear.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0090	פשוט אפשר לקרוא לי אברהם.	My name is Avraham HaIvri. Indeed.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0091	השם שלי הוא אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0092	אני נקרא אברהם העברי.	My name is Avraham HaIvri. Absolutely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0093	שם העוזר הוא אברהם העברי.	My name is Avraham HaIvri. Of course.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0094	אני אברהם העברי.	My name is Avraham HaIvri. Definitely.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0095	השם שלי: אברהם העברי.	My name is Avraham HaIvri. Yes.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0096	קוראים לי אברהם העברי.	My name is Avraham HaIvri.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0097	אברהם העברי — זה השם שלי.	My name is Avraham HaIvri. Great.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0098	אני העוזר המקומי שנקרא אברהם העברי.	My name is Avraham HaIvri. Certainly.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0099	שם המערכת בצ׳אט הוא אברהם העברי.	My name is Avraham HaIvri. Clear.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0100	פשוט אפשר לקרוא לי אברהם.	My name is Avraham HaIvri. Indeed.	מה השם שלך|השם שלך|איך קוראים לך|who are you|what is your name
+0101	אני יכול לזהות מילות מפתח, להבין ניסוחים קרובים, לפתוח אפליקציות ולבצע פעולות Android שנתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0102	אני משלב מילים נרדפות, ביטויים והתאמה חלקית כדי לזהות בקשות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Absolutely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0103	אני יכול לעבוד עם אפליקציות מותקנות, פעולות מערכת מוכרות ושיחה מקומית.	I can recognize keywords, close wording, installed apps, and supported Android actions. Of course.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0104	אני עובד בלי מודל חיצוני ובלי צורך לשלוח את הבקשה לשרת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Definitely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0105	אני יודע לנתב בקשות לצ׳אט, לפתיחת אפליקציה ולפעולות מערכת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Yes.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0106	אני יכול להבין גם משפטים שלא מופיעים בדיוק כפי שנכתבו במאגר.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0107	אני יכול לזהות כמה מילות מפתח באותה הודעה ולחשב התאמה מצטברת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Great.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0108	אני יכול לעבוד עם פקודות שמע ומדיה נתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Certainly.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0109	אני יכול לזהות שמות וכינויים נפוצים של אפליקציות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Clear.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0110	אני יכול לנסות להשיב ממאגר מקומי גם בלי אינטרנט.	I can recognize keywords, close wording, installed apps, and supported Android actions. Indeed.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0111	אני יכול לזהות מילות מפתח, להבין ניסוחים קרובים, לפתוח אפליקציות ולבצע פעולות Android שנתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0112	אני משלב מילים נרדפות, ביטויים והתאמה חלקית כדי לזהות בקשות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Absolutely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0113	אני יכול לעבוד עם אפליקציות מותקנות, פעולות מערכת מוכרות ושיחה מקומית.	I can recognize keywords, close wording, installed apps, and supported Android actions. Of course.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0114	אני עובד בלי מודל חיצוני ובלי צורך לשלוח את הבקשה לשרת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Definitely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0115	אני יודע לנתב בקשות לצ׳אט, לפתיחת אפליקציה ולפעולות מערכת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Yes.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0116	אני יכול להבין גם משפטים שלא מופיעים בדיוק כפי שנכתבו במאגר.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0117	אני יכול לזהות כמה מילות מפתח באותה הודעה ולחשב התאמה מצטברת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Great.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0118	אני יכול לעבוד עם פקודות שמע ומדיה נתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Certainly.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0119	אני יכול לזהות שמות וכינויים נפוצים של אפליקציות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Clear.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0120	אני יכול לנסות להשיב ממאגר מקומי גם בלי אינטרנט.	I can recognize keywords, close wording, installed apps, and supported Android actions. Indeed.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0121	אני יכול לזהות מילות מפתח, להבין ניסוחים קרובים, לפתוח אפליקציות ולבצע פעולות Android שנתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0122	אני משלב מילים נרדפות, ביטויים והתאמה חלקית כדי לזהות בקשות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Absolutely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0123	אני יכול לעבוד עם אפליקציות מותקנות, פעולות מערכת מוכרות ושיחה מקומית.	I can recognize keywords, close wording, installed apps, and supported Android actions. Of course.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0124	אני עובד בלי מודל חיצוני ובלי צורך לשלוח את הבקשה לשרת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Definitely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0125	אני יודע לנתב בקשות לצ׳אט, לפתיחת אפליקציה ולפעולות מערכת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Yes.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0126	אני יכול להבין גם משפטים שלא מופיעים בדיוק כפי שנכתבו במאגר.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0127	אני יכול לזהות כמה מילות מפתח באותה הודעה ולחשב התאמה מצטברת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Great.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0128	אני יכול לעבוד עם פקודות שמע ומדיה נתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Certainly.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0129	אני יכול לזהות שמות וכינויים נפוצים של אפליקציות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Clear.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0130	אני יכול לנסות להשיב ממאגר מקומי גם בלי אינטרנט.	I can recognize keywords, close wording, installed apps, and supported Android actions. Indeed.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0131	אני יכול לזהות מילות מפתח, להבין ניסוחים קרובים, לפתוח אפליקציות ולבצע פעולות Android שנתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0132	אני משלב מילים נרדפות, ביטויים והתאמה חלקית כדי לזהות בקשות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Absolutely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0133	אני יכול לעבוד עם אפליקציות מותקנות, פעולות מערכת מוכרות ושיחה מקומית.	I can recognize keywords, close wording, installed apps, and supported Android actions. Of course.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0134	אני עובד בלי מודל חיצוני ובלי צורך לשלוח את הבקשה לשרת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Definitely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0135	אני יודע לנתב בקשות לצ׳אט, לפתיחת אפליקציה ולפעולות מערכת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Yes.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0136	אני יכול להבין גם משפטים שלא מופיעים בדיוק כפי שנכתבו במאגר.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0137	אני יכול לזהות כמה מילות מפתח באותה הודעה ולחשב התאמה מצטברת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Great.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0138	אני יכול לעבוד עם פקודות שמע ומדיה נתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Certainly.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0139	אני יכול לזהות שמות וכינויים נפוצים של אפליקציות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Clear.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0140	אני יכול לנסות להשיב ממאגר מקומי גם בלי אינטרנט.	I can recognize keywords, close wording, installed apps, and supported Android actions. Indeed.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0141	אני יכול לזהות מילות מפתח, להבין ניסוחים קרובים, לפתוח אפליקציות ולבצע פעולות Android שנתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0142	אני משלב מילים נרדפות, ביטויים והתאמה חלקית כדי לזהות בקשות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Absolutely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0143	אני יכול לעבוד עם אפליקציות מותקנות, פעולות מערכת מוכרות ושיחה מקומית.	I can recognize keywords, close wording, installed apps, and supported Android actions. Of course.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0144	אני עובד בלי מודל חיצוני ובלי צורך לשלוח את הבקשה לשרת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Definitely.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0145	אני יודע לנתב בקשות לצ׳אט, לפתיחת אפליקציה ולפעולות מערכת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Yes.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0146	אני יכול להבין גם משפטים שלא מופיעים בדיוק כפי שנכתבו במאגר.	I can recognize keywords, close wording, installed apps, and supported Android actions.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0147	אני יכול לזהות כמה מילות מפתח באותה הודעה ולחשב התאמה מצטברת.	I can recognize keywords, close wording, installed apps, and supported Android actions. Great.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0148	אני יכול לעבוד עם פקודות שמע ומדיה נתמכות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Certainly.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0149	אני יכול לזהות שמות וכינויים נפוצים של אפליקציות.	I can recognize keywords, close wording, installed apps, and supported Android actions. Clear.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0150	אני יכול לנסות להשיב ממאגר מקומי גם בלי אינטרנט.	I can recognize keywords, close wording, installed apps, and supported Android actions. Indeed.	מה אתה יכול לעשות|יכולות|מה אתה יודע|capabilities|what can you do
+0151	כתוב כמו שאתה מדבר. למשל: „מה השם שלך?”	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0152	אפשר לכתוב: „תתן לי חידה מצחיקה”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Absolutely.	עזרה|תעזור לי|איך משתמשים|help
+0153	אפשר לכתוב: „פתח לי כרום”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Of course.	עזרה|תעזור לי|איך משתמשים|help
+0154	אפשר לכתוב: „תגביה שמע”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Definitely.	עזרה|תעזור לי|איך משתמשים|help
+0155	אפשר לכתוב משפט שלם; המנוע מחפש את מילות המפתח החשובות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Yes.	עזרה|תעזור לי|איך משתמשים|help
+0156	לא צריך לשחזר משפט מדויק מהמאגר.	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0157	נסח את הבקשה בחופשיות והמנוע ישלב כמה התאמות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Great.	עזרה|תעזור לי|איך משתמשים|help
+0158	כשמדובר באפליקציה, כתוב את השם או הכינוי שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Certainly.	עזרה|תעזור לי|איך משתמשים|help
+0159	כשמדובר בפעולת מערכת, כתוב את הפעולה ואת הנושא שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Clear.	עזרה|תעזור לי|איך משתמשים|help
+0160	גם עברית וגם אנגלית נתמכות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Indeed.	עזרה|תעזור לי|איך משתמשים|help
+0161	כתוב כמו שאתה מדבר. למשל: „מה השם שלך?”	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0162	אפשר לכתוב: „תתן לי חידה מצחיקה”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Absolutely.	עזרה|תעזור לי|איך משתמשים|help
+0163	אפשר לכתוב: „פתח לי כרום”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Of course.	עזרה|תעזור לי|איך משתמשים|help
+0164	אפשר לכתוב: „תגביה שמע”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Definitely.	עזרה|תעזור לי|איך משתמשים|help
+0165	אפשר לכתוב משפט שלם; המנוע מחפש את מילות המפתח החשובות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Yes.	עזרה|תעזור לי|איך משתמשים|help
+0166	לא צריך לשחזר משפט מדויק מהמאגר.	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0167	נסח את הבקשה בחופשיות והמנוע ישלב כמה התאמות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Great.	עזרה|תעזור לי|איך משתמשים|help
+0168	כשמדובר באפליקציה, כתוב את השם או הכינוי שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Certainly.	עזרה|תעזור לי|איך משתמשים|help
+0169	כשמדובר בפעולת מערכת, כתוב את הפעולה ואת הנושא שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Clear.	עזרה|תעזור לי|איך משתמשים|help
+0170	גם עברית וגם אנגלית נתמכות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Indeed.	עזרה|תעזור לי|איך משתמשים|help
+0171	כתוב כמו שאתה מדבר. למשל: „מה השם שלך?”	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0172	אפשר לכתוב: „תתן לי חידה מצחיקה”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Absolutely.	עזרה|תעזור לי|איך משתמשים|help
+0173	אפשר לכתוב: „פתח לי כרום”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Of course.	עזרה|תעזור לי|איך משתמשים|help
+0174	אפשר לכתוב: „תגביה שמע”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Definitely.	עזרה|תעזור לי|איך משתמשים|help
+0175	אפשר לכתוב משפט שלם; המנוע מחפש את מילות המפתח החשובות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Yes.	עזרה|תעזור לי|איך משתמשים|help
+0176	לא צריך לשחזר משפט מדויק מהמאגר.	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0177	נסח את הבקשה בחופשיות והמנוע ישלב כמה התאמות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Great.	עזרה|תעזור לי|איך משתמשים|help
+0178	כשמדובר באפליקציה, כתוב את השם או הכינוי שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Certainly.	עזרה|תעזור לי|איך משתמשים|help
+0179	כשמדובר בפעולת מערכת, כתוב את הפעולה ואת הנושא שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Clear.	עזרה|תעזור לי|איך משתמשים|help
+0180	גם עברית וגם אנגלית נתמכות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Indeed.	עזרה|תעזור לי|איך משתמשים|help
+0181	כתוב כמו שאתה מדבר. למשל: „מה השם שלך?”	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0182	אפשר לכתוב: „תתן לי חידה מצחיקה”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Absolutely.	עזרה|תעזור לי|איך משתמשים|help
+0183	אפשר לכתוב: „פתח לי כרום”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Of course.	עזרה|תעזור לי|איך משתמשים|help
+0184	אפשר לכתוב: „תגביה שמע”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Definitely.	עזרה|תעזור לי|איך משתמשים|help
+0185	אפשר לכתוב משפט שלם; המנוע מחפש את מילות המפתח החשובות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Yes.	עזרה|תעזור לי|איך משתמשים|help
+0186	לא צריך לשחזר משפט מדויק מהמאגר.	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0187	נסח את הבקשה בחופשיות והמנוע ישלב כמה התאמות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Great.	עזרה|תעזור לי|איך משתמשים|help
+0188	כשמדובר באפליקציה, כתוב את השם או הכינוי שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Certainly.	עזרה|תעזור לי|איך משתמשים|help
+0189	כשמדובר בפעולת מערכת, כתוב את הפעולה ואת הנושא שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Clear.	עזרה|תעזור לי|איך משתמשים|help
+0190	גם עברית וגם אנגלית נתמכות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Indeed.	עזרה|תעזור לי|איך משתמשים|help
+0191	כתוב כמו שאתה מדבר. למשל: „מה השם שלך?”	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0192	אפשר לכתוב: „תתן לי חידה מצחיקה”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Absolutely.	עזרה|תעזור לי|איך משתמשים|help
+0193	אפשר לכתוב: „פתח לי כרום”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Of course.	עזרה|תעזור לי|איך משתמשים|help
+0194	אפשר לכתוב: „תגביה שמע”.	Write naturally. You can ask a question or describe an action in Hebrew or English. Definitely.	עזרה|תעזור לי|איך משתמשים|help
+0195	אפשר לכתוב משפט שלם; המנוע מחפש את מילות המפתח החשובות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Yes.	עזרה|תעזור לי|איך משתמשים|help
+0196	לא צריך לשחזר משפט מדויק מהמאגר.	Write naturally. You can ask a question or describe an action in Hebrew or English.	עזרה|תעזור לי|איך משתמשים|help
+0197	נסח את הבקשה בחופשיות והמנוע ישלב כמה התאמות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Great.	עזרה|תעזור לי|איך משתמשים|help
+0198	כשמדובר באפליקציה, כתוב את השם או הכינוי שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Certainly.	עזרה|תעזור לי|איך משתמשים|help
+0199	כשמדובר בפעולת מערכת, כתוב את הפעולה ואת הנושא שלה.	Write naturally. You can ask a question or describe an action in Hebrew or English. Clear.	עזרה|תעזור לי|איך משתמשים|help
+0200	גם עברית וגם אנגלית נתמכות.	Write naturally. You can ask a question or describe an action in Hebrew or English. Indeed.	עזרה|תעזור לי|איך משתמשים|help
+0201	אני בסדר ומוכן לעבודה.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0202	אני מוכן. מה תרצה לעשות?	I am ready and working offline. Absolutely.	מה נשמע|מה קורה|מה שלומך|how are you
+0203	הכול בסדר כאן.	I am ready and working offline. Of course.	מה נשמע|מה קורה|מה שלומך|how are you
+0204	אני מוכן לקבל בקשה.	I am ready and working offline. Definitely.	מה נשמע|מה קורה|מה שלומך|how are you
+0205	עובד ופעיל.	I am ready and working offline. Yes.	מה נשמע|מה קורה|מה שלומך|how are you
+0206	אני כאן.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0207	מוכן. נסה אותי.	I am ready and working offline. Great.	מה נשמע|מה קורה|מה שלומך|how are you
+0208	אני מחכה לבקשה הבאה.	I am ready and working offline. Certainly.	מה נשמע|מה קורה|מה שלומך|how are you
+0209	פעיל ועובד אופליין.	I am ready and working offline. Clear.	מה נשמע|מה קורה|מה שלומך|how are you
+0210	הכול טוב.	I am ready and working offline. Indeed.	מה נשמע|מה קורה|מה שלומך|how are you
+0211	אני בסדר ומוכן לעבודה.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0212	אני מוכן. מה תרצה לעשות?	I am ready and working offline. Absolutely.	מה נשמע|מה קורה|מה שלומך|how are you
+0213	הכול בסדר כאן.	I am ready and working offline. Of course.	מה נשמע|מה קורה|מה שלומך|how are you
+0214	אני מוכן לקבל בקשה.	I am ready and working offline. Definitely.	מה נשמע|מה קורה|מה שלומך|how are you
+0215	עובד ופעיל.	I am ready and working offline. Yes.	מה נשמע|מה קורה|מה שלומך|how are you
+0216	אני כאן.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0217	מוכן. נסה אותי.	I am ready and working offline. Great.	מה נשמע|מה קורה|מה שלומך|how are you
+0218	אני מחכה לבקשה הבאה.	I am ready and working offline. Certainly.	מה נשמע|מה קורה|מה שלומך|how are you
+0219	פעיל ועובד אופליין.	I am ready and working offline. Clear.	מה נשמע|מה קורה|מה שלומך|how are you
+0220	הכול טוב.	I am ready and working offline. Indeed.	מה נשמע|מה קורה|מה שלומך|how are you
+0221	אני בסדר ומוכן לעבודה.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0222	אני מוכן. מה תרצה לעשות?	I am ready and working offline. Absolutely.	מה נשמע|מה קורה|מה שלומך|how are you
+0223	הכול בסדר כאן.	I am ready and working offline. Of course.	מה נשמע|מה קורה|מה שלומך|how are you
+0224	אני מוכן לקבל בקשה.	I am ready and working offline. Definitely.	מה נשמע|מה קורה|מה שלומך|how are you
+0225	עובד ופעיל.	I am ready and working offline. Yes.	מה נשמע|מה קורה|מה שלומך|how are you
+0226	אני כאן.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0227	מוכן. נסה אותי.	I am ready and working offline. Great.	מה נשמע|מה קורה|מה שלומך|how are you
+0228	אני מחכה לבקשה הבאה.	I am ready and working offline. Certainly.	מה נשמע|מה קורה|מה שלומך|how are you
+0229	פעיל ועובד אופליין.	I am ready and working offline. Clear.	מה נשמע|מה קורה|מה שלומך|how are you
+0230	הכול טוב.	I am ready and working offline. Indeed.	מה נשמע|מה קורה|מה שלומך|how are you
+0231	אני בסדר ומוכן לעבודה.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0232	אני מוכן. מה תרצה לעשות?	I am ready and working offline. Absolutely.	מה נשמע|מה קורה|מה שלומך|how are you
+0233	הכול בסדר כאן.	I am ready and working offline. Of course.	מה נשמע|מה קורה|מה שלומך|how are you
+0234	אני מוכן לקבל בקשה.	I am ready and working offline. Definitely.	מה נשמע|מה קורה|מה שלומך|how are you
+0235	עובד ופעיל.	I am ready and working offline. Yes.	מה נשמע|מה קורה|מה שלומך|how are you
+0236	אני כאן.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0237	מוכן. נסה אותי.	I am ready and working offline. Great.	מה נשמע|מה קורה|מה שלומך|how are you
+0238	אני מחכה לבקשה הבאה.	I am ready and working offline. Certainly.	מה נשמע|מה קורה|מה שלומך|how are you
+0239	פעיל ועובד אופליין.	I am ready and working offline. Clear.	מה נשמע|מה קורה|מה שלומך|how are you
+0240	הכול טוב.	I am ready and working offline. Indeed.	מה נשמע|מה קורה|מה שלומך|how are you
+0241	אני בסדר ומוכן לעבודה.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0242	אני מוכן. מה תרצה לעשות?	I am ready and working offline. Absolutely.	מה נשמע|מה קורה|מה שלומך|how are you
+0243	הכול בסדר כאן.	I am ready and working offline. Of course.	מה נשמע|מה קורה|מה שלומך|how are you
+0244	אני מוכן לקבל בקשה.	I am ready and working offline. Definitely.	מה נשמע|מה קורה|מה שלומך|how are you
+0245	עובד ופעיל.	I am ready and working offline. Yes.	מה נשמע|מה קורה|מה שלומך|how are you
+0246	אני כאן.	I am ready and working offline.	מה נשמע|מה קורה|מה שלומך|how are you
+0247	מוכן. נסה אותי.	I am ready and working offline. Great.	מה נשמע|מה קורה|מה שלומך|how are you
+0248	אני מחכה לבקשה הבאה.	I am ready and working offline. Certainly.	מה נשמע|מה קורה|מה שלומך|how are you
+0249	פעיל ועובד אופליין.	I am ready and working offline. Clear.	מה נשמע|מה קורה|מה שלומך|how are you
+0250	הכול טוב.	I am ready and working offline. Indeed.	מה נשמע|מה קורה|מה שלומך|how are you
+0251	בשמחה!	You are welcome!	תודה|תודה רבה|thanks|thank you
+0252	על לא דבר.	You are welcome! Absolutely.	תודה|תודה רבה|thanks|thank you
+0253	ברצון.	You are welcome! Of course.	תודה|תודה רבה|thanks|thank you
+0254	בהחלט.	You are welcome! Definitely.	תודה|תודה רבה|thanks|thank you
+0255	בכיף.	You are welcome! Yes.	תודה|תודה רבה|thanks|thank you
+0256	שמח לעזור.	You are welcome!	תודה|תודה רבה|thanks|thank you
+0257	אני כאן בשביל זה.	You are welcome! Great.	תודה|תודה רבה|thanks|thank you
+0258	מעולה.	You are welcome! Certainly.	תודה|תודה רבה|thanks|thank you
+0259	כל הכבוד על הבדיקה.	You are welcome! Clear.	תודה|תודה רבה|thanks|thank you
+0260	בשמחה תמיד.	You are welcome! Indeed.	תודה|תודה רבה|thanks|thank you
+0261	בשמחה!	You are welcome!	תודה|תודה רבה|thanks|thank you
+0262	על לא דבר.	You are welcome! Absolutely.	תודה|תודה רבה|thanks|thank you
+0263	ברצון.	You are welcome! Of course.	תודה|תודה רבה|thanks|thank you
+0264	בהחלט.	You are welcome! Definitely.	תודה|תודה רבה|thanks|thank you
+0265	בכיף.	You are welcome! Yes.	תודה|תודה רבה|thanks|thank you
+0266	שמח לעזור.	You are welcome!	תודה|תודה רבה|thanks|thank you
+0267	אני כאן בשביל זה.	You are welcome! Great.	תודה|תודה רבה|thanks|thank you
+0268	מעולה.	You are welcome! Certainly.	תודה|תודה רבה|thanks|thank you
+0269	כל הכבוד על הבדיקה.	You are welcome! Clear.	תודה|תודה רבה|thanks|thank you
+0270	בשמחה תמיד.	You are welcome! Indeed.	תודה|תודה רבה|thanks|thank you
+0271	בשמחה!	You are welcome!	תודה|תודה רבה|thanks|thank you
+0272	על לא דבר.	You are welcome! Absolutely.	תודה|תודה רבה|thanks|thank you
+0273	ברצון.	You are welcome! Of course.	תודה|תודה רבה|thanks|thank you
+0274	בהחלט.	You are welcome! Definitely.	תודה|תודה רבה|thanks|thank you
+0275	בכיף.	You are welcome! Yes.	תודה|תודה רבה|thanks|thank you
+0276	שמח לעזור.	You are welcome!	תודה|תודה רבה|thanks|thank you
+0277	אני כאן בשביל זה.	You are welcome! Great.	תודה|תודה רבה|thanks|thank you
+0278	מעולה.	You are welcome! Certainly.	תודה|תודה רבה|thanks|thank you
+0279	כל הכבוד על הבדיקה.	You are welcome! Clear.	תודה|תודה רבה|thanks|thank you
+0280	בשמחה תמיד.	You are welcome! Indeed.	תודה|תודה רבה|thanks|thank you
+0281	בשמחה!	You are welcome!	תודה|תודה רבה|thanks|thank you
+0282	על לא דבר.	You are welcome! Absolutely.	תודה|תודה רבה|thanks|thank you
+0283	ברצון.	You are welcome! Of course.	תודה|תודה רבה|thanks|thank you
+0284	בהחלט.	You are welcome! Definitely.	תודה|תודה רבה|thanks|thank you
+0285	בכיף.	You are welcome! Yes.	תודה|תודה רבה|thanks|thank you
+0286	שמח לעזור.	You are welcome!	תודה|תודה רבה|thanks|thank you
+0287	אני כאן בשביל זה.	You are welcome! Great.	תודה|תודה רבה|thanks|thank you
+0288	מעולה.	You are welcome! Certainly.	תודה|תודה רבה|thanks|thank you
+0289	כל הכבוד על הבדיקה.	You are welcome! Clear.	תודה|תודה רבה|thanks|thank you
+0290	בשמחה תמיד.	You are welcome! Indeed.	תודה|תודה רבה|thanks|thank you
+0291	בשמחה!	You are welcome!	תודה|תודה רבה|thanks|thank you
+0292	על לא דבר.	You are welcome! Absolutely.	תודה|תודה רבה|thanks|thank you
+0293	ברצון.	You are welcome! Of course.	תודה|תודה רבה|thanks|thank you
+0294	בהחלט.	You are welcome! Definitely.	תודה|תודה רבה|thanks|thank you
+0295	בכיף.	You are welcome! Yes.	תודה|תודה רבה|thanks|thank you
+0296	שמח לעזור.	You are welcome!	תודה|תודה רבה|thanks|thank you
+0297	אני כאן בשביל זה.	You are welcome! Great.	תודה|תודה רבה|thanks|thank you
+0298	מעולה.	You are welcome! Certainly.	תודה|תודה רבה|thanks|thank you
+0299	כל הכבוד על הבדיקה.	You are welcome! Clear.	תודה|תודה רבה|thanks|thank you
+0300	בשמחה תמיד.	You are welcome! Indeed.	תודה|תודה רבה|thanks|thank you
+0301	מה אמר ה־Wi‑Fi לנתב? אני מרגיש שיש בינינו חיבור.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0302	למה המחשב הלך לרופא? היו לו יותר מדי חלונות פתוחים.	Why did the computer go to the doctor? It had too many open windows. Absolutely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0303	מה אמר הבאג למתכנת? אל תסגור אותי עדיין.	Why did the computer go to the doctor? It had too many open windows. Of course.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0304	למה הטלפון רגוע? הוא על מצב שקט.	Why did the computer go to the doctor? It had too many open windows. Definitely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0305	מה אמר הקובץ לתיקייה? אני צריך מקום.	Why did the computer go to the doctor? It had too many open windows. Yes.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0306	למה הדפדפן התעייף? היו לו יותר מדי טאבים.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0307	מה אמרה הסוללה למטען? אתה נותן לי כוח.	Why did the computer go to the doctor? It had too many open windows. Great.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0308	למה התוכנה חייכה? סוף סוף ה־build עבר.	Why did the computer go to the doctor? It had too many open windows. Certainly.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0309	מה אמר ה־CPU ל־RAM? תן לי קצת מקום לעבוד.	Why did the computer go to the doctor? It had too many open windows. Clear.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0310	למה ה־USB מתלבט? הוא שוב מנסה את הצד השני.	Why did the computer go to the doctor? It had too many open windows. Indeed.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0311	מה אמר ה־Wi‑Fi לנתב? אני מרגיש שיש בינינו חיבור.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0312	למה המחשב הלך לרופא? היו לו יותר מדי חלונות פתוחים.	Why did the computer go to the doctor? It had too many open windows. Absolutely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0313	מה אמר הבאג למתכנת? אל תסגור אותי עדיין.	Why did the computer go to the doctor? It had too many open windows. Of course.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0314	למה הטלפון רגוע? הוא על מצב שקט.	Why did the computer go to the doctor? It had too many open windows. Definitely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0315	מה אמר הקובץ לתיקייה? אני צריך מקום.	Why did the computer go to the doctor? It had too many open windows. Yes.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0316	למה הדפדפן התעייף? היו לו יותר מדי טאבים.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0317	מה אמרה הסוללה למטען? אתה נותן לי כוח.	Why did the computer go to the doctor? It had too many open windows. Great.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0318	למה התוכנה חייכה? סוף סוף ה־build עבר.	Why did the computer go to the doctor? It had too many open windows. Certainly.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0319	מה אמר ה־CPU ל־RAM? תן לי קצת מקום לעבוד.	Why did the computer go to the doctor? It had too many open windows. Clear.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0320	למה ה־USB מתלבט? הוא שוב מנסה את הצד השני.	Why did the computer go to the doctor? It had too many open windows. Indeed.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0321	מה אמר ה־Wi‑Fi לנתב? אני מרגיש שיש בינינו חיבור.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0322	למה המחשב הלך לרופא? היו לו יותר מדי חלונות פתוחים.	Why did the computer go to the doctor? It had too many open windows. Absolutely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0323	מה אמר הבאג למתכנת? אל תסגור אותי עדיין.	Why did the computer go to the doctor? It had too many open windows. Of course.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0324	למה הטלפון רגוע? הוא על מצב שקט.	Why did the computer go to the doctor? It had too many open windows. Definitely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0325	מה אמר הקובץ לתיקייה? אני צריך מקום.	Why did the computer go to the doctor? It had too many open windows. Yes.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0326	למה הדפדפן התעייף? היו לו יותר מדי טאבים.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0327	מה אמרה הסוללה למטען? אתה נותן לי כוח.	Why did the computer go to the doctor? It had too many open windows. Great.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0328	למה התוכנה חייכה? סוף סוף ה־build עבר.	Why did the computer go to the doctor? It had too many open windows. Certainly.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0329	מה אמר ה־CPU ל־RAM? תן לי קצת מקום לעבוד.	Why did the computer go to the doctor? It had too many open windows. Clear.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0330	למה ה־USB מתלבט? הוא שוב מנסה את הצד השני.	Why did the computer go to the doctor? It had too many open windows. Indeed.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0331	מה אמר ה־Wi‑Fi לנתב? אני מרגיש שיש בינינו חיבור.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0332	למה המחשב הלך לרופא? היו לו יותר מדי חלונות פתוחים.	Why did the computer go to the doctor? It had too many open windows. Absolutely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0333	מה אמר הבאג למתכנת? אל תסגור אותי עדיין.	Why did the computer go to the doctor? It had too many open windows. Of course.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0334	למה הטלפון רגוע? הוא על מצב שקט.	Why did the computer go to the doctor? It had too many open windows. Definitely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0335	מה אמר הקובץ לתיקייה? אני צריך מקום.	Why did the computer go to the doctor? It had too many open windows. Yes.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0336	למה הדפדפן התעייף? היו לו יותר מדי טאבים.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0337	מה אמרה הסוללה למטען? אתה נותן לי כוח.	Why did the computer go to the doctor? It had too many open windows. Great.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0338	למה התוכנה חייכה? סוף סוף ה־build עבר.	Why did the computer go to the doctor? It had too many open windows. Certainly.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0339	מה אמר ה־CPU ל־RAM? תן לי קצת מקום לעבוד.	Why did the computer go to the doctor? It had too many open windows. Clear.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0340	למה ה־USB מתלבט? הוא שוב מנסה את הצד השני.	Why did the computer go to the doctor? It had too many open windows. Indeed.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0341	מה אמר ה־Wi‑Fi לנתב? אני מרגיש שיש בינינו חיבור.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0342	למה המחשב הלך לרופא? היו לו יותר מדי חלונות פתוחים.	Why did the computer go to the doctor? It had too many open windows. Absolutely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0343	מה אמר הבאג למתכנת? אל תסגור אותי עדיין.	Why did the computer go to the doctor? It had too many open windows. Of course.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0344	למה הטלפון רגוע? הוא על מצב שקט.	Why did the computer go to the doctor? It had too many open windows. Definitely.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0345	מה אמר הקובץ לתיקייה? אני צריך מקום.	Why did the computer go to the doctor? It had too many open windows. Yes.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0346	למה הדפדפן התעייף? היו לו יותר מדי טאבים.	Why did the computer go to the doctor? It had too many open windows.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0347	מה אמרה הסוללה למטען? אתה נותן לי כוח.	Why did the computer go to the doctor? It had too many open windows. Great.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0348	למה התוכנה חייכה? סוף סוף ה־build עבר.	Why did the computer go to the doctor? It had too many open windows. Certainly.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0349	מה אמר ה־CPU ל־RAM? תן לי קצת מקום לעבוד.	Why did the computer go to the doctor? It had too many open windows. Clear.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0350	למה ה־USB מתלבט? הוא שוב מנסה את הצד השני.	Why did the computer go to the doctor? It had too many open windows. Indeed.	בדיחה|בדיחה מצחיקה|תספר בדיחה|תן לי בדיחה|joke|funny joke
+0351	מה יש לו מקשים אבל לא דלתות? מקלדת.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0352	מה יש לו ידיים אבל לא מוחא כפיים? שעון.	What has keys but no doors? A keyboard. Absolutely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0353	מה רטוב ככל שהוא מייבש? מגבת.	What has keys but no doors? A keyboard. Of course.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0354	מה יש לו שיניים אבל לא אוכל? מסרק.	What has keys but no doors? A keyboard. Definitely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0355	מה מלא חורים ועדיין מחזיק מים? ספוג.	What has keys but no doors? A keyboard. Yes.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0356	מה שייך לך אבל אחרים משתמשים בו יותר? השם שלך.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0357	מה נעלם כשאומרים את שמו? שקט.	What has keys but no doors? A keyboard. Great.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0358	מה תמיד לפניך ואי אפשר לראות? העתיד.	What has keys but no doors? A keyboard. Certainly.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0359	מה יש לו צוואר אבל אין ראש? בקבוק.	What has keys but no doors? A keyboard. Clear.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0360	מה יש לו עין אבל לא רואה? מחט.	What has keys but no doors? A keyboard. Indeed.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0361	מה יש לו מקשים אבל לא דלתות? מקלדת.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0362	מה יש לו ידיים אבל לא מוחא כפיים? שעון.	What has keys but no doors? A keyboard. Absolutely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0363	מה רטוב ככל שהוא מייבש? מגבת.	What has keys but no doors? A keyboard. Of course.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0364	מה יש לו שיניים אבל לא אוכל? מסרק.	What has keys but no doors? A keyboard. Definitely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0365	מה מלא חורים ועדיין מחזיק מים? ספוג.	What has keys but no doors? A keyboard. Yes.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0366	מה שייך לך אבל אחרים משתמשים בו יותר? השם שלך.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0367	מה נעלם כשאומרים את שמו? שקט.	What has keys but no doors? A keyboard. Great.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0368	מה תמיד לפניך ואי אפשר לראות? העתיד.	What has keys but no doors? A keyboard. Certainly.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0369	מה יש לו צוואר אבל אין ראש? בקבוק.	What has keys but no doors? A keyboard. Clear.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0370	מה יש לו עין אבל לא רואה? מחט.	What has keys but no doors? A keyboard. Indeed.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0371	מה יש לו מקשים אבל לא דלתות? מקלדת.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0372	מה יש לו ידיים אבל לא מוחא כפיים? שעון.	What has keys but no doors? A keyboard. Absolutely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0373	מה רטוב ככל שהוא מייבש? מגבת.	What has keys but no doors? A keyboard. Of course.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0374	מה יש לו שיניים אבל לא אוכל? מסרק.	What has keys but no doors? A keyboard. Definitely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0375	מה מלא חורים ועדיין מחזיק מים? ספוג.	What has keys but no doors? A keyboard. Yes.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0376	מה שייך לך אבל אחרים משתמשים בו יותר? השם שלך.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0377	מה נעלם כשאומרים את שמו? שקט.	What has keys but no doors? A keyboard. Great.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0378	מה תמיד לפניך ואי אפשר לראות? העתיד.	What has keys but no doors? A keyboard. Certainly.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0379	מה יש לו צוואר אבל אין ראש? בקבוק.	What has keys but no doors? A keyboard. Clear.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0380	מה יש לו עין אבל לא רואה? מחט.	What has keys but no doors? A keyboard. Indeed.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0381	מה יש לו מקשים אבל לא דלתות? מקלדת.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0382	מה יש לו ידיים אבל לא מוחא כפיים? שעון.	What has keys but no doors? A keyboard. Absolutely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0383	מה רטוב ככל שהוא מייבש? מגבת.	What has keys but no doors? A keyboard. Of course.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0384	מה יש לו שיניים אבל לא אוכל? מסרק.	What has keys but no doors? A keyboard. Definitely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0385	מה מלא חורים ועדיין מחזיק מים? ספוג.	What has keys but no doors? A keyboard. Yes.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0386	מה שייך לך אבל אחרים משתמשים בו יותר? השם שלך.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0387	מה נעלם כשאומרים את שמו? שקט.	What has keys but no doors? A keyboard. Great.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0388	מה תמיד לפניך ואי אפשר לראות? העתיד.	What has keys but no doors? A keyboard. Certainly.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0389	מה יש לו צוואר אבל אין ראש? בקבוק.	What has keys but no doors? A keyboard. Clear.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0390	מה יש לו עין אבל לא רואה? מחט.	What has keys but no doors? A keyboard. Indeed.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0391	מה יש לו מקשים אבל לא דלתות? מקלדת.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0392	מה יש לו ידיים אבל לא מוחא כפיים? שעון.	What has keys but no doors? A keyboard. Absolutely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0393	מה רטוב ככל שהוא מייבש? מגבת.	What has keys but no doors? A keyboard. Of course.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0394	מה יש לו שיניים אבל לא אוכל? מסרק.	What has keys but no doors? A keyboard. Definitely.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0395	מה מלא חורים ועדיין מחזיק מים? ספוג.	What has keys but no doors? A keyboard. Yes.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0396	מה שייך לך אבל אחרים משתמשים בו יותר? השם שלך.	What has keys but no doors? A keyboard.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0397	מה נעלם כשאומרים את שמו? שקט.	What has keys but no doors? A keyboard. Great.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0398	מה תמיד לפניך ואי אפשר לראות? העתיד.	What has keys but no doors? A keyboard. Certainly.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0399	מה יש לו צוואר אבל אין ראש? בקבוק.	What has keys but no doors? A keyboard. Clear.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0400	מה יש לו עין אבל לא רואה? מחט.	What has keys but no doors? A keyboard. Indeed.	חידה|חידה מצחיקה|תן לי חידה|תתן לי חידה|חידון|riddle
+0401	Android משתמש במערכת הרשאות כדי להגביל גישה של אפליקציות למשאבים מסוימים.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0402	RAM הוא זיכרון העבודה של המכשיר בזמן שתוכנות פועלות.	Android uses permissions to control access that apps have to protected resources. Absolutely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0403	CPU מבצע פקודות וחישובים עבור מערכת ההפעלה והאפליקציות.	Android uses permissions to control access that apps have to protected resources. Of course.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0404	Bluetooth מיועד לתקשורת אלחוטית קצרת טווח.	Android uses permissions to control access that apps have to protected resources. Definitely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0405	Wi‑Fi מאפשר למכשירים להתחבר לרשת אלחוטית.	Android uses permissions to control access that apps have to protected resources. Yes.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0406	צילום מסך שומר תמונה של התוכן שמוצג במסך.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0407	מצב טיסה משנה את מצב ממשקי התקשורת האלחוטיים בהתאם למכשיר.	Android uses permissions to control access that apps have to protected resources. Great.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0408	NFC מיועד לתקשורת מקרוב בין מכשירים והתקנים תומכים.	Android uses permissions to control access that apps have to protected resources. Certainly.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0409	נקודה חמה יכולה לשתף חיבור נתונים באמצעות Wi‑Fi במכשירים שתומכים בכך.	Android uses permissions to control access that apps have to protected resources. Clear.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0410	Android יכול להציג כמה אפליקציות אחרונות דרך מסך ה־Recents.	Android uses permissions to control access that apps have to protected resources. Indeed.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0411	Android משתמש במערכת הרשאות כדי להגביל גישה של אפליקציות למשאבים מסוימים.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0412	RAM הוא זיכרון העבודה של המכשיר בזמן שתוכנות פועלות.	Android uses permissions to control access that apps have to protected resources. Absolutely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0413	CPU מבצע פקודות וחישובים עבור מערכת ההפעלה והאפליקציות.	Android uses permissions to control access that apps have to protected resources. Of course.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0414	Bluetooth מיועד לתקשורת אלחוטית קצרת טווח.	Android uses permissions to control access that apps have to protected resources. Definitely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0415	Wi‑Fi מאפשר למכשירים להתחבר לרשת אלחוטית.	Android uses permissions to control access that apps have to protected resources. Yes.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0416	צילום מסך שומר תמונה של התוכן שמוצג במסך.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0417	מצב טיסה משנה את מצב ממשקי התקשורת האלחוטיים בהתאם למכשיר.	Android uses permissions to control access that apps have to protected resources. Great.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0418	NFC מיועד לתקשורת מקרוב בין מכשירים והתקנים תומכים.	Android uses permissions to control access that apps have to protected resources. Certainly.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0419	נקודה חמה יכולה לשתף חיבור נתונים באמצעות Wi‑Fi במכשירים שתומכים בכך.	Android uses permissions to control access that apps have to protected resources. Clear.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0420	Android יכול להציג כמה אפליקציות אחרונות דרך מסך ה־Recents.	Android uses permissions to control access that apps have to protected resources. Indeed.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0421	Android משתמש במערכת הרשאות כדי להגביל גישה של אפליקציות למשאבים מסוימים.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0422	RAM הוא זיכרון העבודה של המכשיר בזמן שתוכנות פועלות.	Android uses permissions to control access that apps have to protected resources. Absolutely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0423	CPU מבצע פקודות וחישובים עבור מערכת ההפעלה והאפליקציות.	Android uses permissions to control access that apps have to protected resources. Of course.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0424	Bluetooth מיועד לתקשורת אלחוטית קצרת טווח.	Android uses permissions to control access that apps have to protected resources. Definitely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0425	Wi‑Fi מאפשר למכשירים להתחבר לרשת אלחוטית.	Android uses permissions to control access that apps have to protected resources. Yes.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0426	צילום מסך שומר תמונה של התוכן שמוצג במסך.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0427	מצב טיסה משנה את מצב ממשקי התקשורת האלחוטיים בהתאם למכשיר.	Android uses permissions to control access that apps have to protected resources. Great.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0428	NFC מיועד לתקשורת מקרוב בין מכשירים והתקנים תומכים.	Android uses permissions to control access that apps have to protected resources. Certainly.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0429	נקודה חמה יכולה לשתף חיבור נתונים באמצעות Wi‑Fi במכשירים שתומכים בכך.	Android uses permissions to control access that apps have to protected resources. Clear.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0430	Android יכול להציג כמה אפליקציות אחרונות דרך מסך ה־Recents.	Android uses permissions to control access that apps have to protected resources. Indeed.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0431	Android משתמש במערכת הרשאות כדי להגביל גישה של אפליקציות למשאבים מסוימים.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0432	RAM הוא זיכרון העבודה של המכשיר בזמן שתוכנות פועלות.	Android uses permissions to control access that apps have to protected resources. Absolutely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0433	CPU מבצע פקודות וחישובים עבור מערכת ההפעלה והאפליקציות.	Android uses permissions to control access that apps have to protected resources. Of course.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0434	Bluetooth מיועד לתקשורת אלחוטית קצרת טווח.	Android uses permissions to control access that apps have to protected resources. Definitely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0435	Wi‑Fi מאפשר למכשירים להתחבר לרשת אלחוטית.	Android uses permissions to control access that apps have to protected resources. Yes.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0436	צילום מסך שומר תמונה של התוכן שמוצג במסך.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0437	מצב טיסה משנה את מצב ממשקי התקשורת האלחוטיים בהתאם למכשיר.	Android uses permissions to control access that apps have to protected resources. Great.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0438	NFC מיועד לתקשורת מקרוב בין מכשירים והתקנים תומכים.	Android uses permissions to control access that apps have to protected resources. Certainly.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0439	נקודה חמה יכולה לשתף חיבור נתונים באמצעות Wi‑Fi במכשירים שתומכים בכך.	Android uses permissions to control access that apps have to protected resources. Clear.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0440	Android יכול להציג כמה אפליקציות אחרונות דרך מסך ה־Recents.	Android uses permissions to control access that apps have to protected resources. Indeed.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0441	Android משתמש במערכת הרשאות כדי להגביל גישה של אפליקציות למשאבים מסוימים.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0442	RAM הוא זיכרון העבודה של המכשיר בזמן שתוכנות פועלות.	Android uses permissions to control access that apps have to protected resources. Absolutely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0443	CPU מבצע פקודות וחישובים עבור מערכת ההפעלה והאפליקציות.	Android uses permissions to control access that apps have to protected resources. Of course.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0444	Bluetooth מיועד לתקשורת אלחוטית קצרת טווח.	Android uses permissions to control access that apps have to protected resources. Definitely.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0445	Wi‑Fi מאפשר למכשירים להתחבר לרשת אלחוטית.	Android uses permissions to control access that apps have to protected resources. Yes.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0446	צילום מסך שומר תמונה של התוכן שמוצג במסך.	Android uses permissions to control access that apps have to protected resources.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0447	מצב טיסה משנה את מצב ממשקי התקשורת האלחוטיים בהתאם למכשיר.	Android uses permissions to control access that apps have to protected resources. Great.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0448	NFC מיועד לתקשורת מקרוב בין מכשירים והתקנים תומכים.	Android uses permissions to control access that apps have to protected resources. Certainly.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0449	נקודה חמה יכולה לשתף חיבור נתונים באמצעות Wi‑Fi במכשירים שתומכים בכך.	Android uses permissions to control access that apps have to protected resources. Clear.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0450	Android יכול להציג כמה אפליקציות אחרונות דרך מסך ה־Recents.	Android uses permissions to control access that apps have to protected resources. Indeed.	עובדה מעניינת|ספר לי עובדה|עובדה|fun fact
+0451	נכון — אני לא דורש משפט זהה. אני צובר התאמות של כמה מילות מפתח.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0452	למשל „תתן לי חידה מצחיקה” יכול לפגוע ב„תתן לי”, „חידה” ו„מצחיקה”.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Absolutely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0453	גם אם כתבת מילה פעמיים, כמו „היי היי”, עצם מילת המפתח עדיין מזוהה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Of course.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0454	המנוע משלב התאמת ביטויים, מילים בודדות והתאמה חלקית.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Definitely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0455	כינוי כמו „כרום” יכול להתנרמל ל־Chrome לפני החיפוש.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Yes.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0456	מילת מפתח חשובה מקבלת יותר משקל כשכמה מילים באותה כוונה מתאימות.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0457	פגיעה חלקית יכולה לעזור גם כשיש שגיאת כתיב קטנה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Great.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0458	אני לא אמור להסתמך רק על התאמה של המשפט כולו.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Certainly.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0459	השאיפה היא לזהות כוונה מתוך כמה רמזים קצרים.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Clear.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0460	גם עברית וגם אנגלית עוברות נרמול לפני ההתאמה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Indeed.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0461	נכון — אני לא דורש משפט זהה. אני צובר התאמות של כמה מילות מפתח.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0462	למשל „תתן לי חידה מצחיקה” יכול לפגוע ב„תתן לי”, „חידה” ו„מצחיקה”.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Absolutely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0463	גם אם כתבת מילה פעמיים, כמו „היי היי”, עצם מילת המפתח עדיין מזוהה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Of course.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0464	המנוע משלב התאמת ביטויים, מילים בודדות והתאמה חלקית.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Definitely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0465	כינוי כמו „כרום” יכול להתנרמל ל־Chrome לפני החיפוש.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Yes.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0466	מילת מפתח חשובה מקבלת יותר משקל כשכמה מילים באותה כוונה מתאימות.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0467	פגיעה חלקית יכולה לעזור גם כשיש שגיאת כתיב קטנה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Great.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0468	אני לא אמור להסתמך רק על התאמה של המשפט כולו.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Certainly.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0469	השאיפה היא לזהות כוונה מתוך כמה רמזים קצרים.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Clear.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0470	גם עברית וגם אנגלית עוברות נרמול לפני ההתאמה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Indeed.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0471	נכון — אני לא דורש משפט זהה. אני צובר התאמות של כמה מילות מפתח.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0472	למשל „תתן לי חידה מצחיקה” יכול לפגוע ב„תתן לי”, „חידה” ו„מצחיקה”.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Absolutely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0473	גם אם כתבת מילה פעמיים, כמו „היי היי”, עצם מילת המפתח עדיין מזוהה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Of course.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0474	המנוע משלב התאמת ביטויים, מילים בודדות והתאמה חלקית.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Definitely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0475	כינוי כמו „כרום” יכול להתנרמל ל־Chrome לפני החיפוש.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Yes.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0476	מילת מפתח חשובה מקבלת יותר משקל כשכמה מילים באותה כוונה מתאימות.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0477	פגיעה חלקית יכולה לעזור גם כשיש שגיאת כתיב קטנה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Great.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0478	אני לא אמור להסתמך רק על התאמה של המשפט כולו.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Certainly.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0479	השאיפה היא לזהות כוונה מתוך כמה רמזים קצרים.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Clear.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0480	גם עברית וגם אנגלית עוברות נרמול לפני ההתאמה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Indeed.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0481	נכון — אני לא דורש משפט זהה. אני צובר התאמות של כמה מילות מפתח.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0482	למשל „תתן לי חידה מצחיקה” יכול לפגוע ב„תתן לי”, „חידה” ו„מצחיקה”.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Absolutely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0483	גם אם כתבת מילה פעמיים, כמו „היי היי”, עצם מילת המפתח עדיין מזוהה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Of course.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0484	המנוע משלב התאמת ביטויים, מילים בודדות והתאמה חלקית.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Definitely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0485	כינוי כמו „כרום” יכול להתנרמל ל־Chrome לפני החיפוש.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Yes.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0486	מילת מפתח חשובה מקבלת יותר משקל כשכמה מילים באותה כוונה מתאימות.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0487	פגיעה חלקית יכולה לעזור גם כשיש שגיאת כתיב קטנה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Great.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0488	אני לא אמור להסתמך רק על התאמה של המשפט כולו.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Certainly.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0489	השאיפה היא לזהות כוונה מתוך כמה רמזים קצרים.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Clear.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0490	גם עברית וגם אנגלית עוברות נרמול לפני ההתאמה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Indeed.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0491	נכון — אני לא דורש משפט זהה. אני צובר התאמות של כמה מילות מפתח.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0492	למשל „תתן לי חידה מצחיקה” יכול לפגוע ב„תתן לי”, „חידה” ו„מצחיקה”.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Absolutely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0493	גם אם כתבת מילה פעמיים, כמו „היי היי”, עצם מילת המפתח עדיין מזוהה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Of course.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0494	המנוע משלב התאמת ביטויים, מילים בודדות והתאמה חלקית.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Definitely.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0495	כינוי כמו „כרום” יכול להתנרמל ל־Chrome לפני החיפוש.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Yes.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0496	מילת מפתח חשובה מקבלת יותר משקל כשכמה מילים באותה כוונה מתאימות.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0497	פגיעה חלקית יכולה לעזור גם כשיש שגיאת כתיב קטנה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Great.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0498	אני לא אמור להסתמך רק על התאמה של המשפט כולו.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Certainly.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0499	השאיפה היא לזהות כוונה מתוך כמה רמזים קצרים.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Clear.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
+0500	גם עברית וגם אנגלית עוברות נרמול לפני ההתאמה.	Yes. I combine keyword hits, phrases, synonyms, partial matches, and light typo tolerance. Indeed.	מילת מפתח|מילות מפתח|איך אתה מזהה|keyword|keywords
 0501	הנושא קול זמין במאגר ללא רשת. [501]	The topic קול is available offline. [501]	קול|volume
 0502	הנושא מוזיקה זמין במאגר ללא רשת. [502]	The topic מוזיקה is available offline. [502]	מוזיקה|music
 0503	הנושא שיר זמין במאגר ללא רשת. [503]	The topic שיר is available offline. [503]	שיר|track
