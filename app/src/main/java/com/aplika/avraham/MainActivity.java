@@ -146,7 +146,7 @@ public class MainActivity extends Activity {
  boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
  boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings","screenshot","lock screen");}
- boolean settingsRequest(String q){return hasAny(q,"wifi","wi-fi","רשת אלחוטית","וויפי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast");}
+ boolean settingsRequest(String q){return hasAny(q,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","וויפי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast");}
 
  void process(String q){
   if(direct(q))return;
@@ -182,8 +182,9 @@ public class MainActivity extends Activity {
    return true;
   }
 
-  // Once the 3,000-row alias table is loaded, allow any catalog alias as a
-  // stand-alone app request too.
+  // Load the compact alias table on demand as well, so the very first command
+  // after installation can use all 3,000 catalog aliases immediately.
+  engine.loadApps(this);
   return engine.isKnownAppAlias(x);
  }
 
