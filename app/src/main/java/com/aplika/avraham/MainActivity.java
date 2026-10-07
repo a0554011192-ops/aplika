@@ -207,27 +207,6 @@ public class MainActivity extends Activity {
  }
 
  void addMessage(String text,String who){
-  if(Looper.myLooper()!=Looper.getMainLooper()){
-   runOnUiThread(()->addMessage(text,who));
-   return;
-  }
-  boolean user="user".equals(who);
-  LinearLayout row=new LinearLayout(this);row.setGravity(user?Gravity.RIGHT:Gravity.LEFT);
-  row.setPadding(8,4,8,4);
-  TextView b=bubble(text,user);
-  LinearLayout.LayoutParams bp=new LinearLayout.LayoutParams(-2,-2);bp.setMargins(user?56:8,2,user?8:56,2);row.addView(b,bp);
-  chatList.addView(row,new LinearLayout.LayoutParams(-1,-2));
-  chatScroll.post(()->chatScroll.fullScroll(View.FOCUS_DOWN));
- }
-
- void sendCurrent(){
-  String q=input.getText().toString().trim();if(q.isEmpty())return;
-  input.setText("");
-  addMessage(q,"user");
-  process(q);
- }
-
- void addMessage(String text,String who){
   if(Looper.myLooper()!=Looper.getMainLooper()){runOnUiThread(()->addMessage(text,who));return;}
   boolean user="user".equals(who);
   if(user&&!isActiveChat())setChatActive(true);
