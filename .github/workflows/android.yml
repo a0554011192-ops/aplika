@@ -1,33 +1,28 @@
-name: Android APK
+name: Android APK Build
+
 on:
   push:
   workflow_dispatch:
+
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v5
+      - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
-      - uses: gradle/actions/setup-gradle@v6
+      - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.10.2'
-          cache-disabled: 'true'
-      - name: Build unsigned APK
-        run: gradle assembleRelease --no-daemon
-      - name: Sign APK
-        shell: bash
-        env:
-          KS_PASS: ${{ secrets.APK_KEYSTORE_PASSWORD }}
-        run: |
-          PASS="${KS_PASS:-avraham-offline-2026}"
-          mkdir -p app/build/keys
-          keytool -genkeypair -v -keystore app/build/keys/release.jks -alias avraham -keyalg RSA -keysize 2048 -validity 10000 -storepass "$PASS" -keypass "$PASS" -dname "CN=Avraham HaIvri, OU=Aplika, O=Aplika, L=Israel, C=IL"
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" sign --ks app/build/keys/release.jks --ks-pass pass:$PASS --ks-key-alias avraham --key-pass pass:$PASS --out app/build/outputs/apk/release/avraham-haivri-android-signed.apk app/build/outputs/apk/release/app-release-unsigned.apk
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose app/build/outputs/apk/release/avraham-haivri-android-signed.apk
+          cache-disabled: true
+      - run: gradle assembleRelease --no-daemon --stacktrace
       - uses: actions/upload-artifact@v4
         with:
-          name: avraham-haivri-android-signed
-          path: app/build/outputs/apk/release/avraham-haivri-android-signed.apk
+          name: avraham-haivri-android-apk
+          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          if-no-files-found: error
