@@ -1,50 +1,35 @@
 # אברהם העברי - אנדרואיד
 
-אפליקציית Android אופליין מבוססת מילות מפתח וטריגרים. ללא הרשאת INTERNET וללא שירות AI/שרת.
+אפליקציית Android אופליין מבוססת טריגרים ומאגרי נתונים מקומיים. ללא הרשאת INTERNET וללא שירות AI או שרת.
 
 ### מובנה באפליקציה
 - 4,000 שמות אפליקציות בעברית ובאנגלית.
-- 4,000 תבניות פעולות מערכת והגדרות בעברית ובאנגלית.
-- 5,000 רשומות תגובה מוגדרות מראש.
-- 6,000 רשומות מילים נרדפות וטריגרים.
+- 712 תבניות פעולות מערכת ללא ריפוד מספרי מלאכותי.
+- 516 מילים נרדפות וטריגרים ללא ריפוד מלאכותי.
+- 1,200 רשומות תגובה ייחודיות לאחר ניקוי כפילויות ומלל ריפוד.
 - זיהוי פעולה לפי מצב מפורש או פעלי פתיחה/פעולה.
-- תיקון שגיאות כתיב באמצעות Levenshtein עד 2 בעת התאמת אפליקציות.
+- תיקון שגיאות כתיב באמצעות Levenshtein בעת התאמת אפליקציות.
 - fallback אופליין ל-Android Document Picker.
-- RTL/LTR, ממשק נעים, ואייקון Vector מקורי ללא תמונות.
+- RTL/LTR, ממשק נעים, ואייקון Vector טהור ללא PNG/JPG.
 - קיצור: + ואז - בתוך שנייה מחזיר את המיקוד לשדה הקלט לפתיחה מהירה.
 
 ### Build
-GitHub Actions ב-`.github/workflows/android.yml` מקמפל Release וחותם אותו בתעודה שנוצרת בזמן הבנייה, ואז מפרסם את ה-APK כ-Artifact.
+GitHub Actions מקמפל Release, בודק את הקטלוגים, מריץ lint, בונה APK, עושה zipalign, מאמת את חתימת APK, מוודא שאין קבצי תמונה רסטריים בתוך ה-APK, בודק התקנה על Android Emulator, ומפרסם גם APK וגם ZIP מלא של הפרויקט.
 
-### App discovery and aliases
-The resolver is device-first: it discovers installed apps on the current Android device and matches spoken names against real app labels and package names. The bundled app catalog contains exactly 4,000 unique app names and is used as auxiliary vocabulary, not as proof that an app is installed.
+### חתימה לעדכונים
+כדי שהתקנות חדשות יוכלו להתקין עדכון מעל גרסה קודמת בלי למחוק אותה, יש להגדיר ב-GitHub Actions פעם אחת את ארבעת ה-Secrets:
+- `AVRAHAM_KEYSTORE_B64`
+- `AVRAHAM_KEYSTORE_PASSWORD`
+- `AVRAHAM_KEY_ALIAS`
+- `AVRAHAM_KEY_PASSWORD`
 
-The main screen includes a Settings button with an installed-app manager. You can search every installed app, set one or more personal nicknames, delete them, refresh the inventory, and run an Android-role diagnostic. Personal nicknames take priority over all other matching.
+כאשר ה-Secrets קיימים, אותו keystore משמש בכל Build. כאשר הם לא קיימים, ה-CI משתמש במפתח זמני לכל ריצה, ולכן זו אינה חתימת עדכון קבועה.
 
-The 4,000-name catalog combines public Google Play category snapshots from privacy-tech-lab/gpc-android with a cleaned public Google Play snapshot. The runtime still uses PackageManager as the authoritative source for what can actually be opened on the device.
+### אייקון
+הקובץ הבינארי `1.ico` הומר למקור SVG טהור ב-`icon/ic_avraham.svg`. אפליקציית Android משתמשת בנגזרת Android VectorDrawable שב-`app/src/main/res/drawable/ic_avraham.xml`. ה-build אינו מייצר או מחליף את האייקון ל-PNG.
 
-ציון Clean Build אחרון: 2026-10-07 — build חדש ומבודד.
+### קיצור מקשים
+שירות הנגישות כולל כעת הצהרה מפורשת על `canRequestFilterKeyEvents` ו-description למשאב Android, כדי שה-ShortcutService יוכל לקבל אירועי מקשים בהתאם להרשאות Android.
 
-Clean fast-loader revision: 2026-10-07.
-
-Clean fast-loader build trigger: 2026-10-07-fix.
-
-Final UI build trigger: cream-history-modes-icon.
-
-Final polished UI build trigger: verified.
-
-Sidebar closed default fix build: 2026-10-07.
-
-Final icon verification build: 1.ico authoritative.
-
-Authoritative 1.ico APK rebuild trigger.
-
-Final 1.ico icon build trigger v2.
-
-1.ico authoritative icon final rebuild.
-
-Clean aligned APK build trigger.
-
-Real Android emulator install verification build.
-
-Full source ZIP snapshot build.
+### קטלוגים
+ה-build נכשל אם מופיעים שוב מספרים מלאכותיים ב-actions/synonyms/responses, אם נוצרים כפילויות סמנטיות, או אם 4,000 רשומות האפליקציות אינן שלמות.
