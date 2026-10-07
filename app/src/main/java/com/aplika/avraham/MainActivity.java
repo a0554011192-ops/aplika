@@ -12,7 +12,9 @@ import android.provider.DocumentsContract;
 import android.view.*;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
+import org.json.*;
 import android.view.KeyEvent;
 import android.accessibilityservice.AccessibilityService;
 import java.util.*;
@@ -39,8 +41,18 @@ public class MainActivity extends Activity {
  volatile Map<String,AppRow> installedExactIndex=Collections.emptyMap();
  volatile Map<String,ArrayList<AppRow>> installedTokenIndex=Collections.emptyMap();
 
- final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
- final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
+ enum Mode{CHAT,APP,FILE}
+ Mode mode=Mode.CHAT;
+ LinearLayout sidebar,sidebarList,welcomePanel,composer;
+ FrameLayout mainFrame;
+ TextView modeLabel;
+ String currentChatId;
+ SharedPreferences historyPrefs;
+ LinkedHashMap<String,ChatSession> chatSessions=new LinkedHashMap<>();
+ final int BG=Color.rgb(250,248,242),PANEL=Color.rgb(246,243,236),TEXT=Color.rgb(37,35,31),MUTED=Color.rgb(119,113,103);
+ final int BUBBLE=Color.rgb(255,254,250),USER_BUBBLE=Color.rgb(237,232,220),BORDER=Color.rgb(224,219,208),DARK=Color.rgb(30,29,27);
+ static class ChatMessage{String text,who;ChatMessage(String t,String w){text=t;who=w;}}
+ static class ChatSession{String id,title;ArrayList<ChatMessage> messages=new ArrayList<>();ChatSession(String i,String t){id=i;title=t;}}
 
  @Override public void onCreate(Bundle b){
   super.onCreate(b);
@@ -49,20 +61,19 @@ public class MainActivity extends Activity {
   audio=(AudioManager)getSystemService(AUDIO_SERVICE);
   engine=new OfflineEngine(this);
   aliasPrefs=getSharedPreferences("app_aliases",MODE_PRIVATE);
+  historyPrefs=getSharedPreferences("chat_history",MODE_PRIVATE);
+  loadHistory();
   buildChatUi();
-  addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
-  // The UI becomes ready immediately. The response catalog warms up silently
-  // in the background so normal chat is ready without a visible loading screen.
-  status.setText("אופליין • מוכן");
-  Thread warmup=new Thread(()->{
+  if(currentChatId==null||!chatSessions.containsKey(currentChatId))newChat();
+  else renderCurrentSession();
+  new Thread(()->{
    try{
     android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
     engine.loadChat(this);
    }catch(Exception ignored){}
-  },"response-warmup");
-  warmup.start();
+  },"response-warmup").start();
  }
-
+ 
  TextView label(String s,float size,int color){
   TextView t=new TextView(this);
   t.setText(s);t.setTextSize(size);t.setTextColor(color);t.setFontFeatureSettings("kern");
