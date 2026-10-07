@@ -296,10 +296,14 @@ final class OfflineEngine {
   // Response matching is intentionally independent of the large synonym map.
   // This keeps the hot path lock-free while synonyms are loaded for app/actions.
   for(String raw:n.split("\\s+")){
-   String tok=raw;
+   LinkedHashSet<String> variants=new LinkedHashSet<>();
+   variants.add(raw);
    String alias=commonAliases.get(raw);
-   if(alias!=null&&!alias.isEmpty())tok=normalize(alias);
-   for(String part:tok.split("\\s+")){
+   if(alias!=null&&!alias.isEmpty())variants.addAll(Arrays.asList(normalize(alias).split("\\s+")));
+   String syn=synonyms.get(raw);
+   if(syn!=null&&!syn.isEmpty())variants.addAll(Arrays.asList(normalize(syn).split("\\s+")));
+   for(String part:variants){
+    if(part.isEmpty())continue;
     ArrayList<Resp> list=responseIndex.get(part);
     if(list!=null){
      candidates.addAll(list);
