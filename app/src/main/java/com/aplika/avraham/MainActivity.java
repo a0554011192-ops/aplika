@@ -16,6 +16,8 @@ import android.media.AudioManager;
 import android.view.KeyEvent;
 import android.accessibilityservice.AccessibilityService;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends Activity {
  LinearLayout root,chatList;
@@ -28,6 +30,11 @@ public class MainActivity extends Activity {
  ArrayList<AppRow> installedApps=new ArrayList<>();
  volatile boolean installedAppsLoaded=false;
  SharedPreferences aliasPrefs;
+ ExecutorService responseExecutor=Executors.newSingleThreadExecutor(r->{
+  Thread t=new Thread(r,"response-worker");
+  t.setPriority(Thread.NORM_PRIORITY);
+  return t;
+ });
 
  final int BG=Color.rgb(248,247,251),TEXT=Color.rgb(43,42,52),MUTED=Color.rgb(111,109,122);
  final int BUBBLE=Color.WHITE,USER_BUBBLE=Color.rgb(236,232,252),BORDER=Color.rgb(226,222,235);
@@ -43,7 +50,14 @@ public class MainActivity extends Activity {
   new Thread(()->loadInstalledApps(),"installed-app-loader").start();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
   status.setText("טוען מאגר מקומי...");
-  new Thread(()->{ engine.loadChat(this); runOnUiThread(()->status.setText("אופליין • מוכן")); engine.loadCommands(this); engine.loadApps(this); },"catalog-loader").start();
+  new Thread(()->{
+   engine.loadChat(this);
+   runOnUiThread(()->status.setText("אופליין • מוכן"));
+  },"response-catalog-loader").start();
+  new Thread(()->{
+   engine.loadCommands(this);
+   engine.loadApps(this);
+  },"device-catalog-loader").start();
  }
 
  TextView label(String s,float size,int color){
@@ -121,6 +135,10 @@ public class MainActivity extends Activity {
  }
 
  void addMessage(String text,String who){
+  if(Looper.myLooper()!=Looper.getMainLooper()){
+   runOnUiThread(()->addMessage(text,who));
+   return;
+  }
   boolean user="user".equals(who);
   LinearLayout row=new LinearLayout(this);row.setGravity(user?Gravity.RIGHT:Gravity.LEFT);
   row.setPadding(8,4,8,4);
@@ -530,20 +548,13 @@ public class MainActivity extends Activity {
  void chat(String q){
   OfflineEngine.Resp fast=engine.quickResponse(q);
   if(fast!=null){addMessage(english?fast.en:fast.he,"assistant");return;}
-  if(!engine.chatLoaded){
-   status.setText("טוען מאגר...");
-   new Thread(()->{
-    engine.loadChat(this);
-    runOnUiThread(()->{
-     status.setText("אופליין • מוכן");
-     chat(q);
-    });
-   },"chat-loader").start();
-   return;
-  }
-  // Never run the full response matcher on the Android UI thread.
   final boolean responseEnglish=english;
-  new Thread(()->{
+  responseExecutor.execute(()->{
+   if(!engine.chatLoaded){
+    runOnUiThread(()->status.setText("טוען מאגר..."));
+    engine.loadChat(this);
+    runOnUiThread(()->status.setText("אופליין • מוכן"));
+   }
    OfflineEngine.Resp r=engine.bestResponse(q,responseEnglish);
    runOnUiThread(()->{
     if(r==null){
@@ -552,7 +563,7 @@ public class MainActivity extends Activity {
      addMessage(responseEnglish?r.en:r.he,"assistant");
     }
    });
-  },"response-matcher").start();
+  });
  }
 
  boolean mathRequest(String raw){
@@ -1110,6 +1121,11 @@ public class MainActivity extends Activity {
   Intent i=new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
   i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION|Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
   startActivityForResult(i,11);
+ }
+
+ @Override protected void onDestroy(){
+  responseExecutor.shutdownNow();
+  super.onDestroy();
  }
 
  @Override protected void onActivityResult(int r,int c,Intent d){
