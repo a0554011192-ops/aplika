@@ -638,7 +638,7 @@ public class MainActivity extends Activity {
  boolean quickToggle(String... labels){try{return ShortcutService.toggleQuickSetting(labels);}catch(Exception e){return false;}}
  boolean openSetting(String action,String ok){try{Intent i=new Intent(action);if(i.resolveActivity(getPackageManager())==null)return false;startActivity(i);addMessage(ok,"assistant");return true;}catch(Exception e){return false;}}
  boolean systemToggle(String q){
-  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
+  String x=norm(q);boolean on=hasAny(x,"תפעיל","הפעל","להפעיל","הדלק","שים","עבור למצב","תעביר אותי למצב","turn on","enable");boolean off=hasAny(x,"תכבה","כבה","לכבות","כיבוי","turn off","disable");if(!on&&!off)return false;
   if(hasAny(x,"בלוטוס","בלוטות","bluetooth")){if(quickToggle("bluetooth","בלוטוס","בלוטות")){addMessage(on?"הבלוטוס הופעל.":"הבלוטוס כובה.","assistant");return true;}if(on)try{Intent i=new Intent(android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE);startActivity(i);addMessage("פתחתי את בקשת הפעלת הבלוטוס.","assistant");return true;}catch(Exception ignored){}if(openSetting(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS,"פתחתי את הגדרות הבלוטוס."))return true;}
   if(hasAny(x,"ויפי","וויפיי","וייפיי","wifi","wi fi","רשת אלחוטית")){if(quickToggle("wifi","wi-fi","wi fi","ויפי","וויפיי","וייפיי")){addMessage(on?"ה־Wi‑Fi הופעל.":"ה־Wi‑Fi כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_WIFI_SETTINGS,"פתחתי את הגדרות ה־Wi‑Fi."))return true;}
   if(hasAny(x,"מצב טיסה","airplane")){if(quickToggle("airplane","airplane mode","מצב טיסה")){addMessage(on?"מצב טיסה הופעל.":"מצב טיסה כובה.","assistant");return true;}if(openSetting(android.provider.Settings.ACTION_AIRPLANE_MODE_SETTINGS,"פתחתי את הגדרות מצב הטיסה."))return true;}
@@ -721,6 +721,14 @@ public class MainActivity extends Activity {
    }
   }catch(Exception ignored){}
 
+  if(!engine.commandsLoaded){
+   addMessage(english?"Loading system command catalog...":"טוען מאגר פקודות מערכת...","assistant");
+   new Thread(()->{engine.loadCommands(this);runOnUiThread(()->runAction(q));},"commands-loader").start();
+   return;
+  }
+  OfflineEngine.ActionEntry matched=engine.bestAction(q);
+  if(matched!=null&&executeActionCode(matched.code,matched.setting,q))return;
+
   int setting=settingForRequest(x);
   if(setting>=0){
    try{
@@ -730,6 +738,21 @@ public class MainActivity extends Activity {
   }
 
   addMessage(english?"I could not match that system action.":"לא הצלחתי לזהות את פעולת המערכת הזאת. נסה למשל Wi‑Fi, Bluetooth, צילום מסך, מסך הבית, אחורה או התראות.","assistant");
+ }
+
+ boolean executeActionCode(String code,int setting,String q){
+  if(code==null)return false;
+  if("VOL_UP".equals(code)){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_RAISE,0);addMessage("עוצמת השמע הוגברה.","assistant");return true;}
+  if("VOL_DOWN".equals(code)){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_LOWER,0);addMessage("עוצמת השמע הונמכה.","assistant");return true;}
+  if("MUTE".equals(code)){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_MUTE,0);addMessage("השמע הושתק.","assistant");return true;}
+  if("UNMUTE".equals(code)){audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,AudioManager.ADJUST_UNMUTE,0);addMessage("ההשתקה בוטלה.","assistant");return true;}
+  if("MEDIA_NEXT".equals(code)){if(media(KeyEvent.KEYCODE_MEDIA_NEXT)){addMessage("השיר הבא.","assistant");return true;}}
+  if("MEDIA_PREV".equals(code)){if(media(KeyEvent.KEYCODE_MEDIA_PREVIOUS)){addMessage("השיר הקודם.","assistant");return true;}}
+  if("MEDIA_PLAY".equals(code)){if(media(KeyEvent.KEYCODE_MEDIA_PLAY)){addMessage("ניגון.","assistant");return true;}}
+  if("MEDIA_PAUSE".equals(code)){if(media(KeyEvent.KEYCODE_MEDIA_PAUSE)){addMessage("הושהה.","assistant");return true;}}
+  if("MEDIA_STOP".equals(code)){if(media(KeyEvent.KEYCODE_MEDIA_STOP)){addMessage("המוזיקה נעצרה.","assistant");return true;}}
+  if("SETTINGS".equals(code)){int idx=setting>=0?setting:settingForRequest(norm(q));if(idx>=0){try{startActivity(engine.settingIntent(idx));addMessage("פותח הגדרות: "+settingName(idx),"assistant");return true;}catch(Exception ignored){}}}
+  return false;
  }
 
  int settingForRequest(String x){
@@ -788,7 +811,9 @@ public class MainActivity extends Activity {
   String wanted=engine.canonical(target);
   PackageManager pm=getPackageManager();
 
-  // Personal nickname always wins.
+  // Personal command/alias always wins.
+  String customPkg=findCustomCommandPackage(q);
+  if(customPkg!=null&&launchPackage(customPkg,q))return true;
   String userPkg=findUserAliasPackage(target);
   if(userPkg!=null && launchPackage(userPkg,target))return true;
 
@@ -799,10 +824,9 @@ public class MainActivity extends Activity {
   for(AppRow row:installedApps){
    int s=appSpecialScore(wanted,row.packageName);
    if(s==0 && wanted.equals(engine.canonical(row.label)))s=120;
-   if(s==0){
-    String hay=row.label+" "+row.packageName.replace('.',' ');
-    s=engine.score(target,hay);
-   }
+   String hay=row.label+" "+row.packageName.replace('.',' ');
+   s=Math.max(s,engine.score(target,hay));
+   s=Math.max(s,engine.score(wanted,hay));
    if(s>bestScore){bestScore=s;best=row;}
   }
 
@@ -835,10 +859,35 @@ public class MainActivity extends Activity {
   return true;
  }
 
+ boolean launchBestInstalled(String target){
+  String q=OfflineEngine.normalize(target);
+  if(q.isEmpty())return false;
+  if(!installedAppsLoaded)loadInstalledApps();
+  AppRow best=null;int bestScore=0;
+  for(AppRow row:installedApps){
+   int score=engine.score(q,row.label+" "+row.packageName.replace('.',' '));
+   String aliases=userAliases(row.packageName);
+   if(!aliases.isEmpty())score=Math.max(score,engine.score(q,aliases)+25);
+   if(score>bestScore){bestScore=score;best=row;}
+  }
+  return best!=null&&bestScore>=35&&launchPackage(best.packageName,target);
+ }
+
  boolean launchPackage(String pkg,String spoken){
   if(pkg==null||pkg.trim().isEmpty())return false;
   try{
-   Intent i=getPackageManager().getLaunchIntentForPackage(pkg);
+   PackageManager pm=getPackageManager();
+   Intent i=pm.getLaunchIntentForPackage(pkg);
+   if(i==null&&installedAppsLoaded){
+    for(AppRow row:installedApps){
+     if(pkg.equals(row.packageName)&&row.activityName!=null&&!row.activityName.isEmpty()){
+      i=new Intent(Intent.ACTION_MAIN);
+      i.addCategory(Intent.CATEGORY_LAUNCHER);
+      i.setComponent(new ComponentName(pkg,row.activityName));
+      break;
+     }
+    }
+   }
    if(i==null)return false;
    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
    startActivity(i);
