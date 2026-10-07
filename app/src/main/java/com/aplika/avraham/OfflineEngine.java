@@ -232,7 +232,6 @@ final class OfflineEngine {
    for(String b:t){
     if(a.equals(b)){score+=8;break;}
     if(a.length()>=3&&b.length()>=3&&(a.contains(b)||b.contains(a))){score+=5;break;}
-    if(a.length()>=3&&b.length()>=3&&edit(a,b)<=1){score+=3;break;}
    }
   }
   return score;
@@ -279,11 +278,9 @@ final class OfflineEngine {
    ArrayList<Resp> list=responseIndex.get(tok);
    if(list!=null)candidates.addAll(list);
   }
-  if(candidates.isEmpty()){
-   for(String tok:qt)for(Map.Entry<String,ArrayList<Resp>> e:responseIndex.entrySet()){
-    if(tok.length()>=3&&e.getKey().length()>=3&&edit(tok,e.getKey())<=1){candidates.addAll(e.getValue());}
-   }
-  }
+  // Deliberately do not scan every indexed token with edit-distance.
+  // That fallback made short/unknown questions proportional to the entire
+  // catalog size. Exact/canonical token candidates are enough for fast offline matching.
   Resp best=null;int bestScore=0;
   for(Resp r:candidates){
    int s=0;
