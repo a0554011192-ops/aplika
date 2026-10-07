@@ -23,14 +23,9 @@ final class OfflineEngine {
  final Map<String,String> synonyms=new ConcurrentHashMap<>();
  final Map<String,String> commonAliases=new ConcurrentHashMap<>();
 
- final HashMap<String,ArrayList<Resp>> responseIndex=new HashMap<>();
- final HashMap<String,ArrayList<Resp>> responseExact=new HashMap<>();
+ final HashMap<String,ArrayList<Resp>> responseGroups=new HashMap<>();
  final HashSet<String> loadedResponseKeys=new HashSet<>();
  final HashMap<String,ArrayList<ActionEntry>> actionIndex=new HashMap<>();
- final Map<String,Resp> responseCache=Collections.synchronizedMap(
-  new LinkedHashMap<String,Resp>(256,0.75f,true){
-   @Override protected boolean removeEldestEntry(Map.Entry<String,Resp> e){return size()>256;}
-  });
 
  volatile boolean chatLoaded=false,commandsLoaded=false,appsLoaded=false,synonymsLoaded=false;
 
@@ -84,11 +79,13 @@ final class OfflineEngine {
    // Keeping this path tiny makes the first answer available quickly.
    responses.clear();
    loadedResponseKeys.clear();
-   responseIndex.clear();
-   responseExact.clear();
-   responseCache.clear();
+   responseGroups.clear();
    load(c,"responses.tsv",2);
    if(responses.size()!=RESPONSE_COUNT) throw new IOException("responses.tsv expected "+RESPONSE_COUNT+" rows, got "+responses.size());
+   if(responseGroups.size()!=200) throw new IOException("responses.tsv expected 200 chat groups, got "+responseGroups.size());
+   for(Map.Entry<String,ArrayList<Resp>> group:responseGroups.entrySet()){
+    if(group.getValue().isEmpty())throw new IOException("empty chat group: "+group.getKey());
+   }
    chatLoaded=true;
   }catch(Exception ex){
    chatLoaded=false;
@@ -179,7 +176,13 @@ final class OfflineEngine {
       if(!loadedResponseKeys.add(responseKey))continue;
       Resp rr=new Resp(he,en,tr.split("\\|",-1));
       responses.add(rr);
-      for(String t:rr.triggerNorms)indexResponseNormalized(t,rr);
+      for(String t:rr.triggerNorms){
+       String n=normalize(t);
+       if(n.isEmpty())continue;
+       ArrayList<Resp> group=responseGroups.get(n);
+       if(group==null){group=new ArrayList<>();responseGroups.put(n,group);}
+       group.add(rr);
+      }
      }
     }else if(type==3&&p.length>=3){
      synonyms.put(normalize(p[1]),normalize(p[2]));
@@ -188,19 +191,16 @@ final class OfflineEngine {
   }catch(Exception ignored){}
  }
 
- void indexResponse(String raw,Resp r){indexResponseNormalized(normalize(raw),r);}
- void indexResponseNormalized(String n,Resp r){
+ // Chat matching deliberately works on the 200 unique conversation triggers,
+ // not on all 9,000 response rows. Each trigger owns its 45 response variants.
+ void indexResponse(String raw,Resp r){
+  String n=normalize(raw);
   if(n.isEmpty())return;
-  ArrayList<Resp> exact=responseExact.get(n);
-  if(exact==null){exact=new ArrayList<>();responseExact.put(n,exact);}
-  exact.add(r);
-  for(String tok:n.split("\\s+")){
-   if(tok.length()<2)continue;
-   ArrayList<Resp> list=responseIndex.get(tok);
-   if(list==null){list=new ArrayList<>();responseIndex.put(tok,list);}
-   if(list.size()<64&&!list.contains(r))list.add(r);
-  }
+  ArrayList<Resp> group=responseGroups.get(n);
+  if(group==null){group=new ArrayList<>();responseGroups.put(n,group);}
+  group.add(r);
  }
+ void indexResponseNormalized(String n,Resp r){indexResponse(n,r);}
 
  void indexAction(String raw,ActionEntry a){
   for(String tok:tokenizeCanonical(raw)){
@@ -362,13 +362,11 @@ final class OfflineEngine {
 
  Resp bestResponseIndexed(String q){
   String n=normalize(q);
-  if(n.isEmpty())return null;
+  if(n.isEmpty()||responseGroups.isEmpty())return null;
 
-  ArrayList<Resp> exact=responseExact.get(n);
+  // Exact trigger: O(1), then a random variant from its 45 responses.
+  ArrayList<Resp> exact=responseGroups.get(n);
   if(exact!=null&&!exact.isEmpty())return randomResponse(exact);
-
-  Resp cached=responseCache.get(n);
-  if(cached!=null)return cached;
 
   String[] words=n.split("\\s+");
   StringBuilder cb=new StringBuilder();
@@ -379,55 +377,25 @@ final class OfflineEngine {
   }
   String canonicalQuery=cb.toString().trim();
   if(!canonicalQuery.equals(n)){
-   ArrayList<Resp> canonicalExact=responseExact.get(canonicalQuery);
-   if(canonicalExact!=null&&!canonicalExact.isEmpty()){
-    Resp hit=randomResponse(canonicalExact);
-    if(hit!=null)responseCache.put(n,hit);
-    return hit;
-   }
+   ArrayList<Resp> canonicalExact=responseGroups.get(canonicalQuery);
+   if(canonicalExact!=null&&!canonicalExact.isEmpty())return randomResponse(canonicalExact);
   }
 
-  // Search the smallest token buckets first. Generic words such as "מה" can
-  // have many entries; rarer words narrow the candidate set much faster.
-  ArrayList<String> searchTokens=new ArrayList<>();
-  for(String raw:words)if(raw.length()>=2&&responseIndex.containsKey(raw))searchTokens.add(raw);
-  Collections.sort(searchTokens,(a,b)->Integer.compare(responseIndex.get(a).size(),responseIndex.get(b).size()));
-
-  LinkedHashSet<Resp> candidates=new LinkedHashSet<>();
-  for(String raw:searchTokens){
-   ArrayList<Resp> list=responseIndex.get(raw);
-   if(list!=null)for(Resp r:list){
-    candidates.add(r);
-    if(candidates.size()>=128)break;
-   }
-   if(candidates.size()>=128)break;
-  }
-  if(candidates.isEmpty() && !canonicalQuery.equals(n)){
-   ArrayList<String> canonicalTokens=new ArrayList<>();
-   for(String raw:canonicalQuery.split("\\s+"))
-    if(raw.length()>=2&&responseIndex.containsKey(raw))canonicalTokens.add(raw);
-   Collections.sort(canonicalTokens,(a,b)->Integer.compare(responseIndex.get(a).size(),responseIndex.get(b).size()));
-   for(String raw:canonicalTokens){
-    ArrayList<Resp> list=responseIndex.get(raw);
-    if(list!=null)for(Resp r:list){
-     candidates.add(r);
-     if(candidates.size()>=128)break;
-    }
-    if(candidates.size()>=128)break;
-   }
-  }
-
-  Resp best=null;int bestScore=0;ArrayList<Resp> ties=new ArrayList<>();
-  for(Resp r:candidates){
-   int localBest=0;
-   for(String tr:r.triggerNorms) localBest=Math.max(localBest,fastScoreNormalized(n,tr));
-   if(localBest>bestScore){bestScore=localBest;best=r;ties.clear();ties.add(r);}
-   else if(localBest==bestScore&&localBest>=20)ties.add(r);
+  // Fuzzy matching is over only the 200 unique triggers, never the 9,000
+  // response rows. This keeps chat CPU work tiny and deterministic.
+  String bestTrigger=null;
+  int bestScore=0;
+  ArrayList<String> ties=new ArrayList<>();
+  for(String trigger:responseGroups.keySet()){
+   int score=fastScoreNormalized(n,trigger);
+   if(!canonicalQuery.equals(n))score=Math.max(score,fastScoreNormalized(canonicalQuery,trigger));
+   if(score>bestScore){bestScore=score;bestTrigger=trigger;ties.clear();ties.add(trigger);}
+   else if(score==bestScore&&score>=20)ties.add(trigger);
   }
   if(bestScore<20)return null;
-  Resp answer=ties.isEmpty()?best:randomResponse(ties);
-  if(answer!=null)responseCache.put(n,answer);
-  return answer;
+  if(!ties.isEmpty())bestTrigger=ties.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(ties.size()));
+  ArrayList<Resp> group=responseGroups.get(bestTrigger);
+  return randomResponse(group);
  }
 
  Resp randomResponse(ArrayList<Resp> list){
