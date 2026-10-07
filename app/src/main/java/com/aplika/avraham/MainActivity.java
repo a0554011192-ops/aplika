@@ -360,7 +360,19 @@ public class MainActivity extends Activity {
  boolean hasAny(String q,String...words){String n=norm(q);for(String w:words)if(n.contains(norm(w)))return true;return false;}
  boolean openRequest(String q){return hasAny(q,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");}
  boolean actionRequest(String q){return hasAny(q,"תגביה","תגביהה","תנמיך","השתק","נגן","השהה","עצור","הבא","קודם","חזור","אחורה","אחרונות","התראות","הגדרות מהירות","צלם מסך","צילום מסך","נעל מסך","נעילת מסך","volume","mute","play","pause","next","previous","home","back","notifications","quick settings","screenshot","lock screen");}
- boolean settingsRequest(String q){return hasAny(q,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","וויפי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast");}
+ boolean settingsRequest(String q){
+  String x=norm(q);
+  if(!hasAny(x,"wifi","wi-fi","רשת אלחוטית","ויפי","וויפיי","וייפיי","bluetooth","בלוטוס","בלוטות","מצב טיסה","airplane","נקודה חמה","hotspot","vpn","dns","תצוגה","display","notification settings","אחסון","storage","הרשאות","permissions","מיקום","location","מקלדת","keyboard","שפה","language","תאריך","date","שעה","time","nfc","שידור מסך","cast","sound","שמע"))return false;
+  if(openRequest(q)||actionRequest(q))return true;
+  return x.equals("wifi")||x.equals("wi fi")||x.equals("ויפי")||x.equals("וויפיי")||x.equals("וייפיי")||
+         x.equals("bluetooth")||x.equals("בלוטוס")||x.equals("בלוטות")||x.equals("מצב טיסה")||
+         x.equals("airplane")||x.equals("נקודה חמה")||x.equals("hotspot")||x.equals("vpn")||
+         x.equals("dns")||x.equals("תצוגה")||x.equals("display")||x.equals("אחסון")||x.equals("storage")||
+         x.equals("הרשאות")||x.equals("permissions")||x.equals("מיקום")||x.equals("location")||
+         x.equals("מקלדת")||x.equals("keyboard")||x.equals("שפה")||x.equals("language")||
+         x.equals("תאריך")||x.equals("date")||x.equals("nfc")||x.equals("שידור מסך")||x.equals("cast")||
+         x.equals("sound")||x.equals("שמע");
+ }
 
  void process(String q){
   if(direct(q))return;
@@ -398,6 +410,7 @@ public class MainActivity extends Activity {
 
   engine.loadApps(this);
   if(engine.isKnownAppAlias(x))return true;
+  if(findUserAliasPackage(x)!=null)return true;
 
   // Any short phrase that exactly/closely matches a currently installed app
   // is also considered an app command, even when it isn't in the offline catalog.
@@ -433,6 +446,12 @@ public class MainActivity extends Activity {
   addMessage(english?r.en:r.he,"assistant");
  }
 
+ boolean isHomeCommand(String q){
+  String x=norm(q);
+  if(x.equals("בית")||x.equals("מסך הבית")||x.equals("דף הבית")||x.equals("home"))return true;
+  return x.matches("^(פתח|תפתח|לפתוח|launch|open|start)(?: את)? (בית|מסך הבית|דף הבית|home)$");
+ }
+
  boolean media(int k){
   try{audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,k));audio.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,k));return true;}catch(Exception e){return false;}
  }
@@ -446,7 +465,7 @@ public class MainActivity extends Activity {
    return true;
   }
   // Deterministic Android home command.
-  if(hasAny(x,"בית","מסך הבית","דף הבית","חזור הביתה","home") && !hasAny(x,"פתח","תפתח","open","launch")){
+  if(isHomeCommand(q)){
    if(global(AccessibilityService.GLOBAL_ACTION_HOME)){addMessage(english?"Home.":"מסך הבית.","assistant");return true;}
    try{
     Intent home=new Intent(Intent.ACTION_MAIN);home.addCategory(Intent.CATEGORY_HOME);home.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
