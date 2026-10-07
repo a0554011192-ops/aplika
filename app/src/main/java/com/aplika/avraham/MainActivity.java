@@ -871,9 +871,15 @@ public class MainActivity extends Activity {
  boolean hasAnyWordOrPhrase(String q,String...terms){for(String t:terms)if(hasWordOrPhrase(q,t))return true;return false;}
  boolean openRequest(String q){
   String x=norm(q);
-  // The opening verb must begin the request (optionally after "בבקשה"/"please").
-  // This makes app launching explicit instead of guessing user intent.
-  return anyStartsCommand(x,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run");
+  // Opening must be explicit. Accept common natural variants, but never infer
+  // an app launch from an app name appearing in ordinary conversation.
+  return anyStartsCommand(x,"פתח","תפתח","לפתוח","פתיחה","open","launch","start","run")
+    || x.startsWith("תוכל לפתוח ")
+    || x.startsWith("אפשר לפתוח ")
+    || x.startsWith("בבקשה תפתח ")
+    || x.startsWith("בבקשה פתח ")
+    || x.startsWith("please open ")
+    || x.startsWith("can you open ");
  }
  boolean startsCommand(String q,String term){
   String n=norm(q),t=norm(term);if(n.equals(t)||n.startsWith(t+" "))return true;
@@ -912,32 +918,47 @@ public class MainActivity extends Activity {
 
  void process(String q){
   try{
-  // CHAT mode is chat-only. App discovery is reached only from the explicit
-  // opening-command branch below.
-  OfflineEngine.Resp instant=engine.quickResponse(q);
-  if(instant!=null){
-   addMessage(english?instant.en:instant.he,"assistant");
-   return;
-  }
+   // In CHAT mode the default path is always conversation. Device actions are
+   // allowed only when the user clearly issued an imperative command.
+   OfflineEngine.Resp instant=engine.quickResponse(q);
+   if(instant!=null){
+    addMessage(english?instant.en:instant.he,"assistant");
+    return;
+   }
+   if(mathRequest(q))return;
 
-  // Tier 1: deterministic Android commands before any offline catalogs.
-  // This prevents a known system command from being mistaken for ordinary chat.
-  if(mathRequest(q))return;
-  if(systemToggle(q))return;
-  if(coreAndroidCommand(q))return;
-  if(direct(q))return;
-  if(settingsRequest(q)){runAction(q);return;}
-  if(openRequest(q)){openThing(q);return;}
-  if(actionRequest(q)){runAction(q);return;}
-  if(engine.commandsLoaded && likelyActionCommand(q) && engine.bestAction(q)!=null){runAction(q);return;}
+   if(explicitDeviceCommand(q)){
+    if(systemToggle(q))return;
+    if(coreAndroidCommand(q))return;
+    if(direct(q))return;
+    if(settingsRequest(q)){runAction(q);return;}
+    if(openRequest(q)){openThing(q);return;}
+    if(actionRequest(q)){runAction(q);return;}
+    if(engine.commandsLoaded && likelyActionCommand(q) && engine.bestAction(q)!=null){
+     runAction(q);return;
+    }
+   }
 
-  // A plain app name is ordinary chat text in CHAT mode. Only the explicit
-  // openRequest() branch above may launch an app.
-  chat(q);
+   chat(q);
   }catch(Exception ex){
    android.util.Log.e("Avraham","process failed",ex);
    addMessage(english?"I hit a local processing error and recovered.":"אירעה שגיאת עיבוד מקומית והאפליקציה התאוששה.","assistant");
   }
+ }
+
+ boolean explicitDeviceCommand(String q){
+  String x=norm(q);
+  if(x.isEmpty())return false;
+  if(openRequest(x))return true;
+  if(anyStartsCommand(x,
+    "תגביה","תגביהה","הגבהה","תגביר","תעלה","תרים","הגבר","תנמיך","הנמכה","תוריד","תקטין","הנמך",
+    "השתק","השתקה","בטל השתקה","נגן","השהה","עצור","חזור אחורה","חזור הביתה",
+    "אחורה","אפליקציות אחרונות","אחרונות","פתח התראות","התראות","הגדרות מהירות",
+    "צלם מסך","צילום מסך","נעל מסך","נעילת מסך","הפעל","תפעיל","השבת","תכבה","כבה",
+    "פתח הגדרות","תפתח הגדרות","היכנס להגדרות","open settings","volume","mute","play","pause",
+    "stop","screenshot","lock","notifications","quick settings"))return true;
+  return hasAnyWordOrPhrase(x,"מה השעה","מה השעה עכשיו","מה הזמן","what time is it","what's the time","current time")
+    || x.equals("השעה");
  }
 
 int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").length;}
