@@ -28,3 +28,5 @@ The 4,000-name catalog combines public Google Play category snapshots from priva
 Clean fast-loader revision: 2026-10-07.
 
 Clean fast-loader build trigger: 2026-10-07-fix.
+
+Final UI build trigger: cream-history-modes-icon.
