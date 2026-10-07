@@ -46,6 +46,10 @@ public class MainActivity extends Activity {
  final ArrayList<Runnable> appLoadWaiters=new ArrayList<>();
  volatile boolean appSearchLoaded=false,appSearchLoading=false;
  final ArrayList<Runnable> appSearchWaiters=new ArrayList<>();
+ volatile boolean commandsLoading=false;
+ final ArrayList<Runnable> commandLoadWaiters=new ArrayList<>();
+ volatile boolean appCatalogLoading=false;
+ final ArrayList<Runnable> appCatalogWaiters=new ArrayList<>();
 
  // Chat is single-flight loaded: the UI never waits on catalog parsing.
  volatile boolean chatLoading=false;
@@ -973,6 +977,50 @@ int tokenCount(String x){return x.trim().isEmpty()?0:x.trim().split("\\s+").leng
   return findInstalledMatch(target)==null?0:100;
  }
 
+ void ensureCommandsLoaded(Runnable done){
+  synchronized(commandLoadWaiters){
+   if(engine.commandsLoaded){
+    if(done!=null)runOnUiThread(done);
+    return;
+   }
+   if(done!=null)commandLoadWaiters.add(done);
+   if(commandsLoading)return;
+   commandsLoading=true;
+  }
+  new Thread(()->{
+   try{engine.loadCommands(this);}catch(Exception ex){android.util.Log.e("Avraham","commands load failed",ex);}
+   ArrayList<Runnable> waiters;
+   synchronized(commandLoadWaiters){
+    commandsLoading=false;
+    waiters=new ArrayList<>(commandLoadWaiters);
+    commandLoadWaiters.clear();
+   }
+   for(Runnable r:waiters)try{r.run();}catch(Exception ex){android.util.Log.e("Avraham","command waiter failed",ex);}
+  },"commands-loader").start();
+ }
+
+ void ensureAppCatalogLoaded(Runnable done){
+  synchronized(appCatalogWaiters){
+   if(engine.appsLoaded){
+    if(done!=null)runOnUiThread(done);
+    return;
+   }
+   if(done!=null)appCatalogWaiters.add(done);
+   if(appCatalogLoading)return;
+   appCatalogLoading=true;
+  }
+  new Thread(()->{
+   try{engine.loadApps(this);}catch(Exception ex){android.util.Log.e("Avraham","app catalog load failed",ex);}
+   ArrayList<Runnable> waiters;
+   synchronized(appCatalogWaiters){
+    appCatalogLoading=false;
+    waiters=new ArrayList<>(appCatalogWaiters);
+    appCatalogWaiters.clear();
+   }
+   for(Runnable r:waiters)try{r.run();}catch(Exception ex){android.util.Log.e("Avraham","app catalog waiter failed",ex);}
+  },"app-catalog-loader").start();
+ }
+
  void ensureChatLoaded(Runnable done){
   synchronized(chatLoadWaiters){
    if(engine.chatLoaded){
@@ -1307,10 +1355,7 @@ boolean coreAppTarget(String raw){
   }catch(Exception ignored){}
 
   if(!engine.commandsLoaded){
-   new Thread(()->{
-    engine.loadCommands(this);
-    runOnUiThread(()->runAction(q));
-   },"commands-loader").start();
+   ensureCommandsLoaded(()->runAction(q));
    return;
   }
   OfflineEngine.ActionEntry matched=engine.bestAction(q);
@@ -1425,12 +1470,9 @@ boolean coreAppTarget(String raw){
   }
 
   // Only after the tiny installed-app search fails do we consult the 4,000-name
-  // vocabulary catalog, and only once, in the background.
+  // vocabulary catalog, and only once, through a single-flight loader.
   if(!engine.appsLoaded){
-   new Thread(()->{
-    engine.loadApps(this);
-    runOnUiThread(()->openThing(q));
-   },"lazy-app-catalog-open").start();
+   ensureAppCatalogLoaded(()->openThing(q));
    return true;
   }
 
