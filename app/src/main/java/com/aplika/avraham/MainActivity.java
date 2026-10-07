@@ -51,12 +51,9 @@ public class MainActivity extends Activity {
   aliasPrefs=getSharedPreferences("app_aliases",MODE_PRIVATE);
   buildChatUi();
   addMessage("שלום. אני אברהם העברי. אני עובד אופליין ומהר, בלי מודל חיצוני.\nאפשר לכתוב לי בקשה רגילה או לבקש פעולה במכשיר.","assistant");
-  status.setText("טוען מאגר מקומי...");
-  new Thread(()->{
-   engine.loadChat(this);
-   runOnUiThread(()->status.setText("אופליין • מוכן"));
-  },"response-catalog-loader").start();
-  // App/action catalogs are lazy-loaded only when a command actually needs them.
+  // Startup is intentionally zero-catalog. The UI becomes ready immediately;
+  // catalogs are loaded only on the rare path that actually needs them.
+  status.setText("אופליין • מוכן");
  }
 
  TextView label(String s,float size,int color){
@@ -534,7 +531,14 @@ public class MainActivity extends Activity {
 
  void process(String q){
   try{
-  // Resolve deterministic Android commands before the large offline catalogs.
+  // Tier 0: canned/common replies. These must never touch any catalog.
+  OfflineEngine.Resp instant=engine.quickResponse(q);
+  if(instant!=null){
+   addMessage(english?instant.en:instant.he,"assistant");
+   return;
+  }
+
+  // Tier 1: deterministic Android commands before any offline catalogs.
   // This prevents a known system command from being mistaken for ordinary chat.
   if(mathRequest(q))return;
   if(systemToggle(q))return;
@@ -616,9 +620,7 @@ public class MainActivity extends Activity {
   responseExecutor.execute(()->{
    try{
     if(!engine.chatLoaded){
-     runOnUiThread(()->status.setText("טוען מאגר..."));
      engine.loadChat(this);
-     runOnUiThread(()->status.setText("אופליין • מוכן"));
     }
     // If a newer question arrived while loading, do not spend CPU matching
     // an obsolete question. The latest request will be processed instead.
@@ -916,8 +918,10 @@ public class MainActivity extends Activity {
   }catch(Exception ignored){}
 
   if(!engine.commandsLoaded){
-   addMessage(english?"Loading system command catalog...":"טוען מאגר פקודות מערכת...","assistant");
-   new Thread(()->{engine.loadCommands(this);runOnUiThread(()->runAction(q));},"commands-loader").start();
+   new Thread(()->{
+    engine.loadCommands(this);
+    runOnUiThread(()->runAction(q));
+   },"commands-loader").start();
    return;
   }
   OfflineEngine.ActionEntry matched=engine.bestAction(q);
