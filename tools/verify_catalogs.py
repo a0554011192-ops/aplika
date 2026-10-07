@@ -7,7 +7,13 @@ for name,n in checks.items():
     rows=read(name)
     assert len(rows)==n,(name,len(rows),n)
     assert len(set(rows))==n,(name,"duplicate rows")
-apps={r.split("\t")[1].strip() for r in read("apps.tsv") if "\t" in r}
+apps=set()
+for r in read("apps.tsv"):
+    p=r.split("\t")
+    if len(p)>=4:
+        apps.add(p[1].strip())
+        apps.add(p[2].strip())
+        apps.update(x.strip() for x in p[3].split("|") if x.strip())
 required={"מחשבון","שעון","דרייב","גוגל דרייב","גוגל פליי","כרום","יוטיוב","מצלמה","גלריה","סייר קבצים","Google Drive","Google Play","Chrome","YouTube","Calculator","Clock"}
 missing=[x for x in required if x not in apps]
 assert not missing,("missing core app aliases",missing)
