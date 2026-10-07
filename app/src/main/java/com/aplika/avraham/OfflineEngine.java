@@ -65,6 +65,11 @@ final class OfflineEngine {
  }
 
  void alias(String a,String c){commonAliases.put(normalize(a),normalize(c));}
+ void catalogAlias(String a,String c){
+  String k=normalize(a),v=normalize(c);
+  if(k.isEmpty()||v.isEmpty())return;
+  if(!commonAliases.containsKey(k))commonAliases.put(k,v);
+ }
 
  synchronized void loadChat(Context c){
   if(chatLoaded)return;
@@ -98,10 +103,10 @@ final class OfflineEngine {
     if(p.length>=4){
      String he=normalize(p[1]), en=normalize(p[2]);
      String canon=en.isEmpty()?he:en;
-     if(!he.isEmpty())alias(he,canon);
-     if(!en.isEmpty())alias(en,canon);
+     if(!he.isEmpty())catalogAlias(he,canon);
+     if(!en.isEmpty())catalogAlias(en,canon);
      for(String t:p[3].split("\\|",-1)){
-      if(!normalize(t).isEmpty())alias(t,canon);
+      if(!normalize(t).isEmpty())catalogAlias(t,canon);
      }
     }
    }
