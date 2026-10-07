@@ -90,7 +90,10 @@ final class OfflineEngine {
    load(c,"responses.tsv",2);
    if(responses.size()!=RESPONSE_COUNT) throw new IOException("responses.tsv expected "+RESPONSE_COUNT+" rows, got "+responses.size());
    chatLoaded=true;
-  }catch(Exception ignored){chatLoaded=false;}
+  }catch(Exception ex){
+   chatLoaded=false;
+   android.util.Log.e("Avraham","Failed to load chat catalog",ex);
+  }
  }
 
  synchronized void loadSynonyms(Context c){
@@ -99,7 +102,10 @@ final class OfflineEngine {
    synonyms.clear();
    load(c,"synonyms.tsv",3);
    synonymsLoaded=true;
-  }catch(Exception ignored){synonymsLoaded=false;}
+  }catch(Exception ex){
+   synonymsLoaded=false;
+   android.util.Log.e("Avraham","Failed to load synonym catalog",ex);
+  }
  }
 
  synchronized void loadCommands(Context c){
@@ -110,7 +116,10 @@ final class OfflineEngine {
    loadSynonyms(c);
    load(c,"actions.tsv",1);
    commandsLoaded=true;
-  }catch(Exception ignored){commandsLoaded=false;}
+  }catch(Exception ex){
+   commandsLoaded=false;
+   android.util.Log.e("Avraham","Failed to load action catalog",ex);
+  }
  }
  // Load the app catalog only as a compact alias table. Launching still uses the
  // real PackageManager list, so a catalog entry can never invent an installed app.
@@ -144,7 +153,7 @@ final class OfflineEngine {
 
 
  void load(Context c,String fn,int type){
-  try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open(fn),"UTF-8"))){
+  try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open(fn),"UTF-8"),65536)){
    String l;
    while((l=br.readLine())!=null){
     String[] p=l.split("\\t",-1);
@@ -199,7 +208,52 @@ final class OfflineEngine {
  }
 
  static String normalize(String s){
-  return s.toLowerCase(Locale.ROOT).replace("׳","'").replaceAll("[^\\p{L}\\p{N}]+"," ").trim().replaceAll("ח{2,}","חחח").replaceAll("(?:lol)+","lol");
+  if(s==null||s.isEmpty())return "";
+  String lower=s.toLowerCase(Locale.ROOT);
+  StringBuilder out=new StringBuilder(lower.length());
+  boolean pendingSpace=false;
+  int hRun=0;
+
+  for(int i=0;i<lower.length();i++){
+   char c=lower.charAt(i);
+   if(Character.isLetterOrDigit(c)){
+    if(pendingSpace&&out.length()>0)out.append(' ');
+    pendingSpace=false;
+    if(c=='ח'){
+     if(hRun<3)out.append(c);
+     hRun++;
+    }else{
+     hRun=0;
+     out.append(c);
+    }
+   }else{
+    pendingSpace=true;
+    hRun=0;
+   }
+  }
+
+  // Preserve the previous "lol" collapsing behavior without regex: only
+  // collapse tokens made entirely of repeated "lol".
+  String normalized=out.toString().trim();
+  if(normalized.isEmpty())return normalized;
+  int start=0;
+  StringBuilder finalText=new StringBuilder(normalized.length());
+  while(start<normalized.length()){
+   int end=normalized.indexOf(' ',start);
+   if(end<0)end=normalized.length();
+   String token=normalized.substring(start,end);
+   if(token.length()>=6&&token.length()%3==0){
+    boolean repeated=true;
+    for(int i=0;i<token.length();i+=3){
+     if(!token.regionMatches(i,"lol",0,3)){repeated=false;break;}
+    }
+    if(repeated)token="lol";
+   }
+   if(finalText.length()>0)finalText.append(' ');
+   finalText.append(token);
+   start=end+1;
+  }
+  return finalText.toString();
  }
 
  String canonicalWord(String w){
