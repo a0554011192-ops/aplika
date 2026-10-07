@@ -66,6 +66,7 @@ public class MainActivity extends Activity {
   buildChatUi();
   if(currentChatId==null||!chatSessions.containsKey(currentChatId))newChat();
   else renderCurrentSession();
+  refreshSidebar();
   new Thread(()->{
    try{
     android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -93,7 +94,7 @@ public class MainActivity extends Activity {
  }
 
  void buildChatUi(){
-  root=new LinearLayout(this);root.setOrientation(LinearLayout.HORIZONTAL);root.setBackgroundColor(BG);
+  root=new LinearLayout(this);root.setOrientation(LinearLayout.HORIZONTAL);root.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);root.setBackgroundColor(BG);
 
   LinearLayout main=new LinearLayout(this);main.setOrientation(LinearLayout.VERTICAL);main.setBackgroundColor(BG);main.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
@@ -202,7 +203,7 @@ public class MainActivity extends Activity {
 
  TextView bubble(String text,boolean user){
   TextView t=label(text,16,TEXT);t.setLineSpacing(0,1.12f);t.setPadding(16,12,16,12);t.setBackground(shape(user?USER_BUBBLE:BUBBLE,22,1));
-  if(user)t.setTextColor(Color.rgb(48,43,72));
+  if(user)t.setTextColor(TEXT);
   return t;
  }
 
