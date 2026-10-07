@@ -150,13 +150,13 @@ final class OfflineEngine {
       for(String t:a.triggers)indexAction(t,a);
      }catch(Exception ignored){}
     }else if(type==2){
-     int a=l.indexOf('\\t'), b=a<0?-1:l.indexOf('\\t',a+1), d=b<0?-1:l.indexOf('\\t',b+1);
+     int a=l.indexOf('\t'), b=a<0?-1:l.indexOf('\t',a+1), d=b<0?-1:l.indexOf('\t',b+1);
      if(d>0){
       int idStart=a+1, heStart=b<0?0:a+1, enStart=b+1, trStart=d+1;
       String he=l.substring(heStart,enStart-1);
       String en=l.substring(enStart,d);
       String tr=l.substring(trStart);
-      String responseKey=normalize(he)+"\\u0000"+normalize(en)+"\\u0000"+normalize(tr);
+      String responseKey=he+"\u0000"+en+"\u0000"+tr;
       if(!loadedResponseKeys.add(responseKey))continue;
       Resp rr=new Resp(he,en,tr.split("\\|",-1));
       responses.add(rr);
