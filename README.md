@@ -32,3 +32,5 @@ Clean fast-loader build trigger: 2026-10-07-fix.
 Final UI build trigger: cream-history-modes-icon.
 
 Final polished UI build trigger: verified.
+
+Sidebar closed default fix build: 2026-10-07.
