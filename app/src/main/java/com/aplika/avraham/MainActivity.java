@@ -46,7 +46,9 @@ public class MainActivity extends Activity {
  LinearLayout sidebar,sidebarList,welcomePanel,composer;
  FrameLayout mainFrame;
  TextView modeLabel;
+ Button sidebarToggle;
  String currentChatId;
+ boolean sidebarOpen=false;
  SharedPreferences historyPrefs;
  LinkedHashMap<String,ChatSession> chatSessions=new LinkedHashMap<>();
  final int BG=Color.rgb(250,248,242),PANEL=Color.rgb(246,243,236),TEXT=Color.rgb(37,35,31),MUTED=Color.rgb(119,113,103);
@@ -98,7 +100,12 @@ public class MainActivity extends Activity {
 
   LinearLayout main=new LinearLayout(this);main.setOrientation(LinearLayout.VERTICAL);main.setBackgroundColor(BG);main.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
-  LinearLayout head=new LinearLayout(this);head.setGravity(Gravity.CENTER_VERTICAL);head.setPadding(dp(18),dp(10),dp(18),dp(8));
+  LinearLayout head=new LinearLayout(this);head.setGravity(Gravity.CENTER_VERTICAL);head.setPadding(dp(12),dp(10),dp(12),dp(8));
+  sidebarToggle=softButton("☰");sidebarToggle.setTextSize(18);sidebarToggle.setPadding(0,0,0,0);
+  sidebarToggle.setBackground(shape(Color.TRANSPARENT,14,0));
+  sidebarToggle.setOnClickListener(v->toggleSidebar());
+  head.addView(sidebarToggle,new LinearLayout.LayoutParams(dp(44),dp(44)));
+
   ImageView mini=new ImageView(this);mini.setImageResource(R.drawable.ic_avraham);head.addView(mini,new LinearLayout.LayoutParams(dp(38),dp(38)));
   LinearLayout ht=new LinearLayout(this);ht.setOrientation(LinearLayout.VERTICAL);ht.setPadding(dp(10),0,0,0);
   TextView title=label("אברהם העברי",18,TEXT);title.setTypeface(Typeface.DEFAULT,Typeface.BOLD);ht.addView(title);
@@ -135,7 +142,9 @@ public class MainActivity extends Activity {
   Button gear=softButton("⚙");gear.setTextSize(18);gear.setPadding(0,0,0,0);gear.setOnClickListener(v->showAppManager());
   LinearLayout.LayoutParams gp=new LinearLayout.LayoutParams(dp(44),dp(44));gp.setMargins(dp(6),0,0,0);sbHead.addView(gear,gp);
   TextView sbTitle=label("השיחות שלי",16,TEXT);sbTitle.setTypeface(Typeface.DEFAULT,Typeface.BOLD);sbTitle.setGravity(Gravity.CENTER);sbHead.addView(sbTitle,new LinearLayout.LayoutParams(0,dp(44),1));
-  TextView collapse=label("‹",25,MUTED);collapse.setGravity(Gravity.CENTER);sbHead.addView(collapse,new LinearLayout.LayoutParams(dp(30),dp(44)));
+  TextView collapse=label("›",25,MUTED);collapse.setGravity(Gravity.CENTER);
+  collapse.setOnClickListener(v->toggleSidebar());
+  sbHead.addView(collapse,new LinearLayout.LayoutParams(dp(30),dp(44)));
   sidebar.addView(sbHead);
 
   View divider=new View(this);divider.setBackgroundColor(BORDER);sidebar.addView(divider,new LinearLayout.LayoutParams(-1,1));
@@ -148,8 +157,17 @@ public class MainActivity extends Activity {
   sidebar.addView(hs,new LinearLayout.LayoutParams(-1,0,1));
 
   root.addView(sidebar,new LinearLayout.LayoutParams(dp(286),-1));
+  sidebar.setVisibility(View.GONE);
+  sidebarOpen=false;
+  sidebarToggle.setText("☰");
   setContentView(root);
   getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+ }
+
+ void toggleSidebar(){
+  sidebarOpen=!sidebarOpen;
+  sidebar.setVisibility(sidebarOpen?View.VISIBLE:View.GONE);
+  if(sidebarToggle!=null)sidebarToggle.setText(sidebarOpen?"×":"☰");
  }
 
  LinearLayout buildComposer(){
