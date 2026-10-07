@@ -79,6 +79,14 @@ final class OfflineEngine {
  }
  // Load the app catalog only as a compact alias table. Launching still uses the
  // real PackageManager list, so a catalog entry can never invent an installed app.
+ synchronized boolean isKnownAppAlias(String s){
+  String x=normalize(s);
+  if(x.isEmpty())return false;
+  if(commonAliases.containsKey(x))return true;
+  String canon=canonicalWord(x);
+  return !canon.equals(x) || synonyms.containsKey(x);
+ }
+
  synchronized void loadApps(Context c){
   try(BufferedReader br=new BufferedReader(new InputStreamReader(c.getAssets().open("apps.tsv"),"UTF-8"))){
    String l;
