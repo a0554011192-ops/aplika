@@ -153,7 +153,38 @@ public class MainActivity extends Activity {
   if(settingsRequest(q)){runAction(q);return;}
   if(openRequest(q)){openThing(q);return;}
   if(actionRequest(q)){runAction(q);return;}
+
+  // Natural Android commands: a user should be able to say just "מחשבון",
+  // "שעון", "דרייב", "גוגל פליי", etc. without adding the word "פתח".
+  if(appNameOnlyRequest(q)){openThing(q);return;}
+
   chat(q);
+ }
+
+ boolean appNameOnlyRequest(String q){
+  String x=norm(q);
+  if(x.isEmpty())return false;
+
+  // Core Android apps and common aliases. These are intentional exact/phrase
+  // matches so ordinary chat sentences are not accidentally treated as apps.
+  if(hasAny(x,
+    "מחשבון","calculator","שעון","clock","דרייב","google drive",
+    "גוגל פליי","גוגל פלי","google play","play store","חנות","חנות play",
+    "סייר קבצים","מנהל קבצים","קבצים","files","file manager","file explorer",
+    "גלריה","gallery","תמונות","google photos","photos",
+    "מצלמה","camera","טלפון","phone","חייגן","dialer",
+    "הודעות","messages","sms","אנשי קשר","contacts","contact",
+    "יומן","לוח שנה","calendar","דפדפן","browser","אינטרנט",
+    "גוגל","google","מפות","google maps","maps",
+    "גימייל","gmail","דואר","email","יוטיוב","youtube",
+    "כרום","chrome","ווטסאפ","וואטסאפ","whatsapp",
+    "טלגרם","telegram","ספוטיפיי","spotify")){
+   return true;
+  }
+
+  // Once the 3,000-row alias table is loaded, allow any catalog alias as a
+  // stand-alone app request too.
+  return engine.isKnownAppAlias(x);
  }
 
  void chat(String q){
